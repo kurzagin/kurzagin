@@ -13,9 +13,8 @@ Then I build the tool I wish already existed.
 
 ## Currently building
 
-* **Siduri** — an AI companion and knowledge layer designed to understand applications without becoming tightly coupled to them
-* **Danna** — a personal operations platform for companions, schedules, finances, goals, memories, and everyday concerns
-* **e-Teyvat** — a structured and immersive Genshin Impact knowledge platform 🎐
+* **Siduri** — an AI companion and knowledge layer designed to understand applications without becoming tightly coupled to them ([vxnus-studio/siduri-x](https://github.com/vxnus-studio/siduri-x))
+* **e-teyvat** — a structured and immersive Genshin Impact knowledge platform 🎐 ([vxnus-studio/e-teyvat](https://github.com/vxnus-studio/e-teyvat))
 * Experimental tools for creators, media workflows, archives, and versioned knowledge
 
 ## What I care about
@@ -46,7 +45,7 @@ Accelerate with intention.
 
 - **Website** → [krzgn.xyz](https://krzgn.xyz)
 - **VXNUS Studio** → [vxnus.xyz](https://vxnus.xyz)
-- **GitHub** → [@vxnuslabs](https://github.com/vxnuslabs)
+- **GitHub** → [@vxnus-studio](https://github.com/vxnus-studio)
 - **X** → [@kurzagin](https://x.com/kurzagin)
 - **Email** → [venus@krzgn.xyz](mailto:venus@krzgn.xyz)
 
