@@ -17,6 +17,10 @@ Then I build the tool I wish already existed.
 * **e-teyvat** — a structured and immersive Genshin Impact knowledge platform 🎐 ([vxnus-studio/e-teyvat](https://github.com/vxnus-studio/e-teyvat))
 * Experimental tools for creators, media workflows, archives, and versioned knowledge
 
+## Past projects / Archive
+
+* **[kurzagin-archive](https://github.com/kurzagin/kurzagin-archive)** — personal archive and legacy projects
+
 ## What I care about
 
 * Systems that remain understandable as they grow
