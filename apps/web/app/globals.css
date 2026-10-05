@@ -472,8 +472,8 @@ nav.top-nav {
   position: absolute;
   top: 10px; left: 10px;
   background:
-    radial-gradient(circle 22px at center, var(--bg-3) 0%, var(--bg-1) 60%, var(--bg-3) 62%, var(--bg-1) 100%),
-    repeating-radial-gradient(circle at center, transparent 28px, rgba(255,255,255,0.02) 29px, transparent 30px, transparent 33px);
+    radial-gradient(circle 30px at center, var(--bg-3) 0%, var(--bg-1) 60%, var(--bg-3) 62%, var(--bg-1) 100%),
+    repeating-radial-gradient(circle at center, transparent 39px, rgba(255,255,255,0.02) 40px, transparent 41px, transparent 44px);
   border: 1px solid var(--border);
   animation: spin 4s linear infinite;
   animation-play-state: paused;
@@ -485,7 +485,7 @@ nav.top-nav {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 54px; height: 54px;
+  width: 76px; height: 76px;
   border-radius: 50%;
   background: var(--bg-2);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -521,7 +521,7 @@ nav.top-nav {
 
 .vinyl-label span {
   font-family: var(--mono);
-  font-size: 0.38rem;
+  font-size: 0.44rem;
   font-weight: 600;
   color: var(--accent);
   letter-spacing: 1px;
@@ -2365,8 +2365,8 @@ footer {
     border-radius: 50%;
     position: relative;
     background:
-      radial-gradient(circle 8px at center, var(--bg-3) 0%, var(--bg-1) 60%, var(--bg-3) 62%, var(--bg-1) 100%),
-      repeating-radial-gradient(circle at center, transparent 7px, rgba(255, 255, 255, 0.03) 8px, transparent 9px, transparent 11px);
+      radial-gradient(circle 9px at center, var(--bg-3) 0%, var(--bg-1) 60%, var(--bg-3) 62%, var(--bg-1) 100%),
+      repeating-radial-gradient(circle at center, transparent 11px, rgba(255, 255, 255, 0.03) 12px, transparent 13px, transparent 15px);
     border: 1px solid var(--border);
     animation: spin 4s linear infinite;
     animation-play-state: paused;
@@ -2385,8 +2385,8 @@ footer {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 18px;
-    height: 18px;
+    width: 21px;
+    height: 21px;
     border-radius: 50%;
     background: var(--bg-2);
     border: 1px solid rgba(255, 255, 255, 0.15);
@@ -2407,7 +2407,7 @@ footer {
 
   .mobile-sheet-vinyl-label span {
     font-family: var(--mono);
-    font-size: 0.32rem;
+    font-size: 0.35rem;
     font-weight: 600;
     color: var(--accent);
     letter-spacing: 0.5px;
