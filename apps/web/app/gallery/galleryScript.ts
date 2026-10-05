@@ -1,7 +1,11 @@
 // @ts-nocheck
 /* eslint-disable */
 // Faithful port of the inline <script> from the Astro gallery page.
-export function initGallery(isOperator: boolean): () => void {
+export function initGallery(
+  isOperator: boolean,
+  defaultTag: string = 'all',
+  defaultPage: number = 1
+): () => void {
     // PARSE STORED GALLERY DATA SAFELY
     let galleryData = [];
     try {
@@ -13,11 +17,247 @@ export function initGallery(isOperator: boolean): () => void {
       console.warn('Error reading gallery data store:', e);
     }
 
-    let currentActiveTag = 'all';
+    const PAGE_SIZE = 20;
+    let currentActiveTag = (defaultTag || 'all').toLowerCase();
+    let currentGalleryPage = defaultPage || 1;
+    (window as any).currentGalleryPage = currentGalleryPage;
     let currentLightboxIdx = -1;
     let selectedFilesQueue = [];
     let isUploading = false;
     const revealedItemIds = new Set();
+
+    function getQueryParam(key: string) {
+      try {
+        const url = new URL(window.location.href);
+        return url.searchParams.get(key);
+      } catch {
+        return null;
+      }
+    }
+
+    function updateQueryUrl(tag: string, page: number, push = false) {
+      try {
+        const url = new URL(window.location.href);
+        if (tag && tag !== 'all') {
+          url.searchParams.set('tag', tag);
+        } else {
+          url.searchParams.delete('tag');
+        }
+        if (page && page > 1) {
+          url.searchParams.set('page', String(page));
+        } else {
+          url.searchParams.delete('page');
+        }
+        const newUrl = url.pathname + (url.searchParams.toString() ? '?' + url.searchParams.toString() : '');
+        if (push) {
+          window.history.pushState({ tag, page }, '', newUrl);
+        } else {
+          window.history.replaceState({ tag, page }, '', newUrl);
+        }
+      } catch (e) {
+        console.warn('Failed to update URL:', e);
+      }
+    }
+
+    function renderGalleryPagination(matchedCount: number, totalPages: number, currentPage: number) {
+      const pagEl = document.getElementById('galleryPagination');
+      if (!pagEl) return;
+
+      if (totalPages <= 1) {
+        pagEl.style.display = 'none';
+        return;
+      }
+      pagEl.style.display = 'flex';
+
+      // Update info
+      const infoEl = document.getElementById('paginationInfo');
+      if (infoEl) {
+        infoEl.innerHTML = `PAGE <span class="hl">${currentPage}</span> OF ${totalPages} &bull; ${matchedCount} CAPTURES`;
+      }
+
+      // Prev / Next button states
+      const prevBtn = document.getElementById('paginationPrevBtn') as HTMLButtonElement | null;
+      if (prevBtn) {
+        if (currentPage <= 1) {
+          prevBtn.classList.add('disabled');
+          prevBtn.disabled = true;
+        } else {
+          prevBtn.classList.remove('disabled');
+          prevBtn.disabled = false;
+          prevBtn.onclick = () => window.goToGalleryPage(currentPage - 1);
+        }
+      }
+
+      const nextBtn = document.getElementById('paginationNextBtn') as HTMLButtonElement | null;
+      if (nextBtn) {
+        if (currentPage >= totalPages) {
+          nextBtn.classList.add('disabled');
+          nextBtn.disabled = true;
+        } else {
+          nextBtn.classList.remove('disabled');
+          nextBtn.disabled = false;
+          nextBtn.onclick = () => window.goToGalleryPage(currentPage + 1);
+        }
+      }
+
+      // Page buttons
+      const container = document.getElementById('paginationPagesContainer');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const items = [];
+      if (totalPages <= 7) {
+        for (let i = 1; i <= totalPages; i++) items.push(i);
+      } else if (currentPage <= 4) {
+        for (let i = 1; i <= 5; i++) items.push(i);
+        items.push('...');
+        items.push(totalPages);
+      } else if (currentPage >= totalPages - 3) {
+        items.push(1);
+        items.push('...');
+        for (let i = totalPages - 4; i <= totalPages; i++) items.push(i);
+      } else {
+        items.push(1);
+        items.push('...');
+        items.push(currentPage - 1);
+        items.push(currentPage);
+        items.push(currentPage + 1);
+        items.push('...');
+        items.push(totalPages);
+      }
+
+      items.forEach((item) => {
+        if (item === '...') {
+          const span = document.createElement('span');
+          span.className = 'pagination-ellipsis';
+          span.innerHTML = '&hellip;';
+          container.appendChild(span);
+        } else {
+          const pageNum = Number(item);
+          const isActive = pageNum === Number(currentPage);
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = `pagination-page ${isActive ? 'active' : ''}`;
+          if (isActive) {
+            btn.setAttribute('aria-current', 'page');
+          }
+          btn.textContent = String(pageNum);
+          btn.onclick = () => window.goToGalleryPage(pageNum);
+          container.appendChild(btn);
+        }
+      });
+    }
+
+    function applyGalleryView(tag: string, page: number, shouldScroll = false, pushHistory = false) {
+      currentActiveTag = (tag || 'all').toLowerCase();
+      currentGalleryPage = parseInt(page as any, 10) || 1;
+      (window as any).currentGalleryPage = currentGalleryPage;
+
+      // 1. Update filter tab buttons active state
+      document.querySelectorAll('.tag-btn').forEach((btn) => {
+        const bTag = (btn.getAttribute('data-tag') || '').toLowerCase();
+        if (bTag === currentActiveTag) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      // 2. Filter matching cards
+      const allCards = Array.from(document.querySelectorAll('.gallery-card')) as HTMLElement[];
+      const matched = allCards.filter((card) => {
+        if (currentActiveTag === 'all') return true;
+        const tags = (card.getAttribute('data-tags') || '').split(/\s+/).filter(Boolean);
+        return tags.includes(currentActiveTag);
+      });
+
+      const totalPages = Math.max(1, Math.ceil(matched.length / PAGE_SIZE));
+      if (currentGalleryPage > totalPages) {
+        currentGalleryPage = totalPages;
+      }
+      if (currentGalleryPage < 1) {
+        currentGalleryPage = 1;
+      }
+      (window as any).currentGalleryPage = currentGalleryPage;
+
+      // 3. Handle Empty State vs Grid
+      const gridEl = document.getElementById('galleryGrid');
+      const emptyTagEl = document.getElementById('tagEmptyState');
+      const metaCountEl = document.getElementById('metaStatusCount');
+
+      if (matched.length === 0) {
+        if (gridEl) gridEl.style.display = 'none';
+        if (emptyTagEl) {
+          emptyTagEl.style.display = 'flex';
+          const titleEl = document.getElementById('tagEmptyTitle');
+          if (titleEl) titleEl.textContent = `NO CAPTURES IN "#${currentActiveTag.toUpperCase()}"`;
+          const descEl = document.getElementById('tagEmptyDesc');
+          if (descEl) descEl.textContent = `No visual captures found under tag "${currentActiveTag}". Switch tags to browse other captures.`;
+        }
+        if (metaCountEl) {
+          metaCountEl.innerHTML = `<span>0 CAPTURES FOUND</span>`;
+        }
+        renderGalleryPagination(0, 0, 1);
+        updateQueryUrl(currentActiveTag, currentGalleryPage, pushHistory);
+        return;
+      }
+
+      if (emptyTagEl) emptyTagEl.style.display = 'none';
+      if (gridEl) gridEl.style.display = 'grid';
+
+      // 4. Show only PAGE_SIZE cards for the current page
+      const startIndex = (currentGalleryPage - 1) * PAGE_SIZE;
+      const endIndex = startIndex + PAGE_SIZE;
+
+      allCards.forEach((card) => {
+        card.style.display = 'none';
+      });
+
+      matched.forEach((card, index) => {
+        if (index >= startIndex && index < endIndex) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // 5. Update Meta Counter
+      if (metaCountEl) {
+        const startNum = startIndex + 1;
+        const endNum = Math.min(endIndex, matched.length);
+        metaCountEl.innerHTML = `<span>SHOWING <strong class="hl">${startNum}&ndash;${endNum}</strong> OF ${matched.length} CAPTURES</span>`;
+      }
+
+      // 6. Update Pagination Bar
+      renderGalleryPagination(matched.length, totalPages, currentGalleryPage);
+
+      // 7. Update URL
+      updateQueryUrl(currentActiveTag, currentGalleryPage, pushHistory);
+
+      // 8. Scroll to top of gallery if requested
+      if (shouldScroll) {
+        const scrollTarget = document.querySelector('.gallery-tag-filter') || document.querySelector('.gallery-meta-bar') || gridEl;
+        if (scrollTarget) {
+          scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }
+
+    function initGalleryController() {
+      const tagParam = getQueryParam('tag') || defaultTag || 'all';
+      const pageParam = parseInt(getQueryParam('page') || String(defaultPage) || '1', 10) || 1;
+      applyGalleryView(tagParam, pageParam, false, false);
+    }
+
+    window.goToGalleryPage = function (page: number) {
+      applyGalleryView(currentActiveTag, page, true, true);
+    };
+
+    window.setGalleryTag = function (tag: string) {
+      applyGalleryView(tag, 1, false, true);
+    };
+
+    window.filterByTag = window.setGalleryTag;
 
     // NSFW Content Filtering & Age Verification Logic
     window.applyNsfwPreferences = function () {
@@ -1008,28 +1248,19 @@ export function initGallery(isOperator: boolean): () => void {
       }
     };
 
-    // Filter by tag
-    window.filterByTag = function (tag) {
-      currentActiveTag = tag.toLowerCase();
-
-      document.querySelectorAll('.tag-btn').forEach((btn) => {
-        if (btn.getAttribute('data-tag') === currentActiveTag) {
-          btn.classList.add('active');
-        } else {
-          btn.classList.remove('active');
+    function getMatchedIndices() {
+      if (currentActiveTag === 'all') {
+        return galleryData.map((_, i) => i);
+      }
+      const indices = [];
+      galleryData.forEach((item, i) => {
+        const tags = Array.isArray(item.tags) ? item.tags.map((t) => String(t).trim().toLowerCase()) : [];
+        if (tags.includes(currentActiveTag)) {
+          indices.push(i);
         }
       });
-
-      const cards = document.querySelectorAll('.gallery-card');
-      cards.forEach((card) => {
-        const tags = (card.getAttribute('data-tags') || '').split(' ');
-        if (currentActiveTag === 'all' || tags.includes(currentActiveTag)) {
-          card.style.display = '';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    };
+      return indices.length > 0 ? indices : galleryData.map((_, i) => i);
+    }
 
     // Lightbox functions
     window.openLightbox = function (idx) {
@@ -1076,7 +1307,13 @@ export function initGallery(isOperator: boolean): () => void {
       }
 
       if (indexEl) {
-        indexEl.textContent = `[ ${idx + 1} / ${galleryData.length} ]`;
+        const matched = getMatchedIndices();
+        const posInMatched = matched.indexOf(idx);
+        if (posInMatched !== -1) {
+          indexEl.textContent = `[ ${posInMatched + 1} / ${matched.length} ]`;
+        } else {
+          indexEl.textContent = `[ ${idx + 1} / ${galleryData.length} ]`;
+        }
       }
 
       if (dimEl) {
@@ -1108,17 +1345,27 @@ export function initGallery(isOperator: boolean): () => void {
     };
 
     window.lightboxPrev = function () {
-      if (galleryData.length <= 1) return;
-      let nextIdx = currentLightboxIdx - 1;
-      if (nextIdx < 0) nextIdx = galleryData.length - 1;
-      openLightbox(nextIdx);
+      const matched = getMatchedIndices();
+      if (matched.length <= 1) return;
+      const currentPos = matched.indexOf(currentLightboxIdx);
+      if (currentPos === -1) {
+        openLightbox(matched[matched.length - 1]);
+        return;
+      }
+      const prevPos = (currentPos - 1 + matched.length) % matched.length;
+      openLightbox(matched[prevPos]);
     };
 
     window.lightboxNext = function () {
-      if (galleryData.length <= 1) return;
-      let nextIdx = currentLightboxIdx + 1;
-      if (nextIdx >= galleryData.length) nextIdx = 0;
-      openLightbox(nextIdx);
+      const matched = getMatchedIndices();
+      if (matched.length <= 1) return;
+      const currentPos = matched.indexOf(currentLightboxIdx);
+      if (currentPos === -1) {
+        openLightbox(matched[0]);
+        return;
+      }
+      const nextPos = (currentPos + 1) % matched.length;
+      openLightbox(matched[nextPos]);
     };
 
     window.handleLightboxBackdropClick = function (e) {
@@ -1155,9 +1402,20 @@ export function initGallery(isOperator: boolean): () => void {
       batchNsfwInput.addEventListener('change', __onBatchNsfwChange);
     }
 
-    // Initialize NSFW content state immediately
+    const onPopState = () => {
+      initGalleryController();
+    };
+    window.addEventListener('popstate', onPopState);
+
+    // Initialize gallery controller and NSFW content state immediately
+    initGalleryController();
     window.applyNsfwPreferences();
+
     return () => {
+      window.removeEventListener('popstate', onPopState);
+      delete (window as any).goToGalleryPage;
+      delete (window as any).setGalleryTag;
+      delete (window as any).filterByTag;
       document.removeEventListener('keydown', __galleryKeydown);
       if (batchNsfwInput) {
         batchNsfwInput.removeEventListener('change', __onBatchNsfwChange);
