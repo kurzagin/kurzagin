@@ -341,19 +341,33 @@ export default function GalleryClient({ items, allTags, authenticated }: Gallery
               {item.hasTape && <div className="pol-tape" style={{ ['--tape-rot' as any]: item.tapeRotation || '0deg' }}></div>}
 
               {item.is_nsfw && (
-                <div className="pol-nsfw-badge" title="18+ Sensitive Content">
+                <div
+                  className={`pol-nsfw-badge ${authenticated ? 'is-operator' : ''}`}
+                  title={authenticated ? "Operator: Click to edit NSFW status" : "18+ Sensitive Content"}
+                  onClick={authenticated ? ((e) => { e.stopPropagation(); const w = window as any; w.toggleGalleryItemNsfw?.(item.id); }) : undefined}
+                >
                   <span className="nsfw-dot"></span> 18+ NSFW
                 </div>
               )}
 
               {authenticated && (
-                <button
-                  className="pol-del-btn"
-                  title="Delete polaroid"
-                  onClick={(e) => { e.stopPropagation(); const w = window as any; w.deleteGalleryItem?.(item.id); }}
-                >
-                  <Trash2 size={12} />
-                </button>
+                <>
+                  <button
+                    className={`pol-nsfw-btn ${item.is_nsfw ? 'active' : ''}`}
+                    title={item.is_nsfw ? "Sensitive (18+ NSFW) • Click to mark as SFW" : "Safe for work • Click to mark as 18+ NSFW"}
+                    onClick={(e) => { e.stopPropagation(); const w = window as any; w.toggleGalleryItemNsfw?.(item.id); }}
+                  >
+                    <ShieldAlert size={11} />
+                    <span>{item.is_nsfw ? '18+' : 'SFW'}</span>
+                  </button>
+                  <button
+                    className="pol-del-btn"
+                    title="Delete polaroid"
+                    onClick={(e) => { e.stopPropagation(); const w = window as any; w.deleteGalleryItem?.(item.id); }}
+                  >
+                    <Trash2 size={12} />
+                  </button>
+                </>
               )}
 
               <div className="pol-img" style={css("padding: 0; overflow: hidden; background: #0d0d10; position: relative; display: flex; align-items: center; justify-content: center;")}>
@@ -411,8 +425,16 @@ export default function GalleryClient({ items, allTags, authenticated }: Gallery
         {/* Media Content Viewport */}
         <div className="lightbox-stage">
           <div className="lightbox-polaroid" id="lightboxPolaroidWrap" style={css("position: relative;")}>
-            <div id="lightboxNsfwBadge" className="lb-nsfw-tag" style={css("display: none;")}>
-              <ShieldAlert size={12} /> 18+ NSFW
+            <div
+              id="lightboxNsfwBadge"
+              className={`lb-nsfw-tag ${authenticated ? 'is-operator' : ''}`}
+              style={css("display: none;")}
+              onClick={authenticated ? ((e) => { const w = window as any; w.toggleCurrentLightboxNsfw?.(); }) : undefined}
+              title={authenticated ? "Operator: Click to edit NSFW status" : "18+ Sensitive Content"}
+            >
+              <ShieldAlert size={12} />
+              <span id="lightboxNsfwBadgeText">18+ NSFW</span>
+              {authenticated && <span className="lb-nsfw-edit-pill">EDIT</span>}
             </div>
             <div className="lightbox-img-frame">
               <img id="lightboxImg" src="" alt="" />
@@ -456,14 +478,25 @@ export default function GalleryClient({ items, allTags, authenticated }: Gallery
               <ExternalLink size={12} /> RAW
             </a>
             {authenticated && (
-              <button
-                id="lightboxDeleteBtn"
-                className="lb-del-btn"
-                title="Delete from darkroom"
-                onClick={(e) => { const w = window as any; deleteCurrentLightboxItem() }}
-              >
-                <Trash2 size={12} /> DELETE
-              </button>
+              <>
+                <button
+                  id="lightboxNsfwToggleBtn"
+                  className="lb-nsfw-btn"
+                  title="Toggle NSFW status (Operator)"
+                  onClick={(e) => { const w = window as any; w.toggleCurrentLightboxNsfw?.(); }}
+                >
+                  <ShieldAlert size={12} />
+                  <span id="lightboxNsfwToggleText">MARK NSFW</span>
+                </button>
+                <button
+                  id="lightboxDeleteBtn"
+                  className="lb-del-btn"
+                  title="Delete from darkroom"
+                  onClick={(e) => { const w = window as any; deleteCurrentLightboxItem() }}
+                >
+                  <Trash2 size={12} /> DELETE
+                </button>
+              </>
             )}
           </div>
         </div>
