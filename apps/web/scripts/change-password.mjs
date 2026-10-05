@@ -191,7 +191,7 @@ Examples:
 
 async function main() {
   console.log('\n========================================');
-  console.log('  kurzagin.log // OPERATOR PASSWORD MANAGER');
+  console.log('  kurzagin // OPERATOR PASSWORD MANAGER');
   console.log('  Neon Postgres & Neon Auth Credential Sync');
   console.log('========================================\n');
 

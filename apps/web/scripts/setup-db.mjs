@@ -56,7 +56,7 @@ function loadEnv() {
 
 async function main() {
   console.log('\n========================================');
-  console.log('  kurzagin.log // DATABASE SETUP');
+  console.log('  kurzagin // DATABASE SETUP');
   console.log('  Neon Postgres Schema Migration');
   console.log('========================================\n');
 

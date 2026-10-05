@@ -4,7 +4,7 @@ import { getServerSession } from '@/lib/serverSession';
 import { isR2Configured } from '@/lib/r2';
 import MusicClient from './MusicClient';
 
-export const metadata = { title: 'music — kurzagin.log' };
+export const metadata = { title: 'music — kurzagin' };
 
 export default async function MusicPage() {
   const session = await getServerSession();

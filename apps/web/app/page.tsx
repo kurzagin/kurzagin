@@ -19,7 +19,7 @@ import { getServerSession } from '@/lib/serverSession';
 import { getClientIp, hashIp } from '@/lib/ip';
 import HomeClient from './HomeClient';
 
-export const metadata = { title: 'home — kurzagin.log' };
+export const metadata = { title: 'home — kurzagin' };
 
 export default async function HomePage({
   searchParams,

@@ -3,7 +3,7 @@ import { getServerSession } from '@/lib/serverSession';
 import { getNeonAuthConfig } from '@/lib/auth';
 import LoginClient from './LoginClient';
 
-export const metadata = { title: 'login — kurzagin.log' };
+export const metadata = { title: 'login — kurzagin' };
 
 const inputStyle = {
   width: '100%',

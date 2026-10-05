@@ -11,7 +11,7 @@ import {
 import { getServerSession } from '@/lib/serverSession';
 import AnimeView from './AnimeView';
 
-export const metadata = { title: 'anime watchlist & reviews — kurzagin.log' };
+export const metadata = { title: 'anime watchlist & reviews — kurzagin' };
 
 function getPaginationItems(current: number, total: number) {
   const items: (number | string)[] = [];

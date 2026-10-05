@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react';
 import { Gamepad2 } from 'lucide-react';
 
-export const metadata = { title: 'games — kurzagin.log' };
+export const metadata = { title: 'games — kurzagin' };
 
 export interface GameItem {
   id?: string;

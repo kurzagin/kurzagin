@@ -91,7 +91,7 @@ function parseArgs() {
 
 async function main() {
   console.log('\n========================================');
-  console.log('  kurzagin.log // OPERATOR ACCOUNT CREATOR');
+  console.log('  kurzagin // OPERATOR ACCOUNT CREATOR');
   console.log('  Powered by Neon Auth & Neon Postgres');
   console.log('========================================\n');
 

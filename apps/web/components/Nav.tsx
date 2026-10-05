@@ -10,7 +10,7 @@ export default function Nav() {
   return (
     <nav className="top-nav">
       <Link href="/" className="nav-brand">
-        <span className="dot"></span>kurzagin.log<span className="jp">クルザギン</span>
+        <span className="dot"></span>kurzagin<span className="jp">クルザギン</span>
       </Link>
       <ul className="nav-links">
         <li><Link href="/profile" className={current === 'profile' ? 'active' : ''}><User size={13} /><span>profile</span></Link></li>

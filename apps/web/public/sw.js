@@ -1,5 +1,5 @@
 // ============================================================
-// kurzagin.log — Service Worker (PWA)
+// kurzagin — Service Worker (PWA)
 // ============================================================
 
 const CACHE_VERSION = 'krzgn-v2.0.1-next';

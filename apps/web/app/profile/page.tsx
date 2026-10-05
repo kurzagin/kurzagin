@@ -6,7 +6,7 @@ import ProfileClient from './ProfileClient';
 export async function generateMetadata() {
   const profile = await getProfile();
   return {
-    title: `${profile.name} — profile — kurzagin.log`,
+    title: `${profile.name} — profile — kurzagin`,
   };
 }
 

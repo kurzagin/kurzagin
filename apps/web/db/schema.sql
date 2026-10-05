@@ -1,5 +1,5 @@
 -- ============================================================
--- kurzagin.log — Neon Database Schema
+-- kurzagin — Neon Database Schema
 -- Run this in the Neon Console SQL Editor or via migration
 -- ============================================================
 
