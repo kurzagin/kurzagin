@@ -154,6 +154,9 @@ export default function GalleryClient({ items, allTags, authenticated }: Gallery
               {/* Dynamically populated compact tiles */}
             </div>
 
+            {/* Error Review Breakdown Panel (visible when any uploads fail) */}
+            <div id="queueErrorSection" className="queue-error-section" style={{ display: 'none' }}></div>
+
             <div style={css("display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; padding-top: 2px;")}>
               <span style={css("font-family: var(--mono); font-size: 0.56rem; color: var(--text-3);")}>
                 // tap 18+ to flag sensitive • tap ✕ to remove

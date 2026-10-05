@@ -86,10 +86,11 @@ Then I build the tool I wish already existed.`,
 };
 
 export function getDb(): DrizzleDb | null {
-  const databaseUrl = process.env.DATABASE_URL;
+  let databaseUrl = process.env.DATABASE_URL;
   if (!databaseUrl) {
     return null;
   }
+  databaseUrl = databaseUrl.replace(/^["']|["']$/g, '').trim();
   if (!cachedDb) {
     const client = neon(databaseUrl);
     cachedDb = drizzle({ client, schema });
