@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build and production outputs
+dist/
+build/
+out/
+.astro/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+.env.development
+.env.test
+.env.production
+!.env.example
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.log
+
+# Framework and deploy caches
+.vercel/
+.netlify/
+.turbo/
+.cache/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# IDE and editors
+.idea/
+**/.vscode/*
+!**/.vscode/settings.json
+!**/.vscode/extensions.json
+*.sublime-workspace
+*.sublime-project
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Local media assets
+assets/music/*
+!assets/music/README.md
+!assets/music/converted/
+!assets/music/converted/.gitkeep

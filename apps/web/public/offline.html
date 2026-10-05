@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0c">
+  <title>Offline // Kur Zagin</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" href="/favicon.ico">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-0: #0a0a0c;
+      --bg-1: #111114;
+      --bg-2: #18181c;
+      --border: #2a2a30;
+      --border-subtle: #1e1e24;
+      --text-0: #e2ded6;
+      --text-1: #b0aca4;
+      --text-2: #706c66;
+      --accent: #c49368;
+      --accent-dim: rgba(196, 147, 104, 0.12);
+      --red-soft: #b05050;
+      --green-soft: #6a9a6a;
+      --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      --sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background: var(--bg-0);
+      color: var(--text-0);
+      font-family: var(--sans);
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Dot grid */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(circle, var(--border-subtle) 0.5px, transparent 0.5px);
+      background-size: 24px 24px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    .offline-card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 480px;
+      background: var(--bg-1);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 32px 28px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+      text-align: center;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--red-soft);
+      background: rgba(176, 80, 80, 0.1);
+      border: 1px solid rgba(176, 80, 80, 0.25);
+      padding: 4px 10px;
+      border-radius: 2px;
+      margin-bottom: 24px;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--red-soft);
+      box-shadow: 0 0 8px var(--red-soft);
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    .logo-container {
+      margin: 0 auto 20px;
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    .logo-container svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    h1 {
+      font-family: var(--mono);
+      font-size: 1.15rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      color: var(--text-0);
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--text-1);
+      margin-bottom: 24px;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      padding: 10px 16px;
+      border-radius: 2px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-0);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0a0c;
+      border-color: var(--accent);
+      font-weight: 500;
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.1);
+    }
+
+    .btn:hover:not(.btn-primary) {
+      background: var(--bg-2);
+      border-color: var(--text-2);
+    }
+
+    .meta-links {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+    }
+
+    .meta-links a {
+      color: var(--text-2);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .meta-links a:hover {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="offline-card">
+    <div class="status-badge" id="statusBadge">
+      <span class="status-dot" id="statusDot"></span>
+      <span id="statusLabel">UPLINK OFFLINE</span>
+    </div>
+
+    <div class="logo-container">
+      <svg viewBox="0 0 180 180" width="32" height="32" fill="none">
+        <mask height="180" id="offline_mask" maskUnits="userSpaceOnUse" width="180" x="0" y="0" style="mask-type: alpha;">
+          <circle cx="90" cy="90" fill="black" r="90" />
+        </mask>
+        <g mask="url(#offline_mask)">
+          <circle cx="90" cy="90" fill="#000000" r="90" />
+          <circle cx="90" cy="90" r="88" fill="none" stroke="#2a2a30" stroke-width="2" />
+          <path d="M149.508 157.52L69.142 54H54V125.97H66.1136V69.3836L139.999 164.845C143.333 162.614 146.509 160.165 149.508 157.52Z" fill="url(#offline_paint0)" />
+          <rect fill="url(#offline_paint1)" height="72" width="12" x="115" y="54" />
+        </g>
+        <defs>
+          <linearGradient gradientUnits="userSpaceOnUse" id="offline_paint0" x1="109" x2="144.5" y1="116.5" y2="160.5">
+            <stop stop-color="#c49368" />
+            <stop offset="1" stop-color="#c49368" stop-opacity="0" />
+          </linearGradient>
+          <linearGradient gradientUnits="userSpaceOnUse" id="offline_paint1" x1="121" x2="120.799" y1="54" y2="106.875">
+            <stop stop-color="#c49368" />
+            <stop offset="1" stop-color="#c49368" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+
+    <h1>kurzagin.log // offline</h1>
+    <p>
+      No active network connection detected. Previously visited pages and cached static assets remain accessible.
+    </p>
+
+    <div class="actions">
+      <button type="button" class="btn btn-primary" onclick="retryConnection()">
+        <span>↻ Retry Uplink</span>
+      </button>
+      <a href="/" class="btn">
+        <span>← Return to Home</span>
+      </a>
+    </div>
+
+    <div class="meta-links">
+      <a href="/music">music</a>
+      <span>·</span>
+      <a href="/gallery">gallery</a>
+      <span>·</span>
+      <a href="/profile">profile</a>
+    </div>
+  </div>
+
+  <script>
+    function retryConnection() {
+      const btn = document.querySelector('.btn-primary');
+      if (btn) btn.textContent = 'Probing connection...';
+      fetch('/', { method: 'HEAD', cache: 'no-store' })
+        .then(() => {
+          window.location.reload();
+        })
+        .catch(() => {
+          setTimeout(() => {
+            if (btn) btn.textContent = '↻ Retry Uplink';
+          }, 600);
+        });
+    }
+
+    window.addEventListener('online', () => {
+      const badge = document.getElementById('statusBadge');
+      const dot = document.getElementById('statusDot');
+      const label = document.getElementById('statusLabel');
+      if (badge && dot && label) {
+        badge.style.color = 'var(--green-soft)';
+        badge.style.borderColor = 'rgba(106, 154, 106, 0.3)';
+        badge.style.background = 'rgba(106, 154, 106, 0.1)';
+        dot.style.background = 'var(--green-soft)';
+        dot.style.boxShadow = '0 0 8px var(--green-soft)';
+        label.textContent = 'LINK RESTORED // RELOADING';
+      }
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
