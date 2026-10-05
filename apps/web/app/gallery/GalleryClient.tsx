@@ -104,10 +104,10 @@ export default function GalleryClient({ items, allTags, authenticated }: Gallery
         <div
           id="dropzone"
           style={css("border: 2px dashed var(--border); border-radius: 4px; padding: 18px 16px; text-align: center; cursor: pointer; background: rgba(255,255,255,0.01); transition: border-color 0.2s, background 0.2s;")}
-          onClick={(e) => { const w = window as any; handleDropzoneClick(event) }}
-          onDragOver={(e) => { const w = window as any; event.preventDefault(); this.style.borderColor='var(--accent)'; }}
-          onDragLeave={(e) => { const w = window as any; this.style.borderColor='var(--border)'; }}
-          onDrop={(e) => { const w = window as any; handleFileDrop(event) }}
+          onClick={(e) => { const w = window as any; w.handleDropzoneClick?.(e); }}
+          onDragOver={(e) => { e.preventDefault(); e.currentTarget.style.borderColor = 'var(--accent)'; }}
+          onDragLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; }}
+          onDrop={(e) => { const w = window as any; w.handleFileDrop?.(e); }}
         >
           <div id="dropzoneEmpty">
             <Upload size={28} style={{ margin: '0 auto 8px', color: 'var(--accent)', opacity: 0.8 }} />
@@ -183,7 +183,7 @@ export default function GalleryClient({ items, allTags, authenticated }: Gallery
           accept="image/*"
           multiple
           style={css("display: none;")}
-          onChange={(e) => { const w = window as any; handleFilesSelected(event) }}
+          onChange={(e) => { const w = window as any; w.handleFilesSelected?.(e); }}
         />
 
         {/* Title & Tags */}
@@ -233,7 +233,7 @@ export default function GalleryClient({ items, allTags, authenticated }: Gallery
           <input
             type="checkbox"
             id="galleryNsfwInput"
-            onChange={(e) => { const w = window as any; handleBatchNsfwChange(this.checked) }}
+            onChange={(e) => { const w = window as any; w.handleBatchNsfwChange?.(e.target.checked); }}
             style={css("cursor: pointer; accent-color: #ff4757; width: 15px; height: 15px;")}
           />
         </div>
@@ -285,9 +285,10 @@ export default function GalleryClient({ items, allTags, authenticated }: Gallery
         ).length;
         return (
           <button
+            key={tag}
             className="feed-filter-btn tag-btn"
             data-tag={tag}
-            onclick={`filterByTag('${tag}')`}
+            onClick={() => { const w = window as any; w.filterByTag?.(tag); }}
           >
             #{tag} ({count})
           </button>
@@ -324,13 +325,14 @@ export default function GalleryClient({ items, allTags, authenticated }: Gallery
           const displayCaption = item.caption || item.title || 'visual capture';
           return (
             <div
+              key={item.id}
               className={`polaroid gallery-card ${item.is_nsfw ? 'is-nsfw-item' : ''}`}
               data-id={item.id}
               data-tags={tagsStr}
               data-index={idx}
               data-nsfw={item.is_nsfw ? "true" : "false"}
               style={{ ['--rot' as any]: item.rotation || '0deg', cursor: 'pointer' }}
-              onclick={`handlePolaroidClick(event, ${idx})`}
+              onClick={(e) => { const w = window as any; w.handlePolaroidClick?.(e, idx); }}
               title={item.title || item.caption || 'Click to view polaroid in darkroom lightbox'}
             >
               {item.hasTape && <div className="pol-tape" style={{ ['--tape-rot' as any]: item.tapeRotation || '0deg' }}></div>}
@@ -345,7 +347,7 @@ export default function GalleryClient({ items, allTags, authenticated }: Gallery
                 <button
                   className="pol-del-btn"
                   title="Delete polaroid"
-                  onclick={`event.stopPropagation(); deleteGalleryItem('${item.id}');`}
+                  onClick={(e) => { e.stopPropagation(); const w = window as any; w.deleteGalleryItem?.(item.id); }}
                 >
                   <Trash2 size={12} />
                 </button>
@@ -361,7 +363,7 @@ export default function GalleryClient({ items, allTags, authenticated }: Gallery
                 />
 
                 {item.is_nsfw && (
-                  <div className="pol-nsfw-overlay" onclick={`event.stopPropagation(); toggleCardUnblur(${idx});`}>
+                  <div className="pol-nsfw-overlay" onClick={(e) => { e.stopPropagation(); const w = window as any; w.toggleCardUnblur?.(idx); }}>
                     <div className="pol-nsfw-alert">
                       <ShieldAlert size={15} />
                       <span style={css("font-weight: 600;")}>18+ SENSITIVE</span>
@@ -369,7 +371,7 @@ export default function GalleryClient({ items, allTags, authenticated }: Gallery
                     <button type="button" className="pol-reveal-btn">
                       <Eye size={11} /> REVEAL
                     </button>
-                    <button type="button" className="pol-settings-link" onClick={(e) => { const w = window as any; event.stopPropagation(); openNsfwModal(); }} title="Filter settings">
+                    <button type="button" className="pol-settings-link" onClick={(e) => { e.stopPropagation(); const w = window as any; w.openNsfwModal?.(); }} title="Filter settings">
                       SETTINGS ⚙
                     </button>
                   </div>
@@ -388,8 +390,8 @@ export default function GalleryClient({ items, allTags, authenticated }: Gallery
 
   {/* DARKROOM LIGHTBOX MODAL (ONLY MOUNTED WHEN ITEMS EXIST) */}
   {items.length > 0 && (
-    <div id="galleryLightbox" className="lightbox-overlay" onClick={(e) => { const w = window as any; handleLightboxBackdropClick(event) }}>
-      <div className="lightbox-container" onClick={(e) => { const w = window as any; event.stopPropagation() }}>
+    <div id="galleryLightbox" className="lightbox-overlay" onClick={(e) => { const w = window as any; w.handleLightboxBackdropClick?.(e); }}>
+      <div className="lightbox-container" onClick={(e) => { e.stopPropagation(); }}>
         {/* Close Button */}
         <button className="lightbox-close-btn" onClick={(e) => { const w = window as any; closeLightbox() }} title="Close (Esc)">
           <X size={20} />
@@ -467,7 +469,7 @@ export default function GalleryClient({ items, allTags, authenticated }: Gallery
   )}
 
   {/* SELF-AGE VERIFICATION & CONTENT FILTER MODAL */}
-  <div id="nsfwModal" className="lightbox-overlay" onClick={(e) => { const w = window as any; handleNsfwModalBackdropClick(event) }}>
+  <div id="nsfwModal" className="lightbox-overlay" onClick={(e) => { const w = window as any; w.handleNsfwModalBackdropClick?.(e); }}>
     <div className="bracket-card reveal" style={css("max-width: 480px; width: 92vw; padding: 28px; position: relative; background: var(--bg-1); border: 1px solid var(--border);")}>
       <div style={css("display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;")}>
         <div style={css("font-family: var(--mono); font-size: 0.68rem; color: #ff6b81; letter-spacing: 1px; display: flex; align-items: center; gap: 6px;")}>

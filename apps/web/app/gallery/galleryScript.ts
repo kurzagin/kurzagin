@@ -213,15 +213,43 @@ export function initGallery(isOperator: boolean): () => void {
 
     window.toggleItemNsfw = function (id, checked) {
       const item = selectedFilesQueue.find((x) => x.id === id);
-      if (item) item.isNsfw = checked;
+      if (!item) return;
+      item.isNsfw = typeof checked === 'boolean' ? checked : !item.isNsfw;
+
+      const tile = document.getElementById(`queue-tile-${id}`);
+      const nsfwBtn = tile?.querySelector('.queue-tile-nsfw') as HTMLButtonElement | null;
+      if (nsfwBtn) {
+        nsfwBtn.classList.toggle('active', Boolean(item.isNsfw));
+        nsfwBtn.setAttribute('onclick', `toggleItemNsfw('${item.id}', ${!item.isNsfw})`);
+      }
+
+      const batchCheckbox = document.getElementById('galleryNsfwInput') as HTMLInputElement | null;
+      if (batchCheckbox && selectedFilesQueue.length > 0) {
+        const allNsfw = selectedFilesQueue.every((x) => Boolean(x.isNsfw));
+        const noneNsfw = selectedFilesQueue.every((x) => !x.isNsfw);
+        if (allNsfw) {
+          batchCheckbox.checked = true;
+        } else if (noneNsfw) {
+          batchCheckbox.checked = false;
+        }
+      }
     };
 
     window.handleBatchNsfwChange = function (checked) {
+      const isChecked = Boolean(checked);
       selectedFilesQueue.forEach((item) => {
-        item.isNsfw = checked;
-        const rowCheckbox = document.querySelector(`#queue-row-${item.id} .queue-item-nsfw-input`);
-        if (rowCheckbox) rowCheckbox.checked = checked;
+        item.isNsfw = isChecked;
+        const tile = document.getElementById(`queue-tile-${item.id}`);
+        const nsfwBtn = tile?.querySelector('.queue-tile-nsfw') as HTMLButtonElement | null;
+        if (nsfwBtn) {
+          nsfwBtn.classList.toggle('active', isChecked);
+          nsfwBtn.setAttribute('onclick', `toggleItemNsfw('${item.id}', ${!isChecked})`);
+        }
       });
+      const batchCheckbox = document.getElementById('galleryNsfwInput') as HTMLInputElement | null;
+      if (batchCheckbox && batchCheckbox.checked !== isChecked) {
+        batchCheckbox.checked = isChecked;
+      }
     };
 
     window.removeQueueItem = function (id) {
@@ -238,8 +266,10 @@ export function initGallery(isOperator: boolean): () => void {
       if (isUploading) return;
       selectedFilesQueue.forEach((item) => URL.revokeObjectURL(item.previewUrl));
       selectedFilesQueue = [];
-      const fileInput = document.getElementById('galleryFileInput');
+      const fileInput = document.getElementById('galleryFileInput') as HTMLInputElement | null;
       if (fileInput) fileInput.value = '';
+      const batchCheckbox = document.getElementById('galleryNsfwInput') as HTMLInputElement | null;
+      if (batchCheckbox) batchCheckbox.checked = false;
       renderQueue();
     };
 
@@ -496,6 +526,9 @@ export function initGallery(isOperator: boolean): () => void {
           item.status = 'pinning';
           updateItemStatusUI(item.id, '// PINNING...', 'var(--accent)', 'is-processing');
 
+          const batchCheckbox = document.getElementById('galleryNsfwInput') as HTMLInputElement | null;
+          const isItemNsfw = item.isNsfw !== undefined ? Boolean(item.isNsfw) : Boolean(batchCheckbox?.checked);
+
           const galleryRes = await fetch('/api/gallery', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -506,7 +539,7 @@ export function initGallery(isOperator: boolean): () => void {
               tags: tags,
               width: uploadJson.width,
               height: uploadJson.height,
-              is_nsfw: Boolean(item.isNsfw),
+              is_nsfw: isItemNsfw,
             }),
           });
 
@@ -749,7 +782,26 @@ export function initGallery(isOperator: boolean): () => void {
     };
     document.addEventListener('keydown', __galleryKeydown);
 
+    const batchNsfwInput = document.getElementById('galleryNsfwInput') as HTMLInputElement | null;
+    const __onBatchNsfwChange = (e: Event) => {
+      window.handleBatchNsfwChange((e.target as HTMLInputElement).checked);
+    };
+    if (batchNsfwInput) {
+      batchNsfwInput.addEventListener('change', __onBatchNsfwChange);
+    }
+
     // Initialize NSFW content state immediately
     window.applyNsfwPreferences();
-  return () => { document.removeEventListener('keydown', __galleryKeydown); document.body.style.overflow = ''; for (const u of selectedFilesQueue) { try { URL.revokeObjectURL(u.previewUrl); } catch (e) {} } };
+    return () => {
+      document.removeEventListener('keydown', __galleryKeydown);
+      if (batchNsfwInput) {
+        batchNsfwInput.removeEventListener('change', __onBatchNsfwChange);
+      }
+      document.body.style.overflow = '';
+      for (const u of selectedFilesQueue) {
+        try {
+          URL.revokeObjectURL(u.previewUrl);
+        } catch (e) {}
+      }
+    };
 }
