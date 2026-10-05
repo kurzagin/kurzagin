@@ -376,6 +376,49 @@
   color: #000;
 }
 
+.pol-nsfw-btn {
+  position: absolute;
+  top: 6px;
+  right: 32px;
+  background: rgba(0, 0, 0, 0.75);
+  color: var(--text-2);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 2px 5px;
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  cursor: pointer;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.2s, background 0.2s, color 0.2s, border-color 0.2s;
+  line-height: 1;
+  height: 22px;
+  box-sizing: border-box;
+}
+
+.polaroid:hover .pol-nsfw-btn {
+  opacity: 1;
+}
+
+.pol-nsfw-btn.active {
+  background: rgba(255, 71, 87, 0.9);
+  color: #fff;
+  border-color: #ff4757;
+  opacity: 0.85;
+}
+
+.polaroid:hover .pol-nsfw-btn.active {
+  opacity: 1;
+}
+
+.pol-nsfw-btn:hover {
+  filter: brightness(1.2);
+}
+
 /* NSFW POLAROID BADGE & BLUR OVERLAY */
 .pol-nsfw-badge {
   position: absolute;
@@ -394,6 +437,16 @@
   align-items: center;
   gap: 4px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.pol-nsfw-badge.is-operator {
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.pol-nsfw-badge.is-operator:hover {
+  transform: scale(1.05);
+  filter: brightness(1.15);
 }
 
 .nsfw-dot {
@@ -500,6 +553,45 @@
   align-items: center;
   gap: 5px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+.lb-nsfw-tag.is-operator {
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.15s ease, filter 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.lb-nsfw-tag.is-operator:hover {
+  filter: brightness(1.15);
+  transform: scale(1.03);
+}
+
+.lb-nsfw-tag.is-sfw {
+  background: rgba(18, 18, 24, 0.9);
+  color: var(--text-2);
+  border: 1px solid var(--border);
+}
+
+.lb-nsfw-tag.is-sfw:hover {
+  border-color: #ff4757;
+  color: #ff6b81;
+}
+
+.lb-nsfw-tag.is-nsfw {
+  background: #ff4757;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.lb-nsfw-edit-pill {
+  font-family: var(--mono);
+  font-size: 0.50rem;
+  letter-spacing: 0.5px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 1px 4px;
+  border-radius: 2px;
+  margin-left: 2px;
 }
 
 .lightbox-polaroid.nsfw-blurred img {
@@ -771,6 +863,40 @@
   color: var(--accent);
 }
 
+.lb-nsfw-btn {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--text-2);
+  background: none;
+  border: 1px solid var(--border);
+  padding: 2px 7px;
+  border-radius: 2px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.lb-nsfw-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-1);
+  border-color: var(--text-3);
+}
+
+.lb-nsfw-btn.is-nsfw {
+  color: #ff6b81;
+  border-color: rgba(255, 71, 87, 0.4);
+  background: rgba(255, 71, 87, 0.1);
+}
+
+.lb-nsfw-btn.is-nsfw:hover {
+  background: #ff4757;
+  color: #fff;
+  border-color: #ff4757;
+}
+
 .lb-del-btn {
   font-family: var(--mono);
   font-size: 0.65rem;
@@ -793,6 +919,11 @@
 
 /* Responsive adjustments placed AFTER base rules */
 @media (max-width: 768px) {
+  .pol-del-btn,
+  .pol-nsfw-btn {
+    opacity: 0.85 !important;
+  }
+
   /* Composer mobile adjustments */
   .composer-inputs-grid {
     grid-template-columns: 1fr !important;

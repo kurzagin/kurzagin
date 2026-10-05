@@ -847,6 +847,167 @@ export function initGallery(isOperator: boolean): () => void {
       }
     };
 
+    function updateLightboxNsfwUI(item) {
+      if (!item) return;
+      const isNsfwItem = Boolean(item.is_nsfw);
+      const nsfwBadge = document.getElementById('lightboxNsfwBadge');
+      const badgeText = document.getElementById('lightboxNsfwBadgeText');
+      const toggleBtn = document.getElementById('lightboxNsfwToggleBtn');
+      const toggleText = document.getElementById('lightboxNsfwToggleText');
+      const nsfwOverlay = document.getElementById('lightboxNsfwOverlay');
+      const lbPolaroid = document.getElementById('lightboxPolaroidWrap');
+
+      if (nsfwBadge) {
+        if (isOperator) {
+          nsfwBadge.style.display = 'inline-flex';
+          nsfwBadge.className = `lb-nsfw-tag is-operator ${isNsfwItem ? 'is-nsfw' : 'is-sfw'}`;
+          if (badgeText) {
+            badgeText.textContent = isNsfwItem ? '18+ NSFW' : 'SFW';
+          }
+          nsfwBadge.title = isNsfwItem
+            ? 'Operator: Click to unmark NSFW'
+            : 'Operator: Click to mark as 18+ NSFW';
+        } else {
+          nsfwBadge.style.display = isNsfwItem ? 'inline-flex' : 'none';
+          nsfwBadge.className = 'lb-nsfw-tag';
+          if (badgeText) {
+            badgeText.textContent = '18+ NSFW';
+          }
+          nsfwBadge.title = '18+ Sensitive Content';
+        }
+      }
+
+      if (toggleBtn) {
+        toggleBtn.classList.toggle('is-nsfw', isNsfwItem);
+        toggleBtn.title = isNsfwItem
+          ? 'Mark as safe (SFW)'
+          : 'Mark as sensitive (18+ NSFW)';
+        if (toggleText) {
+          toggleText.textContent = isNsfwItem ? '18+ NSFW: ON' : 'MARK NSFW';
+        }
+      }
+
+      const defaultMode = isOperator ? 'show' : 'blur';
+      const mode = localStorage.getItem('kurzagin_nsfw_mode') || defaultMode;
+      const isRevealed = revealedItemIds.has(item.id);
+
+      if (isNsfwItem && mode !== 'show' && !isRevealed) {
+        if (lbPolaroid) lbPolaroid.classList.add('nsfw-blurred');
+        if (nsfwOverlay) nsfwOverlay.style.display = 'flex';
+      } else {
+        if (lbPolaroid) lbPolaroid.classList.remove('nsfw-blurred');
+        if (nsfwOverlay) nsfwOverlay.style.display = 'none';
+      }
+    }
+
+    // Toggle NSFW status for a gallery item (Operator only)
+    window.toggleGalleryItemNsfw = async function (id, explicitState) {
+      if (!isOperator) return;
+
+      const idx = galleryData.findIndex((x) => x.id === id);
+      if (idx === -1) return;
+
+      const item = galleryData[idx];
+      if (item._isUpdatingNsfw) return;
+
+      const currentStatus = Boolean(item.is_nsfw);
+      const newStatus = typeof explicitState === 'boolean' ? explicitState : !currentStatus;
+
+      item._isUpdatingNsfw = true;
+
+      const toggleText = document.getElementById('lightboxNsfwToggleText');
+      if (currentLightboxIdx === idx && toggleText) {
+        toggleText.textContent = 'UPDATING...';
+      }
+
+      try {
+        const res = await fetch('/api/gallery', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: item.id, is_nsfw: newStatus }),
+        });
+
+        const json = await res.json();
+        if (!res.ok || !json.success) {
+          throw new Error(json.error || 'Failed to update NSFW status');
+        }
+
+        // Apply new status to item in memory
+        item.is_nsfw = newStatus;
+
+        // If newly marked as NSFW, automatically reveal for this operator session
+        if (newStatus) {
+          revealedItemIds.add(item.id);
+        }
+
+        // Update card in gallery grid DOM
+        const card = document.querySelector(`.gallery-card[data-id="${item.id}"]`);
+        if (card) {
+          card.setAttribute('data-nsfw', newStatus ? 'true' : 'false');
+          card.classList.toggle('is-nsfw-item', newStatus);
+
+          // Update card NSFW badge
+          let badge = card.querySelector('.pol-nsfw-badge');
+          if (newStatus) {
+            if (!badge) {
+              badge = document.createElement('div');
+              badge.className = 'pol-nsfw-badge is-operator';
+              badge.title = 'Operator: Click to edit NSFW status';
+              badge.innerHTML = '<span class="nsfw-dot"></span> 18+ NSFW';
+              badge.onclick = (e) => {
+                e.stopPropagation();
+                window.toggleGalleryItemNsfw(item.id);
+              };
+              card.insertBefore(badge, card.firstChild);
+            } else {
+              badge.style.display = '';
+            }
+          } else if (badge) {
+            badge.style.display = 'none';
+          }
+
+          // Update card operator NSFW button
+          const nsfwBtn = card.querySelector('.pol-nsfw-btn');
+          if (nsfwBtn) {
+            nsfwBtn.classList.toggle('active', newStatus);
+            nsfwBtn.title = newStatus
+              ? 'Sensitive (18+ NSFW) • Click to mark as SFW'
+              : 'Safe for work • Click to mark as 18+ NSFW';
+            const span = nsfwBtn.querySelector('span');
+            if (span) span.textContent = newStatus ? '18+' : 'SFW';
+          }
+        }
+
+        // Update lightbox UI if currently showing this item
+        if (currentLightboxIdx === idx) {
+          updateLightboxNsfwUI(item);
+        }
+
+        // Keep localStorage and card preferences in sync
+        window.applyNsfwPreferences();
+
+        // Update the client data store
+        const storeEl = document.getElementById('galleryDataStore');
+        if (storeEl) {
+          storeEl.dataset.gallery = JSON.stringify(galleryData);
+        }
+      } catch (err: any) {
+        console.error('Error toggling NSFW status:', err);
+        alert(err.message || 'Error updating NSFW status.');
+        if (currentLightboxIdx === idx) {
+          updateLightboxNsfwUI(item);
+        }
+      } finally {
+        item._isUpdatingNsfw = false;
+      }
+    };
+
+    window.toggleCurrentLightboxNsfw = function () {
+      if (currentLightboxIdx >= 0 && galleryData[currentLightboxIdx]) {
+        window.toggleGalleryItemNsfw(galleryData[currentLightboxIdx].id);
+      }
+    };
+
     // Filter by tag
     window.filterByTag = function (tag) {
       currentActiveTag = tag.toLowerCase();
@@ -885,32 +1046,13 @@ export function initGallery(isOperator: boolean): () => void {
       const dimEl = document.getElementById('lightboxDimensions');
       const dateEl = document.getElementById('lightboxDate');
       const rawLink = document.getElementById('lightboxOriginalLink');
-      const nsfwBadge = document.getElementById('lightboxNsfwBadge');
-      const nsfwOverlay = document.getElementById('lightboxNsfwOverlay');
-      const lbPolaroid = document.getElementById('lightboxPolaroidWrap');
 
       if (!overlay || !img) return;
 
       img.src = item.url;
       img.alt = item.alt_text || item.title || item.caption || 'Polaroid view';
 
-      const isNsfwItem = Boolean(item.is_nsfw);
-
-      if (nsfwBadge) {
-        nsfwBadge.style.display = isNsfwItem ? 'inline-flex' : 'none';
-      }
-
-      const defaultMode = isOperator ? 'show' : 'blur';
-      const mode = localStorage.getItem('kurzagin_nsfw_mode') || defaultMode;
-      const isRevealed = revealedItemIds.has(item.id);
-
-      if (isNsfwItem && mode !== 'show' && !isRevealed) {
-        if (lbPolaroid) lbPolaroid.classList.add('nsfw-blurred');
-        if (nsfwOverlay) nsfwOverlay.style.display = 'flex';
-      } else {
-        if (lbPolaroid) lbPolaroid.classList.remove('nsfw-blurred');
-        if (nsfwOverlay) nsfwOverlay.style.display = 'none';
-      }
+      updateLightboxNsfwUI(item);
 
       if (titleEl) {
         titleEl.textContent = item.title || '';

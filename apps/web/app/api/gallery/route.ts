@@ -199,3 +199,98 @@ export async function DELETE(request: NextRequest) {
     });
   }
 }
+
+export async function PATCH(request: NextRequest) {
+  const cookies = await nextCookies();
+  if (!(await isAuthenticated(cookies, request))) {
+    return new Response(JSON.stringify({ error: 'Unauthorized: login required to edit gallery items' }), {
+      status: 401,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
+  const db = getDb();
+  if (!db) {
+    return new Response(JSON.stringify({ error: 'Database connection is not configured' }), {
+      status: 503,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
+  try {
+    const body = await request.json().catch(() => ({}));
+    const id = body.id;
+
+    if (!id) {
+      return new Response(JSON.stringify({ error: 'Item ID is required' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    const updates: Partial<{
+      is_nsfw: boolean;
+      title: string | null;
+      caption: string | null;
+      alt_text: string | null;
+      tags: string[];
+    }> = {};
+
+    if (typeof body.is_nsfw === 'boolean') {
+      updates.is_nsfw = body.is_nsfw;
+    } else if (body.is_nsfw === 'true' || body.is_nsfw === 'false') {
+      updates.is_nsfw = body.is_nsfw === 'true';
+    }
+
+    if (typeof body.title === 'string') {
+      updates.title = body.title.trim() || null;
+    }
+    if (typeof body.caption === 'string') {
+      updates.caption = body.caption.trim() || null;
+    }
+    if (typeof body.alt_text === 'string') {
+      updates.alt_text = body.alt_text.trim() || null;
+    }
+    if (Array.isArray(body.tags)) {
+      updates.tags = body.tags.map((t: string) => String(t).replace(/^#/, '').trim()).filter(Boolean);
+    }
+
+    if (Object.keys(updates).length === 0) {
+      return new Response(JSON.stringify({ error: 'No valid update fields provided' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    const updated = await db
+      .update(galleryItems)
+      .set(updates)
+      .where(eq(galleryItems.id, id))
+      .returning();
+
+    if (updated.length === 0) {
+      return new Response(JSON.stringify({ error: 'Gallery item not found' }), {
+        status: 404,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    return new Response(
+      JSON.stringify({
+        success: true,
+        item: updated[0],
+      }),
+      {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+  } catch (err: any) {
+    console.error('Error updating gallery item:', err);
+    return new Response(JSON.stringify({ error: 'Failed to update gallery item' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+}
+
