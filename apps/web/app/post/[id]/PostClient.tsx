@@ -1,12 +1,13 @@
 // @ts-nocheck
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { Heart, MessageSquare } from 'lucide-react';
+import { Heart, MessageSquare, Pencil } from 'lucide-react';
 import { css } from '../../_ui/css';
 import { processYouTubePost, formatBody } from '@/lib/youtube';
 import type { DbPost, DbComment, DbPostMedia, DbProfile } from '@/lib/db';
+import EditPostModal from '@/components/EditPostModal';
 import './post.css';
 
 function formatPostTime(dateVal: string | Date) {
@@ -37,6 +38,7 @@ interface PostClientProps {
   mediaItems: DbPostMedia[];
   profile: DbProfile;
   isPostLiked: boolean;
+  authenticated?: boolean;
 }
 
 export default function PostClient({
@@ -45,7 +47,9 @@ export default function PostClient({
   mediaItems,
   profile,
   isPostLiked,
+  authenticated = false,
 }: PostClientProps) {
+  const [isEditOpen, setIsEditOpen] = useState(false);
   const { cleanedContent, videos: postYouTubeVideos } = processYouTubePost(post.content || '');
 
   return (
@@ -138,6 +142,18 @@ export default function PostClient({
         <button className="post-act" onClick={(e) => { const w = window as any; document.getElementById('commentInput').focus() }} style={css("display: inline-flex; align-items: center; gap: 4px;")}>
           <MessageSquare size={13} /> <span>{postComments.length}</span>
         </button>
+        {authenticated && (
+          <button
+            type="button"
+            className="post-act edit-btn"
+            onClick={() => setIsEditOpen(true)}
+            title="Operator: Edit transmission"
+            style={css("margin-left: auto; color: var(--accent); opacity: 0.85; display: inline-flex; align-items: center; gap: 4px;")}
+          >
+            <Pencil size={12} />
+            <span>EDIT</span>
+          </button>
+        )}
       </div>
     </article>
 
@@ -230,6 +246,18 @@ export default function PostClient({
         )}
       </div>
     </section>
+
+    {/* OPERATOR EDIT POST MODAL */}
+    {authenticated && (
+      <EditPostModal
+        isOpen={isEditOpen}
+        post={post}
+        initialMedia={mediaItems}
+        onClose={() => setIsEditOpen(false)}
+        onSaved={() => window.location.reload()}
+        onDeleted={() => { window.location.href = '/#blog'; }}
+      />
+    )}
 
   </div>
 
