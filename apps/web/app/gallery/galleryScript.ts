@@ -306,6 +306,30 @@ export function initGallery(isOperator: boolean): () => void {
       }
     }
 
+    function shortenErrorMessage(msg: any): string {
+      if (!msg) return 'ERR';
+      const m = String(msg).toLowerCase();
+      if (m.includes('cloudflare r2') || m.includes('r2 storage')) return 'R2 UNCONFIGURED';
+      if (m.includes('unauthorized') || m.includes('login required')) return 'UNAUTHORIZED';
+      if (m.includes('too large') || m.includes('4.5mb')) return 'FILE > 4.5MB';
+      if (m.includes('rate limit') || m.includes('429')) return 'RATE LIMITED';
+      if (m.includes('image processing') || m.includes('sharp')) return 'IMAGE TRANSCODE ERR';
+      if (m.includes('pinning failed') || m.includes('gallery item')) return 'PIN FAILED';
+      if (m.includes('database') || m.includes('db')) return 'DB ERROR';
+      const clean = String(msg).trim();
+      if (clean.length > 16) return clean.slice(0, 14) + '…';
+      return clean.toUpperCase();
+    }
+
+    window.showQueueItemError = function (id) {
+      const item = selectedFilesQueue.find((x) => x.id === id);
+      if (!item) return;
+      const errorMsg = item.error || 'Unknown upload error occurred.';
+      alert(
+        `[TRANSMISSION ERROR DETAILS]\n\nFile: ${item.file.name} (${formatBytes(item.file.size)})\n\nReason:\n${errorMsg}\n\nTip: You can remove this item using ✕ or resolve the issue and click RETRY PINNING.`
+      );
+    };
+
     function getStatusLabel(item) {
       switch (item.status) {
         case 'uploading':
@@ -340,10 +364,15 @@ export function initGallery(isOperator: boolean): () => void {
       const badgeEl = document.getElementById('queueCountBadge');
       const sizeEl = document.getElementById('queueTotalSize');
       const submitBtn = document.getElementById('submitGalleryBtn');
+      const errorSec = document.getElementById('queueErrorSection');
 
       if (selectedFilesQueue.length === 0) {
         if (emptyEl) emptyEl.style.display = 'block';
         if (queueEl) queueEl.style.display = 'none';
+        if (errorSec) {
+          errorSec.innerHTML = '';
+          errorSec.style.display = 'none';
+        }
         if (titlesWrap) {
           titlesWrap.innerHTML = '';
           titlesWrap.style.display = 'none';
@@ -373,7 +402,15 @@ export function initGallery(isOperator: boolean): () => void {
         listEl.innerHTML = selectedFilesQueue
           .map(
             (item) => `
-          <div class="queue-tile ${item.status === 'done' ? 'is-done' : ''} ${item.status === 'error' ? 'is-error' : ''} ${item.status === 'uploading' || item.status === 'converting' || item.status === 'pinning' ? 'is-processing' : ''}" id="queue-tile-${item.id}">
+          <div
+            class="queue-tile ${item.status === 'done' ? 'is-done' : ''} ${item.status === 'error' ? 'is-error' : ''} ${item.status === 'uploading' || item.status === 'converting' || item.status === 'pinning' ? 'is-processing' : ''}"
+            id="queue-tile-${item.id}"
+            ${
+              item.status === 'error'
+                ? `title="Error: ${escapeHtml(item.error || 'Upload failed')}\n(Click to view details)" onclick="showQueueItemError('${item.id}')"`
+                : ''
+            }
+          >
             <img src="${item.previewUrl}" alt="Preview" class="queue-tile-img" />
 
             ${
@@ -381,7 +418,7 @@ export function initGallery(isOperator: boolean): () => void {
                 ? `
               <button
                 type="button"
-                onclick="removeQueueItem('${item.id}')"
+                onclick="event.stopPropagation(); removeQueueItem('${item.id}')"
                 class="queue-tile-del"
                 title="Remove image"
               >
@@ -393,7 +430,7 @@ export function initGallery(isOperator: boolean): () => void {
 
             <button
               type="button"
-              onclick="toggleItemNsfw('${item.id}', !${Boolean(item.isNsfw)})"
+              onclick="event.stopPropagation(); toggleItemNsfw('${item.id}', !${Boolean(item.isNsfw)})"
               class="queue-tile-nsfw ${item.isNsfw ? 'active' : ''}"
               title="Toggle 18+ sensitive flag"
               ${isUploading ? 'disabled' : ''}
@@ -402,18 +439,89 @@ export function initGallery(isOperator: boolean): () => void {
             </button>
 
             <div class="queue-tile-footer">
-              <span class="queue-tile-size" style="${item.file.size > 4.5 * 1024 * 1024 ? 'color: #ffaa00; font-weight: 600;' : ''}">${formatBytes(item.file.size)}${item.file.size > 4.5 * 1024 * 1024 ? ' ⚠️' : ''}</span>
+              <span class="queue-tile-size" style="${item.file.size > 4.5 * 1024 * 1024 ? 'color: var(--accent); font-weight: 600;' : ''}" title="${item.file.size > 4.5 * 1024 * 1024 ? 'Over 4.5MB: will be automatically optimized to fit serverless payload' : ''}">${formatBytes(item.file.size)}${item.file.size > 4.5 * 1024 * 1024 ? ' ⚡' : ''}</span>
             </div>
 
-            <div id="status-${item.id}" class="queue-tile-overlay">
+            <div
+              id="status-${item.id}"
+              class="queue-tile-overlay"
+              ${
+                item.status === 'error'
+                  ? `title="Error: ${escapeHtml(item.error || 'Upload failed')}\n(Click to view details)"`
+                  : ''
+              }
+            >
               <span class="queue-tile-status-icon" style="color: ${getStatusColor(item.status)};">
                 ${getStatusLabel(item)}
               </span>
+              ${
+                item.status === 'error'
+                  ? `
+                <span class="queue-tile-err-badge" title="${escapeHtml(item.error || 'Upload failed')}">
+                  ${escapeHtml(shortenErrorMessage(item.error))}
+                </span>
+                <span class="queue-tile-tap-hint">TAP INFO</span>
+              `
+                  : ''
+              }
             </div>
           </div>
         `
           )
           .join('');
+      }
+
+      if (errorSec) {
+        const failedItems = selectedFilesQueue.filter((x) => x.status === 'error');
+        if (failedItems.length > 0) {
+          const hasR2Err = failedItems.some((x) => (x.error || '').toLowerCase().includes('r2'));
+          const hasAuthErr = failedItems.some(
+            (x) =>
+              (x.error || '').toLowerCase().includes('unauthorized') ||
+              (x.error || '').toLowerCase().includes('login')
+          );
+          const hasSizeErr = failedItems.some(
+            (x) =>
+              (x.error || '').toLowerCase().includes('too large') ||
+              (x.error || '').toLowerCase().includes('4.5mb')
+          );
+
+          let hintText = '';
+          if (hasR2Err) {
+            hintText =
+              '💡 Cause: Cloudflare R2 storage credentials (R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET_NAME) are not configured on server.';
+          } else if (hasAuthErr) {
+            hintText =
+              '💡 Cause: Operator session expired or unauthorized. Please re-login to operator account.';
+          } else if (hasSizeErr) {
+            hintText =
+              '💡 Cause: File exceeds max server limit of 4.5MB. Please compress or resize image.';
+          }
+
+          errorSec.innerHTML = `
+            <div class="queue-error-header">
+              <span>⚠️ TRANSMISSION ERRORS (${failedItems.length} FAILED)</span>
+              <span style="font-size: 0.52rem; font-weight: normal; color: var(--text-3); font-family: var(--mono);">tap row or badge to inspect</span>
+            </div>
+            <div class="queue-error-list">
+              ${failedItems
+                .map(
+                  (x) => `
+                <div class="queue-error-row" onclick="showQueueItemError('${x.id}')" title="Click to view details: ${escapeHtml(x.error || 'Upload error')}">
+                  <span class="queue-error-file" title="${escapeHtml(x.file.name)}">${escapeHtml(x.file.name)}</span>
+                  <span class="queue-error-msg" title="${escapeHtml(x.error || 'Upload failed')}">${escapeHtml(x.error || 'Upload failed')}</span>
+                </div>
+              `
+                )
+                .join('')}
+            </div>
+            ${hintText ? `<div class="queue-error-hint">${escapeHtml(hintText)}</div>` : ''}
+          `;
+          errorSec.style.display = 'flex';
+        } else {
+          errorSec.innerHTML = '';
+          errorSec.style.display = 'none';
+        }
       }
 
       if (titlesWrap) {
@@ -439,16 +547,94 @@ export function initGallery(isOperator: boolean): () => void {
       }
     }
 
-    function updateItemStatusUI(id, statusText, color, statusClass) {
+    function updateItemStatusUI(id, statusText, color, statusClass, errDetails) {
       const tile = document.getElementById(`queue-tile-${id}`);
       if (tile) {
         tile.classList.remove('is-processing', 'is-done', 'is-error');
         if (statusClass) tile.classList.add(statusClass);
+        if (statusClass === 'is-error') {
+          const err = errDetails || statusText.replace(/^❌\s*/, '');
+          tile.setAttribute('title', `Upload error: ${err}\n(Click to inspect)`);
+          tile.setAttribute('onclick', `showQueueItemError('${id}')`);
+        } else {
+          tile.removeAttribute('title');
+          tile.removeAttribute('onclick');
+        }
       }
       const overlay = document.getElementById(`status-${id}`);
       if (overlay) {
-        overlay.innerHTML = `<span class="queue-tile-status-icon" style="color: ${color || 'var(--accent)'};">${escapeHtml(statusText)}</span>`;
+        if (statusClass === 'is-error') {
+          const err = errDetails || statusText.replace(/^❌\s*/, '');
+          overlay.setAttribute('title', `Error: ${escapeHtml(err)}\n(Click to view details)`);
+          overlay.innerHTML = `
+            <span class="queue-tile-status-icon" style="color: ${color || '#ff5555'};">❌ ERR</span>
+            <span class="queue-tile-err-badge" title="${escapeHtml(err)}">${escapeHtml(shortenErrorMessage(err))}</span>
+            <span class="queue-tile-tap-hint">TAP INFO</span>
+          `;
+        } else {
+          overlay.removeAttribute('title');
+          overlay.innerHTML = `<span class="queue-tile-status-icon" style="color: ${color || 'var(--accent)'};">${escapeHtml(statusText)}</span>`;
+        }
       }
+    }
+
+    async function prepareFileForUpload(file: File): Promise<File> {
+      // If file is 4MB or smaller, send directly without client-side re-compression
+      if (file.size <= 4 * 1024 * 1024) {
+        return file;
+      }
+
+      // If file exceeds 4MB, downscale in browser canvas to stay safely under Vercel's 4.5MB limit
+      return new Promise<File>((resolve) => {
+        const img = new Image();
+        const objectUrl = URL.createObjectURL(file);
+        img.onload = () => {
+          URL.revokeObjectURL(objectUrl);
+          const maxDim = 2560;
+          let width = img.naturalWidth || img.width;
+          let height = img.naturalHeight || img.height;
+
+          if (width > maxDim || height > maxDim) {
+            if (width > height) {
+              height = Math.round((height * maxDim) / width);
+              width = maxDim;
+            } else {
+              width = Math.round((width * maxDim) / height);
+              height = maxDim;
+            }
+          }
+
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          if (!ctx) {
+            resolve(file);
+            return;
+          }
+
+          ctx.drawImage(img, 0, 0, width, height);
+          canvas.toBlob(
+            (blob) => {
+              if (blob && blob.size < file.size) {
+                const optimizedFile = new File([blob], file.name.replace(/\.[^/.]+$/, '') + '.jpg', {
+                  type: 'image/jpeg',
+                });
+                resolve(optimizedFile);
+              } else {
+                resolve(file);
+              }
+            },
+            'image/jpeg',
+            0.88
+          );
+        };
+        img.onerror = () => {
+          URL.revokeObjectURL(objectUrl);
+          resolve(file);
+        };
+        img.src = objectUrl;
+      });
     }
 
     // Submit gallery batch
@@ -509,13 +695,21 @@ export function initGallery(isOperator: boolean): () => void {
         }
 
         try {
+          let fileToSend = item.file;
+          if (item.file.size > 4 * 1024 * 1024) {
+            item.status = 'converting';
+            updateItemStatusUI(item.id, '// OPTIMIZING...', 'var(--accent)', 'is-processing');
+            if (progressLabel) progressLabel.textContent = `// [${itemNumber}/${total}] OPTIMIZING ${item.file.name} (<4.5MB)...`;
+            fileToSend = await prepareFileForUpload(item.file);
+          }
+
           item.status = 'uploading';
           updateItemStatusUI(item.id, '// UPLOADING...', 'var(--accent)', 'is-processing');
           if (progressLabel) progressLabel.textContent = `// [${itemNumber}/${total}] UPLOADING ${item.file.name}...`;
           if (statusText) statusText.textContent = `// transmitting artifact ${itemNumber} of ${total}...`;
 
           const formData = new FormData();
-          formData.append('file', item.file);
+          formData.append('file', fileToSend, item.file.name);
 
           item.status = 'converting';
           updateItemStatusUI(item.id, '// CONVERTING AVIF...', 'var(--accent)', 'is-processing');
@@ -577,7 +771,7 @@ export function initGallery(isOperator: boolean): () => void {
           console.error(`Error uploading ${item.file.name}:`, err);
           item.status = 'error';
           item.error = err.message || 'Upload failed';
-          updateItemStatusUI(item.id, `❌ ${item.error}`, '#ff5555', 'is-error');
+          updateItemStatusUI(item.id, '❌ ERR', '#ff5555', 'is-error', item.error);
           failed++;
         }
 
