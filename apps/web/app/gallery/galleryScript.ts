@@ -402,7 +402,7 @@ export function initGallery(isOperator: boolean): () => void {
             </button>
 
             <div class="queue-tile-footer">
-              <span class="queue-tile-size">${formatBytes(item.file.size)}</span>
+              <span class="queue-tile-size" style="${item.file.size > 4.5 * 1024 * 1024 ? 'color: #ffaa00; font-weight: 600;' : ''}">${formatBytes(item.file.size)}${item.file.size > 4.5 * 1024 * 1024 ? ' ⚠️' : ''}</span>
             </div>
 
             <div id="status-${item.id}" class="queue-tile-overlay">
@@ -470,6 +470,13 @@ export function initGallery(isOperator: boolean): () => void {
       const progressLabel = document.getElementById('uploadProgressLabel');
       const progressPercent = document.getElementById('uploadProgressPercent');
 
+      // Process items that haven't been successfully pinned yet
+      const pendingItems = selectedFilesQueue.filter((x) => x.status !== 'done');
+      if (pendingItems.length === 0) {
+        window.location.reload();
+        return;
+      }
+
       isUploading = true;
       if (submitBtn) {
         submitBtn.disabled = true;
@@ -478,14 +485,19 @@ export function initGallery(isOperator: boolean): () => void {
       if (progressSec) progressSec.style.display = 'flex';
       renderQueue();
 
-      const total = selectedFilesQueue.length;
+      const total = pendingItems.length;
       let completed = 0;
       let successful = 0;
       let failed = 0;
 
       for (let i = 0; i < total; i++) {
-        const item = selectedFilesQueue[i];
+        const item = pendingItems[i];
         const itemNumber = i + 1;
+
+        // Pacing delay (350ms) between consecutive serverless calls to avoid upstream rate limits
+        if (i > 0) {
+          await new Promise((resolve) => setTimeout(resolve, 350));
+        }
 
         let finalTitle = item.title.trim();
         if (!finalTitle) {
@@ -517,10 +529,15 @@ export function initGallery(isOperator: boolean): () => void {
           try {
             uploadJson = await uploadRes.json();
           } catch {
+            if (uploadRes.status === 413) {
+              throw new Error(`File too large (${formatBytes(item.file.size)}). Max allowed is 4.5MB.`);
+            } else if (uploadRes.status === 429) {
+              throw new Error('Rate limit exceeded. Please wait a moment before retrying.');
+            }
             throw new Error(`Upload failed (HTTP ${uploadRes.status}: ${uploadRes.statusText || 'Server error'})`);
           }
           if (!uploadRes.ok || !uploadJson?.success) {
-            throw new Error(uploadJson?.error || `Failed to upload & process image (HTTP ${uploadRes.status}).`);
+            throw new Error(uploadJson?.error || `Upload failed (HTTP ${uploadRes.status}).`);
           }
 
           item.status = 'pinning';
@@ -556,7 +573,7 @@ export function initGallery(isOperator: boolean): () => void {
           item.status = 'done';
           updateItemStatusUI(item.id, '✓ PINNED', 'var(--green-soft)', 'is-done');
           successful++;
-        } catch (err) {
+        } catch (err: any) {
           console.error(`Error uploading ${item.file.name}:`, err);
           item.status = 'error';
           item.error = err.message || 'Upload failed';
@@ -577,17 +594,29 @@ export function initGallery(isOperator: boolean): () => void {
         if (progressLabel) progressLabel.textContent = '// TRANSMISSION COMPLETE';
         setTimeout(() => {
           window.location.reload();
-        }, 500);
-      } else if (successful > 0) {
-        if (statusText) statusText.textContent = `⚠️ Pinned ${successful} polaroids (${failed} failed). Reloading board...`;
-        setTimeout(() => {
-          window.location.reload();
-        }, 1500);
+        }, 800);
       } else {
-        if (statusText) statusText.textContent = `❌ All ${failed} uploads failed.`;
+        // Keep failed items in queue for retry, remove succeeded ones
+        const succeeded = selectedFilesQueue.filter((x) => x.status === 'done');
+        succeeded.forEach((x) => {
+          try { URL.revokeObjectURL(x.previewUrl); } catch {}
+        });
+        selectedFilesQueue = selectedFilesQueue.filter((x) => x.status !== 'done');
+        renderQueue();
+
+        if (successful > 0) {
+          if (statusText) {
+            statusText.textContent = `⚠️ Pinned ${successful} polaroids (${failed} failed). Review error badges below and retry.`;
+          }
+        } else {
+          if (statusText) {
+            statusText.textContent = `❌ All ${failed} uploads failed. Review error badges below.`;
+          }
+        }
+        if (progressLabel) progressLabel.textContent = '// TRANSMISSION INCOMPLETE';
         if (submitBtn) {
           submitBtn.disabled = false;
-          submitBtn.textContent = 'RETRY PIN TO BOARD →';
+          submitBtn.textContent = `RETRY PINNING (${selectedFilesQueue.length}) →`;
         }
       }
     };

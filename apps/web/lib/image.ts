@@ -11,6 +11,12 @@ export async function getSharp(): Promise<any> {
   try {
     const mod = await import('sharp');
     sharpModule = mod.default || mod;
+    if (sharpModule) {
+      try {
+        sharpModule.cache(false);
+        sharpModule.simd(true);
+      } catch {}
+    }
     return sharpModule;
   } catch (err) {
     console.warn('[image] Sharp module is not available in runtime environment:', err);
@@ -52,8 +58,8 @@ export async function processAlbumCoverToAvif(
         })
         .avif({
           quality,
-          effort: 4,
-          chromaSubsampling: '4:4:4',
+          effort: 2,
+          chromaSubsampling: '4:2:0',
         });
 
       const avifBuffer = await pipeline.toBuffer();
@@ -102,8 +108,8 @@ export async function processPostImageToAvif(
         })
         .avif({
           quality,
-          effort: 4,
-          chromaSubsampling: '4:4:4',
+          effort: 2,
+          chromaSubsampling: '4:2:0',
         });
 
       const { data, info } = await pipeline.toBuffer({ resolveWithObject: true });
