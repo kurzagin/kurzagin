@@ -1,0 +1,16 @@
+  .back-feed-link {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: color 0.2s ease;
+  }
+  .back-feed-link:hover {
+    color: var(--text-0);
+    text-decoration: underline;
+  }
+  .thread-main-post {
+    border-left: 3px solid var(--accent);
+    background: var(--bg-1);
+  }

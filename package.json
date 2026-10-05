@@ -1,0 +1,34 @@
+{
+  "name": "kurzagin",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run --prefix apps/web build",
+    "dev": "npm run --prefix apps/web dev",
+    "preview": "npm run --prefix apps/web preview",
+    "create-account": "npm run --prefix apps/web create-account --",
+    "change-password": "npm run --prefix apps/web change-password --",
+    "db:push": "npm run --prefix apps/web db:push",
+    "db:generate": "npm run --prefix apps/web db:generate",
+    "db:studio": "npm run --prefix apps/web db:studio",
+    "db:setup": "npm run --prefix apps/web db:setup",
+    "pwa:icons": "npm run --prefix apps/web pwa:icons",
+    "convert:opus": "node scripts/opus-converter.mjs",
+    "r2:cors": "node scripts/setup-r2-cors.mjs",
+    "db:migrate-cdn": "node scripts/migrate-media-urls.mjs"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.2.0"
+  },
+  "optionalDependencies": {
+    "@esbuild/linux-x64": "0.28.2",
+    "@img/sharp-libvips-linux-x64": "1.3.4",
+    "@img/sharp-linux-x64": "0.35.5",
+    "lightningcss-linux-x64-gnu": "1.33.0"
+  },
+  "allowScripts": {
+    "esbuild": true
+  }
+}

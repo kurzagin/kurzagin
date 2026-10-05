@@ -1,0 +1,114 @@
+{
+  "id": "/",
+  "name": "Kur Zagin",
+  "short_name": "Kur Zagin",
+  "description": "System architect, solo developer, and builder of strange but useful things.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": [
+    "standalone",
+    "window-controls-overlay",
+    "minimal-ui"
+  ],
+  "orientation": "any",
+  "background_color": "#0a0a0c",
+  "theme_color": "#0a0a0c",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": [
+    "portfolio",
+    "music",
+    "entertainment",
+    "developer"
+  ],
+  "icons": [
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-maskable-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/pwa-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Music & Turntable",
+      "short_name": "Music",
+      "description": "Vinyl crate and audio player",
+      "url": "/music",
+      "icons": [
+        {
+          "src": "/pwa-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Visual Gallery",
+      "short_name": "Gallery",
+      "description": "Visual archive and generative art",
+      "url": "/gallery",
+      "icons": [
+        {
+          "src": "/pwa-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Anime Log",
+      "short_name": "Anime",
+      "description": "Watchlist and review records",
+      "url": "/anime",
+      "icons": [
+        {
+          "src": "/pwa-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Games Archive",
+      "short_name": "Games",
+      "description": "Gaming logs and backlog",
+      "url": "/games",
+      "icons": [
+        {
+          "src": "/pwa-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Operator Profile",
+      "short_name": "Profile",
+      "description": "Dossier, bio and system architecture",
+      "url": "/profile",
+      "icons": [
+        {
+          "src": "/pwa-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "prefer_related_applications": false
+}
