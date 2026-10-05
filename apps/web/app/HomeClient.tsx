@@ -1,7 +1,7 @@
 // @ts-nocheck
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import {
   Paperclip,
@@ -17,8 +17,10 @@ import {
   Inbox,
   ArrowRight,
   ArrowUpRight,
+  Pencil,
 } from 'lucide-react';
 import { css } from './_ui/css';
+import EditPostModal from '@/components/EditPostModal';
 import { processYouTubePost, formatBody } from '@/lib/youtube';
 import type {
   DbPost,
@@ -91,6 +93,8 @@ export default function HomeClient({
   tracks,
 }: HomeClientProps) {
   const likedPostIds = new Set(likedPostIdsArray);
+  const [editingPost, setEditingPost] = useState<DbPost | null>(null);
+  const [editingMedia, setEditingMedia] = useState<DbPostMedia[]>([]);
 
   return (
     <>
@@ -351,6 +355,22 @@ export default function HomeClient({
                   <MessageSquare size={13} />
                   <span>{postComments.length}</span>
                 </button>
+                {authenticated && (
+                  <button
+                    type="button"
+                    className="post-act edit-btn"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setEditingPost(post);
+                      setEditingMedia(postMediaItems);
+                    }}
+                    title="Operator: Edit transmission"
+                    style={css("margin-left: auto; color: var(--accent); opacity: 0.85; display: inline-flex; align-items: center; gap: 4px;")}
+                  >
+                    <Pencil size={12} />
+                    <span>EDIT</span>
+                  </button>
+                )}
               </div>
             </article>
           );
@@ -558,6 +578,18 @@ export default function HomeClient({
       </div>
     )}
   </section>
+
+  {/* OPERATOR EDIT POST MODAL */}
+  {authenticated && (
+    <EditPostModal
+      isOpen={!!editingPost}
+      post={editingPost}
+      initialMedia={editingMedia}
+      onClose={() => setEditingPost(null)}
+      onSaved={() => window.location.reload()}
+      onDeleted={() => window.location.reload()}
+    />
+  )}
 
   {/* STORE TRACKS DATA IN CLIENT DATASET */}
   <div id="tracksDataStore" data-tracks={JSON.stringify(tracks)} style={css("display: none;")}></div>

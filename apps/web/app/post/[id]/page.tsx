@@ -14,6 +14,7 @@ import {
   type DbPostMedia,
 } from '@/lib/db';
 import { getClientIp, hashIp } from '@/lib/ip';
+import { getServerSession } from '@/lib/serverSession';
 import { processYouTubePost } from '@/lib/youtube';
 import PostClient from './PostClient';
 
@@ -103,6 +104,9 @@ export default async function PostPage({
     redirect('/#blog');
   }
 
+  const session = await getServerSession();
+  const authenticated = session !== null;
+
   return (
     <PostClient
       post={JSON.parse(JSON.stringify(post))}
@@ -110,6 +114,7 @@ export default async function PostPage({
       mediaItems={JSON.parse(JSON.stringify(mediaItems))}
       profile={JSON.parse(JSON.stringify(profile))}
       isPostLiked={isPostLiked}
+      authenticated={authenticated}
     />
   );
 }
