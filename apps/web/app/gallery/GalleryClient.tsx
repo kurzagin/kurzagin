@@ -29,15 +29,37 @@ export interface RenderedGalleryItem extends DbGalleryItem {
 
 interface GalleryClientProps {
   items: RenderedGalleryItem[];
+  filteredItems?: RenderedGalleryItem[];
   allTags: string[];
   authenticated: boolean;
+  initialTag?: string;
+  initialPage?: number;
+  totalFiltered?: number;
+  totalPages?: number;
+  safePage?: number;
+  startIndex?: number;
+  endIndex?: number;
+  ssrPaginationItems?: (number | string)[];
 }
 
-export default function GalleryClient({ items, allTags, authenticated }: GalleryClientProps) {
+export default function GalleryClient({
+  items,
+  filteredItems = items,
+  allTags,
+  authenticated,
+  initialTag = 'all',
+  initialPage = 1,
+  totalFiltered = items.length,
+  totalPages = 1,
+  safePage = 1,
+  startIndex = 0,
+  endIndex = items.length,
+  ssrPaginationItems = [1],
+}: GalleryClientProps) {
   useEffect(() => {
-    const cleanup = initGallery(authenticated);
+    const cleanup = initGallery(authenticated, initialTag, initialPage);
     return cleanup;
-  }, [authenticated]);
+  }, [authenticated, initialTag, initialPage]);
 
   return (
     <>
@@ -271,25 +293,27 @@ export default function GalleryClient({ items, allTags, authenticated }: Gallery
 
   {/* TAGS FILTER BAR (IF TAGS EXIST) */}
   {allTags.length > 0 && (
-    <div className="gallery-tag-filter reveal" style={css("display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; align-items: center;")}>
+    <div className="gallery-tag-filter reveal" style={css("display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; align-items: center;")}>
       <span style={css("font-family: var(--mono); font-size: 0.65rem; color: var(--text-3); margin-right: 4px;")}>
         <TagIcon size={12} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '3px' }} /> TAGS:
       </span>
       <button
-        className="feed-filter-btn active tag-btn"
+        type="button"
+        className={`feed-filter-btn tag-btn ${initialTag === 'all' ? 'active' : ''}`}
         data-tag="all"
-        onClick={(e) => { const w = window as any; filterByTag('all') }}
+        onClick={() => { const w = window as any; w.filterByTag?.('all'); }}
       >
         // ALL ({items.length})
       </button>
       {allTags.map((tag) => {
         const count = items.filter((item) =>
-          Array.isArray(item.tags) && item.tags.some((t) => t.toLowerCase() === tag)
+          Array.isArray(item.tags) && item.tags.some((t) => String(t).trim().toLowerCase() === tag)
         ).length;
         return (
           <button
+            type="button"
             key={tag}
-            className="feed-filter-btn tag-btn"
+            className={`feed-filter-btn tag-btn ${initialTag === tag ? 'active' : ''}`}
             data-tag={tag}
             onClick={() => { const w = window as any; w.filterByTag?.(tag); }}
           >
@@ -299,6 +323,23 @@ export default function GalleryClient({ items, allTags, authenticated }: Gallery
       })}
     </div>
   )}
+
+  {/* META STATUS / SORT INFO BAR */}
+  <div className="gallery-meta-bar anime-meta-bar">
+    <div className="anime-meta-left">
+      <span className="meta-pill">// SORT: LATEST (NEWEST → OLDEST)</span>
+      <span className="meta-pill">// LIMIT: 20 / PAGE</span>
+    </div>
+    <div className="anime-meta-right" id="metaStatusCount">
+      {totalFiltered > 0 ? (
+        <span>
+          SHOWING <strong className="hl">{startIndex + 1}&ndash;{Math.min(endIndex, totalFiltered)}</strong> OF {totalFiltered} CAPTURES
+        </span>
+      ) : (
+        <span>0 CAPTURES FOUND</span>
+      )}
+    </div>
+  </div>
 
   <section className="section">
     {items.length === 0 ? (
@@ -322,83 +363,179 @@ export default function GalleryClient({ items, allTags, authenticated }: Gallery
         )}
       </div>
     ) : (
-      <div className="gallery-grid" id="galleryGrid">
-        {items.map((item, idx) => {
-          const tagsStr = Array.isArray(item.tags) ? item.tags.join(' ').toLowerCase() : '';
-          const displayCaption = item.caption || item.title || 'visual capture';
-          return (
-            <div
-              key={item.id}
-              className={`polaroid gallery-card ${item.is_nsfw ? 'is-nsfw-item' : ''}`}
-              data-id={item.id}
-              data-tags={tagsStr}
-              data-index={idx}
-              data-nsfw={item.is_nsfw ? "true" : "false"}
-              style={{ ['--rot' as any]: item.rotation || '0deg', cursor: 'pointer' }}
-              onClick={(e) => { const w = window as any; w.handlePolaroidClick?.(e, idx); }}
-              title={item.title || item.caption || 'Click to view polaroid in darkroom lightbox'}
+      <>
+        {/* TAG EMPTY STATE (WHEN FILTER HAS 0 CAPTURES) */}
+        <div
+          className="bracket-card empty-state"
+          id="tagEmptyState"
+          style={items.length > 0 && totalFiltered === 0 ? undefined : { display: 'none' }}
+        >
+          <div className="empty-state-glyph"><ImageIcon size={36} /></div>
+          <div className="empty-state-title" id="tagEmptyTitle">
+            {totalFiltered === 0 && initialTag !== 'all'
+              ? `NO CAPTURES IN "#${initialTag.toUpperCase()}"`
+              : 'NO CAPTURES IN CATEGORY'}
+          </div>
+          <p className="empty-state-desc" id="tagEmptyDesc">
+            {totalFiltered === 0 && initialTag !== 'all'
+              ? `No visual captures found under tag "${initialTag}". Switch tags to browse other captures.`
+              : 'No visual captures found under this tag filter.'}
+          </p>
+          <span className="empty-state-meta">// status: tag category currently empty</span>
+          <div style={css("margin-top: 18px;")}>
+            <button
+              type="button"
+              className="post-btn"
+              style={css("cursor: pointer; font-size: 0.75rem; display: inline-flex; align-items: center; gap: 6px;")}
+              onClick={() => { const w = window as any; w.filterByTag?.('all'); }}
             >
-              {item.hasTape && <div className="pol-tape" style={{ ['--tape-rot' as any]: item.tapeRotation || '0deg' }}></div>}
+              // VIEW ALL CAPTURES ({items.length}) →
+            </button>
+          </div>
+        </div>
 
-              {item.is_nsfw && (
-                <div
-                  className={`pol-nsfw-badge ${authenticated ? 'is-operator' : ''}`}
-                  title={authenticated ? "Operator: Click to edit NSFW status" : "18+ Sensitive Content"}
-                  onClick={authenticated ? ((e) => { e.stopPropagation(); const w = window as any; w.toggleGalleryItemNsfw?.(item.id); }) : undefined}
-                >
-                  <span className="nsfw-dot"></span> 18+ NSFW
-                </div>
-              )}
+        <div className="gallery-grid" id="galleryGrid" style={totalFiltered === 0 ? { display: 'none' } : undefined}>
+          {items.map((item, idx) => {
+            const tagsStr = Array.isArray(item.tags) ? item.tags.join(' ').toLowerCase() : '';
+            const displayCaption = item.caption || item.title || 'visual capture';
+            const matchesFilter =
+              initialTag === 'all'
+                ? true
+                : Array.isArray(item.tags) && item.tags.some((t: string) => String(t).trim().toLowerCase() === initialTag);
 
-              {authenticated && (
-                <>
-                  <button
-                    className={`pol-nsfw-btn ${item.is_nsfw ? 'active' : ''}`}
-                    title={item.is_nsfw ? "Sensitive (18+ NSFW) • Click to mark as SFW" : "Safe for work • Click to mark as 18+ NSFW"}
-                    onClick={(e) => { e.stopPropagation(); const w = window as any; w.toggleGalleryItemNsfw?.(item.id); }}
-                  >
-                    <ShieldAlert size={11} />
-                    <span>{item.is_nsfw ? '18+' : 'SFW'}</span>
-                  </button>
-                  <button
-                    className="pol-del-btn"
-                    title="Delete polaroid"
-                    onClick={(e) => { e.stopPropagation(); const w = window as any; w.deleteGalleryItem?.(item.id); }}
-                  >
-                    <Trash2 size={12} />
-                  </button>
-                </>
-              )}
+            const filteredIndex = matchesFilter ? filteredItems.indexOf(item) : -1;
+            const isVisibleOnPage = matchesFilter && filteredIndex >= startIndex && filteredIndex < endIndex;
 
-              <div className="pol-img" style={css("padding: 0; overflow: hidden; background: #0d0d10; position: relative; display: flex; align-items: center; justify-content: center;")}>
-                <img
-                  src={item.url}
-                  alt={item.alt_text || item.title || item.caption || 'Polaroid image'}
-                  loading="lazy"
-                  className="pol-photo"
-                  style={css("width: 100%; height: 100%; object-fit: contain; display: block;")}
-                />
+            return (
+              <div
+                key={item.id}
+                className={`polaroid gallery-card ${item.is_nsfw ? 'is-nsfw-item' : ''}`}
+                data-id={item.id}
+                data-tags={tagsStr}
+                data-index={idx}
+                data-nsfw={item.is_nsfw ? "true" : "false"}
+                style={{
+                  ['--rot' as any]: item.rotation || '0deg',
+                  cursor: 'pointer',
+                  ...(isVisibleOnPage ? {} : { display: 'none' }),
+                }}
+                onClick={(e) => { const w = window as any; w.handlePolaroidClick?.(e, idx); }}
+                title={item.title || item.caption || 'Click to view polaroid in darkroom lightbox'}
+              >
+                {item.hasTape && <div className="pol-tape" style={{ ['--tape-rot' as any]: item.tapeRotation || '0deg' }}></div>}
 
                 {item.is_nsfw && (
-                  <div className="pol-nsfw-overlay" onClick={(e) => { e.stopPropagation(); const w = window as any; w.toggleCardUnblur?.(idx); }}>
-                    <div className="pol-nsfw-alert">
-                      <ShieldAlert size={15} />
-                      <span style={css("font-weight: 600;")}>18+ SENSITIVE</span>
-                    </div>
-                    <button type="button" className="pol-reveal-btn">
-                      <Eye size={11} /> REVEAL
-                    </button>
-                    <button type="button" className="pol-settings-link" onClick={(e) => { e.stopPropagation(); const w = window as any; w.openNsfwModal?.(); }} title="Filter settings">
-                      SETTINGS ⚙
-                    </button>
+                  <div
+                    className={`pol-nsfw-badge ${authenticated ? 'is-operator' : ''}`}
+                    title={authenticated ? "Operator: Click to edit NSFW status" : "18+ Sensitive Content"}
+                    onClick={authenticated ? ((e) => { e.stopPropagation(); const w = window as any; w.toggleGalleryItemNsfw?.(item.id); }) : undefined}
+                  >
+                    <span className="nsfw-dot"></span> 18+ NSFW
                   </div>
                 )}
+
+                {authenticated && (
+                  <>
+                    <button
+                      className={`pol-nsfw-btn ${item.is_nsfw ? 'active' : ''}`}
+                      title={item.is_nsfw ? "Sensitive (18+ NSFW) • Click to mark as SFW" : "Safe for work • Click to mark as 18+ NSFW"}
+                      onClick={(e) => { e.stopPropagation(); const w = window as any; w.toggleGalleryItemNsfw?.(item.id); }}
+                    >
+                      <ShieldAlert size={11} />
+                      <span>{item.is_nsfw ? '18+' : 'SFW'}</span>
+                    </button>
+                    <button
+                      className="pol-del-btn"
+                      title="Delete polaroid"
+                      onClick={(e) => { e.stopPropagation(); const w = window as any; w.deleteGalleryItem?.(item.id); }}
+                    >
+                      <Trash2 size={12} />
+                    </button>
+                  </>
+                )}
+
+                <div className="pol-img" style={css("padding: 0; overflow: hidden; background: #0d0d10; position: relative; display: flex; align-items: center; justify-content: center;")}>
+                  <img
+                    src={item.url}
+                    alt={item.alt_text || item.title || item.caption || 'Polaroid image'}
+                    loading="lazy"
+                    className="pol-photo"
+                    style={css("width: 100%; height: 100%; object-fit: contain; display: block;")}
+                  />
+
+                  {item.is_nsfw && (
+                    <div className="pol-nsfw-overlay" onClick={(e) => { e.stopPropagation(); const w = window as any; w.toggleCardUnblur?.(idx); }}>
+                      <div className="pol-nsfw-alert">
+                        <ShieldAlert size={15} />
+                        <span style={css("font-weight: 600;")}>18+ SENSITIVE</span>
+                      </div>
+                      <button type="button" className="pol-reveal-btn">
+                        <Eye size={11} /> REVEAL
+                      </button>
+                      <button type="button" className="pol-settings-link" onClick={(e) => { e.stopPropagation(); const w = window as any; w.openNsfwModal?.(); }} title="Filter settings">
+                        SETTINGS ⚙
+                      </button>
+                    </div>
+                  )}
+                </div>
+                <span className="pol-caption">{displayCaption.length > 50 ? displayCaption.slice(0, 50) + '…' : displayCaption}</span>
               </div>
-              <span className="pol-caption">{displayCaption.length > 50 ? displayCaption.slice(0, 50) + '…' : displayCaption}</span>
+            );
+          })}
+        </div>
+
+        {/* PAGINATION BAR */}
+        <nav
+          className="gallery-pagination anime-pagination bracket-card"
+          id="galleryPagination"
+          style={totalPages > 1 ? undefined : { display: 'none' }}
+          aria-label="Gallery pagination"
+        >
+          <div className="pagination-info" id="paginationInfo">
+            PAGE <span className="hl">{safePage}</span> OF {totalPages} &bull; {totalFiltered} CAPTURES
+          </div>
+
+          <div className="pagination-controls">
+            <button
+              type="button"
+              className={`pagination-btn ${safePage <= 1 ? 'disabled' : ''}`}
+              id="paginationPrevBtn"
+              disabled={safePage <= 1}
+              onClick={() => { const w = window as any; w.goToGalleryPage?.((w.currentGalleryPage || safePage) - 1); }}
+            >
+              <ChevronLeft size={14} /> PREV
+            </button>
+
+            <div className="pagination-pages" id="paginationPagesContainer">
+              {ssrPaginationItems.map((item, pIdx) =>
+                item === '...' ? (
+                  <span key={`ellipsis-${pIdx}`} className="pagination-ellipsis">&hellip;</span>
+                ) : (
+                  <button
+                    key={`page-${item}`}
+                    type="button"
+                    className={`pagination-page ${Number(item) === safePage ? 'active' : ''}`}
+                    aria-current={Number(item) === safePage ? 'page' : undefined}
+                    onClick={() => { const w = window as any; w.goToGalleryPage?.(Number(item)); }}
+                  >
+                    {item}
+                  </button>
+                )
+              )}
             </div>
-          );
-        })}
-      </div>
+
+            <button
+              type="button"
+              className={`pagination-btn ${safePage >= totalPages ? 'disabled' : ''}`}
+              id="paginationNextBtn"
+              disabled={safePage >= totalPages}
+              onClick={() => { const w = window as any; w.goToGalleryPage?.((w.currentGalleryPage || safePage) + 1); }}
+            >
+              NEXT <ChevronRight size={14} />
+            </button>
+          </div>
+        </nav>
+      </>
     )}
   </section>
 
