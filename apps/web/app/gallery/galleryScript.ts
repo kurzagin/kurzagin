@@ -483,9 +483,14 @@ export function initGallery(isOperator: boolean): () => void {
             body: formData,
           });
 
-          const uploadJson = await uploadRes.json();
-          if (!uploadRes.ok || !uploadJson.success) {
-            throw new Error(uploadJson.error || 'Failed to upload & process image.');
+          let uploadJson: any = null;
+          try {
+            uploadJson = await uploadRes.json();
+          } catch {
+            throw new Error(`Upload failed (HTTP ${uploadRes.status}: ${uploadRes.statusText || 'Server error'})`);
+          }
+          if (!uploadRes.ok || !uploadJson?.success) {
+            throw new Error(uploadJson?.error || `Failed to upload & process image (HTTP ${uploadRes.status}).`);
           }
 
           item.status = 'pinning';
@@ -505,9 +510,14 @@ export function initGallery(isOperator: boolean): () => void {
             }),
           });
 
-          const galleryJson = await galleryRes.json();
-          if (!galleryRes.ok || !galleryJson.success) {
-            throw new Error(galleryJson.error || 'Failed to pin gallery item.');
+          let galleryJson: any = null;
+          try {
+            galleryJson = await galleryRes.json();
+          } catch {
+            throw new Error(`Pinning failed (HTTP ${galleryRes.status}: ${galleryRes.statusText || 'Server error'})`);
+          }
+          if (!galleryRes.ok || !galleryJson?.success) {
+            throw new Error(galleryJson?.error || 'Failed to pin gallery item.');
           }
 
           item.status = 'done';

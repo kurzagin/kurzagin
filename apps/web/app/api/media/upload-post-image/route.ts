@@ -17,6 +17,18 @@ export async function POST(request: NextRequest) {
     });
   }
 
+  if (!isR2Configured() && (process.env.VERCEL || process.env.NODE_ENV === 'production')) {
+    return new Response(
+      JSON.stringify({
+        error: 'Cloudflare R2 storage is not configured. Please set R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, and R2_BUCKET_NAME in your environment variables.',
+      }),
+      {
+        status: 503,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+  }
+
   try {
     const formData = await request.formData();
     const file = formData.get('image') || formData.get('file');
