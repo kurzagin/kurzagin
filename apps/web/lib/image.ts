@@ -310,7 +310,7 @@ export async function convertRemoteCoverToAvif(
     if (isR2Configured()) {
       const publicUrl = await uploadBufferToR2(key, processed.buffer, 'image/avif');
       if (publicUrl) return publicUrl;
-    } else {
+    } else if (!process.env.VERCEL && process.env.NODE_ENV !== 'production') {
       const uploadsDir = path.resolve(process.cwd(), 'public/uploads/anime');
       if (!fs.existsSync(uploadsDir)) {
         fs.mkdirSync(uploadsDir, { recursive: true });
