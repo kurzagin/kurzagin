@@ -5,7 +5,7 @@ import { isServerAuthenticated } from '@/lib/serverSession';
 import GalleryClient, { type RenderedGalleryItem } from './GalleryClient';
 import './gallery.css';
 
-export const metadata = { title: 'gallery — kurzagin.log' };
+export const metadata = { title: 'gallery — kurzagin' };
 
 const rotations = ['-2deg', '1.5deg', '-1deg', '2.5deg', '-1.8deg', '1.2deg', '-2.5deg', '2deg'];
 const tapeRotations = ['-3deg', '2deg', '-1.5deg', '3.5deg', '-2deg', '1deg'];

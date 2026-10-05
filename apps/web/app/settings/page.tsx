@@ -4,7 +4,7 @@ import { getNeonAuthConfig } from '@/lib/auth';
 import { getProfile } from '@/lib/db';
 import SettingsClient from './SettingsClient';
 
-export const metadata = { title: 'settings — kurzagin.log' };
+export const metadata = { title: 'settings — kurzagin' };
 
 export default async function SettingsPage() {
   await connection();

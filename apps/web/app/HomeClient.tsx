@@ -170,7 +170,7 @@ export default function HomeClient({
         </div>
         <textarea
           id="postInput"
-          placeholder="broadcast new transmission to kurzagin.log... (supports #tags)"
+          placeholder="broadcast new transmission to kurzagin... (supports #tags)"
           maxlength="5000"
           onInput={(e) => { const w = window as any; updateCharCount() }}
         ></textarea>

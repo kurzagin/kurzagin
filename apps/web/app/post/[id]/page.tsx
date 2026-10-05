@@ -24,17 +24,17 @@ export async function generateMetadata({
 }) {
   const { id } = await params;
   const db = getDb();
-  if (!db || !id) return { title: 'post — kurzagin.log' };
+  if (!db || !id) return { title: 'post — kurzagin' };
   try {
     const post = await db.select().from(postsTable).where(eq(postsTable.id, id)).limit(1);
     if (post.length > 0) {
       const { cleanedContent } = processYouTubePost(post[0].content || '');
       return {
-        title: `${post[0].author_name}: "${(cleanedContent || 'transmission').slice(0, 35)}..." — kurzagin.log`,
+        title: `${post[0].author_name}: "${(cleanedContent || 'transmission').slice(0, 35)}..." — kurzagin`,
       };
     }
   } catch {}
-  return { title: 'post — kurzagin.log' };
+  return { title: 'post — kurzagin' };
 }
 
 export default async function PostPage({

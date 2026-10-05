@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * kurzagin.log — Local Audio to Opus Converter
+ * kurzagin — Local Audio to Opus Converter
  * Uses ffmpeg + libopus for high-fidelity music streaming.
  *
  * Usage:

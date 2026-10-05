@@ -9,7 +9,7 @@ import RouteEvents from '@/components/RouteEvents';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://kurzagin.com'),
-  title: 'kurzagin.log',
+  title: 'kurzagin',
   description: 'System architect, solo developer, and builder of strange but useful things.',
   manifest: '/manifest.webmanifest',
   icons: {
