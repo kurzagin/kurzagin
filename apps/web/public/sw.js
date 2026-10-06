@@ -2,7 +2,7 @@
 // kurzagin — Service Worker (PWA)
 // ============================================================
 
-const CACHE_VERSION = 'krzgn-v2.0.1-next';
+const CACHE_VERSION = 'krzgn-v2.0.4-scrub';
 const STATIC_CACHE = `krzgn-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `krzgn-runtime-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
@@ -64,6 +64,22 @@ self.addEventListener('fetch', (event) => {
     url.pathname.match(/\.(mp3|wav|ogg|opus|m4a|aac|flac)$/i) ||
     url.pathname.includes('/api/media/presign-audio')
   ) {
+    return;
+  }
+
+  // 3b. Application runtime scripts: Network-first to prevent stale JS engine caching
+  if (url.pathname === '/main.js') {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          if (response && response.status === 200) {
+            const clone = response.clone();
+            caches.open(STATIC_CACHE).then((c) => c.put(request, clone));
+          }
+          return response;
+        })
+        .catch(() => caches.match(request))
+    );
     return;
   }
 
