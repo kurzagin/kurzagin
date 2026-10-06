@@ -45,7 +45,7 @@ export default async function NovelDraftPage({ params }: Props) {
 
       <section className="section">
         {drafts.length === 0 ? (
-          <div className="bracket-card empty-state reveal">
+          <div className="bracket-card empty-state ">
             <div className="empty-state-glyph"><Edit3 size={36} /></div>
             <div className="empty-state-title">NO DRAFTS LOGGED</div>
             <p className="empty-state-desc">

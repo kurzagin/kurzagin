@@ -78,7 +78,7 @@ export default async function NovelOverviewPage({ params }: NovelProps) {
       <section className="section">
         {/* Premise / Overview banner */}
         <div
-          className="bracket-card reveal"
+          className="bracket-card "
           style={{
             padding: '24px',
             marginBottom: '24px',
@@ -115,7 +115,7 @@ export default async function NovelOverviewPage({ params }: NovelProps) {
         </div>
 
         {/* Section Cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }} className="reveal">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }} className="">
           {sections.map((sec) => {
             const Icon = sec.icon;
             return (

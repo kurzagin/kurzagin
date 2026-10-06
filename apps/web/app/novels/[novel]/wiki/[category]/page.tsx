@@ -50,7 +50,7 @@ export default async function NovelWikiCategoryPage({ params }: Props) {
 
       <section className="section">
         {entries.length === 0 ? (
-          <div className="bracket-card empty-state reveal">
+          <div className="bracket-card empty-state ">
             <div className="empty-state-glyph"><FileText size={36} /></div>
             <div className="empty-state-title">NO ENTRIES FOUND</div>
             <p className="empty-state-desc">
@@ -58,7 +58,7 @@ export default async function NovelWikiCategoryPage({ params }: Props) {
             </p>
           </div>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '14px' }} className="reveal">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '14px' }} className="">
             {entries.map((entry) => (
               <Link
                 key={entry.slug}

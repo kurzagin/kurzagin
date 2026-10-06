@@ -36,14 +36,10 @@ export default function SpoilerGate({ novel, children }: Props) {
     setAcknowledged(true);
   };
 
-  if (loading) {
-    return <div style={{ minHeight: '300px' }} />;
-  }
-
   if (!acknowledged) {
     return (
       <div
-        className="bracket-card reveal"
+        className="bracket-card"
         style={{
           padding: '40px 24px',
           textAlign: 'center',

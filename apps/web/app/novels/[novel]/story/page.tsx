@@ -45,7 +45,7 @@ export default async function NovelStoryPage({ params }: Props) {
 
       <section className="section">
         {stories.length === 0 ? (
-          <div className="bracket-card empty-state reveal">
+          <div className="bracket-card empty-state ">
             <div className="empty-state-glyph"><ScrollText size={36} /></div>
             <div className="empty-state-title">NO RELEASES FOUND</div>
             <p className="empty-state-desc">
