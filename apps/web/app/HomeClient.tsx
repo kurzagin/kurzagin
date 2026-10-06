@@ -119,7 +119,7 @@ export default function HomeClient({
       </h1>
       <p className="hero-desc">
         A quiet corner of the web — <em>vinyl crackle, late-night anime,
-        half-finished games, and whatever else washes up.</em>
+        half-finished games, and whatever else washes up.</em>{' '}
         Somewhere between a journal and a junkyard.
       </p>
     </div>
