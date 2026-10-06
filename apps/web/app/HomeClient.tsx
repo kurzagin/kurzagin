@@ -129,7 +129,7 @@ export default function HomeClient({
 
   {/* PROMINENT BLOG SECTION (PLACED FIRST) */}
   <section className="section" id="blog">
-    <div className="section-head reveal">
+    <div className="section-head">
       <h2>blog</h2>
       <span className="jp-label">日誌</span>
       <div className="line"></div>
@@ -145,7 +145,7 @@ export default function HomeClient({
     </div>
 
     {/* FEED CATEGORY FILTER (ALL LOGS VS MEDIA ONLY VS ANIME) */}
-    <div className="feed-filter-bar reveal" style={css("display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;")}>
+    <div className="feed-filter-bar" style={css("display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;")}>
       <a
         href="/#blog"
         className={`feed-filter-btn ${!isMediaFilter && !isAnimeFilter ? 'active' : ''}`}
@@ -168,7 +168,7 @@ export default function HomeClient({
 
     {/* IN-PLACE CMS COMPOSER (ONLY VISIBLE WHEN OPERATOR IS AUTHENTICATED) */}
     {authenticated && (
-      <div className="composer bracket-card reveal" style={css("margin-bottom: 20px;")}>
+      <div className="composer bracket-card" style={css("margin-bottom: 20px;")}>
         <div style={css("font-family: var(--mono); font-size: 0.65rem; color: var(--accent); margin-bottom: 8px; letter-spacing: 1px;")}>
           // TRANSMISSION CONSOLE — NEW LOG
         </div>
@@ -210,7 +210,7 @@ export default function HomeClient({
     )}
 
     {/* POSTS FEED */}
-    <div className="feed reveal" id="postsFeed">
+    <div className="feed" id="postsFeed">
       {posts.length === 0 ? (
         <div className="bracket-card feed-empty">
           <div className="feed-empty-glyph">{isMediaFilter ? <ImageIcon size={32} /> : <Inbox size={32} />}</div>
