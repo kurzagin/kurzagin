@@ -30,6 +30,19 @@ export const metadata: Metadata = {
     title: 'Kur Zagin',
   },
   applicationName: 'Kur Zagin',
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'none',
+      'max-snippet': -1,
+    },
+  },
   other: {
     'msapplication-TileColor': '#0a0a0c',
     'msapplication-TileImage': '/pwa-192x192.png',
