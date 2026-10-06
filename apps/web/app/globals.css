@@ -625,15 +625,26 @@ nav.top-nav {
   position: relative;
   margin-bottom: 8px;
   border-radius: 1px;
+  touch-action: none;
+  user-select: none;
+}
+
+.progress-track::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  bottom: -10px;
+  left: 0;
+  right: 0;
 }
 
 .progress-fill {
   height: 100%;
   background: var(--accent);
-  width: 35%;
+  width: 0%;
   border-radius: 1px;
   position: relative;
-  transition: width 0.1s;
+  transition: width 0.05s linear;
 }
 
 .progress-fill::after {
@@ -644,6 +655,12 @@ nav.top-nav {
   background: var(--text-0);
   border-radius: 50%;
   box-shadow: 0 0 8px rgba(196,147,104,0.3);
+  transition: transform 0.15s ease;
+}
+
+.progress-track:hover .progress-fill::after,
+.progress-track:active .progress-fill::after {
+  transform: scale(1.3);
 }
 
 .time-display {
@@ -2534,8 +2551,17 @@ footer {
     border: 1px solid var(--border);
     cursor: pointer;
     position: relative;
-    overflow: hidden;
     touch-action: none;
+    user-select: none;
+  }
+
+  .mobile-sheet-progress-bar::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    bottom: -10px;
+    left: 0;
+    right: 0;
   }
 
   .mobile-sheet-progress-fill {
@@ -2543,7 +2569,7 @@ footer {
     background: var(--accent);
     border-radius: 2px;
     width: 0%;
-    transition: width 0.1s linear;
+    transition: width 0.05s linear;
   }
 
   .mobile-sheet-time-row {
