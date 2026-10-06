@@ -770,12 +770,22 @@ export default function MusicClient({
             </div>
 
             <div className="controls">
-              <button className="ctrl-btn" onClick={(e) => { const w = window as any; prevTrack() }} title="Previous track"><SkipBack size={14} /></button>
-              <button className="ctrl-btn play" id="playBtn" onClick={(e) => { const w = window as any; togglePlay() }} title="Play / Pause"><Play size={14} /></button>
-              <button className="ctrl-btn" onClick={(e) => { const w = window as any; nextTrack() }} title="Next track"><SkipForward size={14} /></button>
+              <button className="ctrl-btn" onClick={() => { (window as any).prevTrack?.(); }} title="Previous track"><SkipBack size={14} /></button>
+              <button className="ctrl-btn play" id="playBtn" onClick={() => { (window as any).togglePlay?.(); }} title="Play / Pause"><Play size={14} /></button>
+              <button className="ctrl-btn" onClick={() => { (window as any).nextTrack?.(); }} title="Next track"><SkipForward size={14} /></button>
             </div>
 
-            <div className="progress-track" id="progressBar" onClick={(e) => { const w = window as any; seekTrack(event) }}>
+            <div
+              className="progress-track"
+              id="progressBar"
+              role="slider"
+              aria-label="Audio playback seek bar"
+              aria-valuemin={0}
+              aria-valuemax={100}
+              tabIndex={0}
+              onClick={(e) => { (window as any).seekTrack?.(e.nativeEvent); }}
+              onPointerDown={(e) => { (window as any).startScrub?.(e.nativeEvent); }}
+            >
               <div className="progress-fill" id="progress" style={css("width: 0%;")}></div>
             </div>
 

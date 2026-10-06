@@ -424,14 +424,15 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
     }
 
     function onTimeUpdate() {
-      if (!engine.audio) return;
+      if (!engine.audio || isScrubbing) return;
       const progress = document.getElementById('progress');
       const currentTimeEl = document.getElementById('currentTime');
       const sheetProgress = document.getElementById('sheetProgress');
       const sheetCurrentTime = document.getElementById('sheetCurrentTime');
 
-      if (engine.audio.duration && !isNaN(engine.audio.duration)) {
-        const pct = (engine.audio.currentTime / engine.audio.duration) * 100;
+      const dur = getDuration();
+      if (dur > 0) {
+        const pct = Math.max(0, Math.min(100, (engine.audio.currentTime / dur) * 100));
         if (progress) progress.style.width = `${pct}%`;
         if (sheetProgress) sheetProgress.style.width = `${pct}%`;
       }
@@ -448,11 +449,12 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
       if (!engine.audio) return;
       const totalTimeEl = document.getElementById('totalTime');
       const sheetTotalTime = document.getElementById('sheetTotalTime');
-      const formatted = formatTime(engine.audio.duration);
-      if (totalTimeEl && !engine.tracks[engine.currentIdx]?.duration) {
+      const dur = getDuration();
+      const formatted = formatTime(dur);
+      if (totalTimeEl && (!engine.tracks[engine.currentIdx]?.duration || engine.tracks[engine.currentIdx]?.duration === '0:00')) {
         totalTimeEl.textContent = formatted;
       }
-      if (sheetTotalTime && !engine.tracks[engine.currentIdx]?.duration) {
+      if (sheetTotalTime && (!engine.tracks[engine.currentIdx]?.duration || engine.tracks[engine.currentIdx]?.duration === '0:00')) {
         sheetTotalTime.textContent = formatted;
       }
     }
@@ -564,17 +566,120 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
       loadTrack(engine.currentIdx - 1, true);
     }
 
+    let isScrubbing = false;
+    let activeScrubBar = null;
+
+    function getDuration() {
+      if (engine.audio && Number.isFinite(engine.audio.duration) && engine.audio.duration > 0) {
+        return engine.audio.duration;
+      }
+      const track = engine.tracks[engine.currentIdx];
+      if (track && track.duration_sec && track.duration_sec > 0) {
+        return track.duration_sec;
+      }
+      if (track && track.duration) {
+        const parts = track.duration.split(':').map(Number);
+        if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
+          return parts[0] * 60 + parts[1];
+        }
+      }
+      return 0;
+    }
+
+    function getRatioFromEvent(e, bar) {
+      if (!bar) return 0;
+      const rect = bar.getBoundingClientRect();
+      if (!rect.width || rect.width <= 0) return 0;
+      const clientX = (e.touches && e.touches[0])
+        ? e.touches[0].clientX
+        : (e.clientX !== undefined ? e.clientX : (e.pageX || 0));
+      return Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    }
+
+    function updateScrubUI(ratio) {
+      const dur = getDuration();
+      const previewTime = ratio * dur;
+      const pct = (ratio * 100).toFixed(2);
+
+      const progress = document.getElementById('progress');
+      const currentTimeEl = document.getElementById('currentTime');
+      const sheetProgress = document.getElementById('sheetProgress');
+      const sheetCurrentTime = document.getElementById('sheetCurrentTime');
+
+      if (progress) progress.style.width = `${pct}%`;
+      if (sheetProgress) sheetProgress.style.width = `${pct}%`;
+
+      const formatted = formatTime(previewTime);
+      if (currentTimeEl) currentTimeEl.textContent = formatted;
+      if (sheetCurrentTime) sheetCurrentTime.textContent = formatted;
+    }
+
     function seekTrack(e) {
-      if (!engine.audio || !engine.audio.duration || isNaN(engine.audio.duration)) return;
+      const dur = getDuration();
+      if (!dur || dur <= 0) return;
+      const bar = e?.currentTarget
+        || (e?.target && e.target.closest('.progress-track, .mobile-sheet-progress-bar'))
+        || activeScrubBar
+        || document.getElementById('progressBar')
+        || document.getElementById('sheetProgressBar');
+      if (!bar) return;
+      const ratio = getRatioFromEvent(e, bar);
+      initAudio();
+      if (engine.audio) {
+        engine.audio.currentTime = ratio * dur;
+      }
+      onTimeUpdate();
+    }
+
+    function startScrub(e) {
       const bar = e?.currentTarget
         || (e?.target && e.target.closest('.progress-track, .mobile-sheet-progress-bar'))
         || document.getElementById('progressBar')
         || document.getElementById('sheetProgressBar');
       if (!bar) return;
-      const rect = bar.getBoundingClientRect();
-      const clientX = (e.touches && e.touches[0]) ? e.touches[0].clientX : e.clientX;
-      const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-      engine.audio.currentTime = ratio * engine.audio.duration;
+      isScrubbing = true;
+      activeScrubBar = bar;
+
+      if (e?.target && typeof e.target.setPointerCapture === 'function' && e.pointerId !== undefined) {
+        try {
+          e.target.setPointerCapture(e.pointerId);
+        } catch (_) {}
+      }
+
+      const ratio = getRatioFromEvent(e, bar);
+      updateScrubUI(ratio);
+    }
+
+    function moveScrub(e) {
+      if (!isScrubbing || !activeScrubBar) return;
+      const ratio = getRatioFromEvent(e, activeScrubBar);
+      updateScrubUI(ratio);
+    }
+
+    function endScrub(e) {
+      if (!isScrubbing) return;
+      const bar = activeScrubBar
+        || (e?.target && e.target.closest('.progress-track, .mobile-sheet-progress-bar'))
+        || document.getElementById('progressBar')
+        || document.getElementById('sheetProgressBar');
+
+      if (bar && e) {
+        const ratio = getRatioFromEvent(e, bar);
+        const dur = getDuration();
+        initAudio();
+        if (engine.audio && dur > 0) {
+          engine.audio.currentTime = ratio * dur;
+        }
+      }
+
+      if (e?.target && typeof e.target.releasePointerCapture === 'function' && e.pointerId !== undefined) {
+        try {
+          e.target.releasePointerCapture(e.pointerId);
+        } catch (_) {}
+      }
+
+      isScrubbing = false;
+      activeScrubBar = null;
       onTimeUpdate();
     }
 
@@ -724,6 +829,10 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
     engine.nextTrack = nextTrack;
     engine.prevTrack = prevTrack;
     engine.seekTrack = seekTrack;
+    engine.startScrub = startScrub;
+    engine.moveScrub = moveScrub;
+    engine.endScrub = endScrub;
+    engine.getDuration = getDuration;
     engine.setTracks = setTracks;
     engine.syncUI = syncUI;
     engine.syncPlayingState = syncPlayingState;
@@ -732,6 +841,33 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
 
     initAudio();
     loadTracksFromDOM();
+
+    // Global pointer listeners for smooth continuous scrubbing across the screen
+    window.addEventListener('pointermove', (e) => {
+      if (isScrubbing) {
+        moveScrub(e);
+      }
+    }, { passive: true });
+
+    window.addEventListener('pointerup', (e) => {
+      if (isScrubbing) {
+        endScrub(e);
+      }
+    });
+
+    window.addEventListener('pointercancel', (e) => {
+      if (isScrubbing) {
+        endScrub(e);
+      }
+    });
+
+    // Delegated pointerdown listener for any progress bar in the DOM
+    document.addEventListener('pointerdown', (e) => {
+      const bar = e.target?.closest?.('.progress-track, .mobile-sheet-progress-bar');
+      if (bar) {
+        startScrub(e);
+      }
+    });
   }
 
   // Keyboard shortcuts
@@ -753,6 +889,9 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
   window.nextTrack = function () { window.__AUDIO_ENGINE__?.nextTrack(); };
   window.prevTrack = function () { window.__AUDIO_ENGINE__?.prevTrack(); };
   window.seekTrack = function (e) { window.__AUDIO_ENGINE__?.seekTrack(e); };
+  window.startScrub = function (e) { window.__AUDIO_ENGINE__?.startScrub(e); };
+  window.moveScrub = function (e) { window.__AUDIO_ENGINE__?.moveScrub(e); };
+  window.endScrub = function (e) { window.__AUDIO_ENGINE__?.endScrub(e); };
 
   // Page lifecycle synchronization
   if (document.readyState === 'loading') {

@@ -226,11 +226,14 @@ export default function MobileNavClient({ tracks }: { tracks: DbTrack[] }) {
               <div
                 className="mobile-sheet-progress-bar"
                 id="sheetProgressBar"
-                role="progressbar"
+                role="slider"
                 aria-label="Audio playback seek bar"
+                aria-valuemin={0}
+                aria-valuemax={100}
+                tabIndex={0}
                 title="Seek position"
                 onClick={(e) => { stop(e); if (typeof w().seekTrack === 'function') w().seekTrack(e.nativeEvent); }}
-                onTouchStart={stop}
+                onPointerDown={(e) => { stop(e); if (typeof w().startScrub === 'function') w().startScrub(e.nativeEvent); }}
               >
                 <div className="mobile-sheet-progress-fill" id="sheetProgress" style={{ width: '0%' }}></div>
               </div>
