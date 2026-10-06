@@ -384,6 +384,13 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
         engine.audio.addEventListener('timeupdate', onTimeUpdate);
         engine.audio.addEventListener('ended', onEnded);
         engine.audio.addEventListener('loadedmetadata', onLoadedMetadata);
+        engine.audio.addEventListener('seeking', () => {
+          isSeeking = true;
+        });
+        engine.audio.addEventListener('seeked', () => {
+          isSeeking = false;
+          onTimeUpdate();
+        });
         engine.audio.addEventListener('play', () => {
           engine.isPlaying = true;
           syncPlayingState();
@@ -410,6 +417,8 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
           engine.audio.addEventListener('timeupdate', onTimeUpdate);
           engine.audio.addEventListener('ended', onEnded);
           engine.audio.addEventListener('loadedmetadata', onLoadedMetadata);
+          engine.audio.addEventListener('seeking', () => { isSeeking = true; });
+          engine.audio.addEventListener('seeked', () => { isSeeking = false; onTimeUpdate(); });
           engine.audio.addEventListener('play', () => { engine.isPlaying = true; syncPlayingState(); });
           engine.audio.addEventListener('pause', () => { engine.isPlaying = false; syncPlayingState(); });
           if (currSrc) {
@@ -424,7 +433,7 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
     }
 
     function onTimeUpdate() {
-      if (!engine.audio || isScrubbing) return;
+      if (!engine.audio || isScrubbing || isSeeking) return;
       const progress = document.getElementById('progress');
       const currentTimeEl = document.getElementById('currentTime');
       const sheetProgress = document.getElementById('sheetProgress');
@@ -447,6 +456,18 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
 
     function onLoadedMetadata() {
       if (!engine.audio) return;
+      if (engine.audio.duration === Infinity) {
+        // Force Chromium to fetch last Ogg page to resolve true finite duration
+        const prev = engine.audio.currentTime || 0;
+        try {
+          engine.audio.currentTime = 1e101;
+          const resetOnce = () => {
+            try { engine.audio.currentTime = prev; } catch (_) {}
+            engine.audio.removeEventListener('timeupdate', resetOnce);
+          };
+          engine.audio.addEventListener('timeupdate', resetOnce);
+        } catch (_) {}
+      }
       const totalTimeEl = document.getElementById('totalTime');
       const sheetTotalTime = document.getElementById('sheetTotalTime');
       const dur = getDuration();
@@ -498,6 +519,10 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
         }
       } else if (!engine.audio || !engine.audio.src) {
         engine.currentIdx = 0;
+        initAudio();
+        if (newTracks[0]?.audio_url && engine.audio && !engine.audio.src) {
+          engine.audio.src = newTracks[0].audio_url;
+        }
       }
     }
 
@@ -567,7 +592,9 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
     }
 
     let isScrubbing = false;
+    let isSeeking = false;
     let activeScrubBar = null;
+    let seekSafetyTimer = null;
 
     function getDuration() {
       if (engine.audio && Number.isFinite(engine.audio.duration) && engine.audio.duration > 0) {
@@ -614,9 +641,44 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
       if (sheetCurrentTime) sheetCurrentTime.textContent = formatted;
     }
 
-    function seekTrack(e) {
+    function commitSeek(ratio) {
       const dur = getDuration();
       if (!dur || dur <= 0) return;
+      initAudio();
+
+      if (!engine.audio.src && engine.tracks[engine.currentIdx]?.audio_url) {
+        engine.audio.src = engine.tracks[engine.currentIdx].audio_url;
+      }
+
+      const targetTime = Math.max(0, Math.min(dur, ratio * dur));
+      updateScrubUI(ratio);
+
+      if (engine.audio) {
+        isSeeking = true;
+        if (seekSafetyTimer) clearTimeout(seekSafetyTimer);
+        seekSafetyTimer = setTimeout(() => {
+          isSeeking = false;
+          onTimeUpdate();
+        }, 1000);
+
+        try {
+          if (engine.audio.duration === Infinity) {
+            engine.audio.currentTime = 1e101;
+            const applyTarget = () => {
+              try { engine.audio.currentTime = targetTime; } catch (_) {}
+              engine.audio.removeEventListener('timeupdate', applyTarget);
+            };
+            engine.audio.addEventListener('timeupdate', applyTarget);
+          } else {
+            engine.audio.currentTime = targetTime;
+          }
+        } catch (_) {
+          isSeeking = false;
+        }
+      }
+    }
+
+    function seekTrack(e) {
       const bar = e?.currentTarget
         || (e?.target && e.target.closest('.progress-track, .mobile-sheet-progress-bar'))
         || activeScrubBar
@@ -624,11 +686,7 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
         || document.getElementById('sheetProgressBar');
       if (!bar) return;
       const ratio = getRatioFromEvent(e, bar);
-      initAudio();
-      if (engine.audio) {
-        engine.audio.currentTime = ratio * dur;
-      }
-      onTimeUpdate();
+      commitSeek(ratio);
     }
 
     function startScrub(e) {
@@ -640,10 +698,15 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
       isScrubbing = true;
       activeScrubBar = bar;
 
-      if (e?.target && typeof e.target.setPointerCapture === 'function' && e.pointerId !== undefined) {
+      if (bar && typeof bar.setPointerCapture === 'function' && e?.pointerId !== undefined) {
         try {
-          e.target.setPointerCapture(e.pointerId);
+          bar.setPointerCapture(e.pointerId);
         } catch (_) {}
+      }
+
+      initAudio();
+      if (!engine.audio.src && engine.tracks[engine.currentIdx]?.audio_url) {
+        engine.audio.src = engine.tracks[engine.currentIdx].audio_url;
       }
 
       const ratio = getRatioFromEvent(e, bar);
@@ -663,24 +726,23 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
         || document.getElementById('progressBar')
         || document.getElementById('sheetProgressBar');
 
+      let ratio = 0;
       if (bar && e) {
-        const ratio = getRatioFromEvent(e, bar);
-        const dur = getDuration();
-        initAudio();
-        if (engine.audio && dur > 0) {
-          engine.audio.currentTime = ratio * dur;
-        }
+        ratio = getRatioFromEvent(e, bar);
       }
 
-      if (e?.target && typeof e.target.releasePointerCapture === 'function' && e.pointerId !== undefined) {
+      if (bar && typeof bar.releasePointerCapture === 'function' && e?.pointerId !== undefined) {
         try {
-          e.target.releasePointerCapture(e.pointerId);
+          bar.releasePointerCapture(e.pointerId);
         } catch (_) {}
       }
 
       isScrubbing = false;
       activeScrubBar = null;
-      onTimeUpdate();
+
+      if (bar) {
+        commitSeek(ratio);
+      }
     }
 
     function syncPlayingState() {
@@ -842,29 +904,49 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
     initAudio();
     loadTracksFromDOM();
 
-    // Global pointer listeners for smooth continuous scrubbing across the screen
+    // Global pointer, touch, and mouse listeners for smooth continuous scrubbing
     window.addEventListener('pointermove', (e) => {
-      if (isScrubbing) {
-        moveScrub(e);
-      }
+      if (isScrubbing) moveScrub(e);
+    }, { passive: true });
+    window.addEventListener('touchmove', (e) => {
+      if (isScrubbing) moveScrub(e);
+    }, { passive: true });
+    window.addEventListener('mousemove', (e) => {
+      if (isScrubbing) moveScrub(e);
     }, { passive: true });
 
     window.addEventListener('pointerup', (e) => {
-      if (isScrubbing) {
-        endScrub(e);
-      }
+      if (isScrubbing) endScrub(e);
     });
-
+    window.addEventListener('touchend', (e) => {
+      if (isScrubbing) endScrub(e);
+    });
+    window.addEventListener('mouseup', (e) => {
+      if (isScrubbing) endScrub(e);
+    });
     window.addEventListener('pointercancel', (e) => {
-      if (isScrubbing) {
-        endScrub(e);
-      }
+      if (isScrubbing) endScrub(e);
+    });
+    window.addEventListener('touchcancel', (e) => {
+      if (isScrubbing) endScrub(e);
     });
 
-    // Delegated pointerdown listener for any progress bar in the DOM
+    // Delegated pointerdown / touchstart / mousedown listeners for any progress bar in the DOM
     document.addEventListener('pointerdown', (e) => {
       const bar = e.target?.closest?.('.progress-track, .mobile-sheet-progress-bar');
       if (bar) {
+        startScrub(e);
+      }
+    });
+    document.addEventListener('touchstart', (e) => {
+      const bar = e.target?.closest?.('.progress-track, .mobile-sheet-progress-bar');
+      if (bar && !isScrubbing) {
+        startScrub(e);
+      }
+    }, { passive: true });
+    document.addEventListener('mousedown', (e) => {
+      const bar = e.target?.closest?.('.progress-track, .mobile-sheet-progress-bar');
+      if (bar && !isScrubbing) {
         startScrub(e);
       }
     });

@@ -645,6 +645,7 @@ nav.top-nav {
   border-radius: 1px;
   position: relative;
   transition: width 0.05s linear;
+  pointer-events: none;
 }
 
 .progress-fill::after {
@@ -2570,6 +2571,7 @@ footer {
     border-radius: 2px;
     width: 0%;
     transition: width 0.05s linear;
+    pointer-events: none;
   }
 
   .mobile-sheet-time-row {
