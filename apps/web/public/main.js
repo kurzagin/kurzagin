@@ -88,6 +88,65 @@ function renderMediaPreviews() {
   });
 }
 
+async function prepareImageForUpload(file) {
+  // If file is 4MB or smaller, send directly without client-side re-compression
+  if (file.size <= 4 * 1024 * 1024) {
+    return file;
+  }
+
+  // If file exceeds 4MB, downscale in browser canvas to stay safely under Vercel's 4.5MB limit
+  return new Promise((resolve) => {
+    const img = new Image();
+    const objectUrl = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(objectUrl);
+      const maxDim = 2560;
+      let width = img.naturalWidth || img.width;
+      let height = img.naturalHeight || img.height;
+
+      if (width > maxDim || height > maxDim) {
+        if (width > height) {
+          height = Math.round((height * maxDim) / width);
+          width = maxDim;
+        } else {
+          width = Math.round((width * maxDim) / height);
+          height = maxDim;
+        }
+      }
+
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        resolve(file);
+        return;
+      }
+
+      ctx.drawImage(img, 0, 0, width, height);
+      canvas.toBlob(
+        (blob) => {
+          if (blob && blob.size < file.size) {
+            const optimizedFile = new File([blob], file.name.replace(/\.[^/.]+$/, '') + '.jpg', {
+              type: 'image/jpeg',
+            });
+            resolve(optimizedFile);
+          } else {
+            resolve(file);
+          }
+        },
+        'image/jpeg',
+        0.88
+      );
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(objectUrl);
+      resolve(file);
+    };
+    img.src = objectUrl;
+  });
+}
+
 async function broadcastPost() {
   const input = document.getElementById('postInput');
   const btn = document.getElementById('submitPostBtn');
@@ -111,8 +170,14 @@ async function broadcastPost() {
     if (stagedMediaFiles.length > 0) {
       let uploadedCount = 0;
       const uploadPromises = stagedMediaFiles.map(async (file) => {
+        let fileToSend = file;
+        if (file.size > 4 * 1024 * 1024) {
+          btn.textContent = `OPTIMIZING (<4.5MB)...`;
+          fileToSend = await prepareImageForUpload(file);
+        }
+
         const fd = new FormData();
-        fd.append('image', file);
+        fd.append('image', fileToSend, file.name);
 
         const mediaRes = await fetch('/api/media/upload-post-image', {
           method: 'POST',

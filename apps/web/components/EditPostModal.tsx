@@ -19,6 +19,63 @@ interface EditPostModalProps {
   onDeleted?: (deletedPostId: string) => void;
 }
 
+async function prepareImageForUpload(file: File): Promise<File> {
+  if (file.size <= 4 * 1024 * 1024) {
+    return file;
+  }
+
+  return new Promise<File>((resolve) => {
+    const img = new Image();
+    const objectUrl = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(objectUrl);
+      const maxDim = 2560;
+      let width = img.naturalWidth || img.width;
+      let height = img.naturalHeight || img.height;
+
+      if (width > maxDim || height > maxDim) {
+        if (width > height) {
+          height = Math.round((height * maxDim) / width);
+          width = maxDim;
+        } else {
+          width = Math.round((width * maxDim) / height);
+          height = maxDim;
+        }
+      }
+
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        resolve(file);
+        return;
+      }
+
+      ctx.drawImage(img, 0, 0, width, height);
+      canvas.toBlob(
+        (blob) => {
+          if (blob && blob.size < file.size) {
+            const optimizedFile = new File([blob], file.name.replace(/\.[^/.]+$/, '') + '.jpg', {
+              type: 'image/jpeg',
+            });
+            resolve(optimizedFile);
+          } else {
+            resolve(file);
+          }
+        },
+        'image/jpeg',
+        0.88
+      );
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(objectUrl);
+      resolve(file);
+    };
+    img.src = objectUrl;
+  });
+}
+
 export default function EditPostModal({
   isOpen,
   post,
@@ -125,19 +182,26 @@ export default function EditPostModal({
       // 1. Upload newly staged files to AVIF via /api/media/upload-post-image
       if (stagedFiles.length > 0) {
         for (let i = 0; i < stagedFiles.length; i++) {
-          setStatusMessage(`Converting image ${i + 1}/${stagedFiles.length} to AVIF...`);
           const sf = stagedFiles[i];
+          let fileToSend = sf.file;
+          if (fileToSend.size > 4 * 1024 * 1024) {
+            setStatusMessage(`Optimizing image ${i + 1}/${stagedFiles.length} (<4.5MB)...`);
+            fileToSend = await prepareImageForUpload(sf.file);
+          }
+
+          setStatusMessage(`Converting image ${i + 1}/${stagedFiles.length} to AVIF...`);
           const fd = new FormData();
-          fd.append('image', sf.file);
+          fd.append('image', fileToSend, sf.file.name);
 
           const res = await fetch('/api/media/upload-post-image', {
             method: 'POST',
             body: fd,
           });
 
-          const data = await res.json().catch(() => ({}));
-          if (!res.ok || !data.success) {
-            throw new Error(data.error || `Failed to process image "${sf.file.name}" to AVIF`);
+          const data = await res.json().catch(() => null);
+          if (!res.ok || !data || !data.success) {
+            const errMsg = (data && data.error) ? data.error : (res.statusText || `Upload failed with status ${res.status}`);
+            throw new Error(errMsg || `Failed to process image "${sf.file.name}" to AVIF`);
           }
 
           uploadedMedia.push({
