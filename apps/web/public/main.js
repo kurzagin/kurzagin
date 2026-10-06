@@ -425,20 +425,20 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
 
     function onTimeUpdate() {
       if (!engine.audio || isScrubbing) return;
-      const progress = document.getElementById('progress');
-      const currentTimeEl = document.getElementById('currentTime');
-      const sheetProgress = document.getElementById('sheetProgress');
-      const sheetCurrentTime = document.getElementById('sheetCurrentTime');
+      const progressEls = document.querySelectorAll('#progress, .progress-fill');
+      const sheetProgressEls = document.querySelectorAll('#sheetProgress, .mobile-sheet-progress-fill');
+      const currentTimeEls = document.querySelectorAll('#currentTime');
+      const sheetCurrentTimeEls = document.querySelectorAll('#sheetCurrentTime');
 
       const dur = getDuration();
       if (dur > 0) {
         const pct = Math.max(0, Math.min(100, (engine.audio.currentTime / dur) * 100));
-        if (progress) progress.style.width = `${pct}%`;
-        if (sheetProgress) sheetProgress.style.width = `${pct}%`;
+        progressEls.forEach(el => { el.style.width = `${pct}%`; });
+        sheetProgressEls.forEach(el => { el.style.width = `${pct}%`; });
       }
       const formatted = formatTime(engine.audio.currentTime);
-      if (currentTimeEl) currentTimeEl.textContent = formatted;
-      if (sheetCurrentTime) sheetCurrentTime.textContent = formatted;
+      currentTimeEls.forEach(el => { el.textContent = formatted; });
+      sheetCurrentTimeEls.forEach(el => { el.textContent = formatted; });
     }
 
     function onEnded() {
@@ -573,6 +573,27 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
     let isScrubbing = false;
     let activeScrubBar = null;
 
+    function resolveBar(e) {
+      if (e) {
+        if (e.nodeType === 1 && typeof e.getBoundingClientRect === 'function') {
+          return e;
+        }
+        const target = e.target || e.srcElement;
+        if (target && typeof target.closest === 'function') {
+          const match = target.closest('.progress-track, .mobile-sheet-progress-bar');
+          if (match) return match;
+        }
+        if (e.currentTarget && e.currentTarget.nodeType === 1 && typeof e.currentTarget.getBoundingClientRect === 'function') {
+          const match = (typeof e.currentTarget.closest === 'function' ? e.currentTarget.closest('.progress-track, .mobile-sheet-progress-bar') : null) || e.currentTarget;
+          if (match) return match;
+        }
+      }
+      if (activeScrubBar && typeof activeScrubBar.getBoundingClientRect === 'function') {
+        return activeScrubBar;
+      }
+      return document.getElementById('progressBar') || document.getElementById('sheetProgressBar') || null;
+    }
+
     function getDuration() {
       if (engine.audio && Number.isFinite(engine.audio.duration) && engine.audio.duration > 0) {
         return engine.audio.duration;
@@ -591,12 +612,30 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
     }
 
     function getRatioFromEvent(e, bar) {
-      if (!bar) return 0;
+      if (!bar || typeof bar.getBoundingClientRect !== 'function') return 0;
       const rect = bar.getBoundingClientRect();
       if (!rect.width || rect.width <= 0) return 0;
-      const clientX = (e.touches && e.touches[0])
-        ? e.touches[0].clientX
-        : (e.clientX !== undefined ? e.clientX : (e.pageX || 0));
+
+      let clientX = null;
+      if (e) {
+        if (e.touches && e.touches[0] && e.touches[0].clientX !== undefined) {
+          clientX = e.touches[0].clientX;
+        } else if (e.changedTouches && e.changedTouches[0] && e.changedTouches[0].clientX !== undefined) {
+          clientX = e.changedTouches[0].clientX;
+        } else if (e.clientX !== undefined) {
+          clientX = e.clientX;
+        } else if (e.nativeEvent) {
+          if (e.nativeEvent.clientX !== undefined) {
+            clientX = e.nativeEvent.clientX;
+          } else if (e.nativeEvent.touches && e.nativeEvent.touches[0]) {
+            clientX = e.nativeEvent.touches[0].clientX;
+          }
+        } else if (e.pageX !== undefined) {
+          clientX = e.pageX;
+        }
+      }
+
+      if (clientX === null) return 0;
       return Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
     }
 
@@ -605,17 +644,17 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
       const previewTime = ratio * dur;
       const pct = (ratio * 100).toFixed(2);
 
-      const progress = document.getElementById('progress');
-      const currentTimeEl = document.getElementById('currentTime');
-      const sheetProgress = document.getElementById('sheetProgress');
-      const sheetCurrentTime = document.getElementById('sheetCurrentTime');
+      const progressEls = document.querySelectorAll('#progress, .progress-fill');
+      const sheetProgressEls = document.querySelectorAll('#sheetProgress, .mobile-sheet-progress-fill');
+      const currentTimeEls = document.querySelectorAll('#currentTime');
+      const sheetCurrentTimeEls = document.querySelectorAll('#sheetCurrentTime');
 
-      if (progress) progress.style.width = `${pct}%`;
-      if (sheetProgress) sheetProgress.style.width = `${pct}%`;
+      progressEls.forEach(el => { el.style.width = `${pct}%`; });
+      sheetProgressEls.forEach(el => { el.style.width = `${pct}%`; });
 
       const formatted = formatTime(previewTime);
-      if (currentTimeEl) currentTimeEl.textContent = formatted;
-      if (sheetCurrentTime) sheetCurrentTime.textContent = formatted;
+      currentTimeEls.forEach(el => { el.textContent = formatted; });
+      sheetCurrentTimeEls.forEach(el => { el.textContent = formatted; });
     }
 
     function applySeek(ratio) {
@@ -640,57 +679,77 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
     }
 
     function seekTrack(e) {
-      const bar = e?.currentTarget
-        || (e?.target && e.target.closest('.progress-track, .mobile-sheet-progress-bar'))
-        || activeScrubBar
-        || document.getElementById('progressBar')
-        || document.getElementById('sheetProgressBar');
-      if (!bar) return;
-      const ratio = getRatioFromEvent(e, bar);
-      applySeek(ratio);
+      try {
+        const bar = resolveBar(e);
+        if (!bar) return;
+        const ratio = getRatioFromEvent(e, bar);
+        applySeek(ratio);
+      } finally {
+        isScrubbing = false;
+        activeScrubBar = null;
+      }
     }
 
     function startScrub(e) {
-      const bar = e?.currentTarget
-        || (e?.target && e.target.closest('.progress-track, .mobile-sheet-progress-bar'))
-        || document.getElementById('progressBar')
-        || document.getElementById('sheetProgressBar');
-      if (!bar) return;
-      isScrubbing = true;
-      activeScrubBar = bar;
+      try {
+        const bar = resolveBar(e);
+        if (!bar) return;
+        isScrubbing = true;
+        activeScrubBar = bar;
 
-      initAudio();
-      if (!engine.audio.src && engine.tracks[engine.currentIdx]?.audio_url) {
-        engine.audio.src = engine.tracks[engine.currentIdx].audio_url;
+        if (bar && typeof bar.setPointerCapture === 'function' && e?.pointerId !== undefined) {
+          try {
+            bar.setPointerCapture(e.pointerId);
+          } catch (_) {}
+        }
+
+        initAudio();
+        if (!engine.audio.src && engine.tracks[engine.currentIdx]?.audio_url) {
+          engine.audio.src = engine.tracks[engine.currentIdx].audio_url;
+        }
+
+        const ratio = getRatioFromEvent(e, bar);
+        applySeek(ratio);
+      } catch (err) {
+        console.warn('startScrub error:', err);
+        isScrubbing = false;
+        activeScrubBar = null;
       }
-
-      const ratio = getRatioFromEvent(e, bar);
-      applySeek(ratio);
     }
 
     function moveScrub(e) {
       if (!isScrubbing || !activeScrubBar) return;
-      const ratio = getRatioFromEvent(e, activeScrubBar);
-      updateScrubUI(ratio);
+      try {
+        const ratio = getRatioFromEvent(e, activeScrubBar);
+        updateScrubUI(ratio);
+      } catch (_) {}
     }
 
     function endScrub(e) {
       if (!isScrubbing) return;
-      const bar = activeScrubBar
-        || (e?.target && e.target.closest('.progress-track, .mobile-sheet-progress-bar'))
-        || document.getElementById('progressBar')
-        || document.getElementById('sheetProgressBar');
+      try {
+        const bar = resolveBar(e) || activeScrubBar;
+        let ratio = null;
+        if (bar && e) {
+          ratio = getRatioFromEvent(e, bar);
+        } else if (activeScrubBar && e) {
+          ratio = getRatioFromEvent(e, activeScrubBar);
+        }
 
-      let ratio = null;
-      if (bar && e) {
-        ratio = getRatioFromEvent(e, bar);
-      }
+        if (bar && typeof bar.releasePointerCapture === 'function' && e?.pointerId !== undefined) {
+          try {
+            bar.releasePointerCapture(e.pointerId);
+          } catch (_) {}
+        }
 
-      isScrubbing = false;
-      activeScrubBar = null;
-
-      if (ratio !== null) {
-        applySeek(ratio);
+        if (ratio !== null) {
+          applySeek(ratio);
+        }
+      } catch (err) {
+        console.warn('endScrub error:', err);
+      } finally {
+        isScrubbing = false;
+        activeScrubBar = null;
       }
     }
 
@@ -864,6 +923,31 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
 
     window.addEventListener('pointercancel', (e) => {
       if (isScrubbing) endScrub(e);
+    });
+
+    // Touch and mouse fallbacks
+    window.addEventListener('touchmove', (e) => {
+      if (isScrubbing) moveScrub(e);
+    }, { passive: true });
+
+    window.addEventListener('touchend', (e) => {
+      if (isScrubbing) endScrub(e);
+    });
+
+    window.addEventListener('touchcancel', (e) => {
+      if (isScrubbing) endScrub(e);
+    });
+
+    window.addEventListener('mouseup', (e) => {
+      if (isScrubbing) endScrub(e);
+    });
+
+    // Safety resets on blur / visibility change
+    window.addEventListener('blur', () => {
+      if (isScrubbing) { isScrubbing = false; activeScrubBar = null; }
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden && isScrubbing) { isScrubbing = false; activeScrubBar = null; }
     });
 
     // Delegated pointerdown listener for any progress bar in the DOM

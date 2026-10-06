@@ -232,10 +232,10 @@ export default function MobileNavClient({ tracks }: { tracks: DbTrack[] }) {
                 aria-valuemax={100}
                 tabIndex={0}
                 title="Seek position"
-                onClick={(e) => { stop(e); if (typeof w().seekTrack === 'function') w().seekTrack(e.nativeEvent); }}
-                onPointerDown={(e) => { stop(e); if (typeof w().startScrub === 'function') w().startScrub(e.nativeEvent); }}
+                onClick={(e) => { stop(e); if (typeof w().seekTrack === 'function') w().seekTrack(e); }}
+                onPointerDown={(e) => { stop(e); if (typeof w().startScrub === 'function') w().startScrub(e); }}
               >
-                <div className="mobile-sheet-progress-fill" id="sheetProgress" style={{ width: '0%' }}></div>
+                <div className="mobile-sheet-progress-fill" id="sheetProgress"></div>
               </div>
               <div className="mobile-sheet-time-row">
                 <span id="sheetCurrentTime">0:00</span>

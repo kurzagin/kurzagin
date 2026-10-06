@@ -53,6 +53,7 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js', { scope: '/' })
       .then((reg) => {
+        try { reg.update(); } catch (_) {}
         console.log('[PWA] Service Worker registered with scope:', reg.scope);
         reg.addEventListener('updatefound', () => {
           const installingWorker = reg.installing;
@@ -94,7 +95,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <RouteEvents />
         <script dangerouslySetInnerHTML={{ __html: SW_REGISTER }} />
-        <Script src="/main.js?v=2.0.5" strategy="afterInteractive" />
+        <Script src="/main.js?v=2.0.6" strategy="afterInteractive" />
       </body>
     </html>
   );
