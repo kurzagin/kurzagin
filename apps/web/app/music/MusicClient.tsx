@@ -783,10 +783,10 @@ export default function MusicClient({
               aria-valuemin={0}
               aria-valuemax={100}
               tabIndex={0}
-              onClick={(e) => { (window as any).seekTrack?.(e.nativeEvent); }}
-              onPointerDown={(e) => { (window as any).startScrub?.(e.nativeEvent); }}
+              onClick={(e) => { (window as any).seekTrack?.(e); }}
+              onPointerDown={(e) => { (window as any).startScrub?.(e); }}
             >
-              <div className="progress-fill" id="progress" style={css("width: 0%;")}></div>
+              <div className="progress-fill" id="progress"></div>
             </div>
 
             <div className="time-display">

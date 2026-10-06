@@ -2,7 +2,7 @@
 // kurzagin — Service Worker (PWA)
 // ============================================================
 
-const CACHE_VERSION = 'krzgn-v2.0.5-clean';
+const CACHE_VERSION = 'krzgn-v2.0.6-live';
 const STATIC_CACHE = `krzgn-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `krzgn-runtime-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
