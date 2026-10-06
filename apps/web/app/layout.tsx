@@ -94,7 +94,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <RouteEvents />
         <script dangerouslySetInnerHTML={{ __html: SW_REGISTER }} />
-        <Script src="/main.js?v=2.0.4" strategy="afterInteractive" />
+        <Script src="/main.js?v=2.0.5" strategy="afterInteractive" />
       </body>
     </html>
   );
