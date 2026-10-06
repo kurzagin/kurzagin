@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, User, SquarePen, Disc3, Image as ImageIcon, Tv, Gamepad2, Settings } from 'lucide-react';
+import { Home, User, SquarePen, Disc3, Image as ImageIcon, Tv, Gamepad2, Settings, BookOpen } from 'lucide-react';
 import { getCurrent } from './current';
 
 export default function Sidebar() {
@@ -19,6 +19,7 @@ export default function Sidebar() {
           <li><Link href="/gallery" className={current === 'gallery' ? 'active' : ''}><span className="nav-icon"><ImageIcon size={14} /></span> gallery</Link></li>
           <li><Link href="/anime" className={current === 'anime' ? 'active' : ''}><span className="nav-icon"><Tv size={14} /></span> anime</Link></li>
           <li><Link href="/games" className={current === 'games' ? 'active' : ''}><span className="nav-icon"><Gamepad2 size={14} /></span> games</Link></li>
+          <li><Link href="/novels" className={current === 'novels' ? 'active' : ''}><span className="nav-icon"><BookOpen size={14} /></span> novels</Link></li>
           <li><Link href="/settings" className={current === 'settings' ? 'active' : ''}><span className="nav-icon"><Settings size={14} /></span> settings</Link></li>
         </ul>
       </div>
