@@ -52,7 +52,7 @@ export default async function NovelWikiDetailPage({ params }: Props) {
       <section className="section">
         {/* Classification Header / Metadata Card */}
         <div
-          className="bracket-card reveal"
+          className="bracket-card "
           style={{
             padding: '20px',
             marginBottom: '24px',
@@ -126,7 +126,7 @@ export default async function NovelWikiDetailPage({ params }: Props) {
 
         {/* Markdown Rendered Content */}
         <article
-          className="reveal markdown-body"
+          className=" markdown-body"
           style={{
             background: 'var(--bg-1)',
             border: '1px solid var(--border-subtle)',

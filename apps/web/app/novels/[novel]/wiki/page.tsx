@@ -62,7 +62,7 @@ export default async function NovelWikiPage({ params }: Props) {
       <section className="section">
         {/* Classified Banner */}
         <div
-          className="bracket-card reveal"
+          className="bracket-card "
           style={{
             padding: '16px 20px',
             marginBottom: '24px',
@@ -102,7 +102,7 @@ export default async function NovelWikiPage({ params }: Props) {
         </div>
 
         {/* Categories Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }} className="reveal">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }} className="">
           {categories.map((cat) => {
             const Icon = iconMap[cat.id] || Library;
             return (

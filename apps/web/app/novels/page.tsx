@@ -16,7 +16,7 @@ export default function NovelsPage() {
 
       <section className="section">
         {novelsList.length === 0 ? (
-          <div className="bracket-card empty-state reveal">
+          <div className="bracket-card empty-state ">
             <div className="empty-state-glyph"><BookOpen size={36} /></div>
             <div className="empty-state-title">NO NOVELS REGISTERED</div>
             <p className="empty-state-desc">
@@ -26,7 +26,7 @@ export default function NovelsPage() {
             <span className="empty-state-meta">// status: ready — awaiting novel registration</span>
           </div>
         ) : (
-          <div className="cards-grid reveal">
+          <div className="cards-grid ">
             {novelsList.map((novel) => (
               <Link
                 key={novel.slug}
