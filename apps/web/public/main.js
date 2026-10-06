@@ -119,9 +119,10 @@ async function broadcastPost() {
           body: fd,
         });
 
-        const mediaData = await mediaRes.json();
-        if (!mediaRes.ok || !mediaData.success) {
-          throw new Error(mediaData.error || `Failed to process image "${file.name}" to AVIF`);
+        const mediaData = await mediaRes.json().catch(() => null);
+        if (!mediaRes.ok || !mediaData || !mediaData.success) {
+          const errMsg = (mediaData && mediaData.error) ? mediaData.error : (mediaRes.statusText || `Upload failed with status ${mediaRes.status}`);
+          throw new Error(errMsg || `Failed to process image "${file.name}" to AVIF`);
         }
 
         uploadedCount++;
@@ -149,12 +150,13 @@ async function broadcastPost() {
       }),
     });
 
-    const data = await res.json();
-    if (res.ok && data.success) {
+    const data = await res.json().catch(() => null);
+    if (res.ok && data && data.success) {
       removeStagedMedia();
       window.location.reload();
     } else {
-      alert(data.error || 'Failed to broadcast post');
+      const errMsg = (data && data.error) ? data.error : (res.statusText || `Request failed with status ${res.status}`);
+      alert(errMsg || 'Failed to broadcast post');
       btn.disabled = false;
       btn.textContent = 'BROADCAST LOG →';
     }
@@ -189,8 +191,8 @@ async function submitComment(e, postId) {
       body: JSON.stringify({ postId, content, authorName, honeypot })
     });
 
-    const data = await res.json();
-    if (res.ok && data.success) {
+    const data = await res.json().catch(() => null);
+    if (res.ok && data && data.success) {
       const c = data.comment;
       let list = document.getElementById(`comments-list-${postId}`);
       if (!list) {
@@ -232,10 +234,11 @@ async function submitComment(e, postId) {
         }
       }
     } else {
-      alert(data.error || 'Failed to submit comment');
+      const errMsg = (data && data.error) ? data.error : (res.statusText || `Request failed with status ${res.status}`);
+      alert(errMsg || 'Failed to submit comment');
     }
   } catch (err) {
-    alert('Network error while posting comment');
+    alert(err.message || 'Network error while posting comment');
   } finally {
     submitBtn.disabled = false;
     submitBtn.textContent = 'SEND ↵';
