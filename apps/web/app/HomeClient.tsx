@@ -232,6 +232,12 @@ export default function HomeClient({
           const postMediaItems = mediaByPost[post.id] || [];
           const isLiked = likedPostIds.has(post.id);
           const { cleanedContent, videos: postYouTubeVideos } = processYouTubePost(post.content || '');
+          // Anime reviews historically stored uploaded images as markdown in the
+          // body as well as in postMedia. The media grid is the canonical renderer,
+          // so hide those markdown tokens to prevent raw syntax and duplicate images.
+          const displayContent = postMediaItems.length > 0
+            ? cleanedContent.replace(/!\[[^\]]*\]\([^)]*\)/g, '').replace(/\n{3,}/g, '\n\n').trim()
+            : cleanedContent;
           return (
             <article
               className="post bracket-card feed-post"
@@ -293,14 +299,14 @@ export default function HomeClient({
                 </div>
               )}
 
-              {cleanedContent && (
+              {displayContent && (
                 post.category === 'anime' && post.anime_meta?.has_spoilers ? (
                   <details className="post-spoiler-fold" onClick={(e) => { const w = window as any; event.stopPropagation() }}>
                     <summary className="post-spoiler-toggle">// ⚠️ Contains spoilers for {post.anime_meta.title} (click to reveal review)</summary>
-                    <div className="post-body" dangerouslySetInnerHTML={{ __html: formatBody(cleanedContent) }} />
+                    <div className="post-body" dangerouslySetInnerHTML={{ __html: formatBody(displayContent) }} />
                   </details>
                 ) : (
-                  <div className="post-body" dangerouslySetInnerHTML={{ __html: formatBody(cleanedContent) }} />
+                  <div className="post-body" dangerouslySetInnerHTML={{ __html: formatBody(displayContent) }} />
                 )
               )}
 
