@@ -1,7 +1,7 @@
 import { connection, type NextRequest } from 'next/server';
 import { cookies as nextCookies } from 'next/headers';
 import { desc, eq } from 'drizzle-orm';
-import { getDb, animeWatchlist, animeReviews, posts, type AnimePostMeta } from '@/lib/db';
+import { getDb, animeWatchlist, animeReviews, posts, postMedia, type AnimePostMeta } from '@/lib/db';
 import { isAuthenticated, getSession } from '@/lib/auth';
 
 export async function GET(request: NextRequest) {
@@ -125,6 +125,9 @@ export async function POST(request: NextRequest) {
         has_spoilers: hasSpoilers,
       };
 
+      const rawMedia = Array.isArray(body.media) ? body.media : [];
+      const hasMedia = rawMedia.length > 0;
+
       const insertedPost = await db
         .insert(posts)
         .values({
@@ -133,12 +136,25 @@ export async function POST(request: NextRequest) {
           author_handle: authorHandle,
           category: 'anime',
           anime_meta: animeMeta,
-          has_media: false,
+          has_media: hasMedia,
         })
         .returning();
 
       if (insertedPost.length > 0) {
         sharedPostId = insertedPost[0].id;
+
+        if (hasMedia) {
+          const mediaRows = rawMedia.map((m: any) => ({
+            post_id: sharedPostId!,
+            category: 'media',
+            media_type: 'image',
+            url: String(m.url),
+            alt_text: m.alt_text ? String(m.alt_text) : `Screenshot from ${anime.title}`,
+            width: typeof m.width === 'number' ? m.width : null,
+            height: typeof m.height === 'number' ? m.height : null,
+          }));
+          await db.insert(postMedia).values(mediaRows);
+        }
       }
     }
 

@@ -20,9 +20,12 @@ import {
   Edit3,
   Check,
   AlertCircle,
+  AlertTriangle,
   Clock,
   Sparkles,
   Share2,
+  Radio,
+  Paperclip,
   X,
 } from 'lucide-react';
 import { css } from '../_ui/css';
@@ -57,6 +60,36 @@ function formatDate(dateStr: string | Date) {
   } catch {
     return 'recently';
   }
+}
+
+function renderReviewContent(content: string) {
+  if (!content) return null;
+  const imageRegex = /!\[(.*?)\]\((.*?)\)/g;
+  const parts: React.ReactNode[] = [];
+  let lastIndex = 0;
+  let match;
+
+  while ((match = imageRegex.exec(content)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(
+        <span key={`text-${lastIndex}`}>{content.substring(lastIndex, match.index)}</span>
+      );
+    }
+    const alt = match[1] || 'Review image';
+    const src = match[2];
+    parts.push(
+      <span key={`img-${match.index}`} className="review-content-img-wrap">
+        <img src={src} alt={alt} className="review-content-img" loading="lazy" />
+      </span>
+    );
+    lastIndex = match.index + match[0].length;
+  }
+
+  if (lastIndex < content.length) {
+    parts.push(<span key={`text-${lastIndex}`}>{content.substring(lastIndex)}</span>);
+  }
+
+  return parts;
 }
 
 interface AnimeViewProps {
@@ -316,7 +349,7 @@ export default function AnimeView({
                       type="button"
                       className="quick-ep-btn"
                       title="Increment episode +1"
-                      onClick={() => { const w = window as any; w.incrementEpisode?.(item.id, item.current_episode, item.total_episodes || null); }}
+                      onClick={() => { const w = window as any; w.incrementEpisode?.(item.id, item.current_episode, item.total_episodes || null, item.status); }}
                     >
                       +1 EP
                     </button>
@@ -365,11 +398,14 @@ export default function AnimeView({
 
                     {item.latest_review.has_spoilers ? (
                       <details className="spoiler-drawer">
-                        <summary className="spoiler-summary">// ⚠️ Contains spoilers (click to reveal)</summary>
-                        <p className="review-text">{item.latest_review.content}</p>
+                        <summary className="spoiler-summary">
+                          <AlertTriangle size={12} style={{ display: 'inline', verticalAlign: 'text-bottom', marginRight: '4px' }} />
+                          // Contains spoilers (click to reveal)
+                        </summary>
+                        <div className="review-text">{renderReviewContent(item.latest_review.content)}</div>
                       </details>
                     ) : (
-                      <p className="review-text">{item.latest_review.content}</p>
+                      <div className="review-text">{renderReviewContent(item.latest_review.content)}</div>
                     )}
 
                     {item.reviews.length > 1 && (
@@ -394,7 +430,7 @@ export default function AnimeView({
                     <div className="drawer-title">// ALL EPISODE LOGS & REVIEWS:</div>
                     <div className="reviews-timeline">
                       {item.reviews.map((rev) => (
-                        <div className="timeline-review-entry">
+                        <div className="timeline-review-entry" key={rev.id}>
                           <div className="timeline-header">
                             <span className="timeline-badge type">{formatReviewType(rev.review_type)}</span>
                             {rev.episode !== null && (
@@ -407,11 +443,14 @@ export default function AnimeView({
                           </div>
                           {rev.has_spoilers ? (
                             <details className="spoiler-drawer">
-                              <summary className="spoiler-summary">// ⚠️ Spoilers</summary>
-                              <p className="timeline-content">{rev.content}</p>
+                              <summary className="spoiler-summary">
+                                <AlertTriangle size={12} style={{ display: 'inline', verticalAlign: 'text-bottom', marginRight: '4px' }} />
+                                // Spoilers
+                              </summary>
+                              <div className="timeline-content">{renderReviewContent(rev.content)}</div>
                             </details>
                           ) : (
-                            <p className="timeline-content">{rev.content}</p>
+                            <div className="timeline-content">{renderReviewContent(rev.content)}</div>
                           )}
                         </div>
                       ))}
@@ -485,7 +524,9 @@ export default function AnimeView({
         <div className="modal-title">
           <span className="hl">QUERY ANILIST</span> // ADD TO WATCHLIST
         </div>
-        <button className="modal-close-btn" onClick={(e) => { const w = window as any; closeAddAnimeModal() }}>×</button>
+        <button className="modal-close-btn" onClick={(e) => { const w = window as any; closeAddAnimeModal() }} title="Close">
+          <X size={16} />
+        </button>
       </div>
 
       <div className="modal-search-row">
@@ -555,7 +596,9 @@ export default function AnimeView({
         <div className="modal-title">
           <span className="hl">LOG / REVIEW</span> // <span id="reviewModalAnimeTitle">Anime</span>
         </div>
-        <button className="modal-close-btn" onClick={(e) => { const w = window as any; closeReviewModal() }}>×</button>
+        <button className="modal-close-btn" onClick={(e) => { const w = window as any; closeReviewModal() }} title="Close">
+          <X size={16} />
+        </button>
       </div>
 
       <input type="hidden" id="reviewAnimeId" value="" />
@@ -597,23 +640,46 @@ export default function AnimeView({
         </div>
 
         <div className="form-group" style={css("margin-top: 12px;")}>
-          <label htmlFor="reviewContent">// REVIEW THOUGHTS & LOG ENTRY</label>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <label htmlFor="reviewContent">// REVIEW THOUGHTS & LOG ENTRY</label>
+            <label htmlFor="reviewImageInput" className="review-attach-btn" title="Attach screenshots or images">
+              <Paperclip size={13} />
+              <span>ATTACH IMAGE</span>
+            </label>
+          </div>
+          <input
+            type="file"
+            id="reviewImageInput"
+            accept="image/*"
+            multiple
+            style={{ display: 'none' }}
+            onChange={(e) => { const w = window as any; w.handleReviewImagesSelected?.(e); }}
+          />
           <textarea
             id="reviewContent"
             rows="5"
             placeholder="Write your impressions, thoughts on animation, music, directing, pacing, or arc climax..."
           ></textarea>
+
+          {/* Staged review images tray */}
+          <div id="reviewImagePreviews" className="review-image-previews" style={{ display: 'none' }}></div>
         </div>
 
         <div className="review-checkboxes-row">
           <label className="cyber-checkbox-label">
             <input type="checkbox" id="reviewHasSpoilers" />
-            <span>⚠️ Contains Spoilers (protect with click-to-reveal)</span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <AlertTriangle size={13} className="checkbox-icon warning" />
+              <span>Contains Spoilers (protect with click-to-reveal)</span>
+            </span>
           </label>
 
           <label className="cyber-checkbox-label">
-            <input type="checkbox" id="reviewShareToFeed" checked />
-            <span>📡 Broadcast review to main blog feed (index)</span>
+            <input type="checkbox" id="reviewShareToFeed" defaultChecked />
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <Radio size={13} className="checkbox-icon broadcast" />
+              <span>Broadcast review to main blog feed (index)</span>
+            </span>
           </label>
         </div>
 
@@ -634,7 +700,9 @@ export default function AnimeView({
         <div className="modal-title">
           <span className="hl">UPDATE PROGRESS</span> // <span id="editModalAnimeTitle">Anime</span>
         </div>
-        <button className="modal-close-btn" onClick={(e) => { const w = window as any; closeEditModal() }}>×</button>
+        <button className="modal-close-btn" onClick={(e) => { const w = window as any; closeEditModal() }} title="Close">
+          <X size={16} />
+        </button>
       </div>
 
       <input type="hidden" id="editAnimeId" value="" />

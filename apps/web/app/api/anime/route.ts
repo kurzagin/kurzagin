@@ -263,6 +263,8 @@ export async function PATCH(request: NextRequest) {
       currentEp = totalEps;
     } else if (totalEps && currentEp >= totalEps && newStatus === 'watching') {
       newStatus = 'completed';
+    } else if (newStatus === 'planning' && currentEp > 0 && body.status === undefined) {
+      newStatus = 'watching';
     }
 
     const updateFields: Record<string, any> = {
