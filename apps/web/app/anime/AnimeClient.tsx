@@ -505,19 +505,34 @@ export default function AnimeClient() {
       renderReviewImagePreviews();
     }
 
+    let activeReviewTotalEp = null;
+
     // MODAL 2: ADD REVIEW / EPISODIC LOG
     function openReviewModal(animeId, title, currentEp, totalEp) {
-      activeReviewTotalEp = totalEp;
-      stagedReviewImages = [];
-      renderReviewImagePreviews();
-      document.getElementById('reviewAnimeId').value = animeId;
-      document.getElementById('reviewModalAnimeTitle').textContent = title;
-      document.getElementById('reviewEpisode').value = currentEp || '';
-      document.getElementById('reviewType').value = 'mid_watch';
-      document.getElementById('reviewContent').value = '';
-      document.getElementById('reviewRating').value = '';
-      document.getElementById('reviewModal').style.display = 'flex';
-      document.getElementById('reviewContent').focus();
+      try {
+        activeReviewTotalEp = totalEp;
+        stagedReviewImages = [];
+        renderReviewImagePreviews();
+        const modal = document.getElementById('reviewModal');
+        if (modal) modal.style.display = 'flex';
+        const idEl = document.getElementById('reviewAnimeId');
+        if (idEl) idEl.value = animeId;
+        const titleEl = document.getElementById('reviewModalAnimeTitle');
+        if (titleEl) titleEl.textContent = title;
+        const epEl = document.getElementById('reviewEpisode');
+        if (epEl) epEl.value = currentEp || '';
+        const typeEl = document.getElementById('reviewType');
+        if (typeEl) typeEl.value = 'mid_watch';
+        const contentEl = document.getElementById('reviewContent');
+        if (contentEl) {
+          contentEl.value = '';
+          contentEl.focus();
+        }
+        const ratingEl = document.getElementById('reviewRating');
+        if (ratingEl) ratingEl.value = '';
+      } catch (err) {
+        console.error('Failed to open review modal:', err);
+      }
     }
 
     function handleReviewTypeChange() {
