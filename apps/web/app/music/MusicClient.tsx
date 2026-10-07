@@ -35,6 +35,7 @@ export default function MusicClient({
     let selectedCoverFile = null;
     let detectedDurationSec = 0;
     let detectedDurationStr = '0:00';
+    let isPressing = false;
 
     function formatTime(seconds) {
       if (!seconds || isNaN(seconds)) return '0:00';
@@ -334,6 +335,8 @@ export default function MusicClient({
 
     // OPERATOR CONSOLE: SUBMISSION WORKFLOW
     async function pressVinylRecord() {
+      if (isPressing) return;
+
       const title = (document.getElementById('crateTitle')?.value || '').trim();
       const artist = (document.getElementById('crateArtist')?.value || '').trim();
       const album = (document.getElementById('crateAlbum')?.value || '').trim();
@@ -355,6 +358,7 @@ export default function MusicClient({
         return;
       }
 
+      isPressing = true;
       let currentStep = 'Initializing assets';
       try {
         if (btn) {
@@ -510,6 +514,7 @@ export default function MusicClient({
           statusEl.innerHTML = `<span style="color: #ff6b6b; font-weight: 500;">[!] ERROR during [${currentStep}]: ${err.message || 'Operation failed'}${extraHint}</span>`;
         }
         setUploadProgress(null);
+        isPressing = false;
         if (btn) {
           btn.disabled = false;
           btn.textContent = 'PRESS VINYL →';
@@ -584,14 +589,6 @@ export default function MusicClient({
       ['crateTitle', 'crateArtist', 'crateAlbum'].forEach((id) => {
         document.getElementById(id)?.addEventListener('input', updatePreviewCard);
       });
-
-      const pressBtn = document.getElementById('pressVinylBtn');
-      if (pressBtn) {
-        pressBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          pressVinylRecord();
-        });
-      }
     }
 
     // Expose methods globally for inline triggers and external access
@@ -721,7 +718,17 @@ export default function MusicClient({
         <div className="crate-status-log" id="crateStatus"></div>
 
         <div className="crate-footer">
-          <button className="post-btn" id="pressVinylBtn" onClick={(e) => { const w = window as any; pressVinylRecord() }}>
+          <button
+            className="post-btn"
+            id="pressVinylBtn"
+            onClick={(e) => {
+              e.preventDefault();
+              const w = window as any;
+              if (typeof w.pressVinylRecord === 'function') {
+                w.pressVinylRecord();
+              }
+            }}
+          >
             PRESS VINYL →
           </button>
         </div>
@@ -800,9 +807,15 @@ export default function MusicClient({
         <div className="playlist reveal" id="playlistContainer">
           {tracks.map((t, idx) => (
             <div
+              key={t.id || idx}
               className={`pl-item ${idx === 0 ? 'active' : ''}`}
               id={`pl-item-${idx}`}
-              onclick={`selectTrack(${idx})`}
+              onClick={() => {
+                const w = window as any;
+                if (typeof w.selectTrack === 'function') {
+                  w.selectTrack(idx);
+                }
+              }}
             >
               <span className="num">{String(idx + 1).padStart(2, '0')}</span>
               <span className="name">
@@ -812,8 +825,15 @@ export default function MusicClient({
                 <span className="dur">{t.duration || '0:00'}</span>
                 {authenticated && (
                   <button
+                    type="button"
                     className="track-del-btn"
-                    onclick={`event.stopPropagation(); deleteTrackRecord('${t.id}', '${encodeURIComponent(t.title)}')`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      const w = window as any;
+                      if (typeof w.deleteTrackRecord === 'function') {
+                        w.deleteTrackRecord(t.id, encodeURIComponent(t.title));
+                      }
+                    }}
                     title="Remove record from crate"
                     style={css("display: inline-flex; align-items: center; justify-content: center;")}
                   >
