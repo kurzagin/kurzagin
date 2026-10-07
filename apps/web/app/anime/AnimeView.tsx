@@ -313,30 +313,34 @@ export default function AnimeView({
                 {authenticated && (
                   <div className="anime-operator-row">
                     <button
+                      type="button"
                       className="quick-ep-btn"
                       title="Increment episode +1"
-                      onclick={`incrementEpisode('${item.id}', ${item.current_episode}, ${item.total_episodes || 'null'})`}
+                      onClick={() => { const w = window as any; w.incrementEpisode?.(item.id, item.current_episode, item.total_episodes || null); }}
                     >
                       +1 EP
                     </button>
                     <button
+                      type="button"
                       className="quick-review-btn"
                       title="Post episode review / log"
-                      onclick={`openReviewModal('${item.id}', '${item.title.replace(/'/g, "\\'")}', ${item.current_episode}, ${item.total_episodes || 'null'})`}
+                      onClick={() => { const w = window as any; w.openReviewModal?.(item.id, item.title, item.current_episode, item.total_episodes || null); }}
                     >
                       <MessageSquare size={13} /> // LOG REVIEW
                     </button>
                     <button
+                      type="button"
                       className="quick-edit-btn"
                       title="Edit progress & status"
-                      onclick={`openEditModal('${item.id}', '${item.title.replace(/'/g, "\\'")}', ${item.current_episode}, ${item.total_episodes || "null"}, '${item.status}', ${item.score || "null"})`}
+                      onClick={() => { const w = window as any; w.openEditModal?.(item.id, item.title, item.current_episode, item.total_episodes || null, item.status, item.score || null); }}
                     >
                       <Edit3 size={13} />
                     </button>
                     <button
+                      type="button"
                       className="quick-delete-btn"
                       title="Remove from watchlist"
-                      onclick={`deleteAnime('${item.id}', '${item.title.replace(/'/g, "\\'")}')`}
+                      onClick={() => { const w = window as any; w.deleteAnime?.(item.id, item.title); }}
                     >
                       <Trash2 size={13} />
                     </button>
@@ -370,8 +374,9 @@ export default function AnimeView({
 
                     {item.reviews.length > 1 && (
                       <button
+                        type="button"
                         className="toggle-all-reviews-btn"
-                        onclick={`toggleReviewsDrawer('${item.id}')`}
+                        onClick={() => { const w = window as any; w.toggleReviewsDrawer?.(item.id); }}
                       >
                         // view all {item.reviews.length} logs &darr;
                       </button>
@@ -450,7 +455,7 @@ export default function AnimeView({
                     type="button"
                     className={`pagination-page ${Number(item) === safePage ? 'active' : ''}`}
                     aria-current={Number(item) === safePage ? 'page' : undefined}
-                    onclick={`goToAnimePage(${item})`}
+                    onClick={() => { const w = window as any; w.goToAnimePage?.(Number(item)); }}
                   >
                     {item}
                   </button>
