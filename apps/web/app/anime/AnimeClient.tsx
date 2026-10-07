@@ -250,13 +250,21 @@ export default function AnimeClient() {
     }
   
     // OPERATOR ACTIONS
-    async function incrementEpisode(id, currentEp, totalEp) {
+    async function incrementEpisode(id, currentEp, totalEp, currentStatus) {
       const nextEp = (currentEp || 0) + 1;
       if (totalEp && nextEp > totalEp) {
         alert(`Already reached total episodes (${totalEp})!`);
         return;
       }
-  
+
+      let newStatus = undefined;
+      if (currentStatus === 'planning') {
+        newStatus = 'watching';
+      }
+      if (totalEp && nextEp >= totalEp) {
+        newStatus = 'completed';
+      }
+
       try {
         const res = await fetch('/api/anime', {
           method: 'PATCH',
@@ -264,7 +272,7 @@ export default function AnimeClient() {
           body: JSON.stringify({
             id,
             current_episode: nextEp,
-            status: totalEp && nextEp >= totalEp ? 'completed' : undefined,
+            status: newStatus,
           }),
         });
         const data = await res.json();
@@ -458,11 +466,50 @@ export default function AnimeClient() {
       }
     }
   
-    let activeReviewTotalEp = null;
-  
+    let stagedReviewImages = [];
+
+    function renderReviewImagePreviews() {
+      const container = document.getElementById('reviewImagePreviews');
+      if (!container) return;
+      container.innerHTML = '';
+      if (stagedReviewImages.length === 0) {
+        container.style.display = 'none';
+        return;
+      }
+      container.style.display = 'flex';
+
+      stagedReviewImages.forEach((file, idx) => {
+        const item = document.createElement('div');
+        item.className = 'review-preview-thumb';
+        const objUrl = URL.createObjectURL(file);
+        item.innerHTML = `
+          <img src="${objUrl}" alt="${file.name}" />
+          <button type="button" class="review-preview-remove" onclick="window.removeReviewImage?.(${idx})" title="Remove image">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function handleReviewImagesSelected(e) {
+      const files = Array.from(e.target.files || []);
+      if (!files.length) return;
+      stagedReviewImages = stagedReviewImages.concat(files);
+      renderReviewImagePreviews();
+      e.target.value = '';
+    }
+
+    function removeReviewImage(idx) {
+      stagedReviewImages.splice(idx, 1);
+      renderReviewImagePreviews();
+    }
+
     // MODAL 2: ADD REVIEW / EPISODIC LOG
     function openReviewModal(animeId, title, currentEp, totalEp) {
       activeReviewTotalEp = totalEp;
+      stagedReviewImages = [];
+      renderReviewImagePreviews();
       document.getElementById('reviewAnimeId').value = animeId;
       document.getElementById('reviewModalAnimeTitle').textContent = title;
       document.getElementById('reviewEpisode').value = currentEp || '';
@@ -472,37 +519,73 @@ export default function AnimeClient() {
       document.getElementById('reviewModal').style.display = 'flex';
       document.getElementById('reviewContent').focus();
     }
-  
+
     function handleReviewTypeChange() {
       const type = document.getElementById('reviewType').value;
       if (type === 'final' && activeReviewTotalEp) {
         document.getElementById('reviewEpisode').value = activeReviewTotalEp;
       }
     }
-  
+
     function closeReviewModal() {
+      stagedReviewImages = [];
+      renderReviewImagePreviews();
       document.getElementById('reviewModal').style.display = 'none';
     }
-  
+
     async function submitReview() {
       const animeId = document.getElementById('reviewAnimeId').value;
-      const content = document.getElementById('reviewContent').value.trim();
+      let content = document.getElementById('reviewContent').value.trim();
       const episode = document.getElementById('reviewEpisode').value;
       const reviewType = document.getElementById('reviewType').value;
       const rating = document.getElementById('reviewRating').value;
       const hasSpoilers = document.getElementById('reviewHasSpoilers').checked;
       const shareToFeed = document.getElementById('reviewShareToFeed').checked;
-  
-      if (!content) {
-        alert('Please enter your review or log thoughts.');
+
+      if (!content && stagedReviewImages.length === 0) {
+        alert('Please enter your review thoughts or attach an image.');
         return;
       }
-  
+
       const btn = document.getElementById('submitReviewBtn');
       btn.disabled = true;
-      btn.textContent = 'PUBLISHING...';
-  
+      btn.textContent = stagedReviewImages.length > 0 ? 'CONVERTING TO AVIF...' : 'PUBLISHING...';
+
       try {
+        let uploadedMedia = [];
+
+        if (stagedReviewImages.length > 0) {
+          for (let i = 0; i < stagedReviewImages.length; i++) {
+            const file = stagedReviewImages[i];
+            btn.textContent = `UPLOADING (${i + 1}/${stagedReviewImages.length})...`;
+            const fd = new FormData();
+            fd.append('image', file, file.name);
+
+            const mediaRes = await fetch('/api/media/upload-post-image', {
+              method: 'POST',
+              body: fd,
+            });
+
+            const mediaData = await mediaRes.json().catch(() => null);
+            if (!mediaRes.ok || !mediaData || !mediaData.success) {
+              const errMsg = mediaData?.error || `Upload failed with status ${mediaRes.status}`;
+              throw new Error(errMsg);
+            }
+
+            uploadedMedia.push({
+              url: mediaData.url,
+              width: mediaData.width,
+              height: mediaData.height,
+            });
+          }
+
+          // Append markdown images to review content if not already in content
+          const imgMarkdown = uploadedMedia.map(m => `![attachment](${m.url})`).join('\n\n');
+          content = content ? `${content}\n\n${imgMarkdown}` : imgMarkdown;
+        }
+
+        btn.textContent = 'PUBLISHING REVIEW...';
+
         const res = await fetch('/api/anime/reviews', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -514,12 +597,13 @@ export default function AnimeClient() {
             content,
             has_spoilers: hasSpoilers,
             share_to_feed: shareToFeed,
+            media: uploadedMedia,
           }),
         });
-  
+
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Failed to publish review');
-  
+
         window.location.reload();
       } catch (err) {
         alert(err.message);
@@ -610,6 +694,7 @@ export default function AnimeClient() {
       handleAniListSearchDebounced, searchAniListDirect, clearSelectedAnime,
       submitAddAnime, handleStagingStatusChange, handleStagingEpChange,
       openReviewModal, handleReviewTypeChange, closeReviewModal, submitReview,
+      handleReviewImagesSelected, removeReviewImage,
       openEditModal, handleEditStatusChange, handleEditEpChange, closeEditModal,
       submitEditProgress,
     };
