@@ -1,5 +1,3 @@
-'use client';
-
 import { desc } from 'drizzle-orm';
 import { getDb, getProfile, tracks as tracksTable } from '@/lib/db';
 import SidebarInteractive from './SidebarInteractive';

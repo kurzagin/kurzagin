@@ -110,7 +110,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
         <RouteEvents />
         <script dangerouslySetInnerHTML={{ __html: SW_REGISTER }} />
-        <Script src="/main.js?v=2.0.6" strategy="afterInteractive" />
+        <Script src="/main.js?v=2.0.7" strategy="afterInteractive" />
       </body>
     </html>
   );

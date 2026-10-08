@@ -497,16 +497,20 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
       const sheetProgressEls = document.querySelectorAll('#sheetProgress, .mobile-sheet-progress-fill');
       const currentTimeEls = document.querySelectorAll('#currentTime');
       const sheetCurrentTimeEls = document.querySelectorAll('#sheetCurrentTime');
+      const sidebarProgress = document.getElementById('sidebarProgress');
+      const sidebarCurrentTime = document.getElementById('sidebarCurrentTime');
 
       const dur = getDuration();
       if (dur > 0) {
         const pct = Math.max(0, Math.min(100, (engine.audio.currentTime / dur) * 100));
         progressEls.forEach(el => { el.style.width = `${pct}%`; });
         sheetProgressEls.forEach(el => { el.style.width = `${pct}%`; });
+        if (sidebarProgress) sidebarProgress.style.width = `${pct}%`;
       }
       const formatted = formatTime(engine.audio.currentTime);
       currentTimeEls.forEach(el => { el.textContent = formatted; });
       sheetCurrentTimeEls.forEach(el => { el.textContent = formatted; });
+      if (sidebarCurrentTime) sidebarCurrentTime.textContent = formatted;
     }
 
     function onEnded() {
@@ -517,6 +521,7 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
       if (!engine.audio) return;
       const totalTimeEl = document.getElementById('totalTime');
       const sheetTotalTime = document.getElementById('sheetTotalTime');
+      const sidebarTotalTime = document.getElementById('sidebarTotalTime');
       const dur = getDuration();
       const formatted = formatTime(dur);
       if (totalTimeEl && (!engine.tracks[engine.currentIdx]?.duration || engine.tracks[engine.currentIdx]?.duration === '0:00')) {
@@ -524,6 +529,9 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
       }
       if (sheetTotalTime && (!engine.tracks[engine.currentIdx]?.duration || engine.tracks[engine.currentIdx]?.duration === '0:00')) {
         sheetTotalTime.textContent = formatted;
+      }
+      if (sidebarTotalTime && (!engine.tracks[engine.currentIdx]?.duration || engine.tracks[engine.currentIdx]?.duration === '0:00')) {
+        sidebarTotalTime.textContent = formatted;
       }
     }
 
@@ -648,18 +656,18 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
         }
         const target = e.target || e.srcElement;
         if (target && typeof target.closest === 'function') {
-          const match = target.closest('.progress-track, .mobile-sheet-progress-bar');
+          const match = target.closest('.progress-track, .mobile-sheet-progress-bar, .sidebar-mini-progress');
           if (match) return match;
         }
         if (e.currentTarget && e.currentTarget.nodeType === 1 && typeof e.currentTarget.getBoundingClientRect === 'function') {
-          const match = (typeof e.currentTarget.closest === 'function' ? e.currentTarget.closest('.progress-track, .mobile-sheet-progress-bar') : null) || e.currentTarget;
+          const match = (typeof e.currentTarget.closest === 'function' ? e.currentTarget.closest('.progress-track, .mobile-sheet-progress-bar, .sidebar-mini-progress') : null) || e.currentTarget;
           if (match) return match;
         }
       }
       if (activeScrubBar && typeof activeScrubBar.getBoundingClientRect === 'function') {
         return activeScrubBar;
       }
-      return document.getElementById('progressBar') || document.getElementById('sheetProgressBar') || null;
+      return document.getElementById('progressBar') || document.getElementById('sheetProgressBar') || document.getElementById('sidebarProgressBar') || null;
     }
 
     function getDuration() {
@@ -716,13 +724,17 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
       const sheetProgressEls = document.querySelectorAll('#sheetProgress, .mobile-sheet-progress-fill');
       const currentTimeEls = document.querySelectorAll('#currentTime');
       const sheetCurrentTimeEls = document.querySelectorAll('#sheetCurrentTime');
+      const sidebarProgress = document.getElementById('sidebarProgress');
+      const sidebarCurrentTime = document.getElementById('sidebarCurrentTime');
 
       progressEls.forEach(el => { el.style.width = `${pct}%`; });
       sheetProgressEls.forEach(el => { el.style.width = `${pct}%`; });
+      if (sidebarProgress) sidebarProgress.style.width = `${pct}%`;
 
       const formatted = formatTime(previewTime);
       currentTimeEls.forEach(el => { el.textContent = formatted; });
       sheetCurrentTimeEls.forEach(el => { el.textContent = formatted; });
+      if (sidebarCurrentTime) sidebarCurrentTime.textContent = formatted;
     }
 
     function applySeek(ratio) {
@@ -843,6 +855,10 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
       const sheetBtn = document.getElementById('sheetPlayBtn');
       const sheetStatus = document.getElementById('sheetStatusText');
       const sheetPulse = document.getElementById('sheetPlayingPulse');
+      const sidebarV = document.getElementById('sidebarVinyl');
+      const sidebarBtn = document.getElementById('sidebarPlayBtn');
+      const sidebarStatus = document.getElementById('sidebarStatusText');
+      const sidebarPulse = document.getElementById('sidebarPlayingPulse');
       const eq = document.getElementById('mobileNavEqualizer');
       const moreBtn = document.getElementById('mobileNavMoreBtn');
 
@@ -861,6 +877,15 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
       if (sheetPulse) {
         sheetPulse.classList.toggle('active', playing);
       }
+      if (sidebarV) sidebarV.classList.toggle('playing', playing);
+      if (sidebarBtn) {
+        sidebarBtn.innerHTML = playing
+          ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>'
+          : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>';
+        sidebarBtn.classList.toggle('active', playing);
+      }
+      if (sidebarStatus) sidebarStatus.textContent = playing ? 'NOW PLAYING' : 'DECK STANDBY';
+      if (sidebarPulse) sidebarPulse.classList.toggle('active', playing);
       if (eq) {
         eq.classList.toggle('active', playing);
       }
@@ -934,12 +959,20 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
       const sheetTotalTime = document.getElementById('sheetTotalTime');
       const sheetCoverImg = document.getElementById('sheetVinylCoverImg');
       const sheetFallback = document.getElementById('sheetVinylFallback');
+      const sidebarTitle = document.getElementById('sidebarTrackTitle');
+      const sidebarArtist = document.getElementById('sidebarTrackArtist');
+      const sidebarTotal = document.getElementById('sidebarTotalTime');
+      const sidebarCover = document.getElementById('sidebarVinylCover');
+      const sidebarFallback = document.getElementById('sidebarVinylFallback');
 
       if (sheetTitle) sheetTitle.textContent = track.title;
       if (sheetArtist) {
         sheetArtist.textContent = track.artist + (track.album ? ` — [${track.album}]` : '');
       }
       if (sheetTotalTime) sheetTotalTime.textContent = track.duration || (engine.audio?.duration ? formatTime(engine.audio.duration) : '0:00');
+      if (sidebarTitle) sidebarTitle.textContent = track.title;
+      if (sidebarArtist) sidebarArtist.textContent = track.artist + (track.album ? ` — [${track.album}]` : '');
+      if (sidebarTotal) sidebarTotal.textContent = track.duration || (engine.audio?.duration ? formatTime(engine.audio.duration) : '0:00');
 
       if (track.cover_url) {
         if (sheetCoverImg) {
@@ -947,9 +980,13 @@ document.addEventListener('app:page-load', syncLikedPostsFromStorage);
           sheetCoverImg.style.display = 'block';
         }
         if (sheetFallback) sheetFallback.style.display = 'none';
+        if (sidebarCover) { sidebarCover.src = track.cover_url; sidebarCover.style.display = 'block'; }
+        if (sidebarFallback) sidebarFallback.style.display = 'none';
       } else {
         if (sheetCoverImg) sheetCoverImg.style.display = 'none';
         if (sheetFallback) sheetFallback.style.display = 'block';
+        if (sidebarCover) sidebarCover.style.display = 'none';
+        if (sidebarFallback) sidebarFallback.style.display = 'block';
       }
 
       // Highlight active playlist item on /music
@@ -1156,6 +1193,3 @@ if (document.readyState === 'loading') {
   syncPwaUI();
 }
 document.addEventListener('app:page-load', syncPwaUI);
-
-
-
