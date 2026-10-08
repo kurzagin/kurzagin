@@ -1,5 +1,6 @@
 import { neon } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-http';
+import { sql } from 'drizzle-orm';
 import * as schema from '../db/schema';
 
 export * from '../db/schema';
@@ -16,6 +17,27 @@ export type DbAnimeReview = schema.AnimeReview;
 export type AnimePostMeta = schema.AnimePostMeta;
 export type DbGalleryItem = schema.GalleryItem;
 export type DbMediaAsset = schema.MediaAsset;
+
+export async function incrementSiteVisits(): Promise<number> {
+  const db = getDb();
+  if (!db) return 0;
+
+  try {
+    const result = await db
+      .insert(schema.siteStats)
+      .values({ id: 1, total_visits: 1 })
+      .onConflictDoUpdate({
+        target: schema.siteStats.id,
+        set: { total_visits: sql`${schema.siteStats.total_visits} + 1` },
+      })
+      .returning({ total_visits: schema.siteStats.total_visits });
+
+    return result[0]?.total_visits ?? 0;
+  } catch (err) {
+    console.warn('[db] Unable to increment site visits:', err);
+    return 0;
+  }
+}
 
 export type DrizzleDb = ReturnType<typeof drizzle<typeof schema>>;
 
@@ -111,4 +133,3 @@ export async function getProfile(): Promise<DbProfile> {
   }
   return DEFAULT_PROFILE;
 }
-

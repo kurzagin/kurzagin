@@ -1909,6 +1909,59 @@ footer {
   letter-spacing: 4px;
 }
 
+.retro-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px 7px;
+  border: 1px solid rgba(0, 238, 255, 0.65);
+  background: #05090d;
+  box-shadow: 0 0 10px rgba(0, 238, 255, 0.18), inset 0 0 12px rgba(0, 238, 255, 0.08);
+  color: #00eeff;
+  font-family: var(--mono);
+  line-height: 1;
+}
+
+.retro-counter-label,
+.retro-counter-since {
+  font-size: 0.48rem;
+  letter-spacing: 1px;
+  text-shadow: 0 0 5px currentColor;
+}
+
+.retro-counter-number {
+  min-width: 6ch;
+  padding: 5px 6px 4px;
+  color: #ff4de1;
+  background: #100713;
+  border: 1px solid rgba(255, 77, 225, 0.45);
+  font-family: 'Courier New', var(--mono), monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-align: center;
+  text-shadow: 0 0 5px #ff4de1, 0 0 12px rgba(255, 77, 225, 0.75);
+}
+
+.retro-counter-since {
+  color: #8ba7ad;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 560px) {
+  footer {
+    padding: 28px 20px;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .retro-counter {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 .music-more-link {
   font-family: var(--mono);
   font-size: 0.72rem;

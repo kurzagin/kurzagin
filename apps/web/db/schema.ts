@@ -8,6 +8,15 @@ export const adminUsers = pgTable('admin_users', {
   created_at: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
 });
 
+// 1b. Global retro-style page hit counter
+export const siteStats = pgTable('site_stats', {
+  id: integer('id').primaryKey().default(1),
+  total_visits: integer('total_visits').notNull().default(0),
+});
+
+export type SiteStats = typeof siteStats.$inferSelect;
+export type NewSiteStats = typeof siteStats.$inferInsert;
+
 export interface AnimePostMeta {
   anilist_id?: number;
   anime_id?: string;
@@ -325,4 +334,3 @@ export const mediaAssets = pgTable(
 
 export type MediaAsset = typeof mediaAssets.$inferSelect;
 export type NewMediaAsset = typeof mediaAssets.$inferInsert;
-

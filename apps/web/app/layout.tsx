@@ -6,6 +6,7 @@ import Sidebar from '@/components/Sidebar';
 import Footer from '@/components/Footer';
 import MobileNav from '@/components/MobileNav';
 import RouteEvents from '@/components/RouteEvents';
+import { incrementSiteVisits } from '@/lib/db';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://kurzagin.com'),
@@ -86,7 +87,9 @@ if ('serviceWorker' in navigator) {
 }
 `;
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const visits = await incrementSiteVisits();
+
   return (
     <html lang="en">
       <body>
@@ -102,7 +105,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Sidebar />
         </div>
 
-        <Footer />
+        <Footer visits={visits} />
 
         <MobileNav />
 

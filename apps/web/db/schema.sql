@@ -11,6 +11,12 @@ CREATE TABLE IF NOT EXISTS admin_users (
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+-- Global retro-style page hit counter
+CREATE TABLE IF NOT EXISTS site_stats (
+  id INT PRIMARY KEY DEFAULT 1,
+  total_visits INT NOT NULL DEFAULT 0
+);
+
 -- 2. Posts Table (Personal microblog entries)
 CREATE TABLE IF NOT EXISTS posts (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
