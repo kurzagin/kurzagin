@@ -1,8 +1,8 @@
 'use client';
 
-import Link from 'next/link';
 import { desc } from 'drizzle-orm';
-import { getDb, tracks as tracksTable } from '@/lib/db';
+import { getDb, getProfile, tracks as tracksTable } from '@/lib/db';
+import SidebarInteractive from './SidebarInteractive';
 
 export default async function Sidebar({ visits = 0 }: { visits?: number }) {
   const displayVisits = String(visits).padStart(6, '0');
@@ -10,23 +10,10 @@ export default async function Sidebar({ visits = 0 }: { visits?: number }) {
   const firstTrack = db
     ? (await db.select().from(tracksTable).orderBy(desc(tracksTable.created_at)).limit(1).catch(() => []))[0]
     : null;
+  const profile = await getProfile();
   return (
     <aside className="sidebar">
-      <div className="sb-section anime-side-card">
-        <div className="sb-title">operator</div>
-        <strong className="anime-side-operator">kurzagin</strong>
-        <span className="anime-side-copy">operator dossier &amp; identity</span>
-        <Link href="/profile" className="anime-side-link">view dossier →</Link>
-        <Link href="/login" className="anime-side-link">operator access →</Link>
-      </div>
-
-      <div className="sb-section anime-side-card">
-        <div className="sb-title">audio deck // turntable</div>
-        <span className="anime-side-status">● DECK STANDBY</span>
-        <strong className="anime-side-operator">{firstTrack?.title || 'No tracks in crate'}</strong>
-        <span className="anime-side-copy">{firstTrack?.artist || 'Turntable silent'}</span>
-        <Link href="/music" className="anime-side-link">crate console →</Link>
-      </div>
+      <SidebarInteractive profile={profile} track={firstTrack || null} />
 
       <div className="sb-section retro-counter-side" aria-label={`${visits} total visits`}>
         <span className="retro-counter-label">VISITORS</span>
