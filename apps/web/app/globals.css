@@ -2024,6 +2024,12 @@ footer {
     grid-column: 1 / -1;
   }
 
+  .page:has(.hero) .hero {
+    left: -190px;
+    width: calc(100% + 190px);
+    padding-left: 226px;
+  }
+
   .page:has(.hero) #blog {
     grid-column: 1;
     grid-row: 3;
