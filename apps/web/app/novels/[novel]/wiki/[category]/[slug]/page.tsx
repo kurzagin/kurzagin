@@ -4,6 +4,7 @@ import { ArrowLeft, Shield, Calendar, Tag, AlertTriangle } from 'lucide-react';
 import { getLoreEntry } from '@/lib/lore';
 import { getNovelBySlug } from '@/lib/novels';
 import SpoilerGate from '@/components/novels/SpoilerGate';
+import CopyMarkdownButton from '@/components/novels/CopyMarkdownButton';
 
 interface Props {
   params: Promise<{ novel: string; category: string; slug: string }>;
@@ -25,7 +26,7 @@ export default async function NovelWikiDetailPage({ params }: Props) {
   return (
     <SpoilerGate novel={novel}>
       <div className="page-header">
-        <div style={{ marginBottom: '12px' }}>
+        <div className="novel-detail-actions">
           <Link
             href={`/novels/${novel}/wiki/${category}`}
             style={{
@@ -40,6 +41,7 @@ export default async function NovelWikiDetailPage({ params }: Props) {
           >
             <ArrowLeft size={12} /> back to {category} dossiers
           </Link>
+          <CopyMarkdownButton text={`# ${entry.title}\n\n${entry.rawContent.trim()}`} />
         </div>
         <h1>
           <span className="hl">{entry.title}</span>
