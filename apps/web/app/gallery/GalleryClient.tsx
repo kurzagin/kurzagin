@@ -75,16 +75,18 @@ export default function GalleryClient({
           board: {items.length} captures pinned
         </div>
         <div style={css("display: flex; gap: 6px; align-items: center; flex-wrap: wrap; justify-content: flex-end;")}>
-          <button
-            id="nsfwControlBtn"
-            className="feed-filter-btn"
-            style={css("cursor: pointer; padding: 4px 8px; font-size: 0.62rem; display: inline-flex; align-items: center; gap: 5px;")}
-            onClick={(e) => { const w = window as any; openNsfwModal() }}
-            title="Configure sensitive content & age verification filter"
-          >
-            <ShieldAlert size={12} style={{ color: '#ff6b81' }} />
-            <span id="nsfwControlText">NSFW: BLURRED</span>
-          </button>
+          {authenticated && (
+            <button
+              id="nsfwControlBtn"
+              className="feed-filter-btn"
+              style={css("cursor: pointer; padding: 4px 8px; font-size: 0.62rem; display: inline-flex; align-items: center; gap: 5px;")}
+              onClick={() => { openNsfwModal() }}
+              title="Configure operator-only sensitive content display"
+            >
+              <ShieldAlert size={12} style={{ color: '#ff6b81' }} />
+              <span id="nsfwControlText">NSFW: OPEN ALL</span>
+            </button>
+          )}
           {authenticated && (
             <button
               id="toggleUploadBtn"
@@ -641,8 +643,8 @@ export default function GalleryClient({
     </div>
   )}
 
-  {/* SELF-AGE VERIFICATION & CONTENT FILTER MODAL */}
-  <div id="nsfwModal" className="lightbox-overlay" onClick={(e) => { const w = window as any; w.handleNsfwModalBackdropClick?.(e); }}>
+  {/* OPERATOR-ONLY CONTENT FILTER MODAL */}
+  {authenticated && <div id="nsfwModal" className="lightbox-overlay" onClick={(e) => { const w = window as any; w.handleNsfwModalBackdropClick?.(e); }}>
     <div className="bracket-card reveal" style={css("max-width: 480px; width: 92vw; padding: 28px; position: relative; background: var(--bg-1); border: 1px solid var(--border);")}>
       <div style={css("display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;")}>
         <div style={css("font-family: var(--mono); font-size: 0.68rem; color: #ff6b81; letter-spacing: 1px; display: flex; align-items: center; gap: 6px;")}>
@@ -689,7 +691,7 @@ export default function GalleryClient({
         <a href="/settings" style={css("color: var(--accent); text-decoration: none;")}>SETTINGS PAGE →</a>
       </div>
     </div>
-  </div>
+  </div>}
 
 
     </>

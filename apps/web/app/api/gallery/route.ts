@@ -19,17 +19,21 @@ export async function GET(request: NextRequest) {
     const url = new URL(request.url);
     const tag = url.searchParams.get('tag')?.trim().toLowerCase();
 
+    const cookies = await nextCookies();
+    const authenticated = await isAuthenticated(cookies, request);
     const items = await db
       .select()
       .from(galleryItems)
       .orderBy(desc(galleryItems.created_at))
       .limit(100);
 
+    const visibleItems = authenticated ? items : items.filter((item) => !item.is_nsfw);
+
     const filtered = tag
-      ? items.filter((item) =>
+      ? visibleItems.filter((item) =>
           Array.isArray(item.tags) && item.tags.some((t) => t.toLowerCase() === tag)
         )
-      : items;
+      : visibleItems;
 
     return new Response(JSON.stringify({ items: filtered }), {
       status: 200,
@@ -293,4 +297,3 @@ export async function PATCH(request: NextRequest) {
     });
   }
 }
-

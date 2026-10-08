@@ -47,8 +47,9 @@ export default function SettingsClient({
 
   useEffect(() => {
 
-    // ---- NSFW & Age verification preference ----
+    // ---- Operator-only NSFW preference ----
     (function initNsfwSettings() {
+      if (!isOperator) return;
       const prefBlur = document.getElementById('prefBlur');
       const prefShow = document.getElementById('prefShow');
       const badge = document.getElementById('nsfwStatusBadge');
@@ -56,8 +57,7 @@ export default function SettingsClient({
 
       if (!prefBlur || !prefShow) return;
 
-      // Operator defaults to 'show' (open all); visitor defaults to 'blur'
-      const defaultMode = isOperator ? 'show' : 'blur';
+      const defaultMode = 'show';
       const current = localStorage.getItem('kurzagin_nsfw_mode') || defaultMode;
 
       if (current === 'show') {
@@ -88,7 +88,7 @@ export default function SettingsClient({
             statusText.style.color = '#7bc67a';
             statusText.textContent = isOperator 
               ? '✓ Preference saved: All captures will display unblurred.'
-              : '✓ Preference saved: 18+ verified. NSFW captures will display unblurred in gallery.';
+              : '';
           }
         } else {
           if (badge) {
@@ -275,12 +275,12 @@ export default function SettingsClient({
     <>
   <div className="page-header">
     <h1><span className="hl">preferences</span> & settings</h1>
-    <div className="page-sub"><span className="jp-label">設定</span> — {authenticated ? 'operator controls & content preferences' : 'content filter & operator login'}</div>
+    <div className="page-sub"><span className="jp-label">設定</span> — {authenticated ? 'operator controls & content preferences' : 'operator login'}</div>
   </div>
 
   <section className="section" style={css("max-width: 640px; margin: 0 auto; padding-top: 40px;")}>
-    {/* CONTENT FILTERING & PREFERENCES (ACCESSIBLE TO ALL) */}
-    <div className="bracket-card" style={css("padding: 28px; margin-bottom: 24px;")}>
+    {/* NSFW preferences are intentionally unavailable outside an operator session. */}
+    {authenticated && <div className="bracket-card" style={css("padding: 28px; margin-bottom: 24px;")}>
       <div style={css("display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;")}>
         <div style={css("font-family: var(--mono); font-size: 0.65rem; color: var(--accent); letter-spacing: 2px;")}>
           // CONTENT FILTERING • SENSITIVE MEDIA (18+)
@@ -329,7 +329,7 @@ export default function SettingsClient({
       <div id="nsfwSaveStatus" style={css("font-family: var(--mono); font-size: 0.68rem; margin-top: 12px; min-height: 18px; color: var(--text-3);")}>
         // preference stored locally in your browser
       </div>
-    </div>
+    </div>}
     {authenticated ? (
       <div className="bracket-card" style={css("padding: 32px;")}>
         <div className="bracket-card" style={css("padding: 20px; margin-bottom: 24px; background: var(--bg-0);")}>
