@@ -39,6 +39,7 @@ interface PostClientProps {
   profile: DbProfile;
   isPostLiked: boolean;
   authenticated?: boolean;
+  operatorName?: string;
 }
 
 export default function PostClient({
@@ -48,6 +49,7 @@ export default function PostClient({
   profile,
   isPostLiked,
   authenticated = false,
+  operatorName = '',
 }: PostClientProps) {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [comments, setComments] = useState(postComments);
@@ -89,7 +91,7 @@ export default function PostClient({
             <span className="comment-time">{formatPostTime(comment.created_at)}</span>
           </div>
           <div className="comment-body" style={css("font-size: 0.85rem; line-height: 1.6;")}>{comment.content}</div>
-          <button type="button" className="comment-reply-btn" onClick={() => setReplyingTo(comment)}>REPLY</button>
+          <button type="button" className="comment-reply-btn" onClick={() => { setReplyingTo(comment); setTimeout(() => document.getElementById('commentInput')?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 0); }}>REPLY</button>
         </div>
         {renderComments(comment.id, depth + 1)}
       </div>
@@ -218,10 +220,10 @@ export default function PostClient({
         <div style={css("display: flex; flex-direction: column; gap: 12px;")}>
           {/* Handle Input */}
           <div style={css("display: flex; align-items: center; gap: 8px;")}>
-            <label htmlFor="authorNameInput" style={css("font-family: var(--mono); font-size: 0.65rem; color: var(--text-3); text-transform: uppercase; letter-spacing: 1px; min-width: 70px;")}>
+            {!authenticated && <label htmlFor="authorNameInput" style={css("font-family: var(--mono); font-size: 0.65rem; color: var(--text-3); text-transform: uppercase; letter-spacing: 1px; min-width: 70px;")}>
               Your Name:
-            </label>
-            <input
+            </label>}
+            {!authenticated && <input
               type="text"
               id="authorNameInput"
               name="authorName"
@@ -229,7 +231,8 @@ export default function PostClient({
               placeholder="e.g. alice (leave empty for [guest])"
               maxlength="50"
               style={css("width: 100%; max-width: 280px;")}
-            />
+            />}
+            {authenticated && <span style={css("font-family: var(--mono); font-size: 0.65rem; color: var(--accent);")}>Operator: @{operatorName}</span>}
           </div>
 
           {/* Comment Textarea */}

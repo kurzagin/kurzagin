@@ -115,6 +115,7 @@ export default async function PostPage({
       profile={JSON.parse(JSON.stringify(profile))}
       isPostLiked={isPostLiked}
       authenticated={authenticated}
+      operatorName={session?.username || ''}
     />
   );
 }
