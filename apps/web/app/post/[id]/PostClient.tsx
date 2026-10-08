@@ -50,7 +50,50 @@ export default function PostClient({
   authenticated = false,
 }: PostClientProps) {
   const [isEditOpen, setIsEditOpen] = useState(false);
+  const [comments, setComments] = useState(postComments);
+  const [replyingTo, setReplyingTo] = useState(null);
   const { cleanedContent, videos: postYouTubeVideos } = processYouTubePost(post.content || '');
+
+  const submitReply = async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const content = form.content.value.trim();
+    const authorName = form.authorName.value.trim();
+    if (!content) return;
+    const button = form.querySelector('button[type="submit"]');
+    button.disabled = true;
+    try {
+      const response = await fetch('/api/comments', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ postId: post.id, parentCommentId: replyingTo?.id || null, content, authorName }),
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) throw new Error(data.error || 'Failed to submit reply');
+      setComments((current) => [...current, data.comment]);
+      form.content.value = '';
+      setReplyingTo(null);
+    } catch (error) {
+      alert(error.message || 'Network error while posting reply');
+    } finally {
+      button.disabled = false;
+    }
+  };
+
+  const renderComments = (parentId = null, depth = 0) => comments
+    .filter((comment) => (comment.parent_comment_id || null) === parentId)
+    .map((comment) => (
+      <div key={comment.id} className="comment-branch" style={css(`margin-left: ${Math.min(depth, 5) * 22}px;`)}>
+        <div className="comment-item bracket-card" style={css("padding: 14px 16px;")}>
+          <div className="comment-head" style={css("margin-bottom: 8px;")}>
+            <span className={`comment-author ${comment.author_name === 'guest' ? 'guest' : ''}`} style={css("font-size: 0.72rem;")}>{comment.author_name === 'guest' ? '[guest]' : `[@${comment.author_name}]`}</span>
+            <span className="comment-time">{formatPostTime(comment.created_at)}</span>
+          </div>
+          <div className="comment-body" style={css("font-size: 0.85rem; line-height: 1.6;")}>{comment.content}</div>
+          <button type="button" className="comment-reply-btn" onClick={() => setReplyingTo(comment)}>REPLY</button>
+        </div>
+        {renderComments(comment.id, depth + 1)}
+      </div>
+    ));
 
   return (
     <>
@@ -140,7 +183,7 @@ export default function PostClient({
           <span>{post.likes_count}</span>
         </button>
         <button className="post-act" onClick={() => { document.getElementById('commentInput')?.focus(); }} style={css("display: inline-flex; align-items: center; gap: 4px")}>
-          <MessageSquare size={13} /> <span>{postComments.length}</span>
+          <MessageSquare size={13} /> <span>{comments.length}</span>
         </button>
         {authenticated && (
           <button
@@ -164,11 +207,12 @@ export default function PostClient({
           // LEAVE A COMMENT
         </div>
         <div className="replying-to" style={css("font-family: var(--mono); font-size: 0.65rem; color: var(--text-3);")}>
-          Replying to <span style={css("color: var(--accent);")}>{post.author_handle}</span>
+          Replying to <span style={css("color: var(--accent);")}>{replyingTo ? `@${replyingTo.author_name}` : post.author_handle}</span>
+          {replyingTo && <button type="button" onClick={() => setReplyingTo(null)} style={css("margin-left: 8px; color: var(--text-3); background: none; border: 0; cursor: pointer;")}>cancel</button>}
         </div>
       </div>
 
-      <form className="comment-form" onSubmit={(e) => { void (window as any).submitComment(e.nativeEvent, post.id); }} style={css("background: transparent; border: none; padding: 0")}>
+      <form className="comment-form" onSubmit={submitReply} style={css("background: transparent; border: none; padding: 0")}>
         <input type="text" name="honeypot" style={css("display: none;")} tabindex="-1" autocomplete="off" />
 
         <div style={css("display: flex; flex-direction: column; gap: 12px;")}>
@@ -219,30 +263,18 @@ export default function PostClient({
     <section className="comments-thread-section">
       <div style={css("display: flex; align-items: center; gap: 10px; margin-bottom: 16px;")}>
         <h3 style={css("font-family: var(--mono); font-size: 0.85rem; color: var(--text-0); margin: 0; font-weight: 500; letter-spacing: 1px;")}>
-          REPLIES ({postComments.length})
+          REPLIES ({comments.length})
         </h3>
         <div style={css("flex: 1; height: 1px; background: var(--border-subtle);")}></div>
       </div>
 
       <div className="comments-list" id={`comments-list-${post.id}`} style={css("display: flex; flex-direction: column; gap: 12px;")}>
-        {postComments.length === 0 ? (
+        {comments.length === 0 ? (
           <div className="comments-empty-notice" style={css("font-family: var(--mono); font-size: 0.75rem; color: var(--text-3); padding: 24px; text-align: center; border: 1px dashed var(--border-subtle); border-radius: 2px;")}>
             // No replies yet. Be the first to leave a comment on this thread.
           </div>
         ) : (
-          postComments.map((c) => (
-            <div className="comment-item bracket-card" style={css("padding: 14px 16px;")}>
-              <div className="comment-head" style={css("margin-bottom: 8px;")}>
-                <span className={`comment-author ${c.author_name === 'guest' ? 'guest' : ''}`} style={css("font-size: 0.72rem;")}>
-                  {c.author_name === 'guest' ? '[guest]' : `[@${c.author_name}]`}
-                </span>
-                <span className="comment-time">{formatPostTime(c.created_at)}</span>
-              </div>
-              <div className="comment-body" style={css("font-size: 0.85rem; line-height: 1.6;")}>
-                {c.content}
-              </div>
-            </div>
-          ))
+          renderComments()
         )}
       </div>
     </section>

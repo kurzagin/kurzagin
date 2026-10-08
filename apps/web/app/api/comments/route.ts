@@ -1,10 +1,11 @@
 import type { NextRequest } from 'next/server';
 import { getDb, comments } from '@/lib/db';
+import { eq } from 'drizzle-orm';
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { postId, honeypot } = body;
+    const { postId, parentCommentId, honeypot } = body;
     const content = (body.content || '').trim();
     let authorName = (body.authorName || '').trim();
 
@@ -52,10 +53,25 @@ export async function POST(request: NextRequest) {
       });
     }
 
+    if (parentCommentId) {
+      const parent = await db
+        .select({ id: comments.id, post_id: comments.post_id })
+        .from(comments)
+        .where(eq(comments.id, parentCommentId))
+        .limit(1);
+      if (!parent[0] || parent[0].post_id !== postId) {
+        return new Response(JSON.stringify({ error: 'Reply target was not found' }), {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+    }
+
     const inserted = await db
       .insert(comments)
       .values({
         post_id: postId,
+        parent_comment_id: parentCommentId || null,
         author_name: authorName,
         content,
       })
