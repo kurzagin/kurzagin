@@ -2362,9 +2362,9 @@ footer {
     display: none !important;
   }
 
-  /* The homepage keeps mobile versions of these sections in the main column. */
-  .page:has(.hero) > .sidebar .sidebar-profile-card,
-  .page:has(.hero) > .sidebar .sidebar-player-card {
+  /* These cards are desktop-sidebar only. The homepage has mobile versions in its main column. */
+  .sidebar .sidebar-profile-card,
+  .sidebar .sidebar-player-card {
     display: none !important;
   }
 
