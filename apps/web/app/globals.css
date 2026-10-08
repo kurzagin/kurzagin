@@ -2014,6 +2014,26 @@ footer {
     grid-template-columns: minmax(0, 1fr) 300px;
   }
 
+  /* Home page: banner across the top, then feed + sidebar beneath it. */
+  .page:has(.hero) .main {
+    display: contents;
+  }
+
+  .page:has(.hero) .hero,
+  .page:has(.hero) .main > .divider {
+    grid-column: 1 / -1;
+  }
+
+  .page:has(.hero) #blog {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .page:has(.hero) > .sidebar {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
   footer {
     margin-left: 190px;
     margin-right: 300px;
