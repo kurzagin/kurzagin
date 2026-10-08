@@ -62,7 +62,11 @@ export default async function GalleryPage({
     }
   }
 
-  const items: RenderedGalleryItem[] = rawItems.map((r, i) => ({
+  // NSFW media is operator-only. Keep it out of the server-rendered payload
+  // entirely for visitors instead of relying on a client-side blur gate.
+  const visibleItems = authenticated ? rawItems : rawItems.filter((item) => !item.is_nsfw);
+
+  const items: RenderedGalleryItem[] = visibleItems.map((r, i) => ({
     ...r,
     rotation: rotations[i % rotations.length],
     hasTape: i % 2 === 0,
@@ -72,7 +76,7 @@ export default async function GalleryPage({
   // Collect unique tags
   const allTags = Array.from(
     new Set(
-      rawItems
+      visibleItems
         .flatMap((item) => (Array.isArray(item.tags) ? item.tags : []))
         .map((t) => String(t).trim().toLowerCase())
         .filter(Boolean)
