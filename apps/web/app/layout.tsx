@@ -98,9 +98,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <audio id="globalPersistentAudio" preload="metadata"></audio>
         </div>
 
-        <Nav />
-
         <div className="page">
+          <Nav />
           <div className="main">{children}</div>
           <Sidebar visits={visits} />
         </div>
