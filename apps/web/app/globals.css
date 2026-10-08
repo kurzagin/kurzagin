@@ -1962,7 +1962,7 @@ footer {
 /* ==============================
    OLD WEB / ANIME BLOG DESKTOP FRAME
    ============================== */
-@media (min-width: 1025px) {
+@media (min-width: 901px) {
   nav.top-nav {
     width: 190px;
     height: 100vh;
@@ -2220,7 +2220,7 @@ footer {
 /* ==============================
    RESPONSIVE
    ============================== */
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .page { grid-template-columns: 1fr; margin-left: 0; }
   footer { margin-left: 0; }
   .sidebar {
