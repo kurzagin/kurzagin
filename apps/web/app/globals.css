@@ -35,6 +35,11 @@
 
 html { scroll-behavior: smooth; }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   background: var(--bg-0);
   color: var(--text-0);
@@ -2066,6 +2071,30 @@ footer {
 }
 
 @media (max-width: 768px) {
+  .page,
+  .main,
+  .section,
+  .post {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .post-head {
+    align-items: flex-start;
+  }
+
+  .post-head > div:last-child {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    min-width: 0;
+  }
+
+  .composer textarea,
+  .composer input,
+  .composer select {
+    font-size: 16px;
+  }
+
   body {
     padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
   }
