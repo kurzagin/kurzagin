@@ -6,7 +6,7 @@ import Sidebar from '@/components/Sidebar';
 import Footer from '@/components/Footer';
 import MobileNav from '@/components/MobileNav';
 import RouteEvents from '@/components/RouteEvents';
-import { incrementSiteVisits } from '@/lib/db';
+import { incrementSiteVisits, getProfile } from '@/lib/db';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://kurzagin.com'),
@@ -89,10 +89,12 @@ if ('serviceWorker' in navigator) {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const visits = await incrementSiteVisits();
+  const profile = await getProfile();
+  const theme = profile.theme || 'default';
 
   return (
     <html lang="en">
-      <body>
+      <body data-theme={theme}>
         {/* PERSISTENT GLOBAL AUDIO HOST (root layout never unmounts on navigation) */}
         <div id="globalAudioHost" style={{ display: 'none' }}>
           <audio id="globalPersistentAudio" preload="metadata"></audio>

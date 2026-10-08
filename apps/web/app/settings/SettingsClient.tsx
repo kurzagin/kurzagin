@@ -22,6 +22,7 @@ export default function SettingsClient({
   isConfigured,
 }: SettingsClientProps) {
   const heroUrl = profile?.banner_url || '';
+  const currentTheme = profile?.theme || 'default';
   const isOperator = authenticated;
 
   const inputStyle = {
@@ -164,6 +165,31 @@ export default function SettingsClient({
       const saveBtn = document.getElementById('heroSave');
       const clearBtn = document.getElementById('heroClear');
       const logoutBtn = document.getElementById('logoutBtn');
+      const themeSelect = document.getElementById('themeSelect');
+      const themeSave = document.getElementById('themeSave');
+      const themeStatus = document.getElementById('themeStatus');
+      if (themeSelect && themeSave) {
+        themeSelect.value = currentTheme;
+        themeSave.addEventListener('click', async () => {
+          themeSave.disabled = true;
+          themeStatus.textContent = '// applying skin...';
+          try {
+            const res = await fetch('/api/profile', {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ ...profile, theme: themeSelect.value }),
+            });
+            if (!res.ok) throw new Error('failed to save skin');
+            themeStatus.style.color = '#7bc67a';
+            themeStatus.textContent = '// skin saved. reloading interface...';
+            window.location.reload();
+          } catch (err) {
+            themeStatus.style.color = '#e06c75';
+            themeStatus.textContent = '// error: ' + err.message;
+            themeSave.disabled = false;
+          }
+        });
+      }
       if (!urlInput) return;
 
       function say(msg, color) {
@@ -306,6 +332,18 @@ export default function SettingsClient({
     </div>
     {authenticated ? (
       <div className="bracket-card" style={css("padding: 32px;")}>
+        <div className="bracket-card" style={css("padding: 20px; margin-bottom: 24px; background: var(--bg-0);")}>
+          <div style={css("font-family: var(--mono); font-size: 0.65rem; color: var(--accent); letter-spacing: 2px; margin-bottom: 10px;")}>// SITE SKIN</div>
+          <p style={css("font-size: 0.78rem; color: var(--text-2); margin-bottom: 14px;")}>Change the atmosphere of the entire site. This control is only available to the operator.</p>
+          <div style={css("display: flex; gap: 8px; align-items: center; flex-wrap: wrap;")}>
+            <select id="themeSelect" defaultValue={currentTheme} style={inputStyle}>
+              <option value="default">default // kurzagin</option>
+              <option value="citlali">citlali // obsidian opalstar</option>
+            </select>
+            <button type="button" id="themeSave" className="post-btn">APPLY →</button>
+          </div>
+          <div id="themeStatus" style={css("font-family: var(--mono); font-size: 0.68rem; min-height: 18px; margin-top: 10px; color: var(--text-3);")}>// current skin: {currentTheme}</div>
+        </div>
         <div style={css("display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;")}>
           <div style={css("font-family: var(--mono); font-size: 0.65rem; color: var(--accent); letter-spacing: 2px;")}>// HERO IMAGE</div>
           <span style={css("font-family: var(--mono); font-size: 0.65rem; color: var(--text-3);")}>@{session?.username}</span>

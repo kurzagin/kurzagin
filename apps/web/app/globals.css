@@ -33,6 +33,40 @@
   --jp: 'Noto Sans JP', sans-serif;
 }
 
+/* Character skins. The default remains the site-wide baseline until selected by the operator. */
+[data-theme='citlali'] {
+  --bg-0: #090d1d;
+  --bg-1: #10172d;
+  --bg-2: #172343;
+  --bg-3: #21305a;
+  --border: #334879;
+  --border-subtle: #1d2b4c;
+  --text-0: #e9eaff;
+  --text-1: #b9c8ed;
+  --text-2: #8293c2;
+  --text-3: #52658f;
+  --accent: #f2a9c8;
+  --accent-dim: rgba(242,169,200,0.13);
+  --accent-hover: #ffd0e2;
+  --teal: #9bc9ed;
+  --teal-dim: rgba(155,201,237,0.12);
+  --warm: #c3a7d9;
+  --red-soft: #d77b9c;
+  --green-soft: #8cc5bd;
+  --sticky-1: #f6d5e2;
+  --sticky-2: #c9d9f3;
+  --sticky-3: #b8c9e7;
+  --sticky-4: #d9c8ed;
+}
+
+[data-theme='citlali'] body::before {
+  background-image: radial-gradient(circle, #334879 0.5px, transparent 0.5px);
+}
+
+[data-theme='citlali'] nav.top-nav {
+  background: rgba(9,13,29,0.92);
+}
+
 html { scroll-behavior: smooth; }
 
 html, body {
