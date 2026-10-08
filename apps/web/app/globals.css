@@ -1791,6 +1791,56 @@ nav.top-nav {
   justify-content: center;
 }
 
+.anime-side-card {
+  padding: 12px;
+  border: 1px solid var(--border-subtle);
+  background: linear-gradient(135deg, rgba(25, 15, 31, 0.8), rgba(10, 14, 20, 0.9));
+}
+
+.anime-side-card .sb-title {
+  margin-bottom: 10px;
+}
+
+.anime-side-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-family: var(--mono);
+  font-size: 0.61rem;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+
+.anime-side-entry strong {
+  color: var(--text-0);
+  font-size: 0.68rem;
+  font-weight: 500;
+}
+
+.anime-side-status {
+  color: #ff4de1;
+  font-size: 0.54rem;
+  letter-spacing: 1px;
+  text-shadow: 0 0 7px rgba(255, 77, 225, 0.75);
+}
+
+.anime-side-link {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  color: var(--accent);
+}
+
+.anime-side-links {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--text-2);
+}
+
 /* ==============================
    HOMEPAGE PREVIEW GRID
    ============================== */
@@ -1907,6 +1957,66 @@ footer {
   font-size: 0.8rem;
   color: var(--text-3);
   letter-spacing: 4px;
+}
+
+/* ==============================
+   OLD WEB / ANIME BLOG DESKTOP FRAME
+   ============================== */
+@media (min-width: 1025px) {
+  nav.top-nav {
+    width: 190px;
+    height: 100vh;
+    right: auto;
+    padding: 30px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 34px;
+    border-right: 1px solid var(--border);
+    border-bottom: 0;
+    background: rgba(8, 8, 11, 0.97);
+  }
+
+  .nav-brand {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 7px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--border-subtle);
+  }
+
+  .nav-brand .jp {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-links {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin: 0;
+  }
+
+  .nav-links a {
+    width: 100%;
+    padding: 10px 12px;
+    border-left: 2px solid transparent;
+  }
+
+  .nav-links a.active {
+    border-left-color: var(--accent);
+  }
+
+  .page {
+    margin-left: 190px;
+    grid-template-columns: minmax(0, 1fr) 300px;
+  }
+
+  footer {
+    margin-left: 190px;
+  }
 }
 
 .retro-counter {
@@ -2111,7 +2221,8 @@ footer {
    RESPONSIVE
    ============================== */
 @media (max-width: 1024px) {
-  .page { grid-template-columns: 1fr; }
+  .page { grid-template-columns: 1fr; margin-left: 0; }
+  footer { margin-left: 0; }
   .sidebar {
     position: relative;
     height: auto;
