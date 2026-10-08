@@ -2362,6 +2362,12 @@ footer {
     display: none !important;
   }
 
+  /* The homepage keeps mobile versions of these sections in the main column. */
+  .page:has(.hero) > .sidebar .sidebar-profile-card,
+  .page:has(.hero) > .sidebar .sidebar-player-card {
+    display: none !important;
+  }
+
   .hero-title { font-size: 2rem; }
   .hero { padding: 60px 16px 28px; }
   .hero-banner-wrap { height: 180px; }
