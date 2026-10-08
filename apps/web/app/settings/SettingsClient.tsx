@@ -253,57 +253,6 @@ export default function SettingsClient({
   </div>
 
   <section className="section" style={css("max-width: 640px; margin: 0 auto; padding-top: 40px;")}>
-    {/* PWA & OFFLINE APPLICATION (ACCESSIBLE TO ALL) */}
-    <div className="bracket-card" style={css("padding: 28px; margin-bottom: 24px;")}>
-      <div style={css("display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;")}>
-        <div style={css("font-family: var(--mono); font-size: 0.65rem; color: var(--accent); letter-spacing: 2px;")}>
-          // APPLICATION • PROGRESSIVE WEB APP
-        </div>
-        <span id="pwaStatusBadge" style={css("font-family: var(--mono); font-size: 0.62rem; padding: 2px 8px; border-radius: 2px; border: 1px solid var(--border-subtle); color: var(--text-3); background: rgba(0,0,0,0.2);")}>
-          BROWSER CLIENT
-        </span>
-      </div>
-
-      <p style={css("font-family: var(--sans); font-size: 0.8rem; color: var(--text-2); line-height: 1.5; margin-bottom: 16px;")}>
-        Install Kur Zagin as a standalone desktop or mobile application for instant startup, background audio, lock screen media controls, and offline reliability.
-      </p>
-
-      <div style={css("display: flex; flex-direction: column; gap: 10px; background: var(--bg-0); padding: 14px 16px; border: 1px solid var(--border-subtle); border-radius: 4px; margin-bottom: 16px;")}>
-        <div style={css("display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: 0.72rem;")}>
-          <span style={css("color: var(--text-1);")}>Service Worker & Cache</span>
-          <span style={css("color: var(--green-soft);")}>ACTIVE // v1.0.0</span>
-        </div>
-        <div style={css("display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: 0.72rem; border-top: 1px solid var(--border-subtle); padding-top: 8px;")}>
-          <span style={css("color: var(--text-1);")}>Offline Audio & Assets</span>
-          <span style={css("color: var(--text-2);")}>AUTO-CACHED</span>
-        </div>
-        <div style={css("display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: 0.72rem; border-top: 1px solid var(--border-subtle); padding-top: 8px;")}>
-          <span style={css("color: var(--text-1);")}>Media Session Integration</span>
-          <span style={css("color: var(--accent);")}>ENABLED</span>
-        </div>
-      </div>
-
-      <div style={css("display: flex; gap: 10px; align-items: center; flex-wrap: wrap;")}>
-        <button
-          type="button"
-          id="pwaInstallBtn"
-          className="btn-add-row"
-          style={css("cursor: pointer; margin: 0; display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 0.75rem; padding: 8px 14px; background: var(--accent); color: #0a0a0c; border: 1px solid var(--accent); font-weight: 500;")}
-          onClick={(e) => { const w = window as any; if (typeof window.promptPwaInstall === 'function') window.promptPwaInstall() }}
-        >
-          INSTALL APP
-        </button>
-        <button
-          type="button"
-          className="btn-add-row"
-          style={css("cursor: pointer; margin: 0; display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 0.75rem; padding: 8px 14px; background: transparent; color: var(--text-1); border: 1px solid var(--border);")}
-          onClick={(e) => { const w = window as any; if (navigator.serviceWorker?.controller) { navigator.serviceWorker.controller.postMessage({ type: 'SKIP_WAITING' }); window.location.reload(); } else { window.location.reload(); } }}
-        >
-          CHECK UPDATES
-        </button>
-      </div>
-    </div>
-
     {/* CONTENT FILTERING & PREFERENCES (ACCESSIBLE TO ALL) */}
     <div className="bracket-card" style={css("padding: 28px; margin-bottom: 24px;")}>
       <div style={css("display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;")}>
