@@ -1,6 +1,7 @@
 import type { NextRequest } from 'next/server';
 import { getDb, comments } from '@/lib/db';
 import { eq } from 'drizzle-orm';
+import { getServerSession } from '@/lib/serverSession';
 
 export async function POST(request: NextRequest) {
   try {
@@ -8,6 +9,8 @@ export async function POST(request: NextRequest) {
     const { postId, parentCommentId, honeypot } = body;
     const content = (body.content || '').trim();
     let authorName = (body.authorName || '').trim();
+    const session = await getServerSession();
+    if (session) authorName = session.username;
 
     // Spam honeypot trap
     if (honeypot) {
