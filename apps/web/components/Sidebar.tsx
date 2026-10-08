@@ -10,7 +10,7 @@ export default function Sidebar() {
   return (
     <aside className="sidebar">
       <div className="sb-section sb-nav-section">
-        <div className="sb-title">navigate</div>
+        <div className="sb-title">site index</div>
         <ul className="sb-nav">
           <li><Link href="/" className={current === 'home' ? 'active' : ''}><span className="nav-icon"><Home size={14} /></span> home</Link></li>
           <li><Link href="/profile" className={current === 'profile' ? 'active' : ''}><span className="nav-icon"><User size={14} /></span> profile</Link></li>
@@ -22,6 +22,25 @@ export default function Sidebar() {
           <li><Link href="/novels" className={current === 'novels' ? 'active' : ''}><span className="nav-icon"><BookOpen size={14} /></span> novels</Link></li>
           <li><Link href="/settings" className={current === 'settings' ? 'active' : ''}><span className="nav-icon"><Settings size={14} /></span> settings</Link></li>
         </ul>
+      </div>
+
+      <div className="sb-section anime-side-card">
+        <div className="sb-title">now watching</div>
+        <div className="anime-side-entry">
+          <span className="anime-side-status">● ON AIR</span>
+          <strong>late night anime logs</strong>
+          <span>episode notes, first impressions &amp; rewatches</span>
+        </div>
+        <Link href="/anime" className="anime-side-link">open watchlist →</Link>
+      </div>
+
+      <div className="sb-section anime-side-card">
+        <div className="sb-title">old web links</div>
+        <div className="anime-side-links">
+          <span>✦ anime archive</span>
+          <span>✦ personal diary</span>
+          <span>✦ music crate</span>
+        </div>
       </div>
 
       <div className="sb-section">
