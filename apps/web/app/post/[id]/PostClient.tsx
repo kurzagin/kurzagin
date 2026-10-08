@@ -241,7 +241,7 @@ export default function PostClient({
               id="commentInput"
               name="content"
               className="comment-input-content"
-              placeholder={`Post your reply to ${post.author_handle}...`}
+              placeholder={`Post your reply to ${replyingTo ? `@${replyingTo.author_name}` : post.author_handle}...`}
               required
               rows="3"
               maxlength="1000"
