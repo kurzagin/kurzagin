@@ -175,6 +175,7 @@ export const profiles = pgTable('profiles', {
   bio: text('bio').default('I design products where software, knowledge systems, AI, and immersive interfaces overlap.\n\nMy work usually begins with a small irritation:\n> “Why is this still difficult?”\n\nThen I build the tool I wish already existed.'),
   avatar_url: text('avatar_url'),
   banner_url: text('banner_url'),
+  theme: varchar('theme', { length: 50 }).notNull().default('default'),
   location: varchar('location', { length: 100 }).default('35.6614° N, 139.6681° E'),
   status_message: varchar('status_message', { length: 255 }).default('building tools I wish already existed'),
   currently_building: jsonb('currently_building').$type<ProjectEntry[]>().default([

@@ -56,6 +56,7 @@ My work usually begins with a small irritation:
 Then I build the tool I wish already existed.`,
   avatar_url: null,
   banner_url: null,
+  theme: 'default',
   location: '35.6614° N, 139.6681° E',
   status_message: 'building tools I wish already existed',
   currently_building: [
