@@ -132,14 +132,14 @@ export default function PostClient({
           className={`post-act like-btn ${isPostLiked ? 'liked' : ''}`}
           data-post-id={post.id}
           data-liked={isPostLiked ? 'true' : 'false'}
-          onClick={(e) => { const w = window as any; toggleLike(this) }}
+          onClick={(e) => { toggleLike(e.currentTarget); }}
           title={isPostLiked ? "You already liked this log" : "Like this log"}
           aria-label={`Like log (${post.likes_count} likes)`}
         >
           <Heart className="like-icon" size={14} fill={isPostLiked ? "currentColor" : "none"} />
           <span>{post.likes_count}</span>
         </button>
-        <button className="post-act" onClick={(e) => { const w = window as any; document.getElementById('commentInput').focus() }} style={css("display: inline-flex; align-items: center; gap: 4px;")}>
+        <button className="post-act" onClick={() => { document.getElementById('commentInput')?.focus(); }} style={css("display: inline-flex; align-items: center; gap: 4px")}>
           <MessageSquare size={13} /> <span>{postComments.length}</span>
         </button>
         {authenticated && (
@@ -168,7 +168,7 @@ export default function PostClient({
         </div>
       </div>
 
-      <form className="comment-form" onsubmit={`submitComment(event, '${post.id}')`} style={css("background: transparent; border: none; padding: 0;")}>
+      <form className="comment-form" onSubmit={(e) => { void (window as any).submitComment(e.nativeEvent, post.id); }} style={css("background: transparent; border: none; padding: 0")}>
         <input type="text" name="honeypot" style={css("display: none;")} tabindex="-1" autocomplete="off" />
 
         <div style={css("display: flex; flex-direction: column; gap: 12px;")}>
