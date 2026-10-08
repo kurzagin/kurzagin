@@ -230,6 +230,8 @@ export default function HomeClient({
         posts.map((post) => {
           const postComments = commentsByPost[post.id] || [];
           const postMediaItems = mediaByPost[post.id] || [];
+          const previewMediaItems = postMediaItems.slice(0, 4);
+          const additionalMediaCount = postMediaItems.length - previewMediaItems.length;
           const isLiked = likedPostIds.has(post.id);
           const { cleanedContent, videos: postYouTubeVideos } = processYouTubePost(post.content || '');
           // Anime reviews historically stored uploaded images as markdown in the
@@ -329,8 +331,8 @@ export default function HomeClient({
 
               {postMediaItems.length > 0 && (
                 <div className={`post-media-grid count-${Math.min(postMediaItems.length, 4)}`} style={css("margin-top: 12px;")}>
-                  {postMediaItems.map((m) => (
-                    <div className="post-media-card" onClick={(e) => { e.stopPropagation(); }}>
+                  {previewMediaItems.map((m, index) => (
+                    <div className="post-media-card" key={m.id} onClick={(e) => { e.stopPropagation(); }}>
                       <a href={m.url} target="_blank" rel="noopener noreferrer" className="post-media-link" title="Open full AVIF media">
                         <img
                           src={m.url}
@@ -339,6 +341,11 @@ export default function HomeClient({
                           className="post-media-img"
                         />
                         <span className="media-format-pill">AVIF</span>
+                        {index === previewMediaItems.length - 1 && additionalMediaCount > 0 && (
+                          <span className="media-more-overlay" aria-label={`${additionalMediaCount} more images. Open post to view all`}>
+                            +{additionalMediaCount} more
+                          </span>
+                        )}
                       </a>
                     </div>
                   ))}
