@@ -59,8 +59,9 @@ export default function PostClient({
   const submitReply = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
-    const content = form.content.value.trim();
-    const authorName = form.authorName.value.trim();
+    const formData = new FormData(form);
+    const content = String(formData.get('content') || '').trim();
+    const authorName = String(formData.get('authorName') || '').trim();
     if (!content) return;
     const button = form.querySelector('button[type="submit"]');
     button.disabled = true;
