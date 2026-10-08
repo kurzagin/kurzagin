@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { ArrowLeft, BookOpen, Clock, MapPin, Users, Tag } from 'lucide-react';
 import { getNovelBySlug } from '@/lib/novels';
 import { getNovelDraft, getAllNovelDrafts } from '@/lib/drafts';
+import CopyMarkdownButton from '@/components/novels/CopyMarkdownButton';
 
 interface Props {
   params: Promise<{ novel: string; volume: string; chapter: string }>;
@@ -34,7 +35,7 @@ export default async function NovelDraftReaderPage({ params }: Props) {
   return (
     <>
       <div className="page-header">
-        <div style={{ marginBottom: '12px' }}>
+        <div className="novel-detail-actions">
           <Link
             href={`/novels/${novel}/draft`}
             style={{
@@ -49,6 +50,7 @@ export default async function NovelDraftReaderPage({ params }: Props) {
           >
             <ArrowLeft size={12} /> back to drafts index
           </Link>
+          <CopyMarkdownButton text={`# ${draft.metadata.title}\n\n${draft.rawContent.trim()}`} />
         </div>
         <h1><span className="hl">{draft.metadata.title}</span></h1>
         <div className="page-sub">
