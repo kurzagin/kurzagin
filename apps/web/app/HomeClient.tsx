@@ -242,7 +242,7 @@ export default function HomeClient({
             <article
               className="post bracket-card feed-post"
               id={`post-${post.id}`}
-              onclick={`window.location.href='/post/${post.id}'`}
+              onClick={() => { window.location.href = `/post/${post.id}`; }}
               style={css("cursor: pointer;")}
             >
               <div className="post-head">
@@ -269,7 +269,7 @@ export default function HomeClient({
               </div>
 
               {post.category === 'anime' && post.anime_meta && (
-                <div className="post-anime-banner" onClick={(e) => { const w = window as any; event.stopPropagation() }}>
+                <div className="post-anime-banner" onClick={(e) => { e.stopPropagation(); }}>
                   {post.anime_meta.cover_url && (
                     <a href="/anime" className="post-anime-cover-link">
                       <img src={post.anime_meta.cover_url} alt={post.anime_meta.title || 'Anime'} className="post-anime-cover" loading="lazy" />
@@ -301,7 +301,7 @@ export default function HomeClient({
 
               {displayContent && (
                 post.category === 'anime' && post.anime_meta?.has_spoilers ? (
-                  <details className="post-spoiler-fold" onClick={(e) => { const w = window as any; event.stopPropagation() }}>
+                  <details className="post-spoiler-fold" onClick={(e) => { e.stopPropagation(); }}>
                     <summary className="post-spoiler-toggle">// ⚠️ Contains spoilers for {post.anime_meta.title} (click to reveal review)</summary>
                     <div className="post-body" dangerouslySetInnerHTML={{ __html: formatBody(displayContent) }} />
                   </details>
@@ -311,7 +311,7 @@ export default function HomeClient({
               )}
 
               {postYouTubeVideos.length > 0 && (
-                <div className="post-youtube-embeds" onClick={(e) => { const w = window as any; event.stopPropagation() }}>
+                <div className="post-youtube-embeds" onClick={(e) => { e.stopPropagation(); }}>
                   {postYouTubeVideos.map((video) => (
                     <div className="post-youtube-player">
                       <iframe
@@ -330,7 +330,7 @@ export default function HomeClient({
               {postMediaItems.length > 0 && (
                 <div className={`post-media-grid count-${Math.min(postMediaItems.length, 4)}`} style={css("margin-top: 12px;")}>
                   {postMediaItems.map((m) => (
-                    <div className="post-media-card" onClick={(e) => { const w = window as any; event.stopPropagation() }}>
+                    <div className="post-media-card" onClick={(e) => { e.stopPropagation(); }}>
                       <a href={m.url} target="_blank" rel="noopener noreferrer" className="post-media-link" title="Open full AVIF media">
                         <img
                           src={m.url}
@@ -350,14 +350,14 @@ export default function HomeClient({
                   className={`post-act like-btn ${isLiked ? 'liked' : ''}`}
                   data-post-id={post.id}
                   data-liked={isLiked ? 'true' : 'false'}
-                  onClick={(e) => { const w = window as any; event.stopPropagation(); toggleLike(this) }}
+                  onClick={(e) => { e.stopPropagation(); toggleLike(e.currentTarget); }}
                   title={isLiked ? "You already liked this log" : "Like this log"}
                   aria-label={`Like log (${post.likes_count} likes)`}
                 >
                   <Heart className="like-icon" size={14} fill={isLiked ? "currentColor" : "none"} />
                   <span>{post.likes_count}</span>
                 </button>
-                <button className="post-act" onclick={`event.stopPropagation(); window.location.href='/post/${post.id}'`} title="View thread and replies" style={css("display: inline-flex; align-items: center; gap: 4px;")}>
+                <button className="post-act" onClick={(e) => { e.stopPropagation(); window.location.href = `/post/${post.id}`; }} title="View thread and replies" style={css("display: inline-flex; align-items: center; gap: 4px")}>
                   <MessageSquare size={13} />
                   <span>{postComments.length}</span>
                 </button>
