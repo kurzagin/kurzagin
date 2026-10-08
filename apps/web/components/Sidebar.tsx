@@ -5,8 +5,9 @@ import { usePathname } from 'next/navigation';
 import { Home, User, SquarePen, Disc3, Image as ImageIcon, Tv, Gamepad2, Settings, BookOpen } from 'lucide-react';
 import { getCurrent } from './current';
 
-export default function Sidebar() {
+export default function Sidebar({ visits = 0 }: { visits?: number }) {
   const current = getCurrent(usePathname());
+  const displayVisits = String(visits).padStart(6, '0');
   return (
     <aside className="sidebar">
       <div className="sb-section sb-nav-section">
@@ -25,22 +26,24 @@ export default function Sidebar() {
       </div>
 
       <div className="sb-section anime-side-card">
-        <div className="sb-title">now watching</div>
-        <div className="anime-side-entry">
-          <span className="anime-side-status">● ON AIR</span>
-          <strong>late night anime logs</strong>
-          <span>episode notes, first impressions &amp; rewatches</span>
-        </div>
-        <Link href="/anime" className="anime-side-link">open watchlist →</Link>
+        <div className="sb-title">operator</div>
+        <strong className="anime-side-operator">kurzagin</strong>
+        <span className="anime-side-copy">personal logs, anime notes &amp; midnight transmissions</span>
+        <Link href="/profile" className="anime-side-link">open dossier →</Link>
+        <Link href="/login" className="anime-side-link">operator access →</Link>
       </div>
 
       <div className="sb-section anime-side-card">
-        <div className="sb-title">old web links</div>
-        <div className="anime-side-links">
-          <span>✦ anime archive</span>
-          <span>✦ personal diary</span>
-          <span>✦ music crate</span>
-        </div>
+        <div className="sb-title">now spinning</div>
+        <span className="anime-side-status">● TURNTABLE ONLINE</span>
+        <strong className="anime-side-operator">late night rotation</strong>
+        <Link href="/music" className="anime-side-link">open music crate →</Link>
+      </div>
+
+      <div className="sb-section retro-counter-side" aria-label={`${visits} total visits`}>
+        <span className="retro-counter-label">VISITORS</span>
+        <span className="retro-counter-number">{displayVisits}</span>
+        <span className="retro-counter-since">SINCE 2026</span>
       </div>
 
       <div className="sb-section">
