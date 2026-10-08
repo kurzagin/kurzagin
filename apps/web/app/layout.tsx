@@ -102,10 +102,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
         <div className="page">
           <div className="main">{children}</div>
-          <Sidebar />
+          <Sidebar visits={visits} />
         </div>
 
-        <Footer visits={visits} />
+        <Footer />
 
         <MobileNav />
 

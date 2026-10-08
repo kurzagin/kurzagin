@@ -2016,6 +2016,17 @@ footer {
 
   footer {
     margin-left: 190px;
+    margin-right: 300px;
+    justify-content: center;
+    gap: 32px;
+  }
+
+  /* Keep the desktop center column focused on the log feed. */
+  .main #operator,
+  .main #player,
+  .main #operator + .divider,
+  .main #player + .divider {
+    display: none;
   }
 }
 
@@ -2038,6 +2049,22 @@ footer {
   letter-spacing: 1px;
   text-shadow: 0 0 5px currentColor;
 }
+
+.retro-counter-side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 6px;
+  border: 1px solid rgba(0, 238, 255, 0.65);
+  background: #05090d;
+  box-shadow: 0 0 10px rgba(0, 238, 255, 0.18), inset 0 0 12px rgba(0, 238, 255, 0.08);
+  color: #00eeff;
+  font-family: var(--mono);
+}
+
+.anime-side-operator { display: block; color: var(--text-0); font: 500 0.68rem/1.5 var(--mono); }
+.anime-side-copy { display: block; margin-top: 5px; color: var(--text-2); font: 0.6rem/1.5 var(--mono); }
 
 .retro-counter-number {
   min-width: 6ch;
@@ -2222,7 +2249,7 @@ footer {
    ============================== */
 @media (max-width: 900px) {
   .page { grid-template-columns: 1fr; margin-left: 0; }
-  footer { margin-left: 0; }
+  footer { margin-left: 0; margin-right: 0; }
   .sidebar {
     position: relative;
     height: auto;
