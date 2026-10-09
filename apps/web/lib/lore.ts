@@ -23,9 +23,31 @@ export interface LoreItem {
   role?: string;
   faction?: string;
   threat_rank?: string;
+  visual_reference?: VisualReference;
   rawContent: string;
   contentHtml: string;
   metadata: Record<string, any>;
+}
+
+export interface VisualReference {
+  url: string;
+  alt?: string;
+  caption?: string;
+  source?: string;
+}
+
+function parseVisualReference(value: unknown): VisualReference | undefined {
+  if (!value || typeof value !== 'object') return undefined;
+  const reference = value as Record<string, unknown>;
+  const url = typeof reference.url === 'string' ? reference.url.trim() : '';
+  if (!url || !/^https?:\/\/|^\//i.test(url)) return undefined;
+
+  return {
+    url,
+    alt: typeof reference.alt === 'string' ? reference.alt : undefined,
+    caption: typeof reference.caption === 'string' ? reference.caption : undefined,
+    source: typeof reference.source === 'string' ? reference.source : undefined,
+  };
 }
 
 export function getNovelLoreDir(novelSlug: string): string {
@@ -96,6 +118,7 @@ export function getLoreEntriesByCategory(novelSlug: string, category: string): L
         role: data.role,
         faction: data.faction,
         threat_rank: data.threat_rank,
+        visual_reference: parseVisualReference(data.visual_reference),
         rawContent: content,
         contentHtml: '', // parsed on single view
         metadata: data,
@@ -128,6 +151,7 @@ export async function getLoreEntry(novelSlug: string, category: string, slug: st
       role: data.role,
       faction: data.faction,
       threat_rank: data.threat_rank,
+      visual_reference: parseVisualReference(data.visual_reference),
       rawContent: content,
       contentHtml,
       metadata: data,

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowLeft, Shield, Calendar, Tag, AlertTriangle } from 'lucide-react';
+import { ArrowLeft, Shield, Calendar, Tag, AlertTriangle, Image as ImageIcon } from 'lucide-react';
 import { getLoreEntry } from '@/lib/lore';
 import { getNovelBySlug } from '@/lib/novels';
 import SpoilerGate from '@/components/novels/SpoilerGate';
@@ -52,6 +52,38 @@ export default async function NovelWikiDetailPage({ params }: Props) {
       </div>
 
       <section className="section">
+        {entry.visual_reference && (
+          <aside
+            aria-label="Unofficial visual reference"
+            style={{
+              marginBottom: '24px',
+              padding: '16px',
+              background: 'var(--bg-1)',
+              border: '1px solid var(--border-subtle)',
+              borderRadius: '6px',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px', fontFamily: 'var(--mono)', fontSize: '0.72rem', color: 'var(--accent)' }}>
+              <ImageIcon size={14} />
+              VISUAL REFERENCE — UNOFFICIAL / NOT FINAL ARTWORK
+            </div>
+            <img
+              src={entry.visual_reference.url}
+              alt={entry.visual_reference.alt || `${entry.title} unofficial visual reference`}
+              style={{ display: 'block', width: '100%', maxHeight: '680px', objectFit: 'contain', background: 'var(--bg-2)', borderRadius: '4px' }}
+            />
+            <p style={{ margin: '12px 0 0', color: 'var(--text-3)', fontSize: '0.78rem', lineHeight: 1.55 }}>
+              This image is an interpretive reference for imagination only. It is not official or canonical, and finished artwork may differ.
+              {entry.visual_reference.caption && ` ${entry.visual_reference.caption}`}
+            </p>
+            {entry.visual_reference.source && (
+              <p style={{ margin: '8px 0 0', color: 'var(--text-3)', fontFamily: 'var(--mono)', fontSize: '0.68rem' }}>
+                SOURCE: {entry.visual_reference.source}
+              </p>
+            )}
+          </aside>
+        )}
+
         {/* Classification Header / Metadata Card */}
         <div
           className="bracket-card "
