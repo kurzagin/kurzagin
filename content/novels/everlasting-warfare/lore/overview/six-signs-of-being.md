@@ -13,14 +13,14 @@ tags:
   - "overview"
 ---
 
-In dawn-time during **[The Antediluvian Era](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/timeline/antediluvian-era.md)**, **[Anship](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/anship.md)** created the original **Six Races** of Earth. These six original lineages were unnamed at their creation and possessed a deep-rooted, instinctive racism toward one another triggered merely by physical presence. Lacking any structure of government, law, or leadership, they waged endless, brutal wars against each other.
+In dawn-time during **[The Antediluvian Era](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/timeline/antediluvian-era.md)**, **[Nam-an](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/nam-an.md)** created the original **Six Races** of Earth. These six original lineages were unnamed at their creation and possessed a deep-rooted, instinctive racism toward one another triggered merely by physical presence. Lacking any structure of government, law, or leadership, they waged endless, brutal wars against each other.
 
 ---
 
 ## The Grand Maintenance & The Rise of Enki
 
-- **The Grand Maintenance:** To halt the endless bloodshed, Anship instituted a cosmic event known as **Maintenance**—plunging the entire world and all six races into a profound, heavy slumber.
-- **Appointment of Enki:** Upon waking from Maintenance, Anship introduced a new **Plain Race**—a single mortal man whom Anship appointed as **The King**, known across the realm as the **Lord of Earth**: **[Enki](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/characters/enki.md)**.
+- **The Grand Maintenance:** To halt the endless bloodshed, Nam-an instituted a cosmic event known as **Maintenance**—plunging the entire world and all six races into a profound, heavy slumber.
+- **Appointment of Enki:** Upon waking from Maintenance, Nam-an introduced a new **Plain Race**—a single mortal man whom Nam-an appointed as **The King**, known across the realm as the **Lord of Earth**: **[Enki](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/characters/enki.md)**.
 - **Kingship & Unification:** Enki introduced the concepts of **Kingship**, law, and **[Nam-en](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/nam-en.md)** governance to Earth, successfully unifying the warring six races under structured leadership.
 - **Creation of the Human Race:** Following unification, Enki forged the **[Human Race](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/races/human.md)** in his own image—basing them on his Plain Race morphology.
 

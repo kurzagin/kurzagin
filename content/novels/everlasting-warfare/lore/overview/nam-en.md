@@ -2,13 +2,13 @@
 id: OVER-009
 title: "Nam-en, Entu & The Divine Decrees"
 category: "overview"
-summary: "Nam-en is the divine governance system created by Enki (utilizing the authority derived from Anship) to select mortal women as Entu and grant them Tu—a fraction of Nam-shub power—governed by eight sacred rules."
+summary: "Nam-en is the divine governance system created by Enki (utilizing the authority derived from Nam-an) to select mortal women as Entu and grant them Tu—a fraction of Nam-shub power—governed by eight sacred rules."
 type: "Divine Framework / Metaphysical System"
 status: "Active System"
 tags:
   - "nam-en"
   - "entu"
-  - "anship"
+  - "nam-an"
   - "me"
   - "enki"
   - "tu"
@@ -19,7 +19,7 @@ tags:
   - "overview"
 ---
 
-**Nam-en** is the divine governance system created by the primordial deity **[Enki](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/characters/enki.md)**—built upon the **[Nam-shub](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/nam-shub.md)** authority bestowed upon him by **[Anship](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/anship.md)**—to select specific mortal individuals, grant them the sacred title of **Nam-en**, and elevate them to become an **Entu**.
+**Nam-en** is the divine governance system created by the primordial deity **[Enki](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/characters/enki.md)**—built upon the **[Nam-shub](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/nam-shub.md)** authority bestowed upon him by **[Nam-an](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/nam-an.md)**—to select specific mortal individuals, grant them the sacred title of **Nam-en**, and elevate them to become an **Entu**.
 
 ---
 
@@ -29,7 +29,7 @@ Those chosen as Entu are women selected directly through Enki's systemic framewo
 
 - **Primacy of Nam-shub:** The universe intrinsically prioritizes **Nam-shub** above **Tu**. Consequently, when an Entu speaks, her spoken words carry no automatic reality-warping effect unless she explicitly wills her Tu to manifest the command.
 - **Shared Divine Spark:** This divine framework bestows upon all chosen Entu a small portion of Nam-shub authority to execute their sacred duties.
-- **Cross-Dimensional Boundary:** Neither **Tu** nor **Nam-shub** can directly alter or affect **[Aethernians](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/races/aethernian.md)**. Since Aethernians originate from the **Ohr Ein Sof** universe, Anship-based reality warping commands are ineffective against them directly.
+- **Cross-Dimensional Boundary:** Neither **Tu** nor **Nam-shub** can directly alter or affect **[Aethernians](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/races/aethernian.md)**. Since Aethernians originate from the **Ohr Ein Sof** universe, Nam-an-based reality warping commands are ineffective against them directly.
 
 ---
 

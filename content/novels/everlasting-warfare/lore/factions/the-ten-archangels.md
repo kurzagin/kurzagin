@@ -36,7 +36,7 @@ The **Ten Archangels** represent the highest precision military force and sacred
 | **7** | **Netzach** *(Victory)* | **Haniel** | Archangel of Endurance & Cosmic Harmony | Active (Off-world) |
 | **8** | **Hod** *(Glory)* | **Raphael** | Master of Logic, Intelligence & Sacred Calculation | Active (Off-world) |
 | **9** | **Yesod** *(Foundation)* | **Gabriel** | Herald of Divine Mandate & Planetary Links | Active (Off-world) |
-| **10** | **Malkuth** *(Kingdom)* | **Sandalphon** | Warden of Manifestation & Anship Harvest Oversight | Active (Off-world) |
+| **10** | **Malkuth** *(Kingdom)* | **Sandalphon** | Warden of Manifestation & Nam-an Harvest Oversight | Active (Off-world) |
 
 ---
 

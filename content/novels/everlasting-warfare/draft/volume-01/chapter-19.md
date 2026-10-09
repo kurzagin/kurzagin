@@ -12,7 +12,7 @@ timeline_date: "1641-01-25"
 characters_featured:
   - "Metatron (Leader of Archangels, Kether Rank)"
   - "ur-sag̃ (𒌨𒊕)"
-summary: "High above the scorching Mesopotamian wasteland, the Haloed Anomaly undergoes a divine transcendence. When ur-sag̃ bluntly dismisses its acoustic chirps, its featureless face plate retracts to reveal a serene blonde female face. Metatron—Leader of Archangels, Kether Rank—softly alights upon the desert sand, scans the surrounding wreckage to identify over one hundred thousand destroyed Bene Elohim, and evaluates ur-sag̃ as an Antediluvian Era figure closest to King Enki who likely holds knowledge of the Anship's location."
+summary: "High above the scorching Mesopotamian wasteland, the Haloed Anomaly undergoes a divine transcendence. When ur-sag̃ bluntly dismisses its acoustic chirps, its featureless face plate retracts to reveal a serene blonde female face. Metatron—Leader of Archangels, Kether Rank—softly alights upon the desert sand, scans the surrounding wreckage to identify over one hundred thousand destroyed Bene Elohim, and evaluates ur-sag̃ as an Antediluvian Era figure closest to King Enki who likely holds knowledge of the Nam-an's location."
 ---
 
 It did not descend to wage war, nor did it manifest to conquer.
@@ -77,4 +77,4 @@ She refocused her serene gaze onto the titan reclining upon the throne of wrecke
 
 Her melodic, flat voice continued with seamless, measured cadence:
 
-"Historical record analysis complete. Subject identified as a primary significant figure of the Antediluvian Era, classified as the closest mortal companion to King Enki. Probability calculation: 94.7% likelihood subject possesses coordinates or telemetry data regarding the location of the **Anship**."
+"Historical record analysis complete. Subject identified as a primary significant figure of the Antediluvian Era, classified as the closest mortal companion to King Enki. Probability calculation: 94.7% likelihood subject possesses coordinates or telemetry data regarding the location of the **Nam-an**."
