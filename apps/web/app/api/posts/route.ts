@@ -1,7 +1,7 @@
 import { connection, type NextRequest } from 'next/server';
 import { cookies as nextCookies } from 'next/headers';
 import { desc, eq, inArray } from 'drizzle-orm';
-import { getDb, posts, postMedia, getProfile, type PostMedia } from '@/lib/db';
+import { getDb, posts, postMedia, games, getProfile, type PostMedia } from '@/lib/db';
 import { isAuthenticated, getSession } from '@/lib/auth';
 import { processYouTubePost } from '@/lib/youtube';
 
@@ -19,12 +19,15 @@ export async function GET(request: NextRequest) {
     const url = new URL(request.url);
     const filter = url.searchParams.get('filter');
     const category = url.searchParams.get('category');
+    const gameId = url.searchParams.get('game_id');
     const isMediaFilter = filter === 'media' || category === 'media';
     const isAnimeFilter = filter === 'anime' || category === 'anime';
 
     const query = db.select().from(posts);
     let allPosts;
-    if (isMediaFilter) {
+    if (gameId) {
+      allPosts = await query.where(eq(posts.game_id, gameId)).orderBy(desc(posts.created_at)).limit(50);
+    } else if (isMediaFilter) {
       allPosts = await query.where(eq(posts.has_media, true)).orderBy(desc(posts.created_at)).limit(50);
     } else if (isAnimeFilter) {
       allPosts = await query.where(eq(posts.category, 'anime')).orderBy(desc(posts.created_at)).limit(50);
@@ -115,6 +118,11 @@ export async function POST(request: NextRequest) {
     const hasMedia = mediaItems.length > 0 || videos.length > 0;
     const category = body.category === 'anime' ? 'anime' : hasMedia ? 'media' : 'text';
     const animeMeta = body.category === 'anime' ? body.anime_meta || null : null;
+    let gameId: string | null = body.game_id ? String(body.game_id) : null;
+    if (gameId) {
+      const game = await db.select({ id: games.id }).from(games).where(eq(games.id, gameId)).limit(1);
+      if (!game[0]) gameId = null;
+    }
 
     const inserted = await db
       .insert(posts)
@@ -124,6 +132,7 @@ export async function POST(request: NextRequest) {
         author_handle: authorHandle,
         category,
         anime_meta: animeMeta,
+        game_id: gameId,
         has_media: hasMedia,
       })
       .returning();
@@ -356,4 +365,3 @@ export async function DELETE(request: NextRequest) {
     });
   }
 }
-

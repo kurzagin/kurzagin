@@ -29,6 +29,26 @@ export interface AnimePostMeta {
   has_spoilers?: boolean;
 }
 
+export interface GameMeta {
+  status?: 'active' | 'paused' | 'completed' | 'archived';
+  platform?: string;
+  progress?: string;
+  stats?: { label: string; value: string }[];
+}
+
+export const games = pgTable('games', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  slug: varchar('slug', { length: 120 }).notNull().unique(),
+  title: varchar('title', { length: 255 }).notNull(),
+  summary: text('summary'),
+  cover_url: text('cover_url'),
+  meta: jsonb('meta').$type<GameMeta>().default({}).notNull(),
+  created_at: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updated_at: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+});
+
+export type Game = typeof games.$inferSelect;
+
 // 2. Posts Table (Personal microblog entries)
 export const posts = pgTable(
   'posts',
@@ -39,6 +59,7 @@ export const posts = pgTable(
     author_handle: varchar('author_handle', { length: 50 }).default('@kurzagin').notNull(),
     category: varchar('category', { length: 50 }).default('text').notNull(), // 'text' | 'media' | 'anime'
     anime_meta: jsonb('anime_meta').$type<AnimePostMeta>(),
+    game_id: uuid('game_id').references(() => games.id, { onDelete: 'set null' }),
     has_media: boolean('has_media').default(false).notNull(),
     likes_count: integer('likes_count').default(0).notNull(),
     reposts_count: integer('reposts_count').default(0).notNull(),

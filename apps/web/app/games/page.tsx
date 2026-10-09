@@ -1,29 +1,19 @@
-import type { CSSProperties } from 'react';
+import Link from 'next/link';
 import { Gamepad2 } from 'lucide-react';
+import { desc } from 'drizzle-orm';
+import { getDb, games, type Game } from '@/lib/db';
 
 export const metadata = { title: 'games — kurzagin' };
 
-export interface GameItem {
-  id?: string;
-  title: string;
-  status: 'playing' | 'completed' | 'backlog' | 'abandoned';
-  desc: string;
-  rating?: string;
-  genre?: string;
-  developer?: string;
-  visualEmoji?: string;
-  visualGradient?: string;
-}
-
-// Data source: empty by default (hardcoded items removed)
-const gamesList: GameItem[] = [];
-
-export default function GamesPage() {
+export default async function GamesPage() {
+  const db = getDb();
+  let gamesList: Game[] = [];
+  if (db) { try { gamesList = await db.select().from(games).orderBy(desc(games.updated_at)); } catch {} }
   return (
     <>
       <div className="page-header">
         <h1><span className="hl">games</span> log</h1>
-        <div className="page-sub"><span className="jp-label">ゲーム</span> — playing, clearing, abandoning</div>
+        <div className="page-sub"><span className="jp-label">ゲーム</span> — games I am actually documenting</div>
       </div>
 
       <section className="section">
@@ -32,34 +22,25 @@ export default function GamesPage() {
             <div className="empty-state-glyph"><Gamepad2 size={36} /></div>
             <div className="empty-state-title">NO GAMES LOGGED</div>
             <p className="empty-state-desc">
-              No active sessions found. No playthroughs, backlogs, or cleared titles recorded yet.
+              This is not a backlog. A game appears here when there is a story, progress, or ongoing record worth keeping.
             </p>
             <span className="empty-state-meta">// status: idle — awaiting operator session</span>
           </div>
         ) : (
           <div className="cards-grid reveal">
-            {gamesList.map((item, i) => (
-              <div className="item-card" key={item.id ?? i}>
-                <div
-                  className="card-visual"
-                  style={item.visualGradient ? ({ background: item.visualGradient } as CSSProperties) : undefined}
-                >
-                  <Gamepad2 size={28} />
+            {gamesList.map((item) => {
+              const meta = item.meta || {};
+              return <Link href={`/games/${item.slug}`} className="item-card" key={item.id}>
+                <div className="card-visual">{item.cover_url ? <img src={item.cover_url} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <Gamepad2 size={28} />}
                 </div>
                 <div className="card-body">
-                  <div className={`card-tag ${item.status}`}>{item.status}</div>
+                  <div className={`card-tag ${meta.status || 'active'}`}>{meta.status || 'active'}</div>
                   <h3 className="card-title">{item.title}</h3>
-                  {item.desc && <p className="card-desc">{item.desc}</p>}
-                  {item.rating && <div className="card-rating">{item.rating}</div>}
-                  {(item.genre || item.developer) && (
-                    <div className="card-meta">
-                      {item.genre && <span>{item.genre}</span>}
-                      {item.developer && <span>{item.developer}</span>}
-                    </div>
-                  )}
+                  {item.summary && <p className="card-desc">{item.summary}</p>}
+                  <div className="card-meta"><span>{meta.platform || 'personal archive'}</span><span>{meta.progress || 'open log'}</span></div>
                 </div>
-              </div>
-            ))}
+              </Link>;
+            })}
           </div>
         )}
       </section>
