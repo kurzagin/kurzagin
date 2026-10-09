@@ -65,7 +65,7 @@ export default async function AnimePage({
         .from(animeWatchlistTable)
         .orderBy(sql`${animeWatchlistTable.season_year} DESC NULLS LAST`, desc(animeWatchlistTable.updated_at));
 
-      let reviewsByAnime: Record<string, DbAnimeReview[]> = {};
+      const reviewsByAnime: Record<string, DbAnimeReview[]> = {};
       if (list.length > 0) {
         const animeIds = list.map((a) => a.id);
         const rawReviews = await db

@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
       allPosts = await query.orderBy(desc(posts.created_at)).limit(50);
     }
 
-    let mediaByPost: Record<string, PostMedia[]> = {};
+    const mediaByPost: Record<string, PostMedia[]> = {};
     if (allPosts.length > 0) {
       const postIds = allPosts.map((p) => p.id);
       const rawMedia = await db

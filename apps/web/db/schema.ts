@@ -101,6 +101,20 @@ export type NewPostMedia = typeof postMedia.$inferInsert;
 export type Comment = typeof comments.$inferSelect;
 export type NewComment = typeof comments.$inferInsert;
 
+export const guestbookEntries = pgTable(
+  'guestbook_entries',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    author_name: varchar('author_name', { length: 50 }).default('guest').notNull(),
+    content: text('content').notNull(),
+    created_at: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [index('idx_guestbook_entries_created_at').on(table.created_at.desc())]
+);
+
+export type GuestbookEntry = typeof guestbookEntries.$inferSelect;
+export type NewGuestbookEntry = typeof guestbookEntries.$inferInsert;
+
 export type AdminUser = typeof adminUsers.$inferSelect;
 export type NewAdminUser = typeof adminUsers.$inferInsert;
 

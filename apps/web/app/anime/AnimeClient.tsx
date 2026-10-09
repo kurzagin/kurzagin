@@ -567,7 +567,7 @@ export default function AnimeClient() {
       btn.textContent = stagedReviewImages.length > 0 ? 'CONVERTING TO AVIF...' : 'PUBLISHING...';
 
       try {
-        let uploadedMedia = [];
+        const uploadedMedia = [];
 
         if (stagedReviewImages.length > 0) {
           for (let i = 0; i < stagedReviewImages.length; i++) {

@@ -8,6 +8,7 @@ export * from '../db/schema';
 export type DbPost = schema.Post;
 export type DbPostMedia = schema.PostMedia;
 export type DbComment = schema.Comment;
+export type DbGuestbookEntry = schema.GuestbookEntry;
 export type DbAdminUser = schema.AdminUser;
 export type DbTrack = schema.Track;
 export type DbPostLike = schema.PostLike;

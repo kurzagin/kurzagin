@@ -41,6 +41,17 @@ CREATE TABLE IF NOT EXISTS comments (
 CREATE INDEX IF NOT EXISTS idx_posts_created_at ON posts(created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_comments_post_id ON comments(post_id, created_at ASC);
 
+-- 3b. Guestbook Entries (Standalone visitor messages)
+CREATE TABLE IF NOT EXISTS guestbook_entries (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  author_name VARCHAR(50) NOT NULL DEFAULT 'guest',
+  content TEXT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_guestbook_entries_created_at
+  ON guestbook_entries(created_at DESC);
+
 -- 4. Post Likes Table (IP-gated likes)
 CREATE TABLE IF NOT EXISTS post_likes (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),

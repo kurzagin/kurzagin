@@ -53,7 +53,7 @@ export async function GET(request: NextRequest) {
 
     const list = await query;
 
-    let reviewsByAnime: Record<string, AnimeReview[]> = {};
+    const reviewsByAnime: Record<string, AnimeReview[]> = {};
     if (list.length > 0) {
       const animeIds = list.map((a) => a.id);
       const rawReviews = await db
