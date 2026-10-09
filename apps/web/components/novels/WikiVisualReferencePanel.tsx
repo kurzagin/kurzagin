@@ -12,7 +12,7 @@ export default function WikiVisualReferencePanel({ novel, category, slug, initia
     const form = new FormData(event.currentTarget); form.append('novel', novel); form.append('category', category); form.append('slug', slug);
     const response = await fetch('/api/wiki/visual-references', { method: 'POST', body: form });
     const result = await response.json();
-    if (response.ok) { setItems([...items, result.item]); event.currentTarget.reset(); setMessage('Reference attached.'); }
+    if (response.ok) { setItems([...items, ...(result.items || [])]); event.currentTarget.reset(); setMessage(`${result.items?.length || 0} references attached.`); }
     else setMessage(result.error || 'Upload failed.');
     setBusy(false);
   }
@@ -35,7 +35,7 @@ export default function WikiVisualReferencePanel({ novel, category, slug, initia
       <button type="button" className="feed-filter-btn" onClick={() => remove(item.id)} style={{ cursor: 'pointer', color: '#ff6b81' }}>DELETE</button>
     </div>)}
     <form onSubmit={upload} style={{ display: 'grid', gap: '10px', marginTop: items.length ? '12px' : 0, paddingTop: items.length ? '16px' : 0, borderTop: items.length ? '1px solid var(--border-subtle)' : undefined }}>
-      <label style={{ fontFamily: 'var(--mono)', fontSize: '0.64rem', color: 'var(--text-3)' }}>// ATTACH NEW REFERENCE IMAGE<input name="image" type="file" accept="image/*" required style={{ display: 'block', width: '100%', marginTop: '6px', color: 'var(--text-2)', fontFamily: 'var(--mono)', fontSize: '0.7rem' }} /></label>
+      <label style={{ fontFamily: 'var(--mono)', fontSize: '0.64rem', color: 'var(--text-3)' }}>// ATTACH REFERENCE IMAGES<input name="image" type="file" accept="image/*" multiple required style={{ display: 'block', width: '100%', marginTop: '6px', color: 'var(--text-2)', fontFamily: 'var(--mono)', fontSize: '0.7rem' }} /></label>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '8px' }}>
         <input name="alt_text" placeholder="ALT TEXT" aria-label="Alt text" style={{ background: 'var(--bg-2)', border: '1px solid var(--border-subtle)', color: 'var(--text-1)', padding: '8px 10px', fontFamily: 'var(--mono)', fontSize: '0.68rem', borderRadius: '3px' }} />
         <input name="caption" placeholder="CAPTION / DESIGN NOTE" aria-label="Caption or design note" style={{ background: 'var(--bg-2)', border: '1px solid var(--border-subtle)', color: 'var(--text-1)', padding: '8px 10px', fontFamily: 'var(--mono)', fontSize: '0.68rem', borderRadius: '3px' }} />
