@@ -25,7 +25,7 @@ export default async function NovelWikiDetailPage({ params }: Props) {
   const novelData = getNovelBySlug(novel);
   const entry = await getLoreEntry(novel, category, slug);
   const authenticated = await isServerAuthenticated();
-  const db = authenticated ? getDb() : null;
+  const db = getDb();
   const references = db ? await db.select().from(wikiVisualReferences).where(and(eq(wikiVisualReferences.novel_slug, novel), eq(wikiVisualReferences.category, category), eq(wikiVisualReferences.entry_slug, slug))).orderBy(asc(wikiVisualReferences.created_at)) : [];
 
   if (!novelData || !entry) notFound();
@@ -60,7 +60,7 @@ export default async function NovelWikiDetailPage({ params }: Props) {
 
       <section className="section">
         {authenticated && <WikiVisualReferencePanel novel={novel} category={category} slug={slug} initialItems={references} />}
-        {authenticated && entry.visual_reference && (
+        {entry.visual_reference && (
           <aside
             aria-label="Unofficial visual reference"
             style={{
@@ -91,6 +91,24 @@ export default async function NovelWikiDetailPage({ params }: Props) {
             )}
           </aside>
         )}
+
+        {references.map((reference) => (
+          <aside
+            key={reference.id}
+            aria-label="Unofficial visual reference"
+            style={{ marginBottom: '24px', padding: '16px', background: 'var(--bg-1)', border: '1px solid var(--border-subtle)', borderRadius: '6px' }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px', fontFamily: 'var(--mono)', fontSize: '0.72rem', color: 'var(--accent)' }}>
+              VISUAL REFERENCE — UNOFFICIAL / NOT FINAL ARTWORK
+            </div>
+            <img src={reference.url} alt={reference.alt_text || `${entry.title} unofficial visual reference`} style={{ display: 'block', width: '100%', maxHeight: '680px', objectFit: 'contain', background: 'var(--bg-2)', borderRadius: '4px' }} />
+            <p style={{ margin: '12px 0 0', color: 'var(--text-3)', fontSize: '0.78rem', lineHeight: 1.55 }}>
+              This image is an interpretive reference for imagination only. It is not official or canonical, and finished artwork may differ.
+              {reference.caption && ` ${reference.caption}`}
+            </p>
+            {reference.source && <p style={{ margin: '8px 0 0', color: 'var(--text-3)', fontFamily: 'var(--mono)', fontSize: '0.68rem' }}>SOURCE: {reference.source}</p>}
+          </aside>
+        ))}
 
         {/* Classification Header / Metadata Card */}
         <div
