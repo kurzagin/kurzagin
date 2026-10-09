@@ -92,23 +92,23 @@ export default async function NovelWikiDetailPage({ params }: Props) {
           </aside>
         )}
 
-        {references.map((reference) => (
-          <aside
-            key={reference.id}
-            aria-label="Unofficial visual reference"
-            style={{ marginBottom: '24px', padding: '16px', background: 'var(--bg-1)', border: '1px solid var(--border-subtle)', borderRadius: '6px' }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px', fontFamily: 'var(--mono)', fontSize: '0.72rem', color: 'var(--accent)' }}>
-              VISUAL REFERENCE — UNOFFICIAL / NOT FINAL ARTWORK
+        {references.length > 0 && (
+          <aside aria-label="Unofficial visual references" style={{ marginBottom: '24px', padding: '16px', background: 'var(--bg-1)', border: '1px solid var(--border-subtle)', borderRadius: '6px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', gap: '12px', flexWrap: 'wrap', marginBottom: '12px', fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--accent)' }}>
+              <span>VISUAL REFERENCES — UNOFFICIAL / NOT FINAL ARTWORK</span>
+              <span style={{ color: 'var(--text-3)' }}>{references.length} FILE{references.length === 1 ? '' : 'S'}</span>
             </div>
-            <img src={reference.url} alt={reference.alt_text || `${entry.title} unofficial visual reference`} style={{ display: 'block', width: '100%', maxHeight: '680px', objectFit: 'contain', background: 'var(--bg-2)', borderRadius: '4px' }} />
-            <p style={{ margin: '12px 0 0', color: 'var(--text-3)', fontSize: '0.78rem', lineHeight: 1.55 }}>
-              This image is an interpretive reference for imagination only. It is not official or canonical, and finished artwork may differ.
-              {reference.caption && ` ${reference.caption}`}
-            </p>
-            {reference.source && <p style={{ margin: '8px 0 0', color: 'var(--text-3)', fontFamily: 'var(--mono)', fontSize: '0.68rem' }}>SOURCE: {reference.source}</p>}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(132px, 1fr))', gap: '10px' }}>
+              {references.map((reference) => (
+                <a key={reference.id} href={reference.url} target="_blank" rel="noreferrer" title={reference.caption || 'Open visual reference'} style={{ display: 'block', padding: '5px', background: 'var(--bg-2)', border: '1px solid var(--border-subtle)', borderRadius: '4px', textDecoration: 'none' }}>
+                  <img src={reference.url} alt={reference.alt_text || `${entry.title} unofficial visual reference`} style={{ display: 'block', width: '100%', aspectRatio: '1 / 1', objectFit: 'cover', borderRadius: '2px' }} />
+                  {reference.caption && <div style={{ marginTop: '6px', color: 'var(--text-3)', fontSize: '0.66rem', lineHeight: 1.35, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{reference.caption}</div>}
+                </a>
+              ))}
+            </div>
+            <p style={{ margin: '12px 0 0', color: 'var(--text-3)', fontSize: '0.72rem', lineHeight: 1.5 }}>For imagination only. These references are unofficial, non-canonical, and finished artwork may differ.</p>
           </aside>
-        ))}
+        )}
 
         {/* Classification Header / Metadata Card */}
         <div
