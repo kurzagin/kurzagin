@@ -5,6 +5,7 @@ import { getLoreEntry } from '@/lib/lore';
 import { getNovelBySlug } from '@/lib/novels';
 import SpoilerGate from '@/components/novels/SpoilerGate';
 import CopyMarkdownButton from '@/components/novels/CopyMarkdownButton';
+import { isServerAuthenticated } from '@/lib/serverSession';
 
 interface Props {
   params: Promise<{ novel: string; category: string; slug: string }>;
@@ -20,6 +21,7 @@ export default async function NovelWikiDetailPage({ params }: Props) {
   const { novel, category, slug } = await params;
   const novelData = getNovelBySlug(novel);
   const entry = await getLoreEntry(novel, category, slug);
+  const authenticated = await isServerAuthenticated();
 
   if (!novelData || !entry) notFound();
 
@@ -52,7 +54,7 @@ export default async function NovelWikiDetailPage({ params }: Props) {
       </div>
 
       <section className="section">
-        {entry.visual_reference && (
+        {authenticated && entry.visual_reference && (
           <aside
             aria-label="Unofficial visual reference"
             style={{
