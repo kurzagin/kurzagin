@@ -77,6 +77,7 @@ interface HomeClientProps {
   mediaByPost: Record<string, DbPostMedia[]>;
   likedPostIds: string[];
   tracks: DbTrack[];
+  gameContext: { id: string; title: string; slug: string } | null;
 }
 
 export default function HomeClient({
@@ -91,6 +92,7 @@ export default function HomeClient({
   mediaByPost,
   likedPostIds: likedPostIdsArray,
   tracks,
+  gameContext,
 }: HomeClientProps) {
   const likedPostIds = new Set(likedPostIdsArray);
   const [editingPost, setEditingPost] = useState<DbPost | null>(null);
@@ -170,8 +172,9 @@ export default function HomeClient({
     {authenticated && (
       <div className="composer bracket-card" style={css("margin-bottom: 20px;")}>
         <div style={css("font-family: var(--mono); font-size: 0.65rem; color: var(--accent); margin-bottom: 8px; letter-spacing: 1px;")}>
-          // TRANSMISSION CONSOLE — NEW LOG
+          // TRANSMISSION CONSOLE — {gameContext ? `NEW ${gameContext.title.toUpperCase()} LOG` : 'NEW LOG'}
         </div>
+        {gameContext && <div className="feed-filter-btn active" style={css("display: inline-block; margin-bottom: 10px;")}>GAME CONTEXT: {gameContext.title}</div>}
         <textarea
           id="postInput"
           placeholder="broadcast new transmission to kurzagin... (supports #tags)"

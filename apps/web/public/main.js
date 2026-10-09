@@ -212,6 +212,7 @@ async function broadcastPost() {
       body: JSON.stringify({
         content,
         media: mediaPayload,
+        game_id: new URLSearchParams(window.location.search).get('game_id') || null,
       }),
     });
 
