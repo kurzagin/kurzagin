@@ -169,3 +169,18 @@ CREATE TABLE IF NOT EXISTS gallery_items (
 ALTER TABLE gallery_items ADD COLUMN IF NOT EXISTS is_nsfw BOOLEAN NOT NULL DEFAULT FALSE;
 CREATE INDEX IF NOT EXISTS idx_gallery_items_created_at ON gallery_items(created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_gallery_items_is_nsfw ON gallery_items(is_nsfw);
+
+CREATE TABLE IF NOT EXISTS wiki_visual_references (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  novel_slug VARCHAR(120) NOT NULL,
+  category VARCHAR(80) NOT NULL,
+  entry_slug VARCHAR(160) NOT NULL,
+  url TEXT NOT NULL,
+  storage_key TEXT NOT NULL,
+  alt_text TEXT,
+  caption TEXT,
+  source TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS idx_wiki_visual_references_entry
+  ON wiki_visual_references(novel_slug, category, entry_slug);
