@@ -5,14 +5,14 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
   Home, SquarePen, Disc3, Image as ImageIcon, Tv, Gamepad2, User, Settings,
-  MoreHorizontal, X, ChevronRight, Play, SkipBack, SkipForward, Download, BookOpen,
+  MoreHorizontal, X, ChevronRight, Play, SkipBack, SkipForward, Download, BookOpen, MessageSquare,
 } from 'lucide-react';
 import { getCurrent } from './current';
 import type { DbTrack } from '@/lib/db';
 
 export default function MobileNavClient({ tracks }: { tracks: DbTrack[] }) {
   const current = getCurrent(usePathname());
-  const isMoreActive = ['profile', 'anime', 'games', 'novels', 'settings'].includes(current);
+  const isMoreActive = ['profile', 'anime', 'games', 'novels', 'settings', 'guestbook'].includes(current);
   const first = tracks[0];
 
   const [open, setOpen] = useState(false);
@@ -282,6 +282,15 @@ export default function MobileNavClient({ tracks }: { tracks: DbTrack[] }) {
               <div className="mobile-sheet-card-body">
                 <div className="mobile-sheet-card-title">novels</div>
                 <div className="mobile-sheet-card-desc">drafts, story &amp; tactical codex</div>
+              </div>
+              <ChevronRight size={15} className="mobile-sheet-card-arrow" />
+            </Link>
+
+            <Link href="/guestbook" className={`mobile-sheet-card ${current === 'guestbook' ? 'active' : ''}`}>
+              <div className="mobile-sheet-card-icon"><MessageSquare size={18} /></div>
+              <div className="mobile-sheet-card-body">
+                <div className="mobile-sheet-card-title">guestbook</div>
+                <div className="mobile-sheet-card-desc">leave a trace in the back alleys</div>
               </div>
               <ChevronRight size={15} className="mobile-sheet-card-arrow" />
             </Link>
