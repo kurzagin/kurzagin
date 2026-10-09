@@ -4027,3 +4027,23 @@ footer {
 .markdown-body th, .markdown-body td { padding: .6rem .75rem; border: 1px solid var(--border-subtle); text-align: left; vertical-align: top; }
 .markdown-body th { color: var(--text-0); background: var(--bg-2); }
 @media (max-width: 560px) { .novel-detail-actions { align-items: flex-start; } .markdown-body { padding: 24px 18px !important; } }
+
+/* Guestbook */
+.guestbook-form { display: grid; gap: 14px; padding: 18px; max-width: 760px; }
+.guestbook-form label { display: grid; gap: 7px; font: 0.65rem var(--mono); color: var(--text-2); }
+.guestbook-form input:not(.guestbook-trap), .guestbook-form textarea { width: 100%; border: 1px solid var(--border); background: var(--bg-1); color: var(--text-0); border-radius: 2px; padding: 11px 12px; font: 0.78rem var(--mono); outline: none; resize: vertical; }
+.guestbook-form input:not(.guestbook-trap):focus, .guestbook-form textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-dim); }
+.guestbook-form textarea { min-height: 112px; }
+.guestbook-trap { position: absolute; left: -9999px; opacity: 0; }
+.guestbook-form-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--text-3); font: 0.62rem var(--mono); }
+.guestbook-form-footer button { border: 1px solid var(--accent); background: var(--accent-dim); color: var(--accent); padding: 9px 12px; font: 0.63rem var(--mono); cursor: pointer; }
+.guestbook-form-footer button:hover:not(:disabled) { background: var(--accent); color: var(--bg-0); }
+.guestbook-form-footer button:disabled { opacity: 0.55; cursor: wait; }
+.guestbook-list { display: grid; gap: 12px; }
+.guestbook-entry { padding: 17px 18px; }
+.guestbook-entry-meta { display: flex; justify-content: space-between; gap: 16px; color: var(--accent); font: 0.65rem var(--mono); }
+.guestbook-entry time { color: var(--text-3); }
+.guestbook-entry p { white-space: pre-wrap; margin-top: 13px; color: var(--text-1); font-size: 0.85rem; line-height: 1.75; }
+.guestbook-count { color: var(--text-3); font: 0.62rem var(--mono); }
+.guestbook-empty { padding: 30px; text-align: center; color: var(--text-3); font: 0.72rem var(--mono); }
+@media (max-width: 700px) { .guestbook-form-footer, .guestbook-entry-meta { align-items: flex-start; flex-direction: column; } .guestbook-form-footer button { width: 100%; } }

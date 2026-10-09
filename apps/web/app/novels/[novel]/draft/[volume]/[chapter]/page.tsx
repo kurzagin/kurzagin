@@ -109,7 +109,7 @@ export default async function NovelDraftReaderPage({ params }: Props) {
 
           {draft.metadata.summary && (
             <p style={{ marginTop: '14px', marginBottom: 0, fontSize: '0.86rem', color: 'var(--text-2)', lineHeight: 1.6, fontStyle: 'italic' }}>
-              "{draft.metadata.summary}"
+              &quot;{draft.metadata.summary}&quot;
             </p>
           )}
 

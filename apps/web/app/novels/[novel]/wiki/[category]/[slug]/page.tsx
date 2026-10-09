@@ -159,7 +159,7 @@ export default async function NovelWikiDetailPage({ params }: Props) {
 
           {entry.summary && (
             <p style={{ marginTop: '16px', marginBottom: 0, fontSize: '0.88rem', color: 'var(--text-2)', lineHeight: 1.6, fontStyle: 'italic' }}>
-              "{entry.summary}"
+              &quot;{entry.summary}&quot;
             </p>
           )}
 

@@ -176,7 +176,6 @@ export default function MobileNavClient({ tracks }: { tracks: DbTrack[] }) {
               >
                 <div className="mobile-sheet-vinyl" id="sheetVinyl">
                   <div className="mobile-sheet-vinyl-label">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       id="sheetVinylCoverImg"
                       className="mobile-sheet-vinyl-img"

@@ -47,8 +47,8 @@ export default async function HomePage({
 
   const db = getDb();
   let posts: DbPost[] = [];
-  let commentsByPost: Record<string, DbComment[]> = {};
-  let mediaByPost: Record<string, DbPostMedia[]> = {};
+  const commentsByPost: Record<string, DbComment[]> = {};
+  const mediaByPost: Record<string, DbPostMedia[]> = {};
   let tracks: DbTrack[] = [];
 
   if (db) {

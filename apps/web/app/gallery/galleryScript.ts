@@ -1,5 +1,4 @@
 // @ts-nocheck
-/* eslint-disable */
 // Faithful port of the inline <script> from the Astro gallery page.
 export function initGallery(
   isOperator: boolean,

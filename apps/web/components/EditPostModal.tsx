@@ -177,7 +177,7 @@ export default function EditPostModal({
     setErrorMessage('');
 
     try {
-      let uploadedMedia: any[] = [];
+      const uploadedMedia: any[] = [];
 
       // 1. Upload newly staged files to AVIF via /api/media/upload-post-image
       if (stagedFiles.length > 0) {
