@@ -312,7 +312,28 @@ export const galleryItems = pgTable(
 export type GalleryItem = typeof galleryItems.$inferSelect;
 export type NewGalleryItem = typeof galleryItems.$inferInsert;
 
-// 11. Media Assets Registry (Track all uploaded media, active vs detached ghost files)
+// 11. Operator-only visual references attached to wiki dossiers
+export const wikiVisualReferences = pgTable(
+  'wiki_visual_references',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    novel_slug: varchar('novel_slug', { length: 120 }).notNull(),
+    category: varchar('category', { length: 80 }).notNull(),
+    entry_slug: varchar('entry_slug', { length: 160 }).notNull(),
+    url: text('url').notNull(),
+    storage_key: text('storage_key').notNull(),
+    alt_text: text('alt_text'),
+    caption: text('caption'),
+    source: text('source'),
+    created_at: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [index('idx_wiki_visual_references_entry').on(table.novel_slug, table.category, table.entry_slug)]
+);
+
+export type WikiVisualReference = typeof wikiVisualReferences.$inferSelect;
+export type NewWikiVisualReference = typeof wikiVisualReferences.$inferInsert;
+
+// 12. Media Assets Registry (Track all uploaded media, active vs detached ghost files)
 export const mediaAssets = pgTable(
   'media_assets',
   {
