@@ -9,6 +9,7 @@ import {
   postLikes as postLikesTable,
   tracks as tracksTable,
   getProfile,
+  games as gamesTable,
   type DbPost,
   type DbComment,
   type DbPostMedia,
@@ -36,6 +37,7 @@ export default async function HomePage({
   const filter = typeof sp.filter === 'string' ? sp.filter : null;
   const isMediaFilter = filter === 'media';
   const isAnimeFilter = filter === 'anime';
+  const gameId = typeof sp.game_id === 'string' ? sp.game_id : null;
 
   const h = await headers();
   const host = h.get('host') || 'localhost';
@@ -50,6 +52,7 @@ export default async function HomePage({
   const commentsByPost: Record<string, DbComment[]> = {};
   const mediaByPost: Record<string, DbPostMedia[]> = {};
   let tracks: DbTrack[] = [];
+  let gameContext: { id: string; title: string; slug: string } | null = null;
 
   if (db) {
     try {
@@ -60,7 +63,11 @@ export default async function HomePage({
         .limit(20);
 
       const query = db.select().from(postsTable);
-      if (isMediaFilter) {
+      if (gameId) {
+        const game = await db.select({ id: gamesTable.id, title: gamesTable.title, slug: gamesTable.slug }).from(gamesTable).where(eq(gamesTable.id, gameId)).limit(1);
+        gameContext = game[0] || null;
+        posts = await query.where(eq(postsTable.game_id, gameId)).orderBy(desc(postsTable.created_at)).limit(50);
+      } else if (isMediaFilter) {
         posts = await query.where(eq(postsTable.has_media, true)).orderBy(desc(postsTable.created_at)).limit(50);
       } else if (isAnimeFilter) {
         posts = await query.where(eq(postsTable.category, 'anime')).orderBy(desc(postsTable.created_at)).limit(50);
@@ -117,6 +124,7 @@ export default async function HomePage({
       mediaByPost={JSON.parse(JSON.stringify(mediaByPost))}
       likedPostIds={likedPostIds}
       tracks={JSON.parse(JSON.stringify(tracks))}
+      gameContext={gameContext}
     />
   );
 }

@@ -27,6 +27,7 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
         {meta.stats?.length ? <div className="card-meta" style={{ marginTop: 20 }}>{meta.stats.map((s) => <span key={s.label}>{s.label}: {s.value}</span>)}</div> : null}
       </div>
       <div className="section-head"><h2>journal</h2><span className="jp-label">日誌</span><div className="line" /></div>
+      <Link href={`/?game_id=${game.id}#blog`} className="post-btn" style={{ display: 'inline-flex', marginBottom: 18 }}>// NEW GAME LOG →</Link>
       {logs.length === 0 ? <div className="bracket-card empty-state"><div className="empty-state-title">NO LOGS YET</div><p className="empty-state-desc">Progress, struggles, pulls, puzzles, builds, and discoveries will live here.</p></div> : logs.map((log) => <article className="bracket-card" style={{ padding: 20, marginBottom: 14 }} key={log.id}><div className="card-meta"><span>{new Date(log.created_at).toLocaleDateString()}</span><span>{log.category}</span></div><p style={{ whiteSpace: 'pre-wrap' }}>{log.content}</p><Link href={`/post/${log.id}`} className="card-meta">open transmission →</Link></article>)}
     </section>
   </>;
