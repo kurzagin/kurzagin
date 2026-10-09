@@ -2,10 +2,13 @@ import Link from 'next/link';
 import { Gamepad2 } from 'lucide-react';
 import { desc } from 'drizzle-orm';
 import { getDb, games, type Game } from '@/lib/db';
+import { getServerSession } from '@/lib/serverSession';
+import GamesClient from './GamesClient';
 
 export const metadata = { title: 'games — kurzagin' };
 
 export default async function GamesPage() {
+  const authenticated = (await getServerSession()) !== null;
   const db = getDb();
   let gamesList: Game[] = [];
   if (db) { try { gamesList = await db.select().from(games).orderBy(desc(games.updated_at)); } catch {} }
@@ -14,6 +17,7 @@ export default async function GamesPage() {
       <div className="page-header">
         <h1><span className="hl">games</span> log</h1>
         <div className="page-sub"><span className="jp-label">ゲーム</span> — games I am actually documenting</div>
+        <GamesClient authenticated={authenticated} />
       </div>
 
       <section className="section">
