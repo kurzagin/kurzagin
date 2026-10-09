@@ -49,7 +49,7 @@ Unlike the other Entu—who inherited and wielded the **[Chain of Destruction](f
 - **True Death:** The *Sword of Abramelin* is feared across all realms as one of the exceedingly rare artifacts capable of inflicting **True Death**—an absolute, unalterable destruction that permanently eradicates a soul beyond reincarnation or spiritual recovery.
 - **Levitation & Duplication Magic:** Forged with Advanced Rank spell formulas, the blade incorporates autonomous levitation magic (allowing remote, high-speed telekinetic flight) and duplication magic (enabling it to multiply into swarms of blades).
 - **Anti-Mage Kit & The "Tyrant" Debates:** Modern scholars of Elven history point out that her weapon's toolkit is suspiciously hyper-optimized for hunting down and countering mages. By combining autonomous swarming blade duplications, remote pressure, and soul-eradicating True Death, the weapon leaves spellcasters no window to weave spells or recover. Consequently, contemporary historians fiercely debate whether En-sirsir was truly just a benevolent Entu pioneer, or actually a tyrant who designed her arsenal specifically to suppress and hunt down rogue mages.
-- **Craftsmanship & Arcane Mastery:** Forged using Advanced Rank magic formulas, the weapon stood as the pinnacle of Elven magical catalyst engineering.
+- **Craftsmnam-an & Arcane Mastery:** Forged using Advanced Rank magic formulas, the weapon stood as the pinnacle of Elven magical catalyst engineering.
 
 ---
 

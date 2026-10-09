@@ -32,4 +32,4 @@ The history of Enkiantium dates back to ancient **Mesopotamia** during **[The An
 
 ## The Enkiantium Needle
 
-The **Enkiantium Needle** represents the pinnacle of Dwarven craftsmanship. Using secret methods, Dwarven smiths refine raw Enkiantium into strands as thin as a thread, which retain the absolute, unbreakable durability of its original state.
+The **Enkiantium Needle** represents the pinnacle of Dwarven craftsmnam-an. Using secret methods, Dwarven smiths refine raw Enkiantium into strands as thin as a thread, which retain the absolute, unbreakable durability of its original state.

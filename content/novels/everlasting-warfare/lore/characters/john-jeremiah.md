@@ -51,7 +51,7 @@ J.J owns and operates a prominent tavern located in close proximity to the Royal
 
 J.J is widely recognized in the underworld as a master of weaponry with intuitive, unmatched expertise:
 
-- **Unrivaled Craftsmanship:** Possesses profound knowledge of firearm ballistics, metallurgy, mechanism design, and custom weapon tuning.
+- **Unrivaled Craftsmnam-an:** Possesses profound knowledge of firearm ballistics, metallurgy, mechanism design, and custom weapon tuning.
 - **Abstract Intuition:** J.J possesses an extraordinary, intuitive talent for understanding a client's exact desires. Even when presented with only vague, abstract, or poetic descriptions of what a customer is looking for (such as *"something that pierces heavy armor quietly"* or *"a weapon that feels like thunder in hand"*), J.J can immediately identify, design, or select the precise weapon best suited to their needs.
 
 ---

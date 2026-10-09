@@ -2,12 +2,12 @@
 id: OVER-008
 title: "ME (Divine Decrees)"
 category: "overview"
-summary: "Physical tablets containing divine decrees and cosmic principles forged by Enki using authority derived from Anship, embodying fundamental aspects of civilization, divine rights, and title dynamics."
+summary: "Physical tablets containing divine decrees and cosmic principles forged by Enki using authority derived from Nam-an, embodying fundamental aspects of civilization, divine rights, and title dynamics."
 type: "Divine Relics / Physical Decrees of Reality"
 status: "Active System Tablets"
 tags:
   - "me"
-  - "anship"
+  - "nam-an"
   - "enki"
   - "kingship"
   - "enship"
@@ -15,7 +15,7 @@ tags:
   - "overview"
 ---
 
-**ME** are legendary physical tablets containing divine decrees and cosmic principles forged by **[Enki](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/characters/enki.md)** using the divine authority derived from **[Anship](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/anship.md)**.
+**ME** are legendary physical tablets containing divine decrees and cosmic principles forged by **[Enki](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/characters/enki.md)** using the divine authority derived from **[Nam-an](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/nam-an.md)**.
 
 ---
 

@@ -2,7 +2,7 @@
 id: CHAR-006
 title: "Diapatri"
 category: "characters"
-summary: "The Iudex of Mesopotamia, adopted daughter and designated heir of Enki, wielder of the ME of Lawship, and possessor of a direct Shumu bestowed by Anship."
+summary: "The Iudex of Mesopotamia, adopted daughter and designated heir of Enki, wielder of the ME of Lawship, and possessor of a direct Shumu bestowed by Nam-an."
 role: "Iudex of Mesopotamia / The King's Heir"
 gender: "Female"
 race: "Plain Race"
@@ -15,7 +15,7 @@ tags:
   - "mesopotamia"
   - "me"
   - "shumu"
-  - "anship"
+  - "nam-an"
   - "characters"
 ---
 
@@ -27,7 +27,7 @@ tags:
 
 - **Name Etymology:** Named by Enki as **Diapatri**—meaning *"Through The Father"*—reflecting her unique bond and sacred lineage as his chosen daughter.
 - **Adopted Daughter & Heir:** Adopted by Enki as an orphan child, officially appointed as his true daughter and declared **The King's Heir**.
-- **Direct Shumu from Anship:** Uniquely among mortals and divine proxies, Diapatri's **Shumu** (True Name / Destiny authority) did **not** derive downstream from Enki. Instead, her Shumu was bestowed upon her directly by **[Anship](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/anship.md)** through a miraculous cosmic revelation.
+- **Direct Shumu from Nam-an:** Uniquely among mortals and divine proxies, Diapatri's **Shumu** (True Name / Destiny authority) did **not** derive downstream from Enki. Instead, her Shumu was bestowed upon her directly by **[Nam-an](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/nam-an.md)** through a miraculous cosmic revelation.
 
 ---
 
@@ -37,11 +37,11 @@ Diapatri was originally an orphan girl living under a guardian in the Kingdom of
 
 - **The Encounter:** While King **[Enki](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/characters/enki.md)** was visiting the bustling **Market of Eridu**, the little orphan girl accidentally stumbled directly into the King's leg.
 - **The Prostration:** Instantly, terror gripped the crowded marketplace. Everyone around them—most especially her panic-stricken guardian—immediately threw themselves to the ground, prostrating before the Lord of Earth in fear for the child's life.
-- **Enki's Indifference & Anship's Proclamation:** At first, Enki paid little mind to the clumsy orphan and was indifferent to the stumble. But in that exact moment, reality itself vibrated: sacred letters manifested out of thin air, writing themselves across the open sky, etched into the dirt ground, appearing upon every leaf of the surrounding trees, and glowing on every surface across Eridu:
+- **Enki's Indifference & Nam-an's Proclamation:** At first, Enki paid little mind to the clumsy orphan and was indifferent to the stumble. But in that exact moment, reality itself vibrated: sacred letters manifested out of thin air, writing themselves across the open sky, etched into the dirt ground, appearing upon every leaf of the surrounding trees, and glowing on every surface across Eridu:
 
 > **"THE KING'S HEIR"**
 
-Directly proclaimed by **[Anship](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/anship.md)** through the environment itself, Enki recognized the divine decree, took the orphan girl into his care, and named her **Diapatri** (*"Through The Father"*).
+Directly proclaimed by **[Nam-an](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/nam-an.md)** through the environment itself, Enki recognized the divine decree, took the orphan girl into his care, and named her **Diapatri** (*"Through The Father"*).
 
 ## Interest in Law & Passion for Justice
 

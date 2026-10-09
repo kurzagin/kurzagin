@@ -2,14 +2,14 @@
 id: OVER-002
 title: "Abzu (Realm of the King's Collection)"
 category: "overview"
-summary: "Enki's ultimate subterranean vault beneath all creation housing the Originals—the true primordial templates of every concept, treasure, and soul—with the physical clay cup of Anship resting at its deepest bottom."
+summary: "Enki's ultimate subterranean vault beneath all creation housing the Originals—the true primordial templates of every concept, treasure, and soul—with the physical clay cup of Nam-an resting at its deepest bottom."
 type: "Primordial Realm / Enki's Absolute Vault"
 status: "Active Secret Realm"
 tags:
   - "abzu"
   - "enki"
   - "originals"
-  - "anship"
+  - "nam-an"
   - "kings-collection"
   - "overview"
 ---
@@ -32,10 +32,10 @@ The Abzu is not merely an ocean with surfaces or shores—it is the infinite, bo
 
 ---
 
-## The Origin of the Clay Cup & Anship
+## The Origin of the Clay Cup & Nam-an
 
-In **[The Antediluvian Era](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/timeline/antediluvian-era.md)**, while wielding **[Nam-shub](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/nam-shub.md)** (the power of Anship), Enki accidentally caused **[Anship](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/anship.md)**—the supreme Creator and source of all divinity—to take physical form, shaping omnipotence into a humble **clay cup**.
+In **[The Antediluvian Era](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/timeline/antediluvian-era.md)**, while wielding **[Nam-shub](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/nam-shub.md)** (the power of Nam-an), Enki accidentally caused **[Nam-an](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/nam-an.md)**—the supreme Creator and source of all divinity—to take physical form, shaping omnipotence into a humble **clay cup**.
 
 Recognizing that his Nam-shub had accidentally transformed an invulnerable divine absolute into a physical object that could be stolen or destroyed, Enki created the Abzu as an absolute subterranean vault to safeguard the vessel for eternity.
 
-> At the very bottom of the Abzu, where the pressure of pure existence would crush any ordinary thing to less than dust, rests the crown jewel of Enki's collection: **Anship—the simple clay cup.**
+> At the very bottom of the Abzu, where the pressure of pure existence would crush any ordinary thing to less than dust, rests the crown jewel of Enki's collection: **Nam-an—the simple clay cup.**

@@ -28,7 +28,7 @@ The **Chain of Destruction** is a legendary divine artifact forged during **[The
 ## Origin & Commission by Diapatri
 
 - **Commissioned by Diapatri:** The weapon was originally commissioned during the Antediluvian Era by **[Diapatri](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/characters/diapatri.md)**, the Iudex of Mesopotamia and adopted daughter of King Enki.
-- **Dwarven Craftsmanship:** Diapatri sought out master smiths of the **[Dwarven Race](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/races/dwarf.md)** to forge the chain, using advanced metallurgy and arcane binding formulas.
+- **Dwarven Craftsmnam-an:** Diapatri sought out master smiths of the **[Dwarven Race](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/races/dwarf.md)** to forge the chain, using advanced metallurgy and arcane binding formulas.
 - **Original Purpose:** The artifact was specifically engineered to capture, bind, and tame hostile **[Elemental Beasts](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/races/elemental-beast.md)** that roamed the realm and posed severe dangers to civilization.
 
 ---

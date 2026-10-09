@@ -24,7 +24,7 @@ tags:
 
 During the invasion of Earth in **[The Antediluvian Era](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/timeline/antediluvian-era.md)**, while Sirius was stripped of her memories and emotions to serve as a mindless vanguard weapon for the greedy Aethernian leadership, Kamael remained constantly suspicious. She harbored a deep conviction that Sirius's strong will would eventually shatter her conditioning.
 
-When King **[Enki](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/characters/enki.md)** prayed to **[Anship](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/anship.md)** and triggered the world-destroying cataclysm, expelling off-world entities into space, Sirius's mental shackles broke. The moment Sirius displayed defiance and regained her memories, Kamael reported her sister's betrayal to the Aethernian leaders.
+When King **[Enki](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/characters/enki.md)** prayed to **[Nam-an](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/nam-an.md)** and triggered the world-destroying cataclysm, expelling off-world entities into space, Sirius's mental shackles broke. The moment Sirius displayed defiance and regained her memories, Kamael reported her sister's betrayal to the Aethernian leaders.
 
 ---
 

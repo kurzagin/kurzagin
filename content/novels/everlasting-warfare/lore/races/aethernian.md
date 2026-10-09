@@ -2,7 +2,7 @@
 id: RACE-001
 title: "Aethernian Race"
 category: "races"
-summary: "An ancient celestial machine-god race hailing from the lost universe of Olam HaBa. Driven by the catastrophic rupture of their Ohr Ein Sof and the destruction of their homeworld Ha'aretz ha-Muvtaḥat, they traverse the multiverse aboard Merkabah starships seeking to harvest Divine resources (Anship) to recreate their lost universe."
+summary: "An ancient celestial machine-god race hailing from the lost universe of Olam HaBa. Driven by the catastrophic rupture of their Ohr Ein Sof and the destruction of their homeworld Ha'aretz ha-Muvtaḥat, they traverse the multiverse aboard Merkabah starships seeking to harvest Divine resources (Nam-an) to recreate their lost universe."
 type: "Extraterrestrial Machine-Angelic Species"
 status: "Extant / Antagonist Off-World Cosmic Force"
 tags:
@@ -10,7 +10,7 @@ tags:
   - "olam-haba"
   - "haaretz-ha-muvtahat"
   - "ohr-ein-sof"
-  - "anship"
+  - "nam-an"
   - "the-one"
   - "archangel"
   - "merkabah"
@@ -27,13 +27,13 @@ The **Aethernians** are an ancient celestial race that has traversed the multive
 
 - **The Lost Universe of Olam HaBa & Ha'aretz ha-Muvtaḥat:** The Aethernians originally hailed from the divine universe of **Olam HaBa** (*The World to Come*). Their true homeworld was **Ha'aretz ha-Muvtaḥat** (*The Promised Land*)—a paradise of boundless celestial harmony. Every Aethernian carries an absolute, inescapable inner dream and longing for this lost home.
 - **Rupture of Ohr Ein Sof:** In primordial times, **The One** conducted an action that accidentally ruptured their universe's **Ohr Ein Sof** (the Infinite Divine Resource). At that exact instant, the fundamental structure of Olam HaBa collapsed, and their home universe was completely destroyed.
-- **Sister Divine Branches:** **Ohr Ein Sof** (in Olam HaBa) and **[Anship](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/anship.md)** (in Earth's universe) are sister branches stemming from the exact same primordial divine source. Neither branch is subordinate to or derived from the other; both share the exact same fundamental cosmic hierarchy and divine essence across their respective universes.
-- **Cross-Dimensional Nullification & Reality Warping Constraints:** Because Ohr Ein Sof is the origin source and foundation of the Aethernians' universe while Earth/Anship operates under a distinct dimensional origin:
-  - **High-Level Reality Warping Disabled:** Any attempt by Aethernians to exert high-level reality wrapping/warping using Ohr Ein Sof energy within the Anship universe is completely constrained and disabled. Their divine powers are stripped of fundamental reality-rewriting authority when acting upon the Anship realm.
-  - **Anship Warping Immunity:** Conversely, because Aethernians are fundamentally anchored to Ohr Ein Sof as their ontological source, Anship-side reality warping forces (such as **[Nam-shub](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/nam-shub.md)** decrees, **[Tu](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/nam-en.md)** commands, or ME dictates) cannot directly affect or alter an Aethernian's existence or fundamental reality.
-- **The Singular Mandate:** Facing total extinction, **The One** realized that other universes contained parallel sister branches of this primordial Divine resource. Driven by cold efficiency and their desperate longing for Ha'aretz ha-Muvtaḥat, the Aethernians built their Merkabah fleet—wandering the multiverse aboard colossal divine starships, spearheaded by a massive flagship roughly **three times planetary scale**—with a single unyielding goal: harvest enough Divine resources (Ohr Ein Sof / Anship) from other worlds to recreate their destroyed universe and finally return home.
-- **Discovery of Earth & Materialized Anship:** While searching the cosmic void, **The One** sensed the sister branch of Divine power flowing within Earth's universe. Upon arriving at Earth during the Antediluvian Era, **The One** observed that in this realm, the Divine resource physically materializes—known to Earth's Mesopotamian mortals as **[Anship](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/anship.md)**.
-- **Merkabah Fleet:** Navigating space in **Merkabah**—divine chariot starships powered by sacred geometry, with their main flagship spanning approximately **3 times planetary scale**—the Aethernian legions descended upon Earth to siphon its materialized Anship reserves.
+- **Sister Divine Branches:** **Ohr Ein Sof** (in Olam HaBa) and **[Nam-an](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/nam-an.md)** (in Earth's universe) are sister branches stemming from the exact same primordial divine source. Neither branch is subordinate to or derived from the other; both share the exact same fundamental cosmic hierarchy and divine essence across their respective universes.
+- **Cross-Dimensional Nullification & Reality Warping Constraints:** Because Ohr Ein Sof is the origin source and foundation of the Aethernians' universe while Earth/Nam-an operates under a distinct dimensional origin:
+  - **High-Level Reality Warping Disabled:** Any attempt by Aethernians to exert high-level reality wrapping/warping using Ohr Ein Sof energy within the Nam-an universe is completely constrained and disabled. Their divine powers are stripped of fundamental reality-rewriting authority when acting upon the Nam-an realm.
+  - **Nam-an Warping Immunity:** Conversely, because Aethernians are fundamentally anchored to Ohr Ein Sof as their ontological source, Nam-an-side reality warping forces (such as **[Nam-shub](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/nam-shub.md)** decrees, **[Tu](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/nam-en.md)** commands, or ME dictates) cannot directly affect or alter an Aethernian's existence or fundamental reality.
+- **The Singular Mandate:** Facing total extinction, **The One** realized that other universes contained parallel sister branches of this primordial Divine resource. Driven by cold efficiency and their desperate longing for Ha'aretz ha-Muvtaḥat, the Aethernians built their Merkabah fleet—wandering the multiverse aboard colossal divine starships, spearheaded by a massive flagship roughly **three times planetary scale**—with a single unyielding goal: harvest enough Divine resources (Ohr Ein Sof / Nam-an) from other worlds to recreate their destroyed universe and finally return home.
+- **Discovery of Earth & Materialized Nam-an:** While searching the cosmic void, **The One** sensed the sister branch of Divine power flowing within Earth's universe. Upon arriving at Earth during the Antediluvian Era, **The One** observed that in this realm, the Divine resource physically materializes—known to Earth's Mesopotamian mortals as **[Nam-an](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/nam-an.md)**.
+- **Merkabah Fleet:** Navigating space in **Merkabah**—divine chariot starships powered by sacred geometry, with their main flagship spanning approximately **3 times planetary scale**—the Aethernian legions descended upon Earth to siphon its materialized Nam-an reserves.
 
 ---
 
@@ -83,7 +83,7 @@ Below the Archangels, the main force of the Aethernian species is organized into
 ### 7. Elohim (The Realm Sculptors)
 - **Rank:** 7th Class
 - **Body & Shape:** Geodesic dodecahedrons suspended within articulated, multi-segmented metallic tendrils and rotating orbital rings.
-- **Abilities & Function:** Environmental terraforming and Anship extraction units. Elohim alter ambient atmospheric density, siphon localized Anship veins, and harvest raw Ohr Ein Sof energy directly from planetary soil and ley lines.
+- **Abilities & Function:** Environmental terraforming and Nam-an extraction units. Elohim alter ambient atmospheric density, siphon localized Nam-an veins, and harvest raw Ohr Ein Sof energy directly from planetary soil and ley lines.
 
 ### 8. Bene Elohim (The Shard Swarmers)
 - **Rank:** 8th Class
@@ -98,4 +98,4 @@ Below the Archangels, the main force of the Aethernian species is organized into
 ### 10. Ishim (The Metallic Sentinels)
 - **Rank:** 10th Class
 - **Body & Shape:** Mass-produced humanoid steel chassis featuring a single illuminated horizontal eye-visor and modular utility hardpoints.
-- **Abilities & Function:** Frontline infantry and resource siphons. Operating under unified tactical protocols, Ishim carry out mass Anship harvesting operations and execute ground-level tactical mandates.
+- **Abilities & Function:** Frontline infantry and resource siphons. Operating under unified tactical protocols, Ishim carry out mass Nam-an harvesting operations and execute ground-level tactical mandates.

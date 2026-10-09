@@ -2,13 +2,13 @@
 id: OVER-016
 title: "The Underworld (Realm of the Dead)"
 category: "overview"
-summary: "A spectral purgatory structured as an infinite inverted abyssal pillar beneath Middleworld (An-Ki), created by Enki and sovereignly ruled by Queen Ereshkigal through Nam-shubkur."
+summary: "A spectral purgatory structured as an infinite inverted abyssal pillar beneath Middleworld (An-Ki), created by Enki and sovereignly ruled by Queen Ereshkigal through Nam-shub-kur."
 type: "Spectral Realm / Infinite Abyssal Pillar"
 status: "Active Subterranean Realm"
 tags:
   - "underworld"
   - "ereshkigal"
-  - "nam-shubkur"
+  - "nam-shub-kur"
   - "demon"
   - "lesser-key-of-solomon"
   - "overview"
@@ -20,7 +20,7 @@ tags:
 
 ## Sovereign Law & Geography
 
-- **Nam-shubkur:** Ereshkigal wields absolute sovereign authority via Nam-shubkur within the Dead Realm; Enki's Nam-shub holds no sway here without her consent.
+- **Nam-shub-kur:** Ereshkigal wields absolute sovereign authority via Nam-shub-kur within the Dead Realm; Enki's Nam-shub holds no sway here without her consent.
 - **Geography (The Abyssal Pillar):** Structured as a colossal, inverted infinite tower plunging into subterranean darkness.
 - **Terminology:** Middleworld / An-Ki (Surface world of the living), Underworlder (denizens).
 

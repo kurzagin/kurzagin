@@ -31,6 +31,6 @@ tags:
 
 ## Cataclysmic End: Enki's Scorched Earth
 
-Upon his final battle and prayer to Anship, Enki destroyed the world to force a universal rebirth. However, Enki's soul did **not** vanish. 
+Upon his final battle and prayer to Nam-an, Enki destroyed the world to force a universal rebirth. However, Enki's soul did **not** vanish. 
 
 Because of his cosmic archetype as **The King**, Enki's soul shattered into divine fragments and entered the eternal cycle of reincarnation. As a result, every great leader, monarch, and conqueror across human and continental history carries a fragment of Enki's soul—the true origin of their instinctual drive to lead, conquer, and unify the world under a single **World Order**.
