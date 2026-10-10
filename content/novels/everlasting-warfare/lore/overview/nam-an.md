@@ -13,10 +13,10 @@ tags:
   - "overview"
 ---
 
-**Nam-an** is the **Creator**, the ultimate concept of the supernatural framework, and the absolute source of divinity itself. It is the most supreme divine entity in existence—not the creation of any deity.
+**Nam-an** is the **Creator** and the supreme supernatural framework of Earth's cosmos. It is a direct divine manifestation of **[Protongrammation (ρ)](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/protongrammation.md)**—the most divine and most high source from which all reality derives.
 
 > [!NOTE] Sister Divine Branches (**Nam-an & Ohr Ein Sof**)
-> Earth's **Nam-an** and the Aethernian universe's (**Olam HaBa**) **Ohr Ein Sof** are sister branches stemming from the exact same primordial Divine Origin. Neither is subordinate to or derived from the other; both represent parallel expressions of the same fundamental cosmic hierarchy across their respective universes.
+> Earth's **Nam-an** and the Aethernian universe's (**Olam HaBa**) **Ohr Ein Sof** are sister branches stemming from the exact same primordial Divine Source: **[Protongrammation (ρ)](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/overview/protongrammation.md)**. Neither branch is subordinate to or derived from the other; both represent parallel cosmic derivatives of Protongrammation across their respective universes.
 >
 > **Cross-Dimensional Interaction & Immunity Rules:**
 > 1. **Ohr Ein Sof Constraints in Nam-an Realm:** Because **Ohr Ein Sof** is the source universe of the Aethernians, all high-level reality wrapping/warping applications derived from Ohr Ein Sof are completely disabled and constrained when used to affect or rewrite the physical realm of the **Nam-an** universe.
