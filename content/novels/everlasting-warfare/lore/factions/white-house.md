@@ -86,7 +86,7 @@ Driven by a philosophical obsession with the **defiance of human mortality**—f
 
 Yet in an extraordinary and heartbreaking paradox, Dr. Phoenix **genuinely, deeply loved the children** as a true mother. Universally beloved and called **"Mother"** by all facility subjects, she spent her days and nights tending to their physiology and minds, healing the very suffering her proposals caused. She nursed surgical incisions, alleviated the toxicity of Vigortio, fed them warm home-cooked meals, brought them toys and storybooks, and gave them unconditional love. Her warmth was the crucial anchor that kept the children human and allowed House Twilight to bond as a unified family rather than destroying one another.
 
-Her life ended in profound tragedy years later. Having survived the 1634 facility fire, she was trusted by Zeeran Twilight to treat **Zsofia**; however, blinded by her obsession to conquer death, Parischt used Zsofia as a living "blood stock" for cellular regeneration experiments. Upon discovering this betrayal, Zeeran personally executed the woman he had loved as a mother.
+Her life ended in profound tragedy. When trusted by Zeeran Twilight to treat **Zsofia**, Parischt—blinded by her obsession to conquer death—used Zsofia as a living "blood stock" for cellular regeneration experiments. Upon discovering this betrayal, Zeeran personally executed the woman he had loved as a mother.
 
 ### The First Subject: Zeeran Twilight (ZR4N-4)
 **[Zeeran Twilight](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/characters/zeeran-twilight.md)** (`ZR4N-4`) was brought to the White House facility at around **~6 years old**. 

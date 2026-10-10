@@ -137,13 +137,6 @@ Mother Phoenix's love and philosophy forever altered the fate of House Twilight:
 2. **The Triumph of Unification:**
    When the seven children gathered in the Twilight Room, Griffin expected them to potentially destroy each other in ruthless competition for supremacy. Instead, they bound themselves into an unbreakable, unified family under Zeeran. This outcome was not an accident of cognitive genius—it was the direct fruit of Mother Phoenix's warmth. She taught them to love one another, transforming seven isolated guinea pigs into an invincible brotherhood.
 
----
-
-## The Fire of the White House (1634) & Covert Survival
-
-During the sudden assault on the White House in **1634**, artillery and incendiary shells tore through the facility. 
-
-As the underground wards caught fire, Parischt Chartrenix refused to evacuate with imperial staff, diving into smoke-choked corridors to guide young wards into emergency drainage routes. While outside military records officially logged her as missing or presumed dead in the inferno that claimed **[Zell Twilight](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/characters/zell-twilight.md)**, Parischt survived the compound's collapse. Withdrawing into clandestine shadow facilities, she continued her medical research, driven ever deeper by her lifelong obsession with the absolute defiance of mortality.
 
 ---
 
@@ -151,16 +144,18 @@ As the underground wards caught fire, Parischt Chartrenix refused to evacuate wi
 
 The final, devastating chapter of Dr. Phoenix's life came at the hands of the very boy she loved most: **[Zeeran Twilight](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/characters/zeeran-twilight.md)**.
 
-Throughout their lives, Zeeran held an unshakeable faith in Mother Phoenix. In a world full of manipulative generals, political schemers, and clinical sadists, she was the only parental figure he believed possessed true warmth and selfless medical genius. When **Zsofia** fell severely ill and required critical medical intervention, Zeeran placed his complete faith and unconditional trust in Dr. Phoenix, bringing Zsofia to her care in the absolute certainty that "Mother" would heal her.
+Throughout their lives, Zeeran held an unshakeable faith in Mother Phoenix. In a world full of manipulative generals, political schemers, and clinical sadists, she was the only parental figure he believed possessed true warmth and selfless medical genius. When **[Zsofia](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/characters/zsofia.md)** fell severely ill in the Candlelight Room and facility researchers dismissed Zyfel's desperate pleas, little Zyfel knelt weeping before Zeeran. Furious at seeing his sister beg—viewing it as his personal failure as an older brother—Zeeran confronted **[Dr. Griffin](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/characters/dr-griffin.md)** with a knife held to his own neck. But Griffin coldly told him that even his death changed nothing, as the war had drained all government resources, making it far more efficient to treat only the Twilight Room rather than lower-grade subjects. Crushed and stripped of all hope, Zeeran was met by Dr. Phoenix, who stepped in and promised to treat Zsofia using her own private resources. Zeeran placed his complete faith and unconditional trust in Mother Phoenix, bringing Zsofia to her care in the absolute certainty that she would heal her.
 
 However, Parischt's obsession with **defying human mortality** had crossed the threshold of moral sanity:
 - **Reduced to Blood Stock:** Rather than administering treatment to cure Zsofia, Dr. Phoenix became fascinated by Zsofia's unique biological vitality and cellular profile. Convinced that Zsofia's blood held the elusive key to halting cellular decay and achieving biological immortality, Parischt reduced Zsofia to a **living "blood stock"** (*Blut-Reservoir*)—confining her within hidden laboratory chambers, hooking her up to continuous fluid-harvesting machinery, and systematically draining her blood to fuel her immortality and regeneration experiments.
 - **Zeeran's Discovery:** When Zeeran returned to check on Zsofia's recovery, he bypassed security barriers and uncovered the horrifying truth: the girl he had entrusted to his mother's loving hands was trapped in a glass chamber, pale, drained, and treated as harvested livestock.
 
 ### The Execution by Her "Eldest Son"
-The revelation shattered something irreplaceable within Zeeran Twilight. Zeeran could endure the cruelty of imperial enemies, and he had borne the agonizing degeneration of his own heart and nerves without a word of complaint. But discovering that the woman he called **"Mother"**—the only maternal warmth the Twilight siblings had ever known—had commodified Zsofia into a disposable blood stock was an unforgivable sacrilege.
+The revelation shattered something irreplaceable within Zeeran Twilight. Zeeran could endure the cruelty of imperial enemies, and he had borne the agonizing degeneration of his own heart and nerves without a word of complaint. But discovering that the woman he called **"Mother"**—the only maternal warmth the Twilight siblings had ever known—had commodified Zsofia into a disposable blood stock was an unforgivable sacrilege. In the secret treatment chamber, **[Zsofia](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/characters/zsofia.md)** lay before them in an unrecognizable, horrifying state—already dead, drained completely of her lifeblood.
 
-Zeeran refused to allow imperial courts or foreign authorities to touch her. Taking the burden upon himself, **Zeeran Twilight personally executed Dr. Phoenix**.
+Zeeran refused to allow imperial courts or foreign authorities to touch her. Taking the burden upon himself, **Zeeran Twilight personally executed Dr. Phoenix** beside Zsofia's lifeless corpse.
+
+Alerted by the disturbance and violent noises, young **[Zyfel Twilight](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/characters/zyfel-twilight.md)** rushed immediately to the treatment room. Stepping through the doorway, Zyfel bore witness to the devastating aftermath: Zeeran cutting down Dr. Phoenix, and beside them, her beloved older sister Zsofia in the worst condition imaginable. With her razor-sharp clinical intuition, Zyfel instantly realized the full horror of what Mother had done.
 
 Even as Zeeran drew his weapon to end her life, Parischt looked upon him without hatred, fear, or resentment. In an eerie and tragic continuation of her unconditional maternal devotion, she looked into the cold, weeping eyes of her eldest son with that same gentle, radiant smile—whispering that his absolute, ruthless resolve to protect his own proved that her children had truly transcended the frailty of ordinary mortals.
 
