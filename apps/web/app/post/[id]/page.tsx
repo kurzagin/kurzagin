@@ -15,7 +15,7 @@ import {
 } from '@/lib/db';
 import { getClientIp, hashIp } from '@/lib/ip';
 import { getServerSession } from '@/lib/serverSession';
-import { processYouTubePost } from '@/lib/youtube';
+import { processPostContent } from '@/lib/embeds';
 import PostClient from './PostClient';
 
 export async function generateMetadata({
@@ -29,7 +29,7 @@ export async function generateMetadata({
   try {
     const post = await db.select().from(postsTable).where(eq(postsTable.id, id)).limit(1);
     if (post.length > 0) {
-      const { cleanedContent } = processYouTubePost(post[0].content || '');
+      const { cleanedContent } = processPostContent(post[0].content || '');
       return {
         title: `${post[0].author_name}: "${(cleanedContent || 'transmission').slice(0, 35)}..." — kurzagin`,
       };

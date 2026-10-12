@@ -21,7 +21,8 @@ import {
 } from 'lucide-react';
 import { css } from './_ui/css';
 import EditPostModal from '@/components/EditPostModal';
-import { processYouTubePost, formatBody } from '@/lib/youtube';
+import { TweetEmbed } from '@/components/TweetEmbed';
+import { processPostContent, formatBody } from '@/lib/embeds';
 import type {
   DbPost,
   DbComment,
@@ -236,7 +237,7 @@ export default function HomeClient({
           const previewMediaItems = postMediaItems.slice(0, 4);
           const additionalMediaCount = postMediaItems.length - previewMediaItems.length;
           const isLiked = likedPostIds.has(post.id);
-          const { cleanedContent, videos: postYouTubeVideos } = processYouTubePost(post.content || '');
+          const { cleanedContent, youtubeVideos: postYouTubeVideos, tweetIds: postTweetIds } = processPostContent(post.content || '');
           // Anime reviews historically stored uploaded images as markdown in the
           // body as well as in postMedia. The media grid is the canonical renderer,
           // so hide those markdown tokens to prevent raw syntax and duplicate images.
@@ -318,7 +319,7 @@ export default function HomeClient({
               {postYouTubeVideos.length > 0 && (
                 <div className="post-youtube-embeds" onClick={(e) => { e.stopPropagation(); }}>
                   {postYouTubeVideos.map((video) => (
-                    <div className="post-youtube-player">
+                    <div className="post-youtube-player" key={video.id}>
                       <iframe
                         src={video.embedUrl}
                         title="YouTube video player"
@@ -328,6 +329,14 @@ export default function HomeClient({
                         allowfullscreen
                       ></iframe>
                     </div>
+                  ))}
+                </div>
+              )}
+
+              {postTweetIds.length > 0 && (
+                <div className="post-tweets-container" onClick={(e) => { e.stopPropagation(); }}>
+                  {postTweetIds.map((tweetId) => (
+                    <TweetEmbed key={tweetId} id={tweetId} />
                   ))}
                 </div>
               )}

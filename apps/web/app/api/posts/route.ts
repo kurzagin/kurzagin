@@ -3,7 +3,7 @@ import { cookies as nextCookies } from 'next/headers';
 import { desc, eq, inArray } from 'drizzle-orm';
 import { getDb, posts, postMedia, games, getProfile, type PostMedia } from '@/lib/db';
 import { isAuthenticated, getSession } from '@/lib/auth';
-import { processYouTubePost } from '@/lib/youtube';
+import { processPostContent } from '@/lib/embeds';
 
 export async function GET(request: NextRequest) {
   await connection();
@@ -114,8 +114,8 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    const { videos } = processYouTubePost(content);
-    const hasMedia = mediaItems.length > 0 || videos.length > 0;
+    const { embeds } = processPostContent(content);
+    const hasMedia = mediaItems.length > 0 || embeds.length > 0;
     const category = body.category === 'anime' ? 'anime' : hasMedia ? 'media' : 'text';
     const animeMeta = body.category === 'anime' ? body.anime_meta || null : null;
     let gameId: string | null = body.game_id ? String(body.game_id) : null;
@@ -267,8 +267,8 @@ export async function PATCH(request: NextRequest) {
       });
     }
 
-    const { videos } = processYouTubePost(content);
-    const hasMedia = savedMedia.length > 0 || videos.length > 0;
+    const { embeds } = processPostContent(content);
+    const hasMedia = savedMedia.length > 0 || embeds.length > 0;
     const category = body.category !== undefined
       ? body.category
       : currentPost.category === 'anime'

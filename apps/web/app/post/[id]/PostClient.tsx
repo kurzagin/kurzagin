@@ -5,7 +5,8 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Heart, MessageSquare, Pencil } from 'lucide-react';
 import { css } from '../../_ui/css';
-import { processYouTubePost, formatBody } from '@/lib/youtube';
+import { TweetEmbed } from '@/components/TweetEmbed';
+import { processPostContent, formatBody } from '@/lib/embeds';
 import type { DbPost, DbComment, DbPostMedia, DbProfile } from '@/lib/db';
 import EditPostModal from '@/components/EditPostModal';
 import './post.css';
@@ -54,7 +55,7 @@ export default function PostClient({
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [comments, setComments] = useState(postComments);
   const [replyingTo, setReplyingTo] = useState(null);
-  const { cleanedContent, videos: postYouTubeVideos } = processYouTubePost(post.content || '');
+  const { cleanedContent, youtubeVideos: postYouTubeVideos, tweetIds: postTweetIds } = processPostContent(post.content || '');
 
   const submitReply = async (event) => {
     event.preventDefault();
@@ -141,7 +142,7 @@ export default function PostClient({
       {postYouTubeVideos.length > 0 && (
         <div className="post-youtube-embeds" style={css("margin-bottom: 16px;")}>
           {postYouTubeVideos.map((video) => (
-            <div className="post-youtube-player">
+            <div className="post-youtube-player" key={video.id}>
               <iframe
                 src={video.embedUrl}
                 title="YouTube video player"
@@ -151,6 +152,14 @@ export default function PostClient({
                 allowfullscreen
               ></iframe>
             </div>
+          ))}
+        </div>
+      )}
+
+      {postTweetIds.length > 0 && (
+        <div className="post-tweets-container" style={css("margin-bottom: 16px;")}>
+          {postTweetIds.map((tweetId) => (
+            <TweetEmbed key={tweetId} id={tweetId} />
           ))}
         </div>
       )}

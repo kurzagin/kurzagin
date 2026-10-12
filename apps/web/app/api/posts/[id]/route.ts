@@ -3,7 +3,7 @@ import { cookies as nextCookies } from 'next/headers';
 import { desc, eq } from 'drizzle-orm';
 import { getDb, posts, postMedia, getProfile, type PostMedia } from '@/lib/db';
 import { isAuthenticated } from '@/lib/auth';
-import { processYouTubePost } from '@/lib/youtube';
+import { processPostContent } from '@/lib/embeds';
 
 export async function GET(
   request: NextRequest,
@@ -144,8 +144,8 @@ export async function PATCH(
       });
     }
 
-    const { videos } = processYouTubePost(content);
-    const hasMedia = savedMedia.length > 0 || videos.length > 0;
+    const { embeds } = processPostContent(content);
+    const hasMedia = savedMedia.length > 0 || embeds.length > 0;
     const category = body.category !== undefined
       ? body.category
       : currentPost.category === 'anime'
