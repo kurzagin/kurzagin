@@ -1681,41 +1681,20 @@ nav.top-nav {
 .post-tweet-embed {
   width: 100%;
   display: flex;
+  justify-content: center;
 }
 
-.post-tweet-embed .react-tweet-theme {
-  --tweet-container-margin: 0;
+.post-tweet-embed .tweet-widget-container {
   width: 100%;
-  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  min-height: 250px;
 }
 
-/* Blend tweet container seamlessly into the post card styling */
-.post-tweet-embed [class*="tweet-container_root"] {
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-0);
-  border-radius: 4px;
-  width: 100%;
-  transition: border-color 0.15s ease;
-}
-
-.post-tweet-embed [class*="tweet-container_root"]:hover {
-  border-color: var(--border);
-}
-
-/* Constrain tall vertical images to match X's native feed layout (capped height) */
-.post-tweet-embed [class*="tweet-media_root"] {
-  max-height: 520px;
-  overflow: hidden;
-}
-
-.post-tweet-embed [class*="tweet-media_mediaContainer"] {
-  max-height: 520px;
-  overflow: hidden;
-}
-
-.post-tweet-embed [class*="tweet-media_image"] {
-  object-fit: cover;
-  object-position: top center;
+.post-tweet-embed .tweet-widget-container iframe {
+  max-width: 100% !important;
+  border-radius: 8px !important;
+  margin: 0 auto !important;
 }
 
 .post-link {
