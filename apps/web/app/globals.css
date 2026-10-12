@@ -1690,6 +1690,17 @@ nav.top-nav {
   max-width: 550px;
 }
 
+/* Constrain tall vertical images to match X's native feed layout (capped height) */
+.post-tweet-embed [class*="tweet-media_root"] {
+  max-height: 520px;
+  overflow: hidden;
+}
+
+.post-tweet-embed [class*="tweet-media_mediaContainer"] {
+  max-height: 520px;
+  overflow: hidden;
+}
+
 .post-link {
   color: var(--accent);
   text-decoration: underline;
