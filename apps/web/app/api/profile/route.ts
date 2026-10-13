@@ -34,12 +34,20 @@ export async function PATCH(request: NextRequest) {
 
   try {
     const body = await request.json();
-    const banner_url = body.banner_url ? String(body.banner_url).trim() : null;
-    const theme = ['citlali', 'furina'].includes(body.theme) ? body.theme : 'default';
+    const current = await getProfile();
+
+    const banner_url = body.banner_url !== undefined
+      ? (body.banner_url ? String(body.banner_url).trim() : null)
+      : (current?.banner_url ?? null);
+
+    const theme = body.theme !== undefined
+      ? (['citlali', 'furina'].includes(body.theme) ? body.theme : 'default')
+      : (current?.theme ?? 'default');
+
     if (banner_url && !/^(https?:\/\/|\/)/i.test(banner_url)) {
       return json({ error: 'Image URL must start with http(s):// or /' }, 400);
     }
-    const current = await getProfile();
+
     // If the banner changed or was cleared, track previous banner as detached
     if (current?.banner_url && current.banner_url !== banner_url) {
       await detachMediaByUrl(current.banner_url);
@@ -47,7 +55,7 @@ export async function PATCH(request: NextRequest) {
 
     await db
       .insert(profiles)
-      .values({ ...current, banner_url, updated_at: new Date() })
+      .values({ ...current, banner_url, theme, updated_at: new Date() })
       .onConflictDoUpdate({ target: profiles.id, set: { banner_url, theme, updated_at: new Date() } });
     return json({ success: true, banner_url, theme }, 200);
   } catch (err: any) {
@@ -85,11 +93,18 @@ export async function PUT(request: NextRequest) {
       });
     }
 
+    const current = await getProfile();
     const headline = body.headline !== undefined ? String(body.headline).trim() : null;
     const bio = body.bio !== undefined ? String(body.bio).trim() : null;
-    const avatar_url = body.avatar_url ? String(body.avatar_url).trim() : null;
-    const banner_url = body.banner_url ? String(body.banner_url).trim() : null;
-    const theme = ['citlali', 'furina'].includes(body.theme) ? body.theme : 'default';
+    const avatar_url = body.avatar_url !== undefined
+      ? (body.avatar_url ? String(body.avatar_url).trim() : null)
+      : (current?.avatar_url ?? null);
+    const banner_url = body.banner_url !== undefined
+      ? (body.banner_url ? String(body.banner_url).trim() : null)
+      : (current?.banner_url ?? null);
+    const theme = body.theme !== undefined
+      ? (['citlali', 'furina'].includes(body.theme) ? body.theme : 'default')
+      : (current?.theme ?? 'default');
     const location = body.location !== undefined ? String(body.location).trim() : '35.6614° N, 139.6681° E';
     const status_message = body.status_message !== undefined ? String(body.status_message).trim() : 'online';
     const contact_email = body.contact_email !== undefined ? String(body.contact_email).trim() : null;
@@ -145,7 +160,6 @@ export async function PUT(request: NextRequest) {
       created_at: new Date(),
     };
 
-    const current = await getProfile();
     if (current?.banner_url && current.banner_url !== banner_url) {
       await detachMediaByUrl(current.banner_url);
     }

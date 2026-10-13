@@ -227,6 +227,7 @@ export default function ProfileClient({
         status_message,
         avatar_url,
         banner_url,
+        theme: profile.theme || 'default',
         contact_email,
         contact_note,
         tech_stack,
