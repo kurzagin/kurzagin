@@ -339,6 +339,7 @@ export default function SettingsClient({
             <select id="themeSelect" defaultValue={currentTheme} style={inputStyle}>
               <option value="default">default // kurzagin</option>
               <option value="citlali">citlali // obsidian opalstar</option>
+              <option value="furina">furina // regina di fontaine</option>
             </select>
             <button type="button" id="themeSave" className="post-btn">APPLY →</button>
           </div>

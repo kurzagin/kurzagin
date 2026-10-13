@@ -67,6 +67,39 @@
   background: rgba(9,13,29,0.92);
 }
 
+[data-theme='furina'] {
+  --bg-0: #080d1a;
+  --bg-1: #0e1526;
+  --bg-2: #141f38;
+  --bg-3: #1c2b4c;
+  --border: #29406d;
+  --border-subtle: #182745;
+  --text-0: #edf4ff;
+  --text-1: #c2d5f2;
+  --text-2: #7f9ec7;
+  --text-3: #4b6691;
+  --accent: #5ab2ff;
+  --accent-dim: rgba(90,178,255,0.14);
+  --accent-hover: #82c8ff;
+  --teal: #7ce8ff;
+  --teal-dim: rgba(124,232,255,0.12);
+  --warm: #d5b3ff;
+  --red-soft: #e27d97;
+  --green-soft: #70d6b6;
+  --sticky-1: #dbeaff;
+  --sticky-2: #c6e0ff;
+  --sticky-3: #b0d4ff;
+  --sticky-4: #d8cfff;
+}
+
+[data-theme='furina'] body::before {
+  background-image: radial-gradient(circle, #29406d 0.5px, transparent 0.5px);
+}
+
+[data-theme='furina'] nav.top-nav {
+  background: rgba(8,13,26,0.92);
+}
+
 html { scroll-behavior: smooth; }
 
 html, body {

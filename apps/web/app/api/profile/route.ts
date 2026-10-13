@@ -35,7 +35,7 @@ export async function PATCH(request: NextRequest) {
   try {
     const body = await request.json();
     const banner_url = body.banner_url ? String(body.banner_url).trim() : null;
-    const theme = body.theme === 'citlali' ? 'citlali' : 'default';
+    const theme = ['citlali', 'furina'].includes(body.theme) ? body.theme : 'default';
     if (banner_url && !/^(https?:\/\/|\/)/i.test(banner_url)) {
       return json({ error: 'Image URL must start with http(s):// or /' }, 400);
     }
@@ -89,7 +89,7 @@ export async function PUT(request: NextRequest) {
     const bio = body.bio !== undefined ? String(body.bio).trim() : null;
     const avatar_url = body.avatar_url ? String(body.avatar_url).trim() : null;
     const banner_url = body.banner_url ? String(body.banner_url).trim() : null;
-    const theme = body.theme === 'citlali' ? 'citlali' : 'default';
+    const theme = ['citlali', 'furina'].includes(body.theme) ? body.theme : 'default';
     const location = body.location !== undefined ? String(body.location).trim() : '35.6614° N, 139.6681° E';
     const status_message = body.status_message !== undefined ? String(body.status_message).trim() : 'online';
     const contact_email = body.contact_email !== undefined ? String(body.contact_email).trim() : null;
