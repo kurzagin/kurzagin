@@ -82,7 +82,7 @@ Demonstrating her unmatched dedication and architectural intellect, Merlyne once
 
 - **[Zeeran Twilight](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/characters/zeeran-twilight.md):** Patriarch of House Twilight and Ex Supreme Commander of Tigris. Merlyne involuntarily rescued him and his crew in Antarctica after responding to an instinctual magic trigger.
 - **Her Professor:** A patient academy instructor who genuinely cares for Merlyne, consistently visiting her explosive dorm room to offer encouragement and support for her unconventional Passive Magic research.
-- **Merlin (The First Human Mage):** Historical figure whose personal diary forms the dogmatic foundation of Abraxas Academy. Merlyne respects his legacy as a pioneer while pushing past the limitations of his initial findings.
+- **[Merlin](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/characters/merlin.md) (The First Human Mage):** Historical figure whose personal diary forms the dogmatic foundation of Abraxas Academy. Merlyne respects his legacy as a pioneer while pushing past the limitations of his initial findings.
 - **Human Abraxas Academy:** Merlyne's hidden home and sanctuary. Though she skips its traditional classes, it remains her base of operations.
 
 ---

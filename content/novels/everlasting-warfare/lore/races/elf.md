@@ -34,7 +34,7 @@ Elves possess a biological affinity for mana, which naturally flows directly thr
 ## Mentorship of Humanity
 
 In ancient times, Elven scholars acted as guardians and mentors to younger mortal species:
-- **Training the First Human Mage:** An ancient **Elf Master** accepted **Merlin**, the first human mage, as a disciple. The Elven master imparted fundamental runic principles and catalyst imbuing methods, which Merlin compiled into the *Diary of Merlin*—forming the foundation of all human magical education.
+- **Training the First Human Mage:** An ancient **Elf Master** accepted **[Merlin](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/characters/merlin.md)**, the first human mage, as a disciple. The Elven master imparted fundamental runic principles and catalyst imbuing methods, which Merlin compiled into the *Diary of Merlin*—forming the foundation of all human magical education.
 
 ---
 

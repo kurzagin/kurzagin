@@ -53,4 +53,4 @@ Humans hold a unique, isolated place within the divine **[Nam-en](file:///root/p
 - **[Anna ni Euphratea](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/characters/anna-ni-euphratea.md):** Princess Heir of Euphrates and active VIII Entu (**En-gurnun**).
 - **[Merlyne](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/characters/merlyne.md):** Magical prodigy of the Human Abraxas Academy and pioneer of Passive Magic.
 - **[Zyfel Twilight](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/characters/zyfel-twilight.md):** CEO of World Treasure Company and lead alchemical toxicologist.
-- **Merlin:** Historical first human mage trained by an Elven master.
+- **[Merlin](file:///root/projects/vxnus-studio/EverlastingWarfare/lore/characters/merlin.md):** Historical first human mage, pupil of the unknown Elf Master, and author of the legendary *Diary of Merlin*.
