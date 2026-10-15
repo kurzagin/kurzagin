@@ -1193,8 +1193,8 @@ nav.top-nav {
   font-family: var(--sans);
   font-size: 0.85rem;
   font-weight: 300;
-  resize: none;
-  height: 54px;
+  resize: vertical;
+  min-height: 54px;
   outline: none;
   line-height: 1.6;
 }
@@ -1365,6 +1365,9 @@ nav.top-nav {
   line-height: 1.65;
   font-weight: 300;
   margin-bottom: 12px;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .post-body .tag { color: var(--teal); cursor: pointer; }
@@ -2508,6 +2511,8 @@ footer {
 .comment-body {
   font-family: var(--sans);
   color: var(--text-1);
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
   word-break: break-word;
 }
 
