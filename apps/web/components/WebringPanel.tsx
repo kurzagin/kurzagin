@@ -17,10 +17,10 @@ const WEBRING_NODES: WebringNode[] = [
   {
     id: 'sakana',
     name: 'Sakana Japanese',
-    url: 'https://kurzagin.com/sakana', // Or external/local route
+    url: 'https://sakanajp.site',
     badge: '/badges/sakana.svg',
     desc: 'Retro Kana Study App',
-    external: false,
+    external: true,
   },
   {
     id: 'e-teyvat',
