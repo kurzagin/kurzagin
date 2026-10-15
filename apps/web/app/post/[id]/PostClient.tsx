@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { Heart, MessageSquare, Pencil } from 'lucide-react';
 import { css } from '../../_ui/css';
 import { TweetEmbed } from '@/components/TweetEmbed';
+import { OgCardList } from '@/components/OgCard';
 import { processPostContent, formatBody } from '@/lib/embeds';
 import type { DbPost, DbComment, DbPostMedia, DbProfile } from '@/lib/db';
 import EditPostModal from '@/components/EditPostModal';
@@ -55,7 +56,12 @@ export default function PostClient({
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [comments, setComments] = useState(postComments);
   const [replyingTo, setReplyingTo] = useState(null);
-  const { cleanedContent, youtubeVideos: postYouTubeVideos, tweetIds: postTweetIds } = processPostContent(post.content || '');
+  const {
+    cleanedContent,
+    youtubeVideos: postYouTubeVideos,
+    tweetIds: postTweetIds,
+    ogUrls: postOgUrls,
+  } = processPostContent(post.content || '');
 
   const submitReply = async (event) => {
     event.preventDefault();
@@ -161,6 +167,12 @@ export default function PostClient({
           {postTweetIds.map((tweetId) => (
             <TweetEmbed key={tweetId} id={tweetId} />
           ))}
+        </div>
+      )}
+
+      {postOgUrls && postOgUrls.length > 0 && (
+        <div style={css("margin-bottom: 16px;")}>
+          <OgCardList urls={postOgUrls} />
         </div>
       )}
 

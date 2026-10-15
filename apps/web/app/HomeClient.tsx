@@ -22,6 +22,7 @@ import {
 import { css } from './_ui/css';
 import EditPostModal from '@/components/EditPostModal';
 import { TweetEmbed } from '@/components/TweetEmbed';
+import { OgCardList } from '@/components/OgCard';
 import { processPostContent, formatBody } from '@/lib/embeds';
 import type {
   DbPost,
@@ -237,7 +238,12 @@ export default function HomeClient({
           const previewMediaItems = postMediaItems.slice(0, 4);
           const additionalMediaCount = postMediaItems.length - previewMediaItems.length;
           const isLiked = likedPostIds.has(post.id);
-          const { cleanedContent, youtubeVideos: postYouTubeVideos, tweetIds: postTweetIds } = processPostContent(post.content || '');
+          const {
+            cleanedContent,
+            youtubeVideos: postYouTubeVideos,
+            tweetIds: postTweetIds,
+            ogUrls: postOgUrls,
+          } = processPostContent(post.content || '');
           // Anime reviews historically stored uploaded images as markdown in the
           // body as well as in postMedia. The media grid is the canonical renderer,
           // so hide those markdown tokens to prevent raw syntax and duplicate images.
@@ -339,6 +345,10 @@ export default function HomeClient({
                     <TweetEmbed key={tweetId} id={tweetId} />
                   ))}
                 </div>
+              )}
+
+              {postOgUrls && postOgUrls.length > 0 && (
+                <OgCardList urls={postOgUrls} />
               )}
 
               {postMediaItems.length > 0 && (

@@ -14,6 +14,7 @@ export interface ProcessedPostContent {
     originalUrl: string;
   }[];
   tweetIds: string[];
+  ogUrls: string[];
 }
 
 /**
@@ -47,9 +48,56 @@ const TWEET_REGEX = /(?:https?:\/\/)?(?:www\.)?(?:twitter\.com|x\.com)\/[a-zA-Z0
 const YOUTUBE_REGEX = /(?:https?:\/\/)?(?:www\.|m\.|music\.)?(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|v\/|shorts\/|live\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})(?:[^\s<>"'()]*)/gi;
 
 /**
+ * Checks if a hostname or URL belongs to YouTube or Twitter / X (used for native embeds)
+ */
+export function isOgExcludedUrl(rawUrl: string): boolean {
+  try {
+    const fullUrl = rawUrl.startsWith('http') ? rawUrl : `https://${rawUrl}`;
+    const parsed = new URL(fullUrl);
+    const host = parsed.hostname.toLowerCase();
+    return (
+      host === 'youtube.com' ||
+      host.endsWith('.youtube.com') ||
+      host === 'youtu.be' ||
+      host === 'twitter.com' ||
+      host.endsWith('.twitter.com') ||
+      host === 'x.com' ||
+      host.endsWith('.x.com')
+    );
+  } catch {
+    return true;
+  }
+}
+
+/**
+ * Extracts candidate URLs for OpenGraph cards from content (excluding YouTube and X/Twitter)
+ */
+export function extractOgUrls(content: string): string[] {
+  if (!content) return [];
+  const URL_REGEX = /https?:\/\/[^\s<>'\"()]+/gi;
+  const urls: string[] = [];
+  const seen = new Set<string>();
+  let match: RegExpExecArray | null;
+
+  while ((match = URL_REGEX.exec(content)) !== null) {
+    let url = match[0];
+    while (/[.,;:!?)]$/.test(url)) {
+      url = url.slice(0, -1);
+    }
+    if (!isOgExcludedUrl(url) && !seen.has(url)) {
+      seen.add(url);
+      urls.push(url);
+    }
+  }
+
+  return urls;
+}
+
+/**
  * Processes post content:
  * 1. Extracts all unique YouTube video embeds and X (Twitter) tweet embeds.
  * 2. Strips those URLs from the text body so they render as interactive embeds rather than raw text.
+ * 3. Extracts remaining candidate URLs for OpenGraph preview cards.
  */
 export function processPostContent(content: string): ProcessedPostContent {
   if (!content) {
@@ -58,6 +106,7 @@ export function processPostContent(content: string): ProcessedPostContent {
       embeds: [],
       youtubeVideos: [],
       tweetIds: [],
+      ogUrls: [],
     };
   }
 
@@ -134,11 +183,15 @@ export function processPostContent(content: string): ProcessedPostContent {
     .replace(/\n{3,}/g, '\n\n')
     .trim();
 
+  // Extract non-excluded URLs present in cleaned text for OpenGraph rendering
+  const ogUrls = extractOgUrls(cleaned);
+
   return {
     cleanedContent: cleaned,
     embeds,
     youtubeVideos,
     tweetIds,
+    ogUrls,
   };
 }
 
