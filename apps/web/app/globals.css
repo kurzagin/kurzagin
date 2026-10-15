@@ -4253,6 +4253,158 @@ footer {
 .guestbook-empty { padding: 30px; text-align: center; color: var(--text-3); font: 0.72rem var(--mono); }
 @media (max-width: 700px) { .guestbook-form-footer, .guestbook-entry-meta { align-items: flex-start; flex-direction: column; } .guestbook-form-footer button { width: 100%; } }
 
+/* Webring Join Section in Guestbook */
+.webring-join-section {
+  max-width: 760px;
+}
+
+.webring-join-card {
+  padding: 20px 22px;
+  background: var(--bg-1);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.webring-join-tag {
+  display: inline-block;
+  font: 0.6rem var(--mono);
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.webring-join-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--fg-0);
+  margin-bottom: 6px;
+}
+
+.webring-join-intro {
+  font-size: 0.82rem;
+  color: var(--fg-1);
+  line-height: 1.55;
+}
+
+.webring-join-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 4px;
+}
+
+.webring-join-step {
+  background: var(--bg-0);
+  border: 1px solid var(--border);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.webring-join-step .step-num {
+  font: 0.58rem var(--mono);
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.webring-join-step h4 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--fg-0);
+}
+
+.webring-join-step p {
+  font-size: 0.75rem;
+  color: var(--fg-2);
+  line-height: 1.4;
+}
+
+.webring-join-step code {
+  display: block;
+  margin-top: 6px;
+  padding: 8px 10px;
+  background: var(--bg-2);
+  border: 1px solid var(--border-subtle);
+  font: 0.68rem var(--mono);
+  color: var(--fg-1);
+  white-space: pre-wrap;
+  word-break: break-all;
+  border-radius: 2px;
+}
+
+.webring-reciprocal {
+  margin-top: 8px;
+  padding: 14px 16px;
+  background: var(--bg-0);
+  border: 1px dashed var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.reciprocal-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.reciprocal-badge {
+  flex-shrink: 0;
+  width: 80px;
+  height: 33px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.reciprocal-label {
+  display: block;
+  font: 0.6rem var(--mono);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.reciprocal-desc {
+  font-size: 0.74rem;
+  color: var(--fg-2);
+  margin-top: 2px;
+}
+
+.copy-badge-btn {
+  padding: 8px 14px;
+  font: 0.65rem var(--mono);
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.copy-badge-btn:hover {
+  background: var(--accent);
+  color: var(--bg-0);
+}
+
+@media (max-width: 640px) {
+  .webring-join-options {
+    grid-template-columns: 1fr;
+  }
+  .webring-reciprocal {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .copy-badge-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
 /* ==========================================================================
    WEBRING PANEL & 80x33 BUTTON STYLES
    ========================================================================== */
