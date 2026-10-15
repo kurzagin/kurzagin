@@ -47,10 +47,10 @@ Accelerate with intention.
 
 ## Find me
 
-- **Website** → [krzgn.xyz](https://krzgn.xyz)
+- **Website** → [kurzagin.com](https://kurzagin.com)
 - **VXNUS Studio** → [vxnus.xyz](https://vxnus.xyz)
 - **GitHub** → [@vxnus-studio](https://github.com/vxnus-studio)
 - **X** → [@kurzagin](https://x.com/kurzagin)
-- **Email** → [venus@krzgn.xyz](mailto:venus@krzgn.xyz)
+- **Email** → [venus@kurzagin.com](mailto:venus@kurzagin.com)
 
 Ideas, feedback, technical conversations, and unusual collaborations are welcome ✨

@@ -246,14 +246,14 @@ export const profiles = pgTable('profiles', {
     'System architecture',
   ]).notNull(),
   social_links: jsonb('social_links').$type<SocialLinkEntry[]>().default([
-    { platform: 'Website', label: 'krzgn.xyz', url: 'https://krzgn.xyz' },
+    { platform: 'Website', label: 'kurzagin.com', url: 'https://kurzagin.com' },
     { platform: 'VXNUS Studio', label: 'vxnus.xyz', url: 'https://vxnus.xyz' },
     { platform: 'GitHub', label: '@vxnus-studio', url: 'https://github.com/vxnus-studio' },
     { platform: 'X', label: '@kurzagin', url: 'https://x.com/kurzagin' },
   ]).notNull(),
-  contact_email: varchar('contact_email', { length: 255 }).default('venus@krzgn.xyz'),
+  contact_email: varchar('contact_email', { length: 255 }).default('venus@kurzagin.com'),
   contact_details: jsonb('contact_details').$type<ContactDetailEntry[]>().default([
-    { method: 'Email', value: 'venus@krzgn.xyz', link: 'mailto:venus@krzgn.xyz' },
+    { method: 'Email', value: 'venus@kurzagin.com', link: 'mailto:venus@kurzagin.com' },
     { method: 'GitHub Discussions', value: 'vxnus-studio', link: 'https://github.com/vxnus-studio' },
     { method: 'Direct Message', value: '@kurzagin on X', link: 'https://x.com/kurzagin' },
   ]).notNull(),

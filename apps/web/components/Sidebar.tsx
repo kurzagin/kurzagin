@@ -1,6 +1,7 @@
 import { desc } from 'drizzle-orm';
 import { getDb, getProfile, tracks as tracksTable } from '@/lib/db';
 import SidebarInteractive from './SidebarInteractive';
+import WebringPanel from './WebringPanel';
 
 export default async function Sidebar({ visits = 0 }: { visits?: number }) {
   const displayVisits = String(visits).padStart(6, '0');
@@ -18,6 +19,8 @@ export default async function Sidebar({ visits = 0 }: { visits?: number }) {
         <span className="retro-counter-number">{displayVisits}</span>
         <span className="retro-counter-since">SINCE 2026</span>
       </div>
+
+      <WebringPanel />
 
       <div className="sb-section">
         <div className="sb-title">quote</div>
