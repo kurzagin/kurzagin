@@ -3,6 +3,7 @@
 import { FormEvent, useState } from 'react';
 import type { DbGuestbookEntry } from '@/lib/db';
 import Image from 'next/image';
+import { ChevronDown } from 'lucide-react';
 
 function formatEntryDate(value: string | Date) {
   const date = new Date(value);
@@ -23,6 +24,7 @@ export default function GuestbookClient({
   const [status, setStatus] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [isWebringOpen, setIsWebringOpen] = useState(false);
 
   async function signGuestbook(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -71,7 +73,7 @@ export default function GuestbookClient({
           </div>
         )}
         <div className="hero-content">
-          <div className="hero-label">VISITOR LOG &amp; WEBRING DIRECTORY</div>
+          <div className="hero-label">VISITOR LOG</div>
           <h1 className="hero-title">
             <span className="hl">guestbook</span>
             <br />
@@ -79,74 +81,8 @@ export default function GuestbookClient({
             <span className="jp-sub">訪問者名簿</span>
           </h1>
           <p className="hero-desc">
-            A quiet page for passing visitors and indie web builders. Leave a note or submit your site to join the webring federation.
+            A quiet page for passing visitors. Leave a note before you disappear back into the night.
           </p>
-        </div>
-      </section>
-
-      <div className="divider" />
-
-      {/* Webring Join Guide / Information Box */}
-      <section className="section webring-join-section">
-        <div className="section-head">
-          <h2>join the webring</h2>
-          <span className="jp-label">参加案内</span>
-          <div className="line" />
-        </div>
-
-        <div className="bracket-card webring-join-card">
-          <div className="webring-join-header">
-            <span className="webring-join-tag">FEDERATION PROTOCOL</span>
-            <h3 className="webring-join-title">Want your site added to our 80×33 webring?</h3>
-            <p className="webring-join-intro">
-              Leave an entry below with your <strong>site name</strong>, <strong>URL</strong>, and either your <strong>80×33 image badge link</strong> or the <strong>HTML code snippet</strong>.
-            </p>
-          </div>
-
-          <div className="webring-join-options">
-            <div className="webring-join-step">
-              <span className="step-num">OPTION 1</span>
-              <h4>Send Badge Image Link</h4>
-              <p>Host an 80×33 GIF, PNG, or SVG badge and share the direct link:</p>
-              <code>
-                Site: My Indie Site<br />
-                URL: https://example.com<br />
-                Badge: https://example.com/badge-80x33.png
-              </code>
-            </div>
-
-            <div className="webring-join-step">
-              <span className="step-num">OPTION 2</span>
-              <h4>Send HTML Embed Code</h4>
-              <p>Or paste your full button embed snippet directly into the message box:</p>
-              <code>
-                &lt;a href=&quot;https://example.com&quot;&gt;&lt;img src=&quot;https://example.com/badge.svg&quot; width=&quot;80&quot; height=&quot;33&quot; alt=&quot;My Site&quot; /&gt;&lt;/a&gt;
-              </code>
-            </div>
-          </div>
-
-          {/* Reciprocal Badge Code */}
-          <div className="webring-reciprocal">
-            <div className="reciprocal-left">
-              <div className="reciprocal-badge">
-                <Image
-                  src="/badges/kurzagin.svg"
-                  alt="Kur Zagin 80x33 badge"
-                  width={80}
-                  height={33}
-                  unoptimized
-                  style={{ imageRendering: 'pixelated' }}
-                />
-              </div>
-              <div>
-                <span className="reciprocal-label">OUR 80×33 BADGE</span>
-                <p className="reciprocal-desc">Add this button to your site to complete the ring link.</p>
-              </div>
-            </div>
-            <button type="button" onClick={copyCode} className="copy-badge-btn">
-              {copied ? 'COPIED TO CLIPBOARD ✓' : 'COPY HTML CODE'}
-            </button>
-          </div>
         </div>
       </section>
 
@@ -165,16 +101,16 @@ export default function GuestbookClient({
             <input
               value={name}
               onChange={(event) => setName(event.target.value)}
-              placeholder="operator / guest"
+              placeholder="guest"
               maxLength={50}
             />
           </label>
           <label>
-            message (or webring submission: site URL + 80x33 img link / html)
+            message
             <textarea
               value={content}
               onChange={(event) => setContent(event.target.value)}
-              placeholder="Leave a thought, or submit your site (Name, URL, Badge Image URL or HTML)..."
+              placeholder="you found this place..."
               maxLength={1000}
               required
             />
@@ -194,6 +130,85 @@ export default function GuestbookClient({
             </button>
           </div>
         </form>
+
+        {/* Subtle Accordion for Webring Join Guide */}
+        <div className="webring-accordion-wrap">
+          <button
+            type="button"
+            className="webring-accordion-trigger"
+            onClick={() => setIsWebringOpen((open) => !open)}
+            aria-expanded={isWebringOpen}
+          >
+            <span className="trigger-left">
+              <span className="trigger-icon">❖</span>
+              <span>Want to join the 80×33 webring federation?</span>
+            </span>
+            <span className="trigger-right">
+              <span className="trigger-toggle-text">{isWebringOpen ? 'Hide guide' : 'Show guide'}</span>
+              <ChevronDown
+                size={14}
+                className={`accordion-chevron ${isWebringOpen ? 'open' : ''}`}
+              />
+            </span>
+          </button>
+
+          {isWebringOpen && (
+            <div className="bracket-card webring-join-card webring-accordion-content">
+              <div className="webring-join-header">
+                <span className="webring-join-tag">FEDERATION PROTOCOL</span>
+                <h3 className="webring-join-title">Submit your site to our 80×33 webring</h3>
+                <p className="webring-join-intro">
+                  Sign the guestbook above with your <strong>site name</strong>, <strong>URL</strong>, and either your <strong>80×33 image badge link</strong> or the <strong>HTML code snippet</strong>.
+                </p>
+              </div>
+
+              <div className="webring-join-options">
+                <div className="webring-join-step">
+                  <span className="step-num">OPTION 1</span>
+                  <h4>Send Badge Image Link</h4>
+                  <p>Host an 80×33 GIF, PNG, or SVG badge and share the link:</p>
+                  <code>
+                    Site: My Indie Site<br />
+                    URL: https://example.com<br />
+                    Badge: https://example.com/badge-80x33.png
+                  </code>
+                </div>
+
+                <div className="webring-join-step">
+                  <span className="step-num">OPTION 2</span>
+                  <h4>Send HTML Embed Code</h4>
+                  <p>Or paste your full button embed snippet into the message box:</p>
+                  <code>
+                    &lt;a href=&quot;https://example.com&quot;&gt;&lt;img src=&quot;https://example.com/badge.svg&quot; width=&quot;80&quot; height=&quot;33&quot; alt=&quot;My Site&quot; /&gt;&lt;/a&gt;
+                  </code>
+                </div>
+              </div>
+
+              {/* Reciprocal Badge Code */}
+              <div className="webring-reciprocal">
+                <div className="reciprocal-left">
+                  <div className="reciprocal-badge">
+                    <Image
+                      src="/badges/kurzagin.svg"
+                      alt="Kur Zagin 80x33 badge"
+                      width={80}
+                      height={33}
+                      unoptimized
+                      style={{ imageRendering: 'pixelated' }}
+                    />
+                  </div>
+                  <div>
+                    <span className="reciprocal-label">OUR 80×33 BADGE</span>
+                    <p className="reciprocal-desc">Add this button to your site to complete the ring link.</p>
+                  </div>
+                </div>
+                <button type="button" onClick={copyCode} className="copy-badge-btn">
+                  {copied ? 'COPIED TO CLIPBOARD ✓' : 'COPY HTML CODE'}
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
       </section>
 
       {/* Archived Entries */}

@@ -4253,9 +4253,75 @@ footer {
 .guestbook-empty { padding: 30px; text-align: center; color: var(--text-3); font: 0.72rem var(--mono); }
 @media (max-width: 700px) { .guestbook-form-footer, .guestbook-entry-meta { align-items: flex-start; flex-direction: column; } .guestbook-form-footer button { width: 100%; } }
 
-/* Webring Join Section in Guestbook */
-.webring-join-section {
+/* Webring Join Section & Accordion in Guestbook */
+.webring-accordion-wrap {
+  margin-top: 14px;
   max-width: 760px;
+}
+
+.webring-accordion-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--bg-1);
+  border: 1px dashed var(--border);
+  color: var(--fg-2);
+  font: 0.7rem var(--mono);
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.15s ease;
+}
+
+.webring-accordion-trigger:hover {
+  background: var(--bg-2);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.webring-accordion-trigger .trigger-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.webring-accordion-trigger .trigger-icon {
+  color: var(--accent);
+  font-size: 0.8rem;
+}
+
+.webring-accordion-trigger .trigger-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.65rem;
+}
+
+.webring-accordion-trigger .trigger-toggle-text {
+  color: var(--fg-2);
+}
+
+.webring-accordion-trigger:hover .trigger-toggle-text {
+  color: var(--accent);
+}
+
+.accordion-chevron {
+  transition: transform 0.2s ease;
+}
+
+.accordion-chevron.open {
+  transform: rotate(180deg);
+}
+
+.webring-accordion-content {
+  margin-top: 8px;
+  animation: fadeInDown 0.2s ease;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .webring-join-card {
