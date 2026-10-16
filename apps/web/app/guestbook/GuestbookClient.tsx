@@ -49,7 +49,7 @@ export default function GuestbookClient({
     }
   }
 
-  const badgeHtmlCode = `<a href="https://kurzagin.com" target="_blank" rel="noopener noreferrer"><img src="https://kurzagin.com/badges/kurzagin.svg" alt="Kur Zagin" width="80" height="33" /></a>`;
+  const badgeHtmlCode = `<a href="https://kurzagin.com" target="_blank" rel="noopener noreferrer"><img src="https://kurzagin.com/badges/kurzagin.svg" alt="Kur Zagin" width="88" height="31" /></a>`;
 
   const copyCode = () => {
     navigator.clipboard.writeText(badgeHtmlCode);
@@ -141,7 +141,7 @@ export default function GuestbookClient({
           >
             <span className="trigger-left">
               <span className="trigger-icon">❖</span>
-              <span>Want to join the 80×33 webring federation?</span>
+              <span>Want to join the 88×31 webring federation?</span>
             </span>
             <span className="trigger-right">
               <span className="trigger-toggle-text">{isWebringOpen ? 'Hide guide' : 'Show guide'}</span>
@@ -156,9 +156,9 @@ export default function GuestbookClient({
             <div className="bracket-card webring-join-card webring-accordion-content">
               <div className="webring-join-header">
                 <span className="webring-join-tag">FEDERATION PROTOCOL</span>
-                <h3 className="webring-join-title">Submit your site to our 80×33 webring</h3>
+                <h3 className="webring-join-title">Submit your site to our 88×31 webring</h3>
                 <p className="webring-join-intro">
-                  Sign the guestbook above with your <strong>site name</strong>, <strong>URL</strong>, and either your <strong>80×33 image badge link</strong> or the <strong>HTML code snippet</strong>.
+                  Sign the guestbook above with your <strong>site name</strong>, <strong>URL</strong>, and either your <strong>88×31 image badge link</strong> or the <strong>HTML code snippet</strong>.
                 </p>
               </div>
 
@@ -166,11 +166,11 @@ export default function GuestbookClient({
                 <div className="webring-join-step">
                   <span className="step-num">OPTION 1</span>
                   <h4>Send Badge Image Link</h4>
-                  <p>Host an 80×33 GIF, PNG, or SVG badge and share the link:</p>
+                  <p>Host an 88×31 GIF, PNG, or SVG badge and share the link:</p>
                   <code>
                     Site: My Indie Site<br />
                     URL: https://example.com<br />
-                    Badge: https://example.com/badge-80x33.png
+                    Badge: https://example.com/badge-88x31.png
                   </code>
                 </div>
 
@@ -179,7 +179,7 @@ export default function GuestbookClient({
                   <h4>Send HTML Embed Code</h4>
                   <p>Or paste your full button embed snippet into the message box:</p>
                   <code>
-                    &lt;a href=&quot;https://example.com&quot;&gt;&lt;img src=&quot;https://example.com/badge.svg&quot; width=&quot;80&quot; height=&quot;33&quot; alt=&quot;My Site&quot; /&gt;&lt;/a&gt;
+                    &lt;a href=&quot;https://example.com&quot;&gt;&lt;img src=&quot;https://example.com/badge.svg&quot; width=&quot;88&quot; height=&quot;31&quot; alt=&quot;My Site&quot; /&gt;&lt;/a&gt;
                   </code>
                 </div>
               </div>
@@ -190,15 +190,15 @@ export default function GuestbookClient({
                   <div className="reciprocal-badge">
                     <Image
                       src="/badges/kurzagin.svg"
-                      alt="Kur Zagin 80x33 badge"
-                      width={80}
-                      height={33}
+                      alt="Kur Zagin 88x31 badge"
+                      width={88}
+                      height={31}
                       unoptimized
                       style={{ imageRendering: 'pixelated' }}
                     />
                   </div>
                   <div>
-                    <span className="reciprocal-label">OUR 80×33 BADGE</span>
+                    <span className="reciprocal-label">OUR 88×31 BADGE</span>
                     <p className="reciprocal-desc">Add this button to your site to complete the ring link.</p>
                   </div>
                 </div>

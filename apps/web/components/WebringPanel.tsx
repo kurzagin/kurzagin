@@ -90,9 +90,9 @@ export default function WebringPanel() {
             >
               <Image
                 src={node.badge}
-                alt={`${node.name} 80x33 button`}
-                width={80}
-                height={33}
+                alt={`${node.name} 88x31 button`}
+                width={88}
+                height={31}
                 className="webring-badge-img"
                 unoptimized
               />

@@ -4421,8 +4421,8 @@ footer {
 
 .reciprocal-badge {
   flex-shrink: 0;
-  width: 80px;
-  height: 33px;
+  width: 88px;
+  height: 31px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
@@ -4472,7 +4472,7 @@ footer {
 }
 
 /* ==========================================================================
-   WEBRING PANEL & 80x33 BUTTON STYLES
+   WEBRING PANEL & 88x31 BUTTON STYLES
    ========================================================================== */
 .webring-panel {
   border-top: 1px dashed var(--border);
@@ -4481,7 +4481,7 @@ footer {
 
 .webring-grid {
   display: grid;
-  grid-template-columns: repeat(2, 80px);
+  grid-template-columns: repeat(2, 88px);
   gap: 8px;
   justify-content: start;
   margin-top: 8px;
@@ -4489,8 +4489,8 @@ footer {
 
 .webring-badge-link {
   display: inline-block;
-  width: 80px;
-  height: 33px;
+  width: 88px;
+  height: 31px;
   text-decoration: none;
   border-radius: 1px;
   transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
@@ -4505,8 +4505,8 @@ footer {
 }
 
 .webring-badge-img {
-  width: 80px;
-  height: 33px;
+  width: 88px;
+  height: 31px;
   display: block;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
