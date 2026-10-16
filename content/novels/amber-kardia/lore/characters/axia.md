@@ -47,7 +47,7 @@ Because Amber's existence is a tightly guarded secret that must never be exposed
 Unlike Amber, who is permanently confined to the mansion to hide her impossible 5-Cubereum core from the world, Axia operates regularly in public:
 
 - **Public Pretext:** To outside observers, corporate inspectors, and clients like **[Organicosys](file:///root/projects/kurzagin/content/novels/amber-kardia/lore/factions/organicosys.md)**, Axia appears to be nothing more than a standard, commercially legitimate Guardian Class unit purchased or constructed by an aging engineer for personal defense. Her standard 1-Cubereum core does not trigger high-density energy scanners, allowing her to move through urban checkpoints without raising suspicion.
-- **Vigilant Escort:** Given The Professor's frail constitution and advanced chronic illness, Axia never leaves his side during excursions. She monitors crowds, screens surrounding acoustics, and maintains a hand near her kinetic sidearms or heavy gauntlets, ready to intercept ambush squads or bounty hunters tracking Synthesis sympathizers.
+- **Vigilant Escort for a Dying Master:** Axia is keenly aware that The Professor is an old man whose time is running out. Knowing that his body is fragile and his days are numbered, Axia's protective instincts border on obsessive. She never leaves his side during excursions, scanning every passerby and acoustic frequency, determined to ensure that not a single scratch, indignity, or ounce of stress accelerates his fading life.
 
 ---
 

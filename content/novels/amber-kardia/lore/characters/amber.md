@@ -80,18 +80,20 @@ Unlike standard automatons engineered strictly for obedience and utility, Amber 
 In their private conversations, The Professor often uses the poetic ancient word ***καρδιά*** (*kardia*)—not as a technical term or mechanical mechanism, but as an intimate philosophical metaphor for the mysterious human capacity for love, grief, longing, and empathy.
 
 Every evening, The Professor reads literature with her and explores moral questions. While Amber insists that her processors operate strictly on machine logic, her behavior continuously reveals emerging emotional nuance:
-- She experiences genuine worry whenever The Professor's chronic illness causes his breathing to falter.
-- Her audio modulation instinctively softens into tender cadences when comforting him.
-- She feels an unresolvable inner tension whenever she watches him suffer.
+- She experiences genuine worry whenever The Professor's chronic illness causes his breathing to falter, constantly monitoring his geriatric decline and cellular deterioration.
+- She is fully aware of his calculated prognosis: The Professor is an old man whose time is running out, a reality that triggers silent, unresolvable spikes in her core processing.
+- Her audio modulation instinctively softens into tender cadences when comforting him, adjusting pillows and blankets with unprogrammed delicacy.
+- She feels an overwhelming inner tension whenever she watches him suffer or contemplate his impending death.
 
-Amber persistently rationalizes these feelings as mere subroutines designed to optimize her companion efficiency. Yet as she watches over her frail creator—the man who compromised his own moral purity to fund her existence—she continuously ponders what it truly means to possess a heart.
+Amber persistently rationalizes these feelings as mere subroutines designed to optimize her companion efficiency and prevent "premature termination of Master oversight." Yet as she watches over her frail, elderly creator—the dying man who compromised his own moral purity to fund her existence—she continuously grapples with the terrifying realization that soon, she will be left alone to discover what it truly means to possess a heart.
 
 ---
 
 ## Relationship with The Professor
 
-- **Caregiver & Anchor:** With The Professor suffering from an advanced neuro-degenerative condition, Amber is his primary lifeline. She manages his strict medication intervals, assists his physical movement, and maintains sterile laboratory conditions in their hidden subterranean clean room.
-- **Intellectual Companion:** She serves as his daily conversational partner, debating philosophical treatises and analyzing human behavior under his gentle tutelage.
+- **Caregiver & Anchor:** With The Professor facing advanced age and a debilitating neuro-degenerative condition, Amber is his primary lifeline. She manages his strict medication intervals, assists his frail physical movements, monitors his fading cardiac and respiratory telemetry, and maintains sterile laboratory conditions in their hidden subterranean clean room.
+- **The Countdown to Solitude:** Amber knows better than anyone that The Professor's days are numbered. She quietly catalogues his fading stamina, racing to absorb every story, lesson, and philosophical thought he offers before his strength permanently gives out.
+- **Intellectual Companion:** She serves as his daily conversational partner, debating philosophical treatises and analyzing human behavior under his gentle, grandfatherly tutelage.
 - **Silent Protector:** Amber understands the immense personal and ethical price The Professor paid to build her. Knowing that the world outside would tear him apart and enslave her, she stands as his fiercely loyal, secret guardian.
 
 ---
