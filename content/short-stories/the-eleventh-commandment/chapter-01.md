@@ -309,3 +309,19 @@ The Aurean leaned back, his voice dropping into quiet, devastating finality.
 
 "The book verifies itself. It is mathematically immutable."
 
+Father Daniel rested his elbows on the table and let his head drop into his hands. Monsignor Vance slumped into his chair, staring blankly at the steaming electric kettle, having completely run out of arguments, Latin nouns, and will to fight.
+
+The vestry was silent now, save for the steady rhythm of rain drumming against the roof of St. Jude's.
+
+"And so," Father Daniel muttered hoarsely from beneath his palms, "if your first chapter is thousands of pages of divine tax brackets and unforgeable actuarial tables... what could possibly be in the second?"
+
+The Aurean’s demeanor softened, shifting from the stern demeanor of an auditor to something reverent, almost gentle.
+
+He reached down to the gilded ribbon bookmark, sliding his fingertips beneath the thick deckle edges of the pages. He turned a dense, heavy block of parchment—hundreds of leaves sweeping across with a wind-like whisper—until the double-column grid gave way to flowing, illuminated cursive calligraphy adorned with gold leaf and deep lapis lazuli.
+
+"Chapter Two," the Aurean said softly. "*The Ledger of Eternal Debits.*"
+
+He looked across the circle of weary priests.
+
+"Chapter One was the calculation. But Chapter Two is the poetry. It is the sacred testimony of the divine encounter experienced by Aureus himself. He was not on a mountain peak, nor wandering in the wilderness. He was a tired priest, kneeling in the cold shadows of his church on an autumn night, when the ceiling opened and the heavens demanded an account..."
+
