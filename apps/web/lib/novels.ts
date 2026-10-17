@@ -2,8 +2,17 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-// Root novels directory in the project
-const NOVELS_DIR = path.resolve(process.cwd(), '../../content/novels');
+function getNovelsDir(): string {
+  const candidates = [
+    path.resolve(process.cwd(), '../../content/novels'),
+    path.resolve(process.cwd(), '../content/novels'),
+    path.resolve(process.cwd(), 'content/novels'),
+  ];
+  for (const c of candidates) {
+    if (fs.existsSync(c)) return c;
+  }
+  return candidates[0];
+}
 
 export interface NovelMeta {
   slug: string;
@@ -21,25 +30,26 @@ export interface NovelMeta {
 }
 
 export function getAllNovels(): NovelMeta[] {
-  if (!fs.existsSync(NOVELS_DIR)) return [];
+  const novelsDir = getNovelsDir();
+  if (!fs.existsSync(novelsDir)) return [];
 
-  const novelDirs = fs.readdirSync(NOVELS_DIR, { withFileTypes: true })
+  const novelDirs = fs.readdirSync(novelsDir, { withFileTypes: true })
     .filter(dirent => dirent.isDirectory())
     .map(dirent => dirent.name);
 
   const novels: NovelMeta[] = [];
 
   for (const slug of novelDirs) {
-    const metaPath = path.join(NOVELS_DIR, slug, 'novel.json');
+    const metaPath = path.join(novelsDir, slug, 'novel.json');
     if (fs.existsSync(metaPath)) {
       try {
         const raw = fs.readFileSync(metaPath, 'utf8');
         const data = JSON.parse(raw);
 
         // Count stats
-        const draftDir = path.join(NOVELS_DIR, slug, 'draft');
-        const storyDir = path.join(NOVELS_DIR, slug, 'story');
-        const loreDir = path.join(NOVELS_DIR, slug, 'lore');
+        const draftDir = path.join(novelsDir, slug, 'draft');
+        const storyDir = path.join(novelsDir, slug, 'story');
+        const loreDir = path.join(novelsDir, slug, 'lore');
 
         let draftsCount = 0;
         let storyCount = 0;
@@ -74,16 +84,17 @@ export function getAllNovels(): NovelMeta[] {
 }
 
 export function getNovelBySlug(slug: string): NovelMeta | null {
-  const metaPath = path.join(NOVELS_DIR, slug, 'novel.json');
+  const novelsDir = getNovelsDir();
+  const metaPath = path.join(novelsDir, slug, 'novel.json');
   if (!fs.existsSync(metaPath)) return null;
 
   try {
     const raw = fs.readFileSync(metaPath, 'utf8');
     const data = JSON.parse(raw);
 
-    const draftDir = path.join(NOVELS_DIR, slug, 'draft');
-    const storyDir = path.join(NOVELS_DIR, slug, 'story');
-    const loreDir = path.join(NOVELS_DIR, slug, 'lore');
+    const draftDir = path.join(novelsDir, slug, 'draft');
+    const storyDir = path.join(novelsDir, slug, 'story');
+    const loreDir = path.join(novelsDir, slug, 'lore');
 
     return {
       ...data,
