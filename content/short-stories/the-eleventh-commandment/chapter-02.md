@@ -57,3 +57,79 @@ And that was when the oil lamps flickered.
 
 A sound stirred high in the vaulted rafters—not the scurrying of rats, nor the autumn gale rattling the leaded windowpanes, but the dry, sharp rustling of ten thousand scrolls unrolling at once.
 
+Then came the voice.
+
+It did not thunder like the storms over Mount Sinai, nor did it whisper like the gentle breeze of Elijah. It echoed directly inside the marrow of my skull with the cold, absolute clarity of bronze bells chiming in an empty cathedral. 
+
+It was a voice of pure, terrifying order. It spoke of debts ancient as the stars. It spoke of fractions, balances, tariffs of mercy, and the exact celestial exchange rate between a broken heart and a silver drachma. 
+
+I did not stop to kneel. I did not cross myself. 
+
+There was no thought to question what was happening—no theology, no contemplation, no wondering if this was an angel of light or a fever of the mind. My soul was stripped of all doubt by an overwhelming, primal instinct: *I had to write.* To hesitate was to drown. The sheer pressure of the words pounding against my temples felt like molten iron rising behind my eyes; if I did not channel the torrent outward through the tip of a reed, my skull would shatter from the inside.
+
+I turned on my heel and bolted back into my cell.
+
+I seized a quill. I tore open a fresh jar of gall ink. And I began to write.
+
+*Write. Write. Write. Write.*
+
+It was not a joy. It was not holy ecstasy. It was an agonizing, suffocating heaviness—a labor so exhausting it felt as though the weight of the entire Roman Empire had been strapped to my shoulders. Every single stroke of the pen dragged through my flesh like an ox pulling a plough through frozen clay. My neck burned; my shoulder locked into a rigid, screaming spasm; the tendons in my right forearm hardened until they felt like knotted rope. 
+
+Yet I could not stop. Every word, every number, every sub-clause that crashed into my mind had to be captured. When the first scroll was full, I tossed it to the floor and grabbed another. When the second ran dry, I wrote on the margins of the Ravenna wheat registers. When the wheat registers were black with ink, I dragged out sheets of rough sheepskin vellum, writing until the reeds split and splintered between my bleeding fingers.
+
+An hour passed. Two hours.
+
+Dawn cracked grey against the high slit of my cell window, but I did not see it. Dusk swallowed the room, but the ink seemed to glow with its own phosphor, guiding my shaking hand across the ruled lines.
+
+One day. Two days. Three days.
+
+The exhaustion deepened into a waking torment. Sleep was torn from me, incinerated by the relentless, rhythmic pounding of the celestial dictation. Hunger ceased to exist; thirst was nothing compared to the terror of letting a single decimal point slip back into the ether. My chest grew so tight I could barely draw breath, feeling as if I were inhaling stone dust and liquid lead. I was no longer a man; I was a broken instrument, a human scribe crushed beneath the terrible, unyielding architecture of heaven's ledger.
+
+
+Outside the heavy oak door, soft footsteps hesitated.
+
+*Knock. Knock.*
+
+"Father Aureus?" came the timid voice of Sister Agnes from the attached hospice. "It is the third day since thou hast emerged. We have brought warm broth and fresh oil for thy lamps. Dost thou require anything?"
+
+I could not answer. The voice inside my skull was reciting the amortization schedule for sins committed in ignorance, and my tongue was thick as dry leather. 
+
+Sister Agnes pressed her ear to the wood. She received no reply—only the terrifying, frantic *scritch-scritch-scratch* of a quill tearing across dry vellum at inhuman speed. She whispered a prayer and backed away.
+
+Four days. Five days. Six days.
+
+The priests whispered in the cloister that Father Taxatio had gone mad. The nuns left bread outside the threshold, but the loaves grew stale and untouched. Day and night, whenever anyone passed the dark corridor behind the apse, that same frantic scratching echoed through the keyhole, like a trapped badger clawing through stone.
+
+On the seventh day, the scratching stopped.
+
+A silence fell over the cell—deep, hollow, and horrifying.
+
+Fearing that the bishop's chief accountant had dropped dead over his ledgers, the prioress summoned the cathedral sexton and two burly stonemasons.
+
+"Break it down," the prioress commanded, her rosary clicking nervously. "Break it down at once!"
+
+The iron crowbar bit into the oak jamb. The sexton threw his shoulder against the timber. With a loud, splintering groan, the latch snapped, and the door burst inward.
+
+The three men and the nuns froze on the threshold, gasping.
+
+The room had been utterly consumed. 
+
+Every flat surface was buried. The desk, the floorboards, the narrow pallet bed, the window ledge—hundreds, thousands of leaves of papyrus and calfskin were laid out in meticulously ordered rows, drying in the gloom like fallen autumn leaves of black and gold. Dense, microscopic columns of Latin and Greek script stretched across every inch of parchment, indexed and cross-referenced in geometric perfection.
+
+And in the center of the floor, sprawled face-down beneath the drifting dust motes, lay Father Aureus.
+
+His cassock was soaked in spilled ink. His fingertips were raw, blistered, and stained nearly to the elbows. His quill lay inches from his curled, motionless hand.
+
+"Merciful Mother of God," the sexton breathed, rushing forward and dropping to his knees. "Father Aureus! Canst thou hear me?!"
+
+They rolled me onto my back, splashing cold water from a terracotta jug against my burning forehead. My throat was so parched it felt lined with sand. My vision swam with fractured halos of light.
+
+My eyelids fluttered. I felt the rough wool of the sexton's tunic beneath my neck.
+
+I did not ask for water. I did not ask for the holy viaticum. I did not even ask what day it was.
+
+My trembling, ink-blackened fingers weakly reached up, clutching the sexton's sleeve with the desperate grip of a drowning sailor.
+
+"The... the scripts..." I croaked, my voice scraping against my cracked lips like gravel. "...did the writings survive?"
+
+
