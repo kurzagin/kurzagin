@@ -173,3 +173,139 @@ He closed his finger over the margin and looked across the table at Monsignor Va
 
 "Net spiritual liability: twelve copper pieces, or three bushels of dry barley payable upon the harvest moon. Installment plans are available at four percent interest."
 
+Father Daniel sat paralyzed, staring at the sheer geometric horror of the footnote. The young deacon had stopped giggling entirely, now looking at the massive volume as if it might calculate his student loans if he made sudden movements.
+
+Monsignor Vance swallowed hard, his face flushed. "And... and what of the wretched?" he demanded, his voice straining. "What of the beggar who truly hath nothing? The leper by the roadside who possesses neither twelve coppers nor a solitary grain of barley? Does your merciless accounting cast him into outer darkness because his pockets are empty?!"
+
+The Aurean gave a soft, pitying sigh, turning three pages forward with a gentle flick of his wrist.
+
+"Verse seven hundred and three," he recited solemnly. "*'Regarding Total Insolvency of the Spirit and the Flesh.'*"
+
+He raised his eyes to meet Vance’s gaze.
+
+*"Thou shalt not fret, for God is just."*
+
+The room fell breathless. 
+
+The Aurean pointed down at the golden calligraphy. "*'If a soul hath neither grain, nor coin, nor skin of oil, nor beast of burden, let him not despair before the gates of glory. For the Lord God is not an unmerciful bailiff. His debt shall be entered into the Ledger of Divine Forbearance, interest shall freeze for seven seasons of jubilee, and he shall fulfill his holy obligation through six days of communal roadwork or clearing brush around the parish well, credited at the divine minimum wage of one denarius per cubit cleared.'*"
+
+He looked up. "Divine bankruptcy protection. Fully discharged upon completion of public service."
+
+Daniel rubbed his face with both hands, groaning into his palms. "It’s an entire legal system. You've codified salvation into an municipal tax code."
+
+Suddenly, Daniel’s head snapped up. His eyes narrowed, striking upon the fatal flaw that broke every religious grift throughout human history.
+
+"Wait a moment," Daniel said, pointing an accusatory finger at the book. "What about Aureus himself? The prophet! The author of this monstrosity! I suppose *he* was exempt, wasn't he? Like every charlatan who ever collected a collection plate! Did Taxatio pay his own holy dues, or did he pocket the seventy-percent wanderer tax and sail off to a villa in Capri?!"
+
+A smug murmur stirred among the diocesan delegates. They leaned forward, certain they had cornered the man at last.
+
+The Aurean’s lips twitched into the faintest hint of a smile. 
+
+He didn't search. He simply flipped straight to the very last parchment of Chapter One, where the red ink turned bold and thick. 
+
+"Verse nine hundred and ninety," the Aurean read, his voice ringing like a bronze bell across the vestry.
+
+"*'I knoweth what thou wantest to ask.'*"
+
+Daniel’s jaw dropped.
+
+"Verse nine hundred and ninety-one," the Aurean continued with relish:
+
+*"‘Verily, verily, yes: Aureus Saturnus Taxatio is paying too.’"*
+
+He traced the parchment down to an official stamped seal. "*'Filed in the fourth year of Emperor Theodosius: thirty-four silver denarii, zero exemptions claimed, paid in full unto the common coffer.'*"
+
+He looked across the table at the dumbfounded priests. 
+
+"The prophet audits himself first."
+
+A vein in Monsignor Vance’s temple began to throb visibly. 
+
+Something had broken inside the room. The dignified ecclesiastical inquiry was gone. In its place stood a battlefield of theological desperation. The diocesan delegates were no longer trying to examine the heresy; they were trying to break the book.
+
+"Fine!" the young deacon cried, his hair slightly disheveled as he leaned halfway across the mahogany table. "What if a man is attacked by Mediterranean pirates on the high seas, but the pirate captain is his estranged brother-in-law, and the only plunder taken was seventeen jars of pickled lamprey that were already eighty percent spoiled?! Is the loss deductible as piracy, fraternal gift, or spoiled inventory?!"
+
+The Aurean didn't even flinch. His left hand flicked a chunk of pages backward.
+
+*Thwip.*
+
+"Verse five hundred and sixty-two," he recited smoothly. "*'Regarding Maritime Piracy Among Kinsfolk.'* If the pirate is related by marriage unto the third degree, the theft shall be classified as an informal family settlement unless blood was drawn upon the poop deck. The lampreys shall be written off at twenty percent salvage value, provided the smell thereof was sworn before a notary under oath."
+
+"What if a man gets struck by lightning twice?!" Father Daniel shouted, his voice cracking. "And on the second strike he believes he has become an olive tree?! Does the fruit that falls from his pockets count as agricultural capital gains or taxable bodily harvest?!"
+
+*Thwip-thwip.*
+
+"Verse six hundred and eighteen," the Aurean said without dropping a beat. "*'Concerning the Deluded Arborist.'* He shall be assessed as an olive tree only if he remaineth rooted in soil for forty consecutive suns. Otherwise, all dropped fruit is treated as personal miscellaneous income subject to a fifteen percent pressing fee."
+
+"What if someone robs the church collection plate," Vance shrieked, slamming both palms down onto the table so hard his tea saucer jumped, "and then deposits the exact same stolen silver into the poor box on his way out the door?! Does he receive a charitable tax receipt for grand larceny?!"
+
+The Aurean turned a single leaf with the surgical precision of an archivist handling papyrus.
+
+"Verse eight hundred and four," he answered, his voice steady as granite. "*'The Parable of the Circuitous Scoundrel.'* He hath committed theft under Subsection A, yet rendered charity under Subsection B. The stolen principal shall be restored with five percent restitution, but he may deduct forty percent of the restitution as a moral reconciliation rebate, provided he confesseth before the sun setteth behind the olive groves."
+
+"What if an unbaptized gladiator fakes his own decapitation with a pig's bladder to dodge Roman inheritance tax?!" Vance roared, his face now the shade of a ripe beetroot. "And then uses the death benefit to buy eighty-four barrels of fermented goose grease, which he then donates to a rival pagan cult under the name of his favorite hunting dog?!"
+
+Silence descended on the room. 
+
+Father Daniel stared at Vance in horror. The young deacon covered his mouth. The electric kettle let out one final, terrified bubble.
+
+The Aurean paused. 
+
+For three agonized seconds, nobody breathed. Vance smiled a manic, trembling smile—he had done it. He had finally invented a scenario so thoroughly deranged that no human mind, let alone a fourth-century Roman accountant, could have anticipated it.
+
+The Aurean looked at Vance. 
+
+Then he reached into the spine of the book, pulled out a second red ribbon bookmark, and flipped directly to page 1,402.
+
+"Verse one thousand, one hundred and eighty-nine," the Aurean said quietly.
+
+Vance’s left eyelid began to twitch uncontrollably.
+
+"Clause D," the man read. "*'Regarding the Swinish Decapitation of the Arena Performer and the Goose Grease Bequest.'*"
+
+Daniel slowly sank out of his chair, sliding under the table until only his forehead was visible above the mahogany edge.
+
+"'If the fighter of beasts doth simulate his own demise with the bladder of swine,'" the Aurean read, each syllable falling like a hammer onto an anvil, "'his estate shall be declared void *ab initio*. The eighty-four barrels of goose grease shall be impounded by the diocese for the lubrication of church bells. And concerning the hound...'" 
+
+He paused, adjusting his cuffs.
+
+"'...the hound shall pay nothing, for beasts are without sin, unless the dog was registered as a managing partner of the mercantile syndicate.'"
+
+A heavy, suffocating silence fell upon the vestry.
+
+Father Daniel slowly pulled himself back up onto his chair, his collar crooked, staring at the leather behemoth as if it were a dormant unexploded shell from the Great War. 
+
+The young deacon sat motionless, staring at the open pages. For the first time all morning, the mocking amusement had entirely drained from his face, replaced by a creeping, mathematical dread. 
+
+"It's... it's all connected," the deacon whispered, his eyes wide behind his bangs. "Every verse... the pirate's lamprey ties into the maritime cargo index from page ninety... and the sick donkey exemption offsets the communal feed subsidy in Leviticus... it’s a closed-loop system."
+
+"Quiet, Peter!" Monsignor Vance snapped, though his own voice lacked its former imperious thunder. 
+
+Vance pushed himself up, planting both palms on the table. He was cornered, and like any seasoned diocesan bureaucrat backed into a theological corner, he pivoted from dogma to textual criticism.
+
+"Complexity does not equate to truth!" Vance said harshly, his index finger trembling as he stabbed it toward the book. "A spider's web is complex, yet it exists merely to ensnare the foolish! An obsession with detail is the hallmark of madness, not divine inspiration! What if this entire manuscript is a fabrication? What if some medieval prior, or some Renaissance swindler, or your beloved Taxatio himself simply sat down with an inkwell and made the numbers up?!"
+
+Vance leaned in, his eyes blazing with desperate triumph. 
+
+"Human error, my dear man! Scriptural corruption! Even the Holy Gospels have textual variants, scribal glosses, and translation discrepancies! How do you know someone didn't inflate the seventy percent to line their own pockets? How do you know the numbers aren't forged?!"
+
+The Aurean sighed. It was the deep, weary sigh of a senior forensic accountant having to explain basic arithmetic to an obstinate junior partner.
+
+"Because it is physically and mathematically impossible to forge," the Aurean said calmly.
+
+"Impossible?!" Vance barked a bitter laugh. "Any scoundrel with a quill can forge a number on parchment!"
+
+"A single number in an ordinary text, yes," the Aurean replied, resting both palms flat upon the open leaves. "In an epistle, a copyist may alter a word, and none shall notice save the philologist. But Taxatio did not write a poem. He wrote a balanced double-entry ledger of the cosmos."
+
+He tapped the left-hand column, then the right.
+
+"Every single figure in Chapter One is tethered to a divine audit trail," the Aurean explained, his voice low and relentless. "The seventy percent non-covenant tariff in verse fourteen directly offsets the municipal grain reserve in verse five hundred. The four-sesterce depreciation on the lame donkey reconciles with the livestock casualty allowances in verse twelve hundred. The interest rates, the dependent deductions, the salvage margins—they are mathematically interdependent."
+
+He looked directly into Vance’s eyes, unblinking.
+
+"If you were to tamper with so much as a single copper coin—if you altered one seventy percent to sixty-nine, or forged a three into a four—the totals at the end of the chapter would fail to reconcile. The divine balance sheet would fracture. You cannot forge one verse of Taxatio, Monsignor. To alter a single number, you would be forced to recalculate, re-index, and rewrite the entire four-thousand-page codex from the opening verse to the final amen."
+
+The Aurean leaned back, his voice dropping into quiet, devastating finality.
+
+"The book verifies itself. It is mathematically immutable."
+
