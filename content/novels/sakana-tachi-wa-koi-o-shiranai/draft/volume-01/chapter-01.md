@@ -321,16 +321,36 @@ Before I could uncap the next sample vial, the heavy wooden door of the lab swun
 
 Both of us looked up.
 
-Standing in the doorway, framed against the dim amber light of the subterranean corridor, was a figure.
+Standing in the doorway, framed against the amber light of the subterranean corridor, was a girl clutching a brand-new navy-blue school bag against her chest.
 
-She did not wear the standard navy blazer of Kaiyō High School. Draped over her shoulders was an oversized, salt-bleached fisherman's windbreaker, the hem reaching down past her knees. Her feet were completely bare against the cold concrete floor, leaving faint, damp footprints behind her. Her hair—a pale, translucent shade of silver-blue that looked like the crest of a breaking wave under moonlight—hung loose around her narrow shoulders, damp with sea-mist.
+She was wearing the Kaiyō High School uniform, but clearly had no idea how it was supposed to function. The white sailor blouse was untucked, the blue neckerchief hung loose and unknotted around her collarbones, and over her shoulders she had draped an oversized, salt-bleached fisherman's windbreaker. Most glaringly of all, her regulation indoor slippers were nowhere in sight; her bare feet rested pale and cold against the concrete floor, leaving small, damp outlines of moisture on the stone.
 
-In her arms, held tightly against her chest, was a battered zinc bucket filled with dark seawater.
+Her hair was a translucent, ethereal shade of silver-blue, tumbling down her back like the spray of a breaking wave under moonlight.
 
-Her pale, wide eyes blinked slowly, staring into the dim laboratory. They drifted past the towering specimen jars, past the skeleton hanging from the ceiling, past Chihaya’s frozen form, and locked directly onto me.
+In her right hand, dangling by a twisted hemp cord, she carried a battered zinc bucket sloshing with dark seawater.
 
-She took one silent, barefoot step into the room.
+"Excuse me," Chihaya began, straightening up with an immediate scowl as her laboratory decorum took over. "This is the Marine Preservation Laboratory. General students are not permitted without safety goggles, and walking barefoot through a chemical specimen facility is a grotesque violation of prefectural hygiene codes—"
 
-"Found you," she whispered. Her voice carried the faint, distant resonance of an echo in an underwater cavern. "The boy who talks to the whales."
+The girl didn't look at Chihaya. Her wide, sea-glass eyes drifted slowly past the glowing specimen jars, past the cloud-porpoise skeleton, and settled squarely on me.
 
-On the desk between Chihaya and me, the glass needle of my barometer gave a sharp, violent twitch—and plunged into the deep, unknown blue.
+My breath caught in my throat.
+
+*Three weeks ago.*
+
+It had been four in the morning during a bioluminescent spring tide out at secluded Moon-Crescent Bay. I had gone out to the tide pools testing the acoustic frequency of my carved conch shell, calling out to a wandering pod of infant celestial whales off the reef, when the receding surf had deposited a bundle of tangled oarweed onto the black sands. 
+
+Inside the kelp ribbons had been this very girl—barely breathing, her skin cold as benthic ice. 
+
+I had checked her vitals, wrapped her in my spare dry burlap, and rushed her straight to the one place in Shiozaki equipped to deal with unexplained oceanic phenomena: the Ryūgū Shrine. Shiori had answered the shrine gates in her night robes. When Shiori saw the wild, uncanny way the nearby sea-swallows circled the girl's head, the shrine maiden had immediately recognized the sacred signs of a *Yoriko*—a child gifted by the tides. Shiori had promised to shelter her, speak to her family and elders, and handle the paperwork with the academy.
+
+That was three weeks ago. Shiori had kept the details under strict lock and key, refusing to elaborate whenever I asked at the shrine steps.
+
+And now, here she was. In Kaiyō High School.
+
+The girl took one silent, barefoot step across the threshold into the laboratory.
+
+Her gaze fixed on the carved conch shell resting on the corner of my desk beside the barometer, then lifted to my eyes.
+
+"Found you," she whispered. Her voice was soft, devoid of fear or social hesitation, carrying the faint, submerged resonance of an underwater cave. "The boy who talks to the whales."
+
+Beside me, the glass needle of my barometer gave a sharp, violent twitch—and plunged into the deep, unknown blue.
