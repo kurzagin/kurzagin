@@ -1,11 +1,20 @@
 # Sakana-tachi wa Koi o Shiranai (魚たちは恋を知らない)
+*The Fishes Know Nothing of Love*
 
 ### Master Premise
-Set in a scenic coastal town known for its historic fishing port, bustling morning markets, and rocky tidal pools, *Sakana-tachi wa Koi o Shiranai* (*Fish Don't Know Love*) is a high school romance and slice-of-life anime story.
+In the sun-bleached coastal town of Shiozaki, seeing a forty-meter blue whale gracefully crest across a low-hanging cumulus cloud outside a second-floor classroom window is completely normal. 
 
-The protagonist is an introverted high schooler obsessed with marine biology, fish ecology, ocean currents, and the traditional fishing trade. While he can effortlessly identify obscure pelagic creatures, repair gill nets with local veteran fishermen, and predict weather from tide charts, he is hopelessly oblivious and clumsy when it comes to the complex social tides and unspoken feelings of teenage romance.
+Here sits **Shiozaki Prefectural Kaiyō High School (海陽高校)**—a specialized academy perched on sea cliffs where standard subjects like algebra and modern literature are taught right alongside Celestial Ichthyology, Cloud-Tide Navigation, and Maritime Shinto Lore.
 
-### Themes & Setting
-- **Setting:** Coastal port town, rocky cliffs, sandy beaches, high school biology lab, fisherman harbor, and local seafood markets.
-- **Atmosphere:** Breezy seaside slice-of-life, ocean breezes, salty air, warm coastal sunsets, lighthearted comedy with heartfelt romantic moments.
-- **Motifs:** Marine ecosystems, ichthyology facts, coastal folklore, seasonal fishing runs, tide pools, teenage misunderstandings.
+Enter **Tsubasa Kaidō**, a second-year high schooler with zero interest in popularity, romance, or social games. Instead, Tsubasa is a walking ocean encyclopedia who has spent his life working on 5:00 AM harbor docks alongside salty veteran fishermen. He can predict aerial squalls by reading water salinity in the breeze, mimic the ultrasonic frequencies of celestial humpbacks, and identify obscure deep-sea specimens by touch.
+
+Yet, despite understanding the most intricate mating dances of cuttlefish and seasonal migration paths of pelagic tuna, Tsubasa possesses **zero romantic radar**. When girls blush or flirt with him, he diagnoses them with oxygen deprivation or sunburn. 
+
+Surrounding him is a chaotic, charming harem of heroines whose lives intertwine with the town's living maritime folklore—from the haughty shrine maiden tasked with blessing sky-whales, to a tomboy boat pilot, an ethereal deep-sea castaway, and a frustrated academic rival.
+
+---
+
+### World & Atmosphere
+- **Aesthetic**: Makoto Shinkai-esque coastal light, Shinto coastal shrines, rustic wooden harbor piers, azure waters meeting azure skies, and colossal aerial marine megafauna.
+- **Tone**: Lighthearted romantic comedy filled with slapstick banter, vibrant school-life chaos, seaside slice-of-life charm, and awe-inspiring supernatural ocean visuals.
+- **Key Themes**: Coastal folklore made real, the science of the sea meeting the mystery of human emotion, and the unpredictable undercurrents of youth.
