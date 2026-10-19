@@ -12,14 +12,13 @@ characters_featured:
   - "Matsuri Isaki"
   - "Shiori Ryūgū"
   - "Chihaya Kujirazaki"
-characters_mentioned:
   - "Umika Minagi"
 factions_mentioned:
   - "Shiozaki Prefectural Kaiyō High School"
   - "Student Council"
   - "Ryūgū Shrine"
   - "Marine Specimen & Ecology Club"
-summary: "Tsubasa and Matsuri dash through the school gates just in time, running into the stern Student Council President Shiori Ryūgū, whose hidden seasickness Tsubasa diagnoses with clinical precision. After surviving classes and dissecting Matsuri's homemade bento with reverent ichthyological analysis, Tsubasa retreats to the Marine Specimen Club, where club president Chihaya Kujirazaki is obsessed with analyzing the morning's whale mist—leading to an explosive academic clash and a foreboding rumor from the coastline."
+summary: "Tsubasa and Matsuri dash through the school gates just in time, running into the stern Student Council President Shiori Ryūgū, whose hidden seasickness Tsubasa diagnoses with clinical precision. After surviving classes and dissecting Matsuri's homemade bento with reverent ichthyological analysis, Tsubasa retreats to the Marine Specimen Club, where club president Chihaya Kujirazaki's analysis of whale mist sparks an explosive academic clash—interrupted by the barefoot arrival of Umika Minagi, the mysterious sea-drifter Tsubasa found weeks ago."
 ---
 
 The final three steps of the Great Otokozaka were slick with whale-mist and smelled intensely of ozone.

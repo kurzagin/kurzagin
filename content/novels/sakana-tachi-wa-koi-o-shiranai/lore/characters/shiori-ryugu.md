@@ -23,6 +23,7 @@ tags:
 - **The Dignified Miko:** Elegant, poised, and fiercely strict about campus regulations. She carries herself with the gravity expected of the clan that preserves the town's spiritual pact with the sea.
 - **The Secret Weakness:** Despite her sacred heritage, Shiori suffers from catastrophic seasickness and vertigo whenever she steps onto boats or high-altitude sky-platforms. She conceals this weakness behind cold authority and peppermint drops.
 - **Tsundere Dynamic with Tsubasa:** Frustrated by Tsubasa’s constant rule-breaking (skipping homeroom to gut fish at the docks), yet hopelessly dependent on him to troubleshoot ritual logistics that ancient shrine manuals fail to explain.
+- **The Secret Pact (Umika's Guardian):** Three weeks prior to the school term, Tsubasa brought a mysterious, hypothermic girl washed ashore in kelp to the shrine gates at dawn. Recognizing the sacred marks of a *Yoriko*, Shiori took her in, sponsored her care under the Ryūgū clan's authority, and arranged her admission to Kaiyō High School while keeping the full circumstances hidden from the public.
 
 ## Romantic Complications
 - When an official shrine ritual requires blessing a passing celestial humpback, she gets paralyzed with fear. Tsubasa discreetly holds her trembling hand beneath her flowing miko sleeves to steady her, causing her heart to race uncontrollably while she insists: *"I am merely utilizing your body heat to stabilize my circulation, Kaidō-kun!"*

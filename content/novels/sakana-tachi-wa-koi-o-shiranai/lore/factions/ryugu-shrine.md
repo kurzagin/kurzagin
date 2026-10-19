@@ -23,3 +23,4 @@ tags:
 ## Ceremonial Roles
 - **The Great Tide Blessing (*Ōshio Shinji*):** Conducted at each new moon to ensure passing sky-whales do not disrupt coastal navigation or harbor shipping lanes.
 - **Tide-Glass Purification:** The shrine distributes consecrated sea-glass charms believed to protect fishermen from squalls and bring destined lovers together across changing tides.
+- **Sanctuary of the *Yoriko*:** In accordance with ancient maritime covenants, castaways or children gifted by the sea (*Yoriko*) are granted divine sanctuary and legal sponsorship by the Ryūgū clan (such as the recent enrollment of Umika Minagi at Kaiyō High School).

@@ -26,7 +26,7 @@ tags:
 - **The Reliable Protector:** The moment a genuine crisis occurs—such as a runaway sky-whale calf or an incoming riptide—his dorky demeanor vanishes into calm, authoritative leadership.
 
 ## Special Abilities
-- **Acoustic Mimicry:** Can mimic low-frequency cetacean clicks and whale calls using hollow sea-snail shells, calming agitated sky-whales.
+- **Acoustic Mimicry:** Can mimic low-frequency cetacean clicks and whale calls using hollow sea-snail shells, calming agitated sky-whales. (This was the acoustic signal that drew the drifting Umika to shore at Moon-Crescent Bay before he rescued her).
 - **Swell Prediction:** Detects minute barometric drops and atmospheric salinity shifts hours before coastal sirens sound.
 
 ## Quotes
