@@ -102,66 +102,78 @@ export default async function NovelWikiPage({ params }: Props) {
         </div>
 
         {/* Categories Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }} className="">
-          {categories.map((cat) => {
-            const Icon = iconMap[cat.id] || Library;
-            return (
-              <Link
-                key={cat.id}
-                href={`/novels/${novel}/wiki/${cat.id}`}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  padding: '20px',
-                  background: 'var(--bg-1)',
-                  border: '1px solid var(--border-subtle)',
-                  borderRadius: '6px',
-                  textDecoration: 'none',
-                  color: 'inherit',
-                  transition: 'border-color 0.2s ease',
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
-                  <div
-                    style={{
-                      width: '36px',
-                      height: '36px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      background: 'var(--bg-2)',
-                      borderRadius: '6px',
-                      color: 'var(--accent)',
-                    }}
-                  >
-                    <Icon size={18} />
+        {categories.length === 0 ? (
+          <div className="bracket-card empty-state">
+            <div className="empty-state-glyph"><Library size={36} /></div>
+            <div className="empty-state-title">NO CODEX ENTRIES LOGGED</div>
+            <p className="empty-state-desc">
+              No lore categories or dossiers have been indexed for this novel yet.
+              World bible archives and character files will appear here once connected.
+            </p>
+            <span className="empty-state-meta">// status: idle — awaiting codex compilation</span>
+          </div>
+        ) : (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }} className="">
+            {categories.map((cat) => {
+              const Icon = iconMap[cat.id] || Library;
+              return (
+                <Link
+                  key={cat.id}
+                  href={`/novels/${novel}/wiki/${cat.id}`}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    padding: '20px',
+                    background: 'var(--bg-1)',
+                    border: '1px solid var(--border-subtle)',
+                    borderRadius: '6px',
+                    textDecoration: 'none',
+                    color: 'inherit',
+                    transition: 'border-color 0.2s ease',
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
+                    <div
+                      style={{
+                        width: '36px',
+                        height: '36px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        background: 'var(--bg-2)',
+                        borderRadius: '6px',
+                        color: 'var(--accent)',
+                      }}
+                    >
+                      <Icon size={18} />
+                    </div>
+                    <span
+                      style={{
+                        fontFamily: 'var(--mono)',
+                        fontSize: '0.7rem',
+                        padding: '2px 8px',
+                        borderRadius: '4px',
+                        background: 'var(--bg-2)',
+                        color: 'var(--text-3)',
+                        border: '1px solid var(--border-subtle)',
+                      }}
+                    >
+                      {cat.count} files
+                    </span>
                   </div>
-                  <span
-                    style={{
-                      fontFamily: 'var(--mono)',
-                      fontSize: '0.7rem',
-                      padding: '2px 8px',
-                      borderRadius: '4px',
-                      background: 'var(--bg-2)',
-                      color: 'var(--text-3)',
-                      border: '1px solid var(--border-subtle)',
-                    }}
-                  >
-                    {cat.count} files
-                  </span>
-                </div>
 
-                <h3 style={{ fontSize: '1rem', margin: '0 0 6px', color: 'var(--text-1)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  {cat.label}
-                  <ChevronRight size={14} style={{ color: 'var(--text-3)' }} />
-                </h3>
-                <p style={{ margin: 0, fontSize: '0.78rem', color: 'var(--text-3)', lineHeight: 1.5 }}>
-                  {cat.description}
-                </p>
-              </Link>
-            );
-          })}
-        </div>
+                  <h3 style={{ fontSize: '1rem', margin: '0 0 6px', color: 'var(--text-1)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    {cat.label}
+                    <ChevronRight size={14} style={{ color: 'var(--text-3)' }} />
+                  </h3>
+                  <p style={{ margin: 0, fontSize: '0.78rem', color: 'var(--text-3)', lineHeight: 1.5 }}>
+                    {cat.description}
+                  </p>
+                </Link>
+              );
+            })}
+          </div>
+        )}
       </section>
     </SpoilerGate>
   );
