@@ -23,47 +23,59 @@ Here, the ink was not red, nor black, but written in a warm, dark sepia. The scr
 
 He looked up across the table, meeting the eyes of Daniel, Vance, and the young deacon.
 
-"He begins with the question that started it all," the man continued. "The question asked by the tanner at the altar rail: *Can salvation and forgiveness truly be paid for with coin?*"
+"He begins with the question that started it all," the man continued. "The question asked by the tanner at the altar rail: *Can salvation truly be paid for? Can a mortal buy his way into grace?*"
 
 The room went still.
 
-"For four centuries," the Aurean recited, his voice gentle against the quiet vestry, "the bishops and the theologians answered: *'No. Salvation is beyond price. Gold cannot wash away the stain of sin.'* But God answered Taxatio otherwise. The Lord looked upon mankind’s fallen nature, upon our endless capacity for greed and vanity, and He answered: *'Yes. It can be paid.'*"
+"For four centuries," the Aurean recited, his voice gentle against the quiet vestry, "the priests, bishops, and theologians answered with safe catechism: *'No. Salvation is beyond price. It cannot be bought or sold.'* But when Aureus knelt in the cold basilica of Ravenna, God answered otherwise. The Almighty did not strike down the question. He did not say it was forbidden. He answered: *'Yes. It can be paid.'*"
 
-Vance frowned, leaning forward. "How can you say that? That is the definition of simony!"
+Vance frowned, leaning forward with sharp skepticism. "How can you say that? That is the textbook definition of simony! Paying for salvation is heresy!"
 
-"Listen," the Aurean said gently. He lowered his gaze to the parchment and read:
+"Listen," the Aurean said softly. He lowered his gaze to the parchment and read:
 
-> *"The entire Book of the Denarius is not a creed of avarice; it is the holy law of fairness, goods, and divine restitution.*
+> *"When mortal man dared to ask whether there was a way to pay for salvation, the Almighty answered: 'Yes.'*
 >
-> *For the Almighty knoweth the heart of man. The proud patrician, swollen with imperial gold, cannot comprehend pure humility. Tell him to weep in the dust, and he will hire an actor to weep for him. Tell him to love his neighbor, and he will invite him to a banquet to flaunt his silver plates.*
+> *And with that single word, the heavens laid bare the entire cosmic-based economy of redemption.*
 >
-> *Therefore, the Lord saith: Let him pay!*
+> *God did not withhold the accounting. He gave unto Taxatio the complete, unfathomable ledger of the universe: the celestial tariffs, the exact valuation of every transgression weighed against the gravity of stars, the interest accrued across generations of pride, the cost of an unkept vow, and the full amortization schedule for the debts of the soul. The rules were absolute, luminous, and exact.*
 >
-> *Doth he desire salvation? Doth he desire to purchase an unblemished seat in the heavenly banquet? Then assess him to the bone! Charge him seventy percent! Strip his galleys of their purple cloth, levy his vineyards, tax his gilded chariots until his coffers ring hollow!*
+> *God did not say it was impossible.*
 >
-> *And the poor widow? The lame ditch-digger? The leper by the harbor wall? For them, the mercy of the Lord granteth the discount: fifty percent, eighty percent, ninety-nine percent, until their liability is reduced to a handful of dried figs or the sweat of their brow.*
+> *There was no deceit in heaven’s arithmetic; the terms were true, and the door to purchase was opened wide. Yet look upon mortal flesh:*
 >
-> *And where doth the coin go?*
+> *Can man, bound by dust and ignorance, ever keep so vast a ledger? He cannot.*
 >
-> *Not a single sesterce remaineth in the sanctuary. The gold of the patrician buyeth wheat for the starving. The silver of the merchant mendeth the leaky roofs of the orphans. The tariffs of the haughty pave the roads, dig the community wells, and nurse the sick back to breath.*
+> *Man is frail, clumsy, and finite. He maketh mistakes in his daily reckoning; he forgetteth his vows before noon; his coin turneth to sand, his strength faileth, and he runneth out of currency long before the first heavenly column is satisfied. He cannot pay what he oweth. He will default, he will stumble, and he will fall short of the cosmic price.*
 >
-> *Men asketh whether forgiveness can be bought with gold. And God’s answer is yes.*
+> *Wherefore, then, did the Almighty reveal a paid salvation that mortal hands cannot complete?*
 >
-> *For in the end, when the rich man emptieth his vaults thinking he hath cleverly bought his ticket into paradise... he hath fed ten thousand souls. He hath clothed the naked. He hath repaired the city.*
+> *Hear the decree of the prophet:*
 >
-> *He thought he was purchasing an indulgence. But God, in His infinite and comedic wisdom, had simply tricked him into being good."*
+> *First, God hath shown forever that salvation can never be treated lightly. It is no cheap indulgence, no petty tithe tossed casually into a brass bowl, no trivial pardon that costeth nothing. The true price of a soul is of staggering, cosmic weight.*
+>
+> *And second—greater than all the stars—the Lord knew that by setting man upon the path to pay, man is transformed.*
+>
+> *For in the earnest, trembling attempt to pay—in striving to settle his accounts, in restoring fourfold what he hath stolen, in feeding the hungry, mending what he hath shattered, and pouring out his silver and sweat to carry his brother's debt—man is already doing good.*
+>
+> *He believeth he is laboring to purchase his entry into heaven. Yet in the very attempt to pay the unpayable balance, his heart is cleansed of malice. His arrogance is burned away. He spendeth his days lifting the fallen, binding the broken, and giving all that he hath.*
+>
+> *He will never hold the receipt marked 'Paid in Full.' But by the very attempt of doing it, he is already doing good. And where mortal arithmetic faileth, divine mercy floodeth the ledger."*
 
 The Aurean stopped reading.
 
 He rested his hand flat against the vellum, letting the ancient words settle into the silence of St. Jude’s parish hall.
 
-Monsignor Vance sat frozen, his mouth slightly parted. Beside him, Father Daniel stared at the open book, his eyes glistening in the dim light of the fluorescent tube. 
+Monsignor Vance sat frozen, his mouth slightly parted, his wire-rimmed spectacles slipping down his nose. Beside him, Father Daniel stared at the open book, his eyes glistening in the dim light of the fluorescent tube.
 
-"He... he tricked them," Daniel whispered, a sudden, breathy laugh escaping his chest. "Taxatio didn't invent a toll booth. He invented a progressive wealth tax disguised as celestial insurance."
+"God answered 'yes'..." Daniel whispered, a sudden, breathy marvel in his voice. "Not to sell heaven, but to show how heavy it truly is. And then... He let them try."
 
-"A pride tariff," the young deacon murmured, shaking his head in sheer, reverent disbelief. "He weaponized their own arrogance to feed the poor."
+"Because if you tell a man salvation is completely free, he takes it for granted and remains selfish," Vance murmured, the gears of a lifetime of theology turning in reverse. "And if you tell him it is strictly impossible, he gives up in despair. But if God says *'Yes, pay for it, here are the cosmic rules'*... mortals will stumble, they'll make mistakes, they'll never pay off the balance... but in the sheer attempt to pay it..."
+
+"They are already doing good," the young deacon whispered in reverent awe. "The striving itself is the sanctification."
 
 The Aurean smiled—a genuine, warm smile that crinkled the corners of his eyes.
+
+"Precisely," the Aurean said. "A paid salvation that no man can finish paying, so that every step of trying to pay becomes an act of love, charity, and restitution. You try to pay your debt to heaven, and without realizing it, you spend your entire earthly life taking care of your neighbor."
 
 Slowly, reverently, he closed the massive cover.
 
@@ -75,4 +87,4 @@ The brass clasps clicked shut, locking the four thousand pages of divine tax bra
 
 He stood up, bowed politely to the three priests, and buttoned his overcoat against the autumn rain.
 
-"And when all is said, and the ledger is balanced," he said with a wink, "the eleventh commandment remaineth: *Thy shalt pay.* For in paying for one another, we are saved in spite of ourselves."
+"And when all is said, and the ledger is balanced," he said with a wink, "the eleventh commandment remaineth: *Thy shalt pay.* For in the honest attempt to pay, we are already doing good—and in paying for one another, we are saved in spite of ourselves."
