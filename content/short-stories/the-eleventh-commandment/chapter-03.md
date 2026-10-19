@@ -87,4 +87,4 @@ The brass clasps clicked shut, locking the four thousand pages of divine tax bra
 
 He stood up, bowed politely to the three priests, and buttoned his overcoat against the autumn rain.
 
-"And when all is said, and the ledger is balanced," he said with a wink, "the eleventh commandment remaineth: *Thy shalt pay.* For in the honest attempt to pay, we are already doing good—and in paying for one another, we are saved in spite of ourselves."
+"And when all is said, and the ledger is balanced," he said with a wink, "the eleventh commandment remaineth: *Thou shalt pay.* For in the honest attempt to pay, we are already doing good—and in paying for one another, we are saved in spite of ourselves."

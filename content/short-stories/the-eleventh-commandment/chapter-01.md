@@ -79,7 +79,7 @@ The Aurean bowed his head slightly, placing both hands squarely on the cover as 
 
 The Aurean looked up, his eyes bright with unshakeable faith.
 
-*"Thy shalt pay."*
+*"Thou shalt pay."*
 
 A beat of stunned silence passed, followed by an involuntary snort from the corner. 
 
@@ -87,7 +87,7 @@ Then the diocesan bench broke into outright laughter.
 
 Monsignor Vance took off his glasses again, chuckling so hard his shoulders shook. The young deacon buried his face in his hands, trembling with suppressed giggles, while Father Daniel leaned back in his mahogany chair, grinning in sheer disbelief.
 
-"Thy shalt pay?!" Daniel laughed. "Good heavens, man! You're describing a theological toll booth! What is this, the gospel of naked greed?"
+"Thou shalt pay?!" Daniel laughed. "Good heavens, man! You're describing a theological toll booth! What is this, the gospel of naked greed?"
 
 "It sounds like a subscription model for paradise," Vance added, wiping a tear of merriment from the corner of his eye. "Why would the Creator of the cosmos command humanity to pay for salvation? Does the Almighty have utility bills? Are the cherubim unionized and demanding cost-of-living adjustments? Does heaven have quarterly overhead?"
 

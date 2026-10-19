@@ -35,7 +35,7 @@ The Aurean smiled, his eyes crinkling.
 
 He unbuttoned the top button of his overcoat, resting both hands on the edge of the radiator, warming them against the gentle hum of the parish boiler.
 
-"When the Western Empire crumbled," he continued quietly, "the legions withdrew and the imperial grain dole vanished overnight. Villages all across northern Italy burned or starved. The powerful hoarded what little they had behind stone walls, and the desperate slaughtered each other over scraps of bread. But our little village had Taxatio’s parchment. And we had taken his eleventh commandment to heart: *Thy shalt pay.*"
+"When the Western Empire crumbled," he continued quietly, "the legions withdrew and the imperial grain dole vanished overnight. Villages all across northern Italy burned or starved. The powerful hoarded what little they had behind stone walls, and the desperate slaughtered each other over scraps of bread. But our little village had Taxatio’s parchment. And we had taken his eleventh commandment to heart: *Thou shalt pay.*"
 
 "Pay whom?" Daniel asked. "The emperor was gone."
 
