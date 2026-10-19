@@ -17,13 +17,15 @@ tags:
   - "yoriko"
 ---
 
-**Umika Minagi (水凪 海華)** is a quiet transfer student who appeared unexpectedly at the start of the summer term. Weeks prior, she was discovered asleep on the shore of secluded Moon-Crescent Bay during an ethereal bioluminescent spring tide, wrapped in deep-sea kelp ribbons.
+**Umika Minagi (水凪 海華)** is a quiet transfer student who appeared unexpectedly at the start of the summer term. Weeks prior, she was discovered washed ashore on the black sands of secluded Moon-Crescent Bay during a bioluminescent spring tide, wrapped in deep-sea kelp ribbons. 
+
+She was found by Tsubasa Kaidō while he was testing the acoustic call of his carved conch shell to infant celestial whales off the reef. Observing her uncanny connection to wild sea creatures, Tsubasa carried the hypothermic girl to Otohime Ryūgū Shrine. Recognizing the sacred omens of a *Yoriko* (child gifted by the tides), Shiori Ryūgū agreed to shelter her at the shrine, secure municipal sponsorship through her family, and arrange her transfer enrollment at Kaiyō High School.
 
 ## Personality & Traits
-- **Deadpan Ethereality:** Soft-spoken, calm, and fascinated by ordinary land-dwelling customs. She walks barefoot along seaside railings with effortless balance and has a body temperature noticeably cooler than normal humans.
+- **Deadpan Ethereality:** Soft-spoken, calm, and fascinated by ordinary land-dwelling customs. She walks barefoot along seaside railings and school corridors with effortless balance, frequently abandoning her indoor slippers, and has a body temperature noticeably cooler than normal humans.
 - **Natural Ocean Empathy:** Wild marine life treats her with reverence. Passing schools of sky-squid linger around her hair, and wild sea turtles will swim straight to her hands if she dips them into the tide pools.
 - **Personal Space Amnesia:** Lacks conventional social boundaries. She constantly tilts her head right next to Tsubasa, leans against his shoulder while reading his field notebooks, or casually takes bites from his lunch without asking.
-- **The Bond with Tsubasa:** Fascinated by Tsubasa because he speaks to her not as an exotic curiosity, but as someone who understands the ocean's silent rhythms.
+- **The Bond with Tsubasa:** Bound to Tsubasa by memory of his conch call—she knows him as *"the boy who talks to the whales"*—and fascinated that he speaks to her not as an exotic oddity, but as someone who understands the ocean's silent rhythms.
 
 ## Supernatural Hints
 - Her eyes shift from deep sea-navy to iridescent teal under strong sunlight.
