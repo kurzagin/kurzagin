@@ -18,32 +18,32 @@ factions_mentioned:
   - "Student Council"
   - "Ryūgū Shrine"
   - "Marine Specimen & Ecology Club"
-summary: "Tsubasa and Matsuri dash through the school gates just in time, running into the stern Student Council President Shiori Ryūgū, whose hidden seasickness Tsubasa diagnoses with clinical precision. After surviving classes and dissecting Matsuri's homemade bento with reverent ichthyological analysis, Tsubasa retreats to the Marine Specimen Club, where club president Chihaya Kujirazaki's analysis of whale mist sparks an explosive academic clash—interrupted by the barefoot arrival of Umika Minagi, the mysterious sea-drifter Tsubasa found weeks ago."
+summary: "Tsubasa and Matsuri reach the school gates just ahead of the morning bell, intercepted by Student Council President Shiori Ryūgū over uniform infractions and harbor smells. In navigation class, Tsubasa corrects the homeroom proctor's atmospheric models before enduring Matsuri's volatile bento critique. After school, Tsubasa heads to the Marine Specimen Club, where an empirical clash with club president Chihaya Kujirazaki over celestial whale vapor is interrupted by the quiet arrival of Umika Minagi."
 ---
 
-The final three steps of the Great Otokozaka were slick with whale-mist and smelled intensely of ozone.
+The final three stone steps of the Great Otokozaka were slick with whale-mist and smelled intensely of ozone.
 
-Matsuri hit the gravel plateau before the school gate with a desperate slide, her rubber-soled school loafers throwing up a rooster-tail of wet crushed granite. I cleared the threshold half a pace behind her, one hand clamping my school bag shut to prevent the yellowtail collar bento from undergoing catastrophic lateral displacement.
+Matsuri hit the gravel plateau before the school gate with a desperate slide, her rubber-soled school loafers throwing up a rooster-tail of wet crushed granite. I cleared the threshold half a pace behind her, one hand clamping my canvas satchel shut to prevent the cedar bento box inside from undergoing catastrophic lateral displacement.
 
 *Chiiiiiiime.*
 
-The high-brass chime of Kaiyō High School’s first bell echoed across the bluffs, vibrating the morning dew off the cedar windbreaks.
+The high-brass chime of Kaiyō High School’s first bell echoed across the bluffs, vibrating the morning dew off the windbreak cedars.
 
-"Safe!" Matsuri gasped, planting her palms on her knees. Her chest heaved against her navy blazer, steam rising from her damp ponytail in the brisk morning air. "We're safe! Tell me the proctor didn't see us!"
+"Safe!" Matsuri gasped, planting her palms on her knees. Her chest heaved against her navy blazer, steam rising from her damp ponytail in the brisk morning air. "We're safe! Tell me the gate monitor didn't clock us!"
 
-"Your definition of 'safe' neglects basic optics," I said, catching my breath and checking my barometer. "We crossed the threshold with four seconds of margin, which technically classifies us as punctual under Section 4, Paragraph B of the municipal attendance charter. However, our presence has already been visually acquired."
+"Your definition of 'safe' neglects basic optics," I said, catching my breath and checking the analog barometer strapped to my wrist. "We crossed the threshold with four seconds of margin, which technically classifies us as punctual under Section 4, Paragraph B of the municipal attendance charter. However, our presence has already been visually acquired."
 
-Matsuri stiffened. Slowly, like a rusted winch turning against three tons of kelp, she raised her head.
+Matsuri stiffened. Slowly, like a rusted winch turning against three tons of wet kelp, she raised her head.
 
-Standing beneath the shadow of the heavy wooden Torii gate that served as Kaiyō High School’s western entrance was a girl holding an aluminum clipboard with both hands.
+Standing beneath the shadow of the heavy wooden Torii gate that served as Kaiyō High School’s western entrance was an inspection lectern, and behind it, a girl holding an aluminum clipboard with both hands.
 
-She wore the standard Kaiyō blazer, but hers was impeccably pressed, devoid of the salt-stains and diesel streaks that marked anyone living south of the cliff road. Her obsidian hair fell in straight, silk-smooth sheets past her shoulders, pinned behind her ears with lacquered tortoiseshell combs bearing the three-wave crest of the Ryūgū Shrine. A gold arm-band pinned to her left sleeve read *Student Council President* in immaculate brush calligraphy.
+She wore the standard Kaiyō blazer, but hers was impeccably pressed, devoid of the salt-stains and diesel streaks that marked anyone living south of the cliff road. Her obsidian hair fell in straight sheets past her shoulders, pinned behind her ears with lacquered tortoiseshell combs bearing the three-wave crest of the Ryūgū Shrine. A gold arm-band pinned to her left sleeve read *Student Council President* in immaculate brush calligraphy.
 
 Shiori Ryūgū tapped a mechanical pencil against the aluminum clip. *Click. Click. Click.*
 
 "Four seconds before homeroom bell," Shiori said. Her voice was like crushed sea-glass—crisp, pristine, and perfectly measured. "Hardly a margin befitting second-year students of a prefectural maritime academy, Kaidō-san. Isaki-san."
 
-"Ryūgū-senpai!" Matsuri instantly straightened up, tucking her hands behind her back, though her jaw remained obstinately jutted out. "The celestial siren went off! The Great Otokozaka was caught directly under the downdraft wake of an *Amanokujira*! You can't issue demerits for acts of god!"
+"Ryūgū-senpai!" Matsuri instantly straightened up, tucking her hands behind her back, though her chin remained obstinately jutted out. "The celestial siren went off! The Great Otokozaka was caught directly under the downdraft wake of an *Amanokujira*! You can't issue demerits for acts of god!"
 
 "The migration schedule of the pod was posted on the harbor bulletin board forty-eight hours ago," Shiori replied without looking up from her roster. "A disciplined student anticipates aerial barometric shifts. A negligent student uses magnificent ocean fauna as an excuse for uncombed hair and poorly tied neckties."
 
@@ -53,61 +53,59 @@ Her nose twitched. Just a millimeter.
 
 "Kaidō-san."
 
-"Good morning, Student Council President," I said respectfully.
+"Good morning, Student Council President," I said.
 
-"You smell of raw skipjack blood, WD-40, and brine," she declared, her upper lip curling slightly in distaste. "Did you sleep in an engine bilge again?"
+"You smell of raw skipjack blood, WD-40, and brine," she declared, her upper lip curling slightly. "Did you sleep in an engine bilge again?"
 
 "I was assisting the third-shift trawlers on the southern pier between four-thirty and six AM," I explained. "The dawn skipjack had elevated lactic acid levels due to an offshore thermocline collapse; rapid bleeding was essential to prevent enzymatic degradation of the flesh. As for the WD-40, the coastal salt air causes galvanic corrosion in the zinc winch gears if they aren't sprayed post-rinse."
 
-"This is an educational institution, not a fish-gutting cooperative," Shiori said coldly. She stepped forward, her posture rigid, her chin tilted at the precise fifteen-degree angle prescribed for shrine maidens greeting imperial envoys. "If you bring harbor refuse into the second-year corridor, I will personally see to it that the Disciplinary Committee assigns you to barnacle scraping on the tide-intake flumes for the next two—"
+"This is an educational institution, not a fish-gutting cooperative," Shiori said coldly. She stepped forward, her posture rigid, her chin tilted at the precise fifteen-degree angle prescribed for shrine maidens greeting prefectural officials. "If you bring harbor refuse into the second-year corridor, I will personally see to it that the Disciplinary Committee assigns you to barnacle scraping on the tide-intake flumes for the next two—"
 
 She stopped.
 
-A micro-tremor ran through her knuckles. Her knuckles whitened against the aluminum clipboard. The color drained from her lips, leaving them the pale, chalky gray of bleached coral.
+Her fingers clamped suddenly hard against the aluminum clipboard. The color drained from her lips, leaving them the chalky gray of bleached coral.
 
 I stepped forward and leaned in slightly, squinting at her face.
 
-"K-Kaidō-san?!" Shiori gasped, recoiling half an inch. Her eyes widened, a sudden rush of crimson breaking through her pale cheeks. "What are you doing?! Maintain standard personal distance!"
+"K-Kaidō-san?!" Shiori gasped, flinching back half an inch. Her eyes widened, a sudden rush of color breaking through her cheeks. "What are you doing?! Maintain regulation distance!"
 
-"Pupil dilation is asymmetrical by approximately seven percent," I observed clinically. "Your cervical vertebrae are locked in an involuntary compensatory stiffening, and your breathing pattern indicates shallow thoracic compensation. You're suffering from vestibular canal disturbance."
+"Pupil dilation is asymmetrical by approximately seven percent," I observed. "Your neck muscles are locked in an involuntary compensatory stiffening, and your breathing pattern indicates shallow thoracic compensation. You're suffering from vestibular canal disturbance."
 
 "I am doing no such thing! Step back!"
 
 "It was the infrasound from the humpback's breach," I continued, unperturbed. "Celestial Humpbacks emit a twenty-hertz subterranean hum during atmospheric decompression. When that frequency bounces off the basalt bluffs, people with sensitive inner-ear fluid balance experience acute vertical vertigo. In short: you are seasick on dry land."
 
-"I am *not* seasick!" Shiori’s voice cracked into a sharp, mortified pitch. She took a frantic step back, but her balance wobbled on the gravel; her right ankle gave way beneath her.
+"I am *not* seasick!" Shiori’s voice cracked into a sharp, mortified pitch. She took a step back, but her balance wobbled on the gravel; her right ankle gave way beneath her.
 
 Before her knees could hit the dirt, I caught her elbow, stabilizing her center of gravity against the stone post of the gate.
 
-Her body felt shockingly light, vibrating like a plucked fluorocarbon guitar string. Close up, she smelled not of fish or sea-salt, but of peppermint pastilles and pressed temple incense. 
+Her frame was light, vibrating like a plucked fluorocarbon guitar string. Close up, she smelled not of fish or sea-salt, but of peppermint pastilles and pressed cedar incense. 
 
-"Let go of me!" she hissed, though she didn't have the strength to pull away. Her face was now burning a furious, humiliated scarlet that rivaled a boiled spiny lobster. "I am the daughter of the Ryūgū Shrine! We have commanded the tides of Shiozaki for seven hundred years! The sea does not make me ill!"
+"Let go of me!" she hissed, though her fingers dug into my sleeve for support before she pushed herself upright. Her face had flushed to the distinct scarlet of a boiled spiny lobster. "I am the daughter of the Ryūgū Shrine. We have conducted the tide rites of Shiozaki for seven hundred years. The sea does not make me ill!"
 
-"The human inner ear cares very little for ancestral pedigree," I noted reasonably. I reached into my coat pocket and retrieved a small, wax-paper packet. "Here. Peppermint won't solve it; it only masks nausea. This is dried ginger root crystallized in coarse sea-salt and roasted kelp powder. Chew half a slice. The gingerols inhibit serotonin receptors in the vestibular nuclei, and the sodium stabilizes your blood pressure."
+"The human inner ear cares very little for ancestral pedigree," I noted reasonably. I reached into my coat pocket and retrieved a small, wax-paper packet. "Here. Peppermint only masks nausea; it doesn't affect the labyrinth of the ear. This is dried ginger root crystallized in coarse sea-salt and roasted kelp powder. Chew half a slice. The gingerols inhibit serotonin receptors in the vestibular nuclei, and the sodium stabilizes blood pressure."
 
 Shiori stared at the grimy wax packet in my hand as if I had offered her a live blowfish.
 
-"You... you expect me to put dock-scraps into my mouth?!"
+"You expect me to put dock-scraps into my mouth?!"
 
 "Suit yourself. But if you collapse during the morning assembly, the third-year vice president will have to read the tide warnings, and his pronunciation of Latin pelagic classifications is atrocious."
 
-Matsuri, who had been watching this interaction with her arms crossed and her foot tapping aggressively against the gravel, suddenly grabbed my sleeve and yanked me backward with the force of an offshore gale.
+Matsuri, who had been watching this with her arms crossed and her boots digging into the gravel, suddenly grabbed my collar and yanked me backward.
 
-"Hey! Don't go shoving weird fisherman remedies into the Council President's face, Wing-head!" Matsuri barked, glaring between the two of us. Her cheeks were oddly flushed again, her teeth clamped tight. "Come on! The warning bell is going to ring any second, and I am not getting detention because you decided to play coastal witch doctor at the front gate!"
+"Hey! Don't go shoving weird dock remedies into the Council President's face, Wing-head!" Matsuri barked, glaring between the two of us. Her forehead was knotted tight. "Come on! The homeroom warning bell is going to ring any second, and I am not getting docked because you decided to lecture people on cranial nerves at the front gate!"
 
 "Take the packet, President," I said, setting it neatly on the corner of her wooden inspection lectern. "And drink warm barley tea, not cold water."
 
 Matsuri dragged me by my blazer collar down the stone flagstones toward the main building. 
 
-Behind us, through the morning fog, I looked back for a fraction of a second. 
-
-Shiori was still standing beneath the Torii gate, completely alone. She looked at the wax packet on the podium. Slowly, furtively, looking left and right to confirm that no other disciplinary officers were in sight, her slender fingers reached out, plucked the dried ginger from the paper, and slipped it into her mouth.
+Behind us, through the morning fog, I glanced back. Shiori was still standing beneath the Torii gate, looking left and right along the empty gravel path. Her fingers reached out, plucked the dried ginger from the paper, and slipped it into her mouth.
 
 ***
 
 Second period was Celestial Navigation and Atmospheric Meteorology, held in Classroom 2-B on the second floor of the seaside wing.
 
-Outside the open sash windows, the sky had returned to its deceptive, crystal-clear blue. But fifty meters below the cliff edge, the Pacific swell was crashing with rhythmic, booming violence, sending plumes of white foam shooting up the black rocks like fireworks.
+Outside the open sash windows, the sky had returned to its deceptive, crystal-clear blue. But fifty meters below the cliff edge, the Pacific swell was crashing with rhythmic, booming violence, sending plumes of white foam shooting up the black rocks.
 
 "...and as we observe during vernal equinox conditions," droned Mr. Kameyama, our homeroom proctor, tapping a dusty wooden pointer against a blackboard diagram of high-altitude isobar lines, "the convergence of the Kuroshio ocean current and the upper troposphere jet stream creates a localized pocket of zero-shear vapor lift. This is why our town enjoys a Grade Three or higher aerial fishery throughout April."
 
@@ -175,7 +173,7 @@ Her hazel eyes were narrowed like a reef shark assessing a wounded seal. Her bro
 
 "Proper digestion requires an unhurried, parasympathetic state," I noted, carefully placing the indigo-wrapped cedar box onto my desk. 
 
-With meticulous care, I untied the fisherman's hitch. I folded the indigo cloth into neat, crisp quarters, laying it aside like surgical linen, before lifting the lid.
+With meticulous care, I untied the fisherman's hitch. I folded the indigo cloth into neat quarters, laying it aside, before lifting the lid.
 
 The fragrance of aged soy sauce, sweet mirin, and braised ginger bloomed into the air, drawing a sharp, appreciative sniff from two boys sitting three desks over. The yellowtail collar sat nestled against a bed of steamed white rice, flanked by pickled daikon and tender burdock root. The glaze had settled into a deep, glossy amber.
 
@@ -203,21 +201,21 @@ I took a bite of the rice, perfectly coated in the braising liquor.
 
 Matsuri sat frozen.
 
-Slowly, inexorably, the heat began to rise. It started at her collarbones, swept up the slender column of her throat, and engulfed her cheeks, ears, and temples in a thermonuclear crimson that seemed almost capable of igniting paper.
+Slowly, the heat began to rise. It started at her collarbones, swept up the slender column of her throat, and engulfed her cheeks and ears in a fierce crimson.
 
 "Y-You..." she stammered, her mouth opening and closing soundlessly like a beached carp. "You... you absolute... moron!"
 
-"Did I misidentify the cooking duration?" I asked, taking another bite of the tender cheek meat. "The texture suggests twenty-five minutes, but if you used an induction simmer plate—"
+"Did I misidentify the cooking duration?" I asked, taking another bite of the cheek meat. "The texture suggests twenty-five minutes, but if you used an induction simmer plate—"
 
 "I asked if it tasted good, you hopeless fish-nerd! Not for a doctoral defense on fat molecules!" 
 
 She leaped to her feet, knocking her chair backward against the linoleum with a deafening clatter. The entire classroom went quiet, half a dozen students turning to watch the spectacle with amused, knowing grins.
 
-"Eat it all! Every single grain of rice!" she yelled, pointing an accusatory, trembling finger at my face. "If you leave behind even one piece of ginger, I will throw you off the lighthouse pier after school!"
+"Eat it all! Every single grain of rice!" she yelled, pointing an accusatory finger at my face. "If you leave behind even one piece of ginger, I will throw you off the lighthouse pier after school!"
 
-She spun on her heel, her skirt flaring out, and stormed out of the classroom into the hallway, slamming the sliding door behind her with enough force to shake the glass panes.
+She spun on her heel and stormed out of the classroom, slamming the sliding door behind her with enough force to rattle the glass.
 
-"A truly volatile temperament," I remarked to myself, picking up another succulent morsel of fish. "High blood pressure runs in coastal families. I should recommend more potassium in her diet."
+"A truly volatile temperament," I remarked to myself, picking up another piece of fish. "High blood pressure runs in coastal families. I should recommend more potassium in her diet."
 
 ***
 
@@ -244,7 +242,7 @@ Her crimson-framed glasses reflected the blue glow of an electron microscope mon
 
 Chihaya Kujirazaki did not look up from her microscope.
 
-"You're seven minutes late, Kaidō-kun," she announced, her voice clipped, haughty, and dripping with aristocratic disdain. "A proper research assistant does not linger in the hallways when empirical science is waiting."
+"You're seven minutes late, Kaidō-kun," she announced, her voice clipped and brisk. "A proper research assistant does not linger in the hallways when empirical science is waiting."
 
 "I am a registered member of this club, Kujirazaki-senpai, not your indentured laboratory assistant," I replied, setting my school bag on the leather sofa in the corner. "Furthermore, I was delayed because Matsuri insisted on reclaiming her empty bento box with three separate verbal threats."
 
@@ -256,7 +254,7 @@ I walked over to the stainless-steel table and leaned over her shoulder to inspe
 
 Displayed on the monitor was a high-resolution microscopic feed of a liquid droplet. Suspended within the fluid were thousands of tiny, crystalline structures—hexagonal prisms that glowed with a faint, iridescent violet phosphorescence.
 
-"Atmospheric condensation collected from the southern meteorological tower during the morning breach," Chihaya said, her voice rising with unmistakable pride. She tapped the glass screen with the tip of her titanium probe. "Using my family foundation’s proprietary mass-spectrometry array, I have spent the last three hours analyzing the vapor plume of that *Amanokujira*. Observe the lipid crystalline lattice. It is completely unprecedented."
+"Atmospheric condensation collected from the southern meteorological tower during the morning breach," Chihaya said, her voice rising with pride. She tapped the glass screen with the tip of her titanium probe. "Using my family foundation’s proprietary mass-spectrometry array, I have spent the last three hours analyzing the vapor plume of that *Amanokujira*. Observe the lipid crystalline lattice. It is completely unprecedented."
 
 She spun her swivel chair around, crossing one black-stockinged leg over the other, and looked up at me with a triumphant glare.
 
@@ -266,9 +264,9 @@ I didn't answer immediately.
 
 I picked up the micropipette from the rack, drew a half-microliter drop of the fluid from the open petri dish, and deposited it onto the back of my left hand. 
 
-"Hey! What are you doing?!" Chihaya gasped, her composure instantly shattering as she jumped out of her chair. "That is an unsterilized biological sample from an eighty-ton celestial megafauna! You cannot simply smear it on your skin like hand lotion! The contamination risk—"
+"Hey! What are you doing?!" Chihaya gasped, jumping out of her chair. "That is an unsterilized biological sample from an eighty-ton celestial megafauna! You cannot simply smear it on your skin like hand lotion! The contamination risk—"
 
-I brought my hand to my nose and inhaled deeply. Then, before Chihaya could physically tackle me, I touched the tip of my tongue to the residue.
+I brought my hand to my nose and inhaled deeply. Then, before Chihaya could physically grab my wrist, I touched the tip of my tongue to the residue.
 
 "K-Kaidō!" she shrieked, her face turning bright red behind her glasses. "Are you insane?! Spitting in the face of laboratory safety protocols—!"
 
