@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { BookOpen, Edit3, ScrollText, Library, ArrowLeft, ChevronRight } from 'lucide-react';
+import { BookOpen, Edit3, ScrollText, Library, ArrowLeft, ChevronRight, Terminal } from 'lucide-react';
 import { getNovelBySlug } from '@/lib/novels';
 
 interface NovelProps {
@@ -24,6 +24,17 @@ export default async function NovelOverviewPage({ params }: NovelProps) {
   }
 
   const sections = [
+    ...(novel === 'heart-of-ea'
+      ? [
+          {
+            title: 'Visual Novel',
+            href: `/novels/${novel}/play`,
+            desc: 'Terminal-based atmospheric sound/visual novel reader. Play Act 1: The Dilmun Deluge.',
+            icon: Terminal,
+            badge: 'Interactive',
+          },
+        ]
+      : []),
     {
       title: 'Story',
       href: `/novels/${novel}/story`,
