@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
-  Home, SquarePen, Disc3, Image as ImageIcon, Tv, Gamepad2, User, Settings,
+  Home, SquarePen, Disc3, Tv, Gamepad2, User, Settings,
   MoreHorizontal, X, ChevronRight, Play, SkipBack, SkipForward, Download, BookOpen, MessageSquare,
 } from 'lucide-react';
 import { getCurrent } from './current';
@@ -80,10 +80,10 @@ export default function MobileNavClient({ tracks }: { tracks: DbTrack[] }) {
             {current === 'music' && <span className="mobile-nav-indicator" />}
           </Link>
 
-          <Link href="/gallery" className={`mobile-nav-item ${current === 'gallery' ? 'active' : ''}`} data-nav="gallery">
-            <span className="mobile-nav-icon"><ImageIcon size={18} /></span>
-            <span className="mobile-nav-label">gallery</span>
-            {current === 'gallery' && <span className="mobile-nav-indicator" />}
+          <Link href="/anime" className={`mobile-nav-item ${current === 'anime' ? 'active' : ''}`} data-nav="anime">
+            <span className="mobile-nav-icon"><Tv size={18} /></span>
+            <span className="mobile-nav-label">anime</span>
+            {current === 'anime' && <span className="mobile-nav-indicator" />}
           </Link>
 
           <button
@@ -336,9 +336,9 @@ export default function MobileNavClient({ tracks }: { tracks: DbTrack[] }) {
               <Disc3 size={14} />
               <span>music</span>
             </Link>
-            <Link href="/gallery" className={`mobile-sheet-quick-link ${current === 'gallery' ? 'active' : ''}`}>
-              <ImageIcon size={14} />
-              <span>gallery</span>
+            <Link href="/anime" className={`mobile-sheet-quick-link ${current === 'anime' ? 'active' : ''}`}>
+              <Tv size={14} />
+              <span>anime</span>
             </Link>
           </div>
         </div>

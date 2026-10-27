@@ -62,18 +62,6 @@
       ]
     },
     {
-      "name": "Visual Gallery",
-      "short_name": "Gallery",
-      "description": "Visual archive and generative art",
-      "url": "/gallery",
-      "icons": [
-        {
-          "src": "/pwa-192x192.png",
-          "sizes": "192x192"
-        }
-      ]
-    },
-    {
       "name": "Anime Log",
       "short_name": "Anime",
       "description": "Watchlist and review records",

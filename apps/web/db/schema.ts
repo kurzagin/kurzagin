@@ -323,31 +323,7 @@ export const animeReviews = pgTable(
 export type AnimeReview = typeof animeReviews.$inferSelect;
 export type NewAnimeReview = typeof animeReviews.$inferInsert;
 
-// 10. Gallery Items Table (Dedicated imageboard / visual fragments)
-export const galleryItems = pgTable(
-  'gallery_items',
-  {
-    id: uuid('id').defaultRandom().primaryKey(),
-    title: varchar('title', { length: 255 }),
-    caption: text('caption'),
-    url: text('url').notNull(),
-    alt_text: text('alt_text'),
-    width: integer('width'),
-    height: integer('height'),
-    tags: jsonb('tags').$type<string[]>().default([]).notNull(),
-    is_nsfw: boolean('is_nsfw').default(false).notNull(),
-    created_at: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
-  },
-  (table) => [
-    index('idx_gallery_items_created_at').on(table.created_at.desc()),
-    index('idx_gallery_items_is_nsfw').on(table.is_nsfw),
-  ]
-);
-
-export type GalleryItem = typeof galleryItems.$inferSelect;
-export type NewGalleryItem = typeof galleryItems.$inferInsert;
-
-// 11. Operator-only visual references attached to wiki dossiers
+// 10. Operator-only visual references attached to wiki dossiers
 export const wikiVisualReferences = pgTable(
   'wiki_visual_references',
   {
@@ -376,7 +352,7 @@ export const mediaAssets = pgTable(
     key: text('key').notNull().unique('idx_media_assets_key'),
     url: text('url').notNull().unique('idx_media_assets_url'),
     storage: varchar('storage', { length: 20 }).default('r2').notNull(), // 'r2' | 'local' | 'external'
-    media_type: varchar('media_type', { length: 50 }).default('image').notNull(), // 'banner' | 'avatar' | 'cover' | 'track' | 'post_image' | 'gallery'
+    media_type: varchar('media_type', { length: 50 }).default('image').notNull(), // 'banner' | 'avatar' | 'cover' | 'track' | 'post_image'
     status: varchar('status', { length: 20 }).default('active').notNull(), // 'active' | 'detached' | 'deleted'
     size_bytes: integer('size_bytes'),
     mime_type: varchar('mime_type', { length: 100 }),

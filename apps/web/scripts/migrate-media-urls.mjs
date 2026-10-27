@@ -106,25 +106,6 @@ async function runMigration() {
     console.log('  - No post_media matching old CDN found.');
   }
 
-  // 3. Table: gallery_items
-  console.log('// Migrating `gallery_items` (url)...');
-  const galleryBefore = await sql`
-    SELECT id, url 
-    FROM gallery_items 
-    WHERE url LIKE '%cdn.krzgn.xyz%'
-  `;
-
-  if (galleryBefore.length > 0) {
-    await sql`
-      UPDATE gallery_items
-      SET url = REPLACE(url, ${OLD_CDN}, ${NEW_CDN})
-      WHERE url LIKE '%cdn.krzgn.xyz%'
-    `;
-    console.log(`  ✓ Updated ${galleryBefore.length} record(s) in gallery_items.`);
-  } else {
-    console.log('  - No gallery_items matching old CDN found.');
-  }
-
   // 4. Table: profiles
   console.log('// Migrating `profiles` (avatar_url, banner_url, social_links)...');
   const profilesBefore = await sql`

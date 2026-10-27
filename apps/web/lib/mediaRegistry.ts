@@ -8,7 +8,7 @@ export interface RegisterAssetParams {
   key: string;
   url: string;
   storage?: 'r2' | 'local' | 'external';
-  mediaType: 'banner' | 'avatar' | 'cover' | 'track' | 'post_image' | 'gallery';
+  mediaType: 'banner' | 'avatar' | 'cover' | 'track' | 'post_image';
   sizeBytes?: number;
   mimeType?: string;
 }
@@ -281,11 +281,10 @@ function extractKeyFromUrl(url: string): string | null {
 /**
  * Helper to guess media_type from key if registering retroactively
  */
-function inferMediaTypeFromKey(key: string): 'banner' | 'avatar' | 'cover' | 'track' | 'post_image' | 'gallery' {
+function inferMediaTypeFromKey(key: string): 'banner' | 'avatar' | 'cover' | 'track' | 'post_image' {
   if (key.includes('banners')) return 'banner';
   if (key.includes('avatars')) return 'avatar';
   if (key.includes('covers')) return 'cover';
   if (key.includes('tracks')) return 'track';
-  if (key.includes('gallery')) return 'gallery';
   return 'post_image';
 }

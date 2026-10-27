@@ -163,23 +163,7 @@ CREATE TABLE IF NOT EXISTS anime_reviews (
 CREATE INDEX IF NOT EXISTS idx_anime_reviews_anime_id ON anime_reviews(anime_id, created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_anime_reviews_review_type ON anime_reviews(review_type);
 
--- 10. Gallery Items Table (Dedicated imageboard / polaroids)
-CREATE TABLE IF NOT EXISTS gallery_items (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  title VARCHAR(255),
-  caption TEXT,
-  url TEXT NOT NULL,
-  alt_text TEXT,
-  width INT,
-  height INT,
-  tags JSONB NOT NULL DEFAULT '[]'::jsonb,
-  is_nsfw BOOLEAN NOT NULL DEFAULT FALSE,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-
-ALTER TABLE gallery_items ADD COLUMN IF NOT EXISTS is_nsfw BOOLEAN NOT NULL DEFAULT FALSE;
-CREATE INDEX IF NOT EXISTS idx_gallery_items_created_at ON gallery_items(created_at DESC);
-CREATE INDEX IF NOT EXISTS idx_gallery_items_is_nsfw ON gallery_items(is_nsfw);
+-- 10. Operator-only visual references attached to wiki dossiers
 
 CREATE TABLE IF NOT EXISTS wiki_visual_references (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),

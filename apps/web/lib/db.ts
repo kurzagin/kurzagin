@@ -16,7 +16,6 @@ export type DbProfile = schema.Profile;
 export type DbAnimeWatchlistItem = schema.AnimeWatchlistItem;
 export type DbAnimeReview = schema.AnimeReview;
 export type AnimePostMeta = schema.AnimePostMeta;
-export type DbGalleryItem = schema.GalleryItem;
 export type DbMediaAsset = schema.MediaAsset;
 
 export async function incrementSiteVisits(): Promise<number> {

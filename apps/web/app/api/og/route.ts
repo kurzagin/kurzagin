@@ -13,7 +13,7 @@ export interface OpenGraphData {
 const ogCache = new Map<string, { data: OpenGraphData | null; expiresAt: number }>();
 const CACHE_TTL_MS = 1000 * 60 * 60 * 6; // 6 hours
 
-export function isExcludedOgHost(hostname: string): boolean {
+function isExcludedOgHost(hostname: string): boolean {
   const host = hostname.toLowerCase();
   return (
     host === 'youtube.com' ||

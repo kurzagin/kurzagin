@@ -85,8 +85,8 @@ self.addEventListener('fetch', (event) => {
 
   // 4. API endpoints & Authentication routes: Network first, never block dynamic server actions
   if (url.pathname.startsWith('/api/')) {
-    // For read-only public endpoints (like tracks or gallery), fallback to cache on network failure
-    if (url.pathname.startsWith('/api/tracks') || url.pathname.startsWith('/api/gallery')) {
+    // For read-only public endpoints (like tracks), fallback to cache on network failure
+    if (url.pathname.startsWith('/api/tracks')) {
       event.respondWith(
         fetch(request)
           .then((response) => {

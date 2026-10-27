@@ -46,81 +46,6 @@ export default function SettingsClient({
   };
 
   useEffect(() => {
-
-    // ---- Operator-only NSFW preference ----
-    (function initNsfwSettings() {
-      if (!isOperator) return;
-      const prefBlur = document.getElementById('prefBlur');
-      const prefShow = document.getElementById('prefShow');
-      const badge = document.getElementById('nsfwStatusBadge');
-      const statusText = document.getElementById('nsfwSaveStatus');
-
-      if (!prefBlur || !prefShow) return;
-
-      const defaultMode = 'show';
-      const current = localStorage.getItem('kurzagin_nsfw_mode') || defaultMode;
-
-      if (current === 'show') {
-        prefShow.checked = true;
-        if (badge) {
-          badge.textContent = isOperator ? 'MODE: OPEN ALL (OP)' : 'MODE: OPEN ALL (18+)';
-          badge.style.borderColor = 'rgba(255, 71, 87, 0.4)';
-          badge.style.color = '#ff6b81';
-        }
-      } else {
-        prefBlur.checked = true;
-        if (badge) {
-          badge.textContent = 'MODE: BLURRED';
-          badge.style.borderColor = 'var(--border-subtle)';
-          badge.style.color = 'var(--text-3)';
-        }
-      }
-
-      function setMode(mode) {
-        localStorage.setItem('kurzagin_nsfw_mode', mode);
-        if (mode === 'show') {
-          if (badge) {
-            badge.textContent = isOperator ? 'MODE: OPEN ALL (OP)' : 'MODE: OPEN ALL (18+)';
-            badge.style.borderColor = 'rgba(255, 71, 87, 0.4)';
-            badge.style.color = '#ff6b81';
-          }
-          if (statusText) {
-            statusText.style.color = '#7bc67a';
-            statusText.textContent = isOperator 
-              ? '✓ Preference saved: All captures will display unblurred.'
-              : '';
-          }
-        } else {
-          if (badge) {
-            badge.textContent = 'MODE: BLURRED';
-            badge.style.borderColor = 'var(--border-subtle)';
-            badge.style.color = 'var(--text-3)';
-          }
-          if (statusText) {
-            statusText.style.color = 'var(--accent)';
-            statusText.textContent = '✓ Preference saved: Sensitive captures will be blurred by default.';
-          }
-        }
-      }
-
-      prefBlur.addEventListener('change', () => {
-        if (prefBlur.checked) setMode('blur');
-      });
-
-      prefShow.addEventListener('change', () => {
-        if (prefShow.checked) {
-          if (!isOperator) {
-            if (!confirm('Age Verification (18+):\n\nDo you confirm that you are at least 18 years of age or the legal age of majority in your jurisdiction?')) {
-              prefBlur.checked = true;
-              setMode('blur');
-              return;
-            }
-          }
-          setMode('show');
-        }
-      });
-    })();
-
     (function () {
       // ---- logged-out mode: login ----
       const form = document.getElementById('loginForm');
@@ -279,57 +204,6 @@ export default function SettingsClient({
   </div>
 
   <section className="section" style={css("max-width: 640px; margin: 0 auto; padding-top: 40px;")}>
-    {/* NSFW preferences are intentionally unavailable outside an operator session. */}
-    {authenticated && <div className="bracket-card" style={css("padding: 28px; margin-bottom: 24px;")}>
-      <div style={css("display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;")}>
-        <div style={css("font-family: var(--mono); font-size: 0.65rem; color: var(--accent); letter-spacing: 2px;")}>
-          // CONTENT FILTERING • SENSITIVE MEDIA (18+)
-        </div>
-        <span id="nsfwStatusBadge" style={css("font-family: var(--mono); font-size: 0.62rem; padding: 2px 8px; border-radius: 2px; border: 1px solid var(--border-subtle); color: var(--text-3); background: rgba(0,0,0,0.2);")}>
-          MODE: {authenticated ? 'OPEN ALL (DEFAULT)' : 'BLURRED (DEFAULT)'}
-        </span>
-      </div>
-
-      <p style={css("font-family: var(--sans); font-size: 0.8rem; color: var(--text-2); line-height: 1.5; margin-bottom: 16px;")}>
-        Configure how sensitive and adult captures in the gallery darkroom appear on your device.
-        {authenticated 
-          ? <span style={css("color: var(--accent); display: block; margin-top: 4px; font-size: 0.72rem; font-family: var(--mono);")}>• Operator session: Defaults to opening all captures, but you can toggle blur mode anytime to preview visitor experience.</span>
-          : <span style={css("color: var(--text-3); display: block; margin-top: 4px; font-size: 0.72rem; font-family: var(--mono);")}>• Visitor mode: Sensitive captures are blurred by default until self-age verified.</span>
-        }
-      </p>
-
-      <div style={css("display: flex; flex-direction: column; gap: 12px; background: var(--bg-0); padding: 14px 16px; border: 1px solid var(--border-subtle); border-radius: 4px;")}>
-        <label style={css("display: flex; align-items: flex-start; gap: 10px; cursor: pointer;")}>
-          <input type="radio" name="nsfwPreference" value="blur" id="prefBlur" style={css("margin-top: 3px; accent-color: var(--accent); cursor: pointer;")} />
-          <div>
-            <div style={css("font-family: var(--mono); font-size: 0.75rem; color: var(--text-0); font-weight: 500;")}>
-              Blur sensitive & adult captures {authenticated ? '' : '(Default for visitors)'}
-            </div>
-            <div style={css("font-family: var(--sans); font-size: 0.68rem; color: var(--text-3); margin-top: 2px;")}>
-              NSFW polaroids remain blurred until clicked or revealed.
-            </div>
-          </div>
-        </label>
-
-        <label style={css("display: flex; align-items: flex-start; gap: 10px; cursor: pointer; border-top: 1px solid var(--border-subtle); padding-top: 10px;")}>
-          <input type="radio" name="nsfwPreference" value="show" id="prefShow" style={css("margin-top: 3px; accent-color: #ff4757; cursor: pointer;")} />
-          <div>
-            <div style={css("font-family: var(--mono); font-size: 0.75rem; color: #ff6b81; font-weight: 500;")}>
-              Open all captures {authenticated ? '(Default for operator)' : '• Self-verified 18+'}
-            </div>
-            <div style={css("font-family: var(--sans); font-size: 0.68rem; color: var(--text-3); margin-top: 2px;")}>
-              {authenticated 
-                ? 'All captures are displayed unblurred without sensitive overlay.' 
-                : 'I certify that I am at least 18 years of age or the legal age of majority in my jurisdiction.'}
-            </div>
-          </div>
-        </label>
-      </div>
-
-      <div id="nsfwSaveStatus" style={css("font-family: var(--mono); font-size: 0.68rem; margin-top: 12px; min-height: 18px; color: var(--text-3);")}>
-        // preference stored locally in your browser
-      </div>
-    </div>}
     {authenticated ? (
       <div className="bracket-card" style={css("padding: 32px;")}>
         <div className="bracket-card" style={css("padding: 20px; margin-bottom: 24px; background: var(--bg-0);")}>
