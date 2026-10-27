@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-interface WebringNode {
+export interface WebringNode {
   id: string;
   name: string;
   url: string;
@@ -13,7 +13,15 @@ interface WebringNode {
   external?: boolean;
 }
 
-const WEBRING_NODES: WebringNode[] = [
+export const WEBRING_MEMBERS: WebringNode[] = [
+  {
+    id: 'kurzagin',
+    name: 'Kur Zagin',
+    url: 'https://kurzagin.com',
+    badge: '/badges/kurzagin.svg',
+    desc: 'Digital Archive & Systems Architecture',
+    external: false,
+  },
   {
     id: 'sakana',
     name: 'Sakana Japanese',
@@ -38,30 +46,38 @@ const WEBRING_NODES: WebringNode[] = [
     desc: 'Creative Technology Studio',
     external: true,
   },
-  {
-    id: 'join',
-    name: 'Join Webring',
-    url: '/guestbook',
-    badge: '/badges/join.svg',
-    desc: 'Leave your site link in the guestbook',
-    external: false,
-  },
 ];
 
 export default function WebringPanel() {
+  const currentSiteId = 'kurzagin';
+  const otherSites = WEBRING_MEMBERS.filter((n) => n.id !== currentSiteId);
   const [activeNode, setActiveNode] = useState<WebringNode | null>(null);
 
-  // Quick random node navigation (excluding the 'join' button)
-  const realSites = WEBRING_NODES.filter((n) => n.id !== 'join');
+  // In ring order: kurzagin -> sakana -> e-teyvat -> vxnus -> kurzagin
+  const currentIndex = WEBRING_MEMBERS.findIndex((n) => n.id === currentSiteId);
+  const prevNode = WEBRING_MEMBERS[(currentIndex - 1 + WEBRING_MEMBERS.length) % WEBRING_MEMBERS.length];
+  const nextNode = WEBRING_MEMBERS[(currentIndex + 1) % WEBRING_MEMBERS.length];
 
   const handleRandom = () => {
-    const random = realSites[Math.floor(Math.random() * realSites.length)];
+    const random = otherSites[Math.floor(Math.random() * otherSites.length)];
     if (random.external) {
       window.open(random.url, '_blank', 'noopener,noreferrer');
     } else {
       window.location.href = random.url;
     }
   };
+
+  const displayList = [
+    ...otherSites,
+    {
+      id: 'join',
+      name: 'Join Webring',
+      url: '/guestbook',
+      badge: '/badges/join.svg',
+      desc: 'Leave your site link in the guestbook',
+      external: false,
+    },
+  ];
 
   return (
     <div className="sb-section webring-panel" aria-label="Webring federation">
@@ -71,7 +87,7 @@ export default function WebringPanel() {
       </div>
 
       <div className="webring-grid" role="list">
-        {WEBRING_NODES.map((node) => {
+        {displayList.map((node) => {
           const isExternal = node.external;
           const linkProps = isExternal
             ? { target: '_blank', rel: 'noopener noreferrer' }
@@ -111,7 +127,7 @@ export default function WebringPanel() {
         ) : (
           <>
             <span className="webring-ticker-name">indie webring</span>
-            <span className="webring-ticker-desc">3 nodes online · click badge to visit</span>
+            <span className="webring-ticker-desc">{otherSites.length} nodes connected · click badge to visit</span>
           </>
         )}
       </div>
@@ -119,11 +135,11 @@ export default function WebringPanel() {
       {/* Retro Webring Bar Controls */}
       <div className="webring-ctrls">
         <a
-          href={realSites[0].url}
-          target={realSites[0].external ? '_blank' : undefined}
-          rel={realSites[0].external ? 'noopener noreferrer' : undefined}
+          href={prevNode.url}
+          target={prevNode.external ? '_blank' : undefined}
+          rel={prevNode.external ? 'noopener noreferrer' : undefined}
           className="webring-ctrl-btn"
-          title="Previous site"
+          title={`Previous site: ${prevNode.name}`}
         >
           ‹ prev
         </a>
@@ -139,11 +155,11 @@ export default function WebringPanel() {
           + join
         </Link>
         <a
-          href={realSites[1].url}
-          target={realSites[1].external ? '_blank' : undefined}
-          rel={realSites[1].external ? 'noopener noreferrer' : undefined}
+          href={nextNode.url}
+          target={nextNode.external ? '_blank' : undefined}
+          rel={nextNode.external ? 'noopener noreferrer' : undefined}
           className="webring-ctrl-btn"
-          title="Next site"
+          title={`Next site: ${nextNode.name}`}
         >
           next ›
         </a>
