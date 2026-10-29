@@ -5,14 +5,14 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
   Home, SquarePen, Disc3, Tv, Gamepad2, User, Settings,
-  MoreHorizontal, X, ChevronRight, Play, SkipBack, SkipForward, Download, BookOpen, MessageSquare,
+  MoreHorizontal, X, ChevronRight, Play, SkipBack, SkipForward, Download, BookOpen, MessageSquare, Wrench,
 } from 'lucide-react';
 import { getCurrent } from './current';
 import type { DbTrack } from '@/lib/db';
 
 export default function MobileNavClient({ tracks }: { tracks: DbTrack[] }) {
   const current = getCurrent(usePathname());
-  const isMoreActive = ['profile', 'anime', 'games', 'novels', 'settings', 'guestbook'].includes(current);
+  const isMoreActive = ['profile', 'anime', 'games', 'novels', 'tools', 'settings', 'guestbook'].includes(current);
   const first = tracks[0];
 
   const [open, setOpen] = useState(false);
@@ -282,6 +282,15 @@ export default function MobileNavClient({ tracks }: { tracks: DbTrack[] }) {
               <div className="mobile-sheet-card-body">
                 <div className="mobile-sheet-card-title">novels</div>
                 <div className="mobile-sheet-card-desc">drafts, story &amp; tactical codex</div>
+              </div>
+              <ChevronRight size={15} className="mobile-sheet-card-arrow" />
+            </Link>
+
+            <Link href="/tools" className={`mobile-sheet-card ${current === 'tools' ? 'active' : ''}`}>
+              <div className="mobile-sheet-card-icon"><Wrench size={18} /></div>
+              <div className="mobile-sheet-card-body">
+                <div className="mobile-sheet-card-title">tools</div>
+                <div className="mobile-sheet-card-desc">free operator &amp; web utilities</div>
               </div>
               <ChevronRight size={15} className="mobile-sheet-card-arrow" />
             </Link>

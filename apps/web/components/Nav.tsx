@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { User, SquarePen, Disc3, Tv, Gamepad2, BookOpen, MessageSquare } from 'lucide-react';
+import { User, SquarePen, Disc3, Tv, Gamepad2, BookOpen, MessageSquare, Wrench } from 'lucide-react';
 import { getCurrent } from './current';
 
 export default function Nav() {
@@ -19,6 +19,7 @@ export default function Nav() {
         <li><Link href="/anime" className={current === 'anime' ? 'active' : ''}><Tv size={13} /><span>anime</span></Link></li>
         <li><Link href="/games" className={current === 'games' ? 'active' : ''}><Gamepad2 size={13} /><span>games</span></Link></li>
         <li><Link href="/novels" className={current === 'novels' ? 'active' : ''}><BookOpen size={13} /><span>novels</span></Link></li>
+        <li><Link href="/tools" className={current === 'tools' ? 'active' : ''}><Wrench size={13} /><span>tools</span></Link></li>
         <li><Link href="/guestbook" className={current === 'guestbook' ? 'active' : ''}><MessageSquare size={13} /><span>guestbook</span></Link></li>
       </ul>
     </nav>
