@@ -12,7 +12,7 @@ import type { DbTrack } from '@/lib/db';
 
 export default function MobileNavClient({ tracks }: { tracks: DbTrack[] }) {
   const current = getCurrent(usePathname());
-  const isMoreActive = ['profile', 'anime', 'games', 'novels', 'tools', 'settings', 'guestbook'].includes(current);
+  const isMoreActive = ['profile', 'anime', 'games', 'novels', 'settings', 'guestbook'].includes(current);
   const first = tracks[0];
 
   const [open, setOpen] = useState(false);
@@ -69,9 +69,10 @@ export default function MobileNavClient({ tracks }: { tracks: DbTrack[] }) {
             {current === 'home' && <span className="mobile-nav-indicator" />}
           </Link>
 
-          <Link href="/#blog" className="mobile-nav-item" data-nav="blog">
-            <span className="mobile-nav-icon"><SquarePen size={18} /></span>
-            <span className="mobile-nav-label">blog</span>
+          <Link href="/tools" className={`mobile-nav-item ${current === 'tools' ? 'active' : ''}`} data-nav="tools">
+            <span className="mobile-nav-icon"><Wrench size={18} /></span>
+            <span className="mobile-nav-label">tools</span>
+            {current === 'tools' && <span className="mobile-nav-indicator" />}
           </Link>
 
           <Link href="/music" className={`mobile-nav-item ${current === 'music' ? 'active' : ''}`} data-nav="music">
@@ -286,11 +287,11 @@ export default function MobileNavClient({ tracks }: { tracks: DbTrack[] }) {
               <ChevronRight size={15} className="mobile-sheet-card-arrow" />
             </Link>
 
-            <Link href="/tools" className={`mobile-sheet-card ${current === 'tools' ? 'active' : ''}`}>
-              <div className="mobile-sheet-card-icon"><Wrench size={18} /></div>
+            <Link href="/#blog" className="mobile-sheet-card">
+              <div className="mobile-sheet-card-icon"><SquarePen size={18} /></div>
               <div className="mobile-sheet-card-body">
-                <div className="mobile-sheet-card-title">tools</div>
-                <div className="mobile-sheet-card-desc">free operator &amp; web utilities</div>
+                <div className="mobile-sheet-card-title">blog</div>
+                <div className="mobile-sheet-card-desc">articles, logs &amp; dispatches</div>
               </div>
               <ChevronRight size={15} className="mobile-sheet-card-arrow" />
             </Link>
