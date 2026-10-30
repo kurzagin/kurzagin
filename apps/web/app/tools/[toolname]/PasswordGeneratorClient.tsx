@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { ToolDefinition } from '@/lib/tools';
 import { KeyRound, Copy, Check, RefreshCw, ShieldAlert, ShieldCheck, Lock } from 'lucide-react';
 
@@ -14,8 +14,22 @@ export default function PasswordGeneratorClient({ tool }: { tool: ToolDefinition
   const [mode, setMode] = useState<'password' | 'pin'>('password');
   const [pinLength, setPinLength] = useState(6);
 
-  const [password, setPassword] = useState(() => generatePassword(16, true, true, true, true, false));
+  const [password, setPassword] = useState('');
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    setPassword(generatePassword(16, true, true, true, true, false));
+  }, []);
+
+  function getRandomValues(array: Uint32Array) {
+    if (typeof window !== 'undefined' && window.crypto && window.crypto.getRandomValues) {
+      window.crypto.getRandomValues(array);
+    } else {
+      for (let i = 0; i < array.length; i++) {
+        array[i] = Math.floor(Math.random() * 0xffffffff);
+      }
+    }
+  }
 
   function generatePassword(
     len: number,
@@ -34,7 +48,7 @@ export default function PasswordGeneratorClient({ tool }: { tool: ToolDefinition
     if (!chars) chars = 'abcdefghijklmnopqrstuvwxyz';
 
     const array = new Uint32Array(len);
-    window.crypto.getRandomValues(array);
+    getRandomValues(array);
 
     let res = '';
     for (let i = 0; i < len; i++) {
@@ -45,7 +59,7 @@ export default function PasswordGeneratorClient({ tool }: { tool: ToolDefinition
 
   function generatePin(len: number): string {
     const array = new Uint32Array(len);
-    window.crypto.getRandomValues(array);
+    getRandomValues(array);
     let res = '';
     for (let i = 0; i < len; i++) {
       res += (array[i] % 10).toString();

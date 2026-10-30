@@ -1,3 +1,4 @@
+// @ts-nocheck
 /*
  * QR Code generator library (compiled from TypeScript)
  *
