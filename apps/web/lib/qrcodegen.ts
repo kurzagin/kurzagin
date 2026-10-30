@@ -22,7 +22,7 @@
  *   Software.
  */
 "use strict";
-var qrcodegen;
+export const qrcodegen: any = {};
 (function (qrcodegen) {
     /*---- QR Code symbol class ----*/
     /*
@@ -837,4 +837,4 @@ var qrcodegen;
     })(QrSegment = qrcodegen.QrSegment || (qrcodegen.QrSegment = {}));
 })(qrcodegen || (qrcodegen = {}));
 
-export { qrcodegen };
+
