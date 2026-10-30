@@ -1,11 +1,46 @@
 import Link from 'next/link';
-import { Wrench, ArrowRight, ShieldCheck } from 'lucide-react';
+import {
+  Wrench,
+  ArrowRight,
+  ShieldCheck,
+  Link2,
+  QrCode,
+  AlignLeft,
+  Type,
+  Image as ImageIcon,
+  Timer,
+  Shuffle,
+  KeyRound,
+} from 'lucide-react';
 import { TOOLS } from '@/lib/tools';
 
 export const metadata = {
   title: 'tools — kurzagin',
   description: 'Free, lightweight, client-side web and utility tools.',
 };
+
+function getToolIcon(slug: string) {
+  switch (slug) {
+    case 'link-cleaner':
+      return <Link2 size={32} />;
+    case 'qr-generator':
+      return <QrCode size={32} />;
+    case 'word-counter':
+      return <AlignLeft size={32} />;
+    case 'case-converter':
+      return <Type size={32} />;
+    case 'image-converter':
+      return <ImageIcon size={32} />;
+    case 'timer':
+      return <Timer size={32} />;
+    case 'random-picker':
+      return <Shuffle size={32} />;
+    case 'password-generator':
+      return <KeyRound size={32} />;
+    default:
+      return <Wrench size={32} />;
+  }
+}
 
 export default function ToolsPage() {
   return (
@@ -15,7 +50,7 @@ export default function ToolsPage() {
           <span className="hl">free</span> tools
         </h1>
         <div className="page-sub">
-          <span className="jp-label">道具箱</span> — minimalist, privacy-first operator utilities
+          <span className="jp-label">道具箱</span> — minimalist, privacy-first operator utilities (100% in-browser)
         </div>
       </div>
 
@@ -30,7 +65,7 @@ export default function ToolsPage() {
           {TOOLS.map((tool) => (
             <Link href={`/tools/${tool.slug}`} key={tool.slug} className="item-card tool-card">
               <div className="card-visual tool-visual">
-                <Wrench size={32} />
+                {getToolIcon(tool.slug)}
               </div>
               <div className="card-body">
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
