@@ -779,7 +779,7 @@ export const qrcodegen: any = {};
 })(qrcodegen || (qrcodegen = {}));
 /*---- Public helper enumeration ----*/
 (function (qrcodegen) {
-    var QrCode;
+    let QrCode;
     (function (QrCode) {
         /*
          * The error correction level in a QR Code symbol. Immutable.
@@ -805,7 +805,7 @@ export const qrcodegen: any = {};
 })(qrcodegen || (qrcodegen = {}));
 /*---- Public helper enumeration ----*/
 (function (qrcodegen) {
-    var QrSegment;
+    let QrSegment;
     (function (QrSegment) {
         /*
          * Describes how a segment's data bits are interpreted. Immutable.

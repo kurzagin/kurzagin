@@ -231,7 +231,7 @@ export default function ImageConverterClient({ tool }: { tool: ToolDefinition })
                     </div>
                     <a
                       href={convertedUrl}
-                      download={`converted-${Date.now()}.${getExtension()}`}
+                      download={`converted-image.${getExtension()}`}
                       className="tool-action-btn primary"
                       style={{ display: 'inline-flex', textDecoration: 'none' }}
                     >
