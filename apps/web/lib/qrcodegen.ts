@@ -22,7 +22,7 @@
  *   Software.
  */
 "use strict";
-export const qrcodegen: any = {};
+const _qrcodegen: any = {};
 (function (qrcodegen) {
     /*---- QR Code symbol class ----*/
     /*
@@ -776,7 +776,7 @@ export const qrcodegen: any = {};
     // where each character value maps to the index in the string.
     QrSegment.ALPHANUMERIC_CHARSET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ $%*+-./:";
     qrcodegen.QrSegment = QrSegment;
-})(qrcodegen || (qrcodegen = {}));
+})(_qrcodegen);
 /*---- Public helper enumeration ----*/
 (function (qrcodegen) {
     let QrCode;
@@ -802,7 +802,7 @@ export const qrcodegen: any = {};
         Ecc.HIGH = new Ecc(3, 2); // The QR Code can tolerate about 30% erroneous codewords
         QrCode.Ecc = Ecc;
     })(QrCode = qrcodegen.QrCode || (qrcodegen.QrCode = {}));
-})(qrcodegen || (qrcodegen = {}));
+})(_qrcodegen);
 /*---- Public helper enumeration ----*/
 (function (qrcodegen) {
     let QrSegment;
@@ -835,6 +835,8 @@ export const qrcodegen: any = {};
         Mode.ECI = new Mode(0x7, [0, 0, 0]);
         QrSegment.Mode = Mode;
     })(QrSegment = qrcodegen.QrSegment || (qrcodegen.QrSegment = {}));
-})(qrcodegen || (qrcodegen = {}));
+})(_qrcodegen);
 
 
+
+export const qrcodegen = _qrcodegen;
