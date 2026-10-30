@@ -35,6 +35,8 @@ const eslintConfig = defineConfig([
       'react-hooks/exhaustive-deps': 'off',
       'jsx-a11y/alt-text': 'off',
       'eslint-comments/no-unused-disable': 'off',
+      'react-hooks/purity': 'off',
+      'react-hooks/immutability': 'off',
     },
   },
 ]);
